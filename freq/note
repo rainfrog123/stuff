@@ -4,9 +4,9 @@ freqtrade download-data -c config.json --timerange 20220101- --timeframes 1m 3m 
 
 freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --strategy all_entry_strategy_long --eps --starting-balance 1000000000 --cache none 
 
-freqtrade backtesting -c config.json --timerange 20101110- --timeframe 1m --strategy macd_short_strategy --eps --starting-balance 1000000000 --cache none 
+freqtrade backtesting -c config.json --timerange 20111111- --timeframe 1m --strategy macd_strategy_long --eps --starting-balance 1000000000 --cache none 
  
-freqtrade backtesting -c config.json --timerange 20101110- --timeframe 1m --strategy macd_long_strategy --eps --starting-balance 1000000000 --cache none 
+freqtrade backtesting -c config.json --timerange 20111111- --timeframe 1m --strategy macd_strategy_short --eps --starting-balance 1000000000 --cache none 
 
 "cwd": "${fileDirname}","cwd":"/allah/freqtrade",
 "args": ["backtesting", "-c","config.json", "--timerange","20221123-", "--strategy","all_entry_strategy_long","--eps", "--starting-balance", "100000000", "--cache", "none"]
