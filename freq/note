@@ -1,6 +1,9 @@
 freqtrade download-data -c config.json --timerange 20220101- --timeframes 1m 3m 5m 15m 30m 1h 4h
 
-/allah/freqtrade/user_data/strategies
+freqtrade trade -c config.json --strategy all_entry_strategy_long
+
+/allah/freqtrade/user_data/strategies 
+freqtrade list-pairs --exchange binance --trading-mode futures
 
 freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --strategy all_entry_strategy_long --eps --starting-balance 1000000000 --cache none 
 
@@ -10,6 +13,5 @@ freqtrade backtesting -c config.json --timerange 20111111- --timeframe 1m --stra
 
 "cwd": "${fileDirname}","cwd":"/allah/freqtrade",
 "args": ["backtesting", "-c","config.json", "--timerange","20221123-", "--strategy","all_entry_strategy_long","--eps", "--starting-balance", "100000000", "--cache", "none"]
-
 
 
