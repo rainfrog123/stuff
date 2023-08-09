@@ -34,10 +34,10 @@
     "exchange": {
         "name": "binance",
         "ccxt_config": {
-            "aiohttp_proxy": "http://172.105.177.237:21280",
+            "aiohttp_proxy": "",
             "proxies": {
-              "http": "http://172.105.177.237:21280",
-              "https": "http://172.105.177.237:21280"
+              "http": "",
+              "https": ""
             }},
         "key": "",
         "secret": "",
