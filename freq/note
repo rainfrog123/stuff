@@ -7,11 +7,12 @@ freqtrade list-pairs --exchange binance --trading-mode futures
 
 freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --strategy all_entry_strategy_long --eps --starting-balance 1000000000 --cache none 
 
-freqtrade backtesting -c config.json --timerange 20111111- --timeframe 1m --strategy macd_strategy_long --eps --starting-balance 1000000000 --cache none 
+freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyLong --eps --starting-balance 1000000000 --cache none 
  
-freqtrade backtesting -c config.json --timerange 20111111- --timeframe 1m --strategy macd_strategy_short --eps --starting-balance 1000000000 --cache none 
+freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyShort --eps --starting-balance 1000000000 --cache none 
 
-"cwd": "${fileDirname}","cwd":"/allah/freqtrade",
-"args": ["backtesting", "-c","config.json", "--timerange","20221123-", "--strategy","all_entry_strategy_long","--eps", "--starting-balance", "100000000", "--cache", "none"]
+"cwd": "${fileDirname}"
+"cwd":"/allah/freqtrade",
+"args": ["backtesting", "-c","config.json", "--timerange","20221123-", "--strategy","MacdStrategyLong","--eps", "--starting-balance", "100000000", "--cache", "none"]
 
 
