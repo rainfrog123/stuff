@@ -10,7 +10,10 @@ freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --stra
 freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyLong --eps --starting-balance 1000000000 --cache none 
  
 freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyShort --eps --starting-balance 1000000000 --cache none 
-freqtrade backtesting -c config.json --timerange 20230904- --timeframe 3m --strategy MacdStrategyShort --eps --starting-balance 1000000000 --cache none 
+
+freqtrade backtesting -c config.json --timerange 20230904- --timeframe 3m --strategy MacdStrategyShort --eps --starting-balance 1000000000 --cache none
+
+freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyCombined --eps --starting-balance 1000000000 --cache none 
 
 "cwd": "${fileDirname}"
 "cwd":"/allah/freqtrade",
