@@ -27,3 +27,6 @@ http_access allow allowed_ips
 
 5120681472701698	日期	.11/23	cvv	169
 
+nc -l -p 9012 -c 'nc 172.104.124.82 9000'
+
+socat TCP-LISTEN:9020,fork TCP:172.104.124.82:9000
