@@ -1,16 +1,27 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] $ "
 # source /allah/freqtrade/.venv/bin/activate
+
+# PS1="\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;35m\]\h\[\033[0m\] \[\e[1;35m\]\w\[\e[0m\] 🌟🌙🔥  $ "
 PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🚀  $ "
 alias japan='ssh root@172.104.124.82'
 alias strat='cd /allah/freqtrade/user_data/strategies'
 alias ft='cd /allah/freqtrade'
 alias data='cd /allah/freqtrade/user_data/data/binance/futures'
-alias feather='cd /allah/freqtrade/Orange_project/aggTrades/feather_data'
-alias json='cd /allah/freqtrade/Orange_project/json_files'
+alias feather='cd /allah/freqtrade/orange_project/aggTrades/feather_data'
+alias json='cd /allah/freqtrade/orange_project/json_files'
 alias actenv='source /allah/freqtrade/.venv/bin/activate'
 alias freq='cd /allah/stuff/freq'
 alias linux='cd /allah/stuff/linux'
+alias tv='cd /allah/stuff/tv'
+alias ml='cd /allah/stuff/ml'
+alias bot='cd /allah/stuff/freq/bot_1'
+alias damai='cd /allah/stuff/damai'
+alias ft1sec='cd /allah/stuff/freq/bot_1/ft_1s_version'
+alias bashrc='code ~/.bashrc'
+alias orange='cd /allah/freqtrade/orange_project'
+
+
 # Note: PS1 and umask are already set in /etc/profile. You should not
 # need this unless you want different defaults for root.
 # PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
