@@ -1,4 +1,4 @@
-freqtrade download-data -c config.json --timerange 20230101- --timeframes 1m
+freqtrade download-data -c config.json --timerange 20220101- --timeframes 1m
 
 freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
 
