@@ -3,7 +3,7 @@
 # source /allah/freqtrade/.venv/bin/activate
 # PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🔥  $ "
 # PS1="\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;35m\]\h\[\033[0m\] \[\e[1;35m\]\w\[\e[0m\] 🌟🌙🔥  $ "
-PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🚀  $ "
+PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🚀🚀🚀  $ "
 alias japan='ssh root@172.232.237.204'
 alias strat='cd /allah/freqtrade/user_data/strategies'
 alias ft='cd /allah/freqtrade'
@@ -22,6 +22,7 @@ alias bashrc='code ~/.bashrc'
 alias orange='cd /allah/freqtrade/orange_project'
 alias plot='cd /allah/freqtrade/user_data/plot/'
 alias stuff='cd /allah/stuff'
+alias book='cd /allah/stuff/ml/book'
 # source /allah/freqtrade/.venv/bin/activate
 # JW9ji*bEU=^QVfQ!_hbA
 # ssh-copy-id root@172.232.237.204
@@ -42,3 +43,4 @@ alias stuff='cd /allah/stuff'
 # alias rm='rm -i'
 # alias cp='cp -i'
 # alias mv='mv -i'
+
