@@ -44,5 +44,16 @@ sudo sysctl -p
 # Set PS1 prompt in ~/.bashrc
 echo 'PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🚀🚀🚀  $ "' >> ~/.bashrc
 
+# Create a directory /allah
+sudo mkdir /allah
+
+# Set random global username and email for Git
+git config --global user.name "$(openssl rand -hex 12)"
+git config --global user.email "$(openssl rand -hex 12)@example.com"
+
+# Change to /allah and clone a GitHub repository
+cd /allah
+git clone https://github.com/rainfrog123/stuff.git
+
 # Reboot the system
 sudo reboot
