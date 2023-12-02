@@ -7,7 +7,7 @@
 sudo apt update && sudo apt upgrade -y
 
 # Create the shadowsocks-r configuration file
-sudo bash -c 'cat > /etc/shadowsocks-r/test.json <<EOF
+sudo bash -c 'cat > /etc/shadowsocks-r/config.json <<EOF
 {
     "server":"0.0.0.0",
     "server_ipv6":"::",
