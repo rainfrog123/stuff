@@ -1,12 +1,18 @@
 #!/bin/bash
 
-# Enable debugging mode
-# set -x
+set -e  # Exit on error
 
 # Update and upgrade system
 sudo apt update && sudo apt upgrade -y
 
+# Install Docker and Docker Compose
+sudo apt install -y docker.io docker-compose
+
+# Pull the shadowsocks-r image
+sudo docker pull teddysun/shadowsocks-r
+
 # Create the shadowsocks-r configuration file
+sudo mkdir -p /etc/shadowsocks-r/
 sudo bash -c 'cat > /etc/shadowsocks-r/config.json <<EOF
 {
     "server":"0.0.0.0",
@@ -27,12 +33,6 @@ sudo bash -c 'cat > /etc/shadowsocks-r/config.json <<EOF
     "workers":5
 }
 EOF'
-
-# Install Docker and Docker Compose
-sudo apt install -y docker.io docker-compose 
-
-# Pull the shadowsocks-r image
-sudo docker pull teddysun/shadowsocks-r
 
 # Run the shadowsocks-r Docker container
 sudo docker run -d -p 19000:19000 -p 19000:19000/udp --name ssr --restart=always -v /etc/shadowsocks-r:/etc/shadowsocks-r teddysun/shadowsocks-r
@@ -58,5 +58,8 @@ git config --global user.email "$(openssl rand -hex 12)@example.com"
 cd /allah
 git clone https://github.com/rainfrog123/stuff.git
 
-# Reboot the system
-# sudo reboot
+# Reboot the system (with interactive confirmation)
+read -p "Do you want to reboot the system now? (y/n): " -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    sudo reboot
+fi
