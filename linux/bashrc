@@ -1,9 +1,9 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] $ "
-# source /allah/freqtrade/.venv/bin/activate
-# PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🔥  $ "
+# ~/.bashrc: Configuration file executed by Bash(1) for non-login shells.
 # PS1="\[\033[1;36m\]\u\[\033[0m\]@\[\033[1;35m\]\h\[\033[0m\] \[\e[1;35m\]\w\[\e[0m\] 🌟🌙🔥  $ "
+# Customize the command prompt (PS1) with different color and emoji combinations.
 PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🚀🚀🚀  $ "
+
+# Define aliases for frequently used commands and directories.
 alias japan='ssh root@172.232.237.204'
 alias strat='cd /allah/freqtrade/user_data/strategies'
 alias ft='cd /allah/freqtrade'
@@ -23,24 +23,26 @@ alias orange='cd /allah/freqtrade/orange_project'
 alias plot='cd /allah/freqtrade/user_data/plot/'
 alias stuff='cd /allah/stuff'
 alias book='cd /allah/stuff/ml/book'
-# source /allah/freqtrade/.venv/bin/activate
-# JW9ji*bEU=^QVfQ!_hbA
-# ssh-copy-id root@172.232.237.204
 
-# Note: PS1 and umask are already set in /etc/profile. You should not
-# need this unless you want different defaults for root.
-# PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
-# umask 022
-
-# You may uncomment the following lines if you want `ls' to be colorized:
+# Uncomment the following lines for colorized 'ls' command.
 # export LS_OPTIONS='--color=auto'
 # eval "$(dircolors)"
 # alias ls='ls $LS_OPTIONS'
 # alias ll='ls $LS_OPTIONS -l'
 # alias l='ls $LS_OPTIONS -lA'
-#
-# Some more alias to avoid making mistakes:
+
+# Additional aliases for safer commands and common tasks.
 # alias rm='rm -i'
 # alias cp='cp -i'
 # alias mv='mv -i'
 
+# Note: PS1 and umask are already set in /etc/profile. Uncomment if different defaults for root are desired.
+# PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
+# umask 022
+
+# Uncomment the following lines if you want `ls' to be colorized:
+# export LS_OPTIONS='--color=auto'
+# eval "$(dircolors)"
+# alias ls='ls $LS_OPTIONS'
+# alias ll='ls $LS_OPTIONS -l'
+# alias l='ls $LS_OPTIONS -lA'
