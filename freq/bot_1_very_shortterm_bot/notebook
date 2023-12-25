@@ -2,12 +2,12 @@ freqtrade download-data -c config.json --timerange 20220101- --timeframes 1m
 
 freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
 
+freqtrade download-data -c config.json --timerange 20191001- --timeframes 1m 3m 5m 15m 30m 1h 4h
 freqtrade download-data -c config.json --timerange 20231001- --timeframes 1m 3m 5m 15m 30m 1h 4h
 
 freqtrade backtesting -c config.json --timerange 20231111- --timeframe 1m --strategy LuxAlgoTEMA20Strategy --starting-balance 1000 --cache none
 
 freqtrade backtesting -c fake_1m_config.json --timerange 20100101- --timeframe 1m --strategy fake_1m_strat --eps --starting-balance 1000000000 --cache none
-
 
 freqtrade backtesting -c fake_1m_config.json --timerange 19900101- --timeframe 1m --strategy fake_1m_strat_short --starting-balance 1000 --cache none
 
