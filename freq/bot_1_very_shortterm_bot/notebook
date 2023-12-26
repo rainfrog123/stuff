@@ -5,7 +5,7 @@ freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
 freqtrade download-data -c config.json --timerange 20191001- --timeframes 1m 3m 5m 15m 30m 1h 4h
 freqtrade download-data -c config.json --timerange 20231001- --timeframes 1m 3m 5m 15m 30m 1h 4h
 
-freqtrade backtesting -c config.json --timerange 20231111- --timeframe 1m --strategy LuxAlgoTEMA20Strategy --starting-balance 1000 --cache none
+freqtrade backtesting -c config.json --timerange 20231225- --timeframe 1m --strategy LuxAlgoTEMA20Strategy_follow --starting-balance 1000 --cache none
 
 freqtrade backtesting -c fake_1m_config.json --timerange 20100101- --timeframe 1m --strategy fake_1m_strat --eps --starting-balance 1000000000 --cache none
 
@@ -35,16 +35,15 @@ http_access allow allowed_ips
 0 * * * * /bin/bash -c 'source /allah/freqtrade/.venv/bin/activate && cd /allah/freqtrade/ && freqtrade download-data -c config.json --timerange 20220101- --timeframes 1m 3m 5m 15m 30m 1h 4h' 2>&1 | tail -n 5 >> /allah/freqtrade/json_dict/crontab.log
 #vogom31242@ipniel.com 25h,?V^sXQnw6q*tb_Fm
 
-5120681472701698	日期	.11/23	cvv	169
-
 nc -l -p 9012 -c 'nc 172.104.124.82 9000'
-
 socat TCP-LISTEN:19020,fork TCP:172.104.124.82:9000
 
 freqtrade hyperopt -c fake_1m_config.json --hyperopt-loss SharpeHyperOptLossDaily --spaces buy sell --strategy fake_1m_strat_long --timerange 19900101- --timeframe 1m --export-filename fake_1m_strat_long_hyperopt --export-directory user_data/hyperopts
-# Have a working strategy at hand.
+
+freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces roi stoploss trailing --strategy MyWorkingStrategy --config config.json -e 100
 
 freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces roi stoploss --strategy fake_1m_strat_short --config fake_1m_config.json -e 100
+
 freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces trailing --strategy fake_1m_strat_short --config fake_1m_config.json -e 100
 
 socat TCP-LISTEN:19020,fork TCP:172.104.124.82:9000
@@ -53,11 +52,6 @@ code --uninstall-extension ms-python.vscode-pylance
 
 mv !(history) /allah/stuff/freq/history/   shopt -s extglob
 
- "https": "http://172.104.124.82:49150"
+"https": "http://172.104.124.82:49150"
 
- freqtrade plot-dataframe --strategy fake_1s_strat_short -p BTC/USDT:USDT --timerange=20231105-20231106
-tradingview jayafaj735@eazenity.com lookfirst11!_1s
-
-China Mainland / exiedu140@163.com----Xa77889900----你少年时代最好的朋友叫什么名字？----xm777----你的理想工作是什么？----xm888----你的父母是在哪里认识的？----xm999----1990-01-09----美国
-
-ssh root@192.53.114.57
+freqtrade plot-dataframe --strategy fake_1s_strat_short -p BTC/USDT:USDT --timerange=20231105-20231106
