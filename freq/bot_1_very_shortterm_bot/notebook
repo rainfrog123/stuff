@@ -43,8 +43,9 @@ freqtrade hyperopt -c fake_1m_config.json --hyperopt-loss SharpeHyperOptLossDail
 freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces roi stoploss trailing --strategy MyWorkingStrategy --config config.json -e 100
 # Have a working strategy at hand.
 
-freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces stoploss --strategy LuxAlgoTEMA20Strategy_follow --config config.json -e 50 --timerange 20231226- --timeframe 1m --disable-param-export
+freqtrade hyperopt --hyperopt-loss ShortTradeDurHyperOptLoss  --spaces stoploss buy --strategy LuxAlgoTEMA20Strategy_follow --config config.json -e 50 --timerange 20231220- --timeframe 1m --disable-param-export
 
+freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces buy stoploss --strategy LuxAlgoTEMA20Strategy_follow --config config.json -e 50 --timerange 20231215- --timeframe 1m --disable-param-export
 
 socat TCP-LISTEN:19020,fork TCP:172.104.124.82:9000
 
