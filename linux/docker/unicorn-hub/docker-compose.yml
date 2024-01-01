@@ -1,0 +1,16 @@
+version: '3'
+services:
+  aapanel:
+    image: aapanel/aapanel:lib
+    ports:
+      - "80:80"
+      - "9871:22"
+      - "9820:3306"
+      - "443:443"
+      - "29:21"
+      - "889:888"
+      - "8886:7800"
+    volumes:
+      - ~/website_data:/www/wwwroot
+      - ~/mysql_data:/www/server/data
+      - ~/vhost:/www/server/panel/vhost
