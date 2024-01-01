@@ -1,7 +1,7 @@
 version: '3'
 services:
   aapanel:
-    image: aapanel/aapanel:lib
+    image: l1n0x711/unicornhub:recent
     ports:
       - "80:80"
       - "9871:22"
@@ -14,3 +14,8 @@ services:
       - ~/website_data:/www/wwwroot
       - ~/mysql_data:/www/server/data
       - ~/vhost:/www/server/panel/vhost
+    restart: always
+
+
+
+# docker-compose up -d

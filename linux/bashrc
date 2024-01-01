@@ -35,7 +35,7 @@ alias plot='cd /allah/freqtrade/user_data/plot/'
 alias stuff='cd /allah/stuff'
 alias book='cd /allah/stuff/ml/book'
 alias dujiao='cd ~/website_data/edgesoftware.xyz/dujiaoka'
-alias dock='cd ~/website_data/edgesoftware.xyz/dujiaoka'
+alias hub='cd /allah/stuff/linux/docker/unicorn-hub'
 
 
 
