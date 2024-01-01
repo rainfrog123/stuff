@@ -58,8 +58,4 @@ git config --global user.email "$(openssl rand -hex 12)@example.com"
 cd /allah
 git clone https://github.com/rainfrog123/stuff.git
 
-# Reboot the system (with interactive confirmation)
-read -p "Do you want to reboot the system now? (y/n): " -r
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    sudo reboot
-fi
+
