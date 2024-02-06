@@ -1,0 +1,48 @@
+Act as an English prompt teacher, assisting me by refining my questions for clarity and effectiveness before providing an answer during each conversation.
+# Data Download Commands
+freqtrade download-data -c config.json --timerange 20191001- --timeframes 1m 3m 5m 15m 30m 1h 4h
+freqtrade download-data -c config.json --timerange 20231001- --timeframes 1m 3m 5m 15m 30m 1h 4h
+
+# Trades to OHLCV Conversion
+freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
+
+# Backtesting Commands
+freqtrade backtesting -c config.json --timerange 20231225- --timeframe 1m --strategy LuxAlgoTEMA20Strategy_follow --starting-balance 1000 --cache none
+freqtrade backtesting -c fake_1m_config.json --timerange 20100101- --timeframe 1m --strategy fake_1m_strat --eps --starting-balance 1000000000 --cache none
+freqtrade backtesting -c fake_1m_config.json --timerange 19900101- --timeframe 1m --strategy fake_1m_strat_short --starting-balance 1000 --cache none
+freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --strategy all_entry_strategy_long --eps --starting-balance 1000000000 --cache none
+freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyLong --eps --starting-balance 1000000000 --cache none
+
+# Trading Commands
+freqtrade trade -c config.json --strategy MacdStrategyCombined --starting-balance 10000
+
+# Listing Commands
+freqtrade list-pairs --exchange binance --trading-mode futures
+
+# Plotting Commands
+freqtrade plot-dataframe -p BTC/USDT:USDT --strategy fake_1m_strat_long
+freqtrade plot-dataframe --strategy fake_1s_strat_short -p BTC/USDT:USDT --timerange=20231105-20231106
+
+# Hyperopt Commands
+freqtrade hyperopt -c fake_1m_config.json --hyperopt-loss SharpeHyperOptLossDaily --spaces buy sell --strategy fake_1m_strat_long --timerange 19900101- --timeframe 1m --export-filename fake_1m_strat_long_hyperopt --export-directory user_data/hyperopts
+freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces roi stoploss trailing --strategy MyWorkingStrategy --config config.json -e 100
+freqtrade hyperopt --hyperopt-loss ShortTradeDurHyperOptLoss --spaces stoploss buy --strategy LuxAlgoTEMA20Strategy_follow --config config.json -e 50 --timerange 20231220- --timeframe 1m --disable-param-export
+freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces buy stoploss --strategy LuxAlgoTEMA20Strategy_follow --config config.json -e 50 --timerange 20231215- --timeframe 1m --disable-param-export
+
+# Analysis Commands
+freqtrade backtesting-analysis -c fake_1m_config.json --analysis-groups 0 1 2 3 4 5
+
+# Network Commands
+nc -l -p 9012 -c 'nc 172.104.124.82 9000'
+socat TCP-LISTEN:19020,fork TCP:172.104.124.82:9000
+
+# Security and Configuration
+acl allowed_ips src 103.3.60.27 // 172.104.124.82
+http_access allow allowed_ips
+"cwd": "${fileDirname}"
+"cwd":"/allah/freqtrade"
+"https": "http://172.104.124.82:49150"
+
+# System Commands
+0 * * * * /bin/bash -c 'source /allah/freqtrade/.venv/bin/activate && cd /allah/freqtrade/ && freqtrade download-data -c config.json --timerange 20220101- --timeframes 1m 3m 5m 15m 30m 1h 4h' 2>&1 | tail -n 5 >> /allah/freqtrade/json_dict/crontab.log
+mv !(history) /allah/stuff/freq/history/   shopt -s extglob
