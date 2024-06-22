@@ -13,6 +13,12 @@ freqtrade backtesting -c fake_1m_config.json --timerange 19900101- --timeframe 1
 freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --strategy all_entry_strategy_long --eps --starting-balance 1000000000 --cache none
 freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyLong --eps --starting-balance 1000000000 --cache none
 
+freqtrade backtesting -c config.json --timerange 20240610- --timeframe 15m --strategy ChangePointTrendStrategy --starting-balance 10000 --cache none
+
+freqtrade hyperopt --strategy ChangePointTrendStrategy --hyperopt-loss SharpeHyperOptLoss --spaces stoploss -e 10 --timerange 20240610- -c config.json --disable-param-export --starting-balance 10000
+
+
+
 # Trading Commands
 freqtrade trade -c config.json --strategy MacdStrategyCombined --starting-balance 10000
 
