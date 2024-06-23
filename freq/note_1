@@ -15,7 +15,7 @@ freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --stra
 
 freqtrade backtesting -c config.json --timerange 20240610- --timeframe 15m --strategy ChangePointTrendStrategy --starting-balance 10000 --cache none
 
-freqtrade hyperopt --strategy ChangePointTrendStrategy --hyperopt-loss SharpeHyperOptLoss --spaces stoploss -e 30 --timerange 20240610- -c config.json --disable-param-export --starting-balance 10000
+freqtrade hyperopt --strategy ChangePointTrendStrategy --hyperopt-loss SharpeHyperOptLoss --spaces stoploss buy -e 50 --timerange 20240610- -c config.json --disable-param-export --starting-balance 10000
 
 
 # Trading Commands
