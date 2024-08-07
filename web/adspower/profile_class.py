@@ -74,8 +74,11 @@ user_proxy_config_example = UserProxyConfig(proxy_soft='no_proxy')
 finger_print_config_example = FingerprintConfig()
 
 profile_example = Profile(
-    name='test1',
+    name='test2',
     group_id='4683840',
     fingerprint_config=finger_print_config_example,
     user_proxy_config=user_proxy_config_example
 )
+  
+
+  

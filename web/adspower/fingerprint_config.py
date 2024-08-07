@@ -94,7 +94,7 @@ class RandomUA:
     """
     def __init__(self, ua_browser=None, ua_version=None, ua_system_version=None):
         self.ua_browser = ua_browser or ["chrome"]
-        self.ua_version = ua_version or [""]
+        self.ua_version = ua_version or ["126"]
         self.ua_system_version = ua_system_version or [""]
 
     def to_dict(self):
