@@ -91,6 +91,13 @@ class RandomUA:
         ua_browser (list): List of browsers. Default is ["chrome"].
         ua_version (list): List of versions. Default is ["80"].
         ua_system_version (list): List of system versions. Default is ["Windows 10"].
+
+    Supported System Versions:
+        - Android (Specify version: Android 9, Android 10, Android 11, Android 12, Android 13)
+        - iOS (Specify version: iOS 14, iOS 15)
+        - Windows (Specify version: Windows 7, Windows 8, Windows 10, Windows 11)
+        - Mac OS X (Specify version: Mac OS X 10, Mac OS X 11, Mac OS X 12, Mac OS X 13)
+        - Linux
     """
     def __init__(self, ua_browser=None, ua_version=None, ua_system_version=None):
         self.ua_browser = ua_browser or ["chrome"]
