@@ -25,7 +25,8 @@ class Block:
         return str(self)
 
     def calculate_features(self):
-        import talib
+        print(f'Calculating features for block: {self.start_date} - {self.end_date}')
+        import 
 
 
 def load_crypto_data(data_file_path, start_date, end_date):
