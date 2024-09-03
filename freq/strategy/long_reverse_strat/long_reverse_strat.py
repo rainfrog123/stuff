@@ -62,7 +62,12 @@ class LongReversalStrategy(IStrategy):
         # Count duration of current trend
         dataframe['trend_duration'] = (dataframe['trend'] != dataframe['trend'].shift(1)).cumsum()
         dataframe['trend_count'] = dataframe.groupby('trend_duration').cumcount() + 1
-
+# for debugging
+# dataframe[dataframe['trend_count']]
+# dataframe[dataframe['trend_duration']]
+# only output column trend duration and basic fisrt 4 columns
+# dataframe[['trend_duration', 'open', 'high', 'low', 'close']]
+# dataframe['trend_duration']
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -73,24 +78,27 @@ class LongReversalStrategy(IStrategy):
         :param metadata: Additional information like the currently traded pair
         :return: DataFrame with entry columns populated
         """
+        # Long entry signal: trend reversal from DOWN to UP, previous DOWN trend lasted more than 20 periods
         dataframe.loc[
             (
-                (dataframe['trend'] == 'UP') &  # Current trend is down
-                (dataframe['trend'].shift(1) == 'DOWN') &  # Previous trend was up
-                (dataframe['trend_count'].shift(1) >= 20)  # Previous up trend lasted more than 20 periods
+                (dataframe['trend'] == 'UP') &  # Current trend is UP
+                (dataframe['trend'].shift(1) == 'DOWN') &  # Previous trend was DOWN
+                (dataframe['trend_count'].shift(1) >= 20)  # Previous DOWN trend lasted more than 20 periods
             ),
             'enter_long'] = 1
 
+        # Short entry signal: trend reversal from UP to DOWN, previous UP trend lasted more than 20 periods
         dataframe.loc[
             (
-                (dataframe['trend'] == 'DOWN') &  # Current trend is down
-                (dataframe['trend'].shift(1) == 'UP') &  # Previous trend was up
-                (dataframe['trend_count'].shift(1) >= 20)  # Previous up trend lasted more than 20 periods
+                (dataframe['trend'] == 'DOWN') &  # Current trend is DOWN
+                (dataframe['trend'].shift(1) == 'UP') &  # Previous trend was UP
+                (dataframe['trend_count'].shift(1) >= 20)  # Previous UP trend lasted more than 20 periods
             ),
             'enter_short'] = 1
 
         return dataframe
-
+# debugging. 
+# dataframe[dataframe['enter_long'] == 1]
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the exit signal for the given dataframe.
@@ -99,11 +107,5 @@ class LongReversalStrategy(IStrategy):
         :param metadata: Additional information like the currently traded pair
         :return: DataFrame with exit columns populated
         """
-        # Simple exit strategy: exit when the trend goes down
-        # dataframe.loc[
-        #     (
-        #         dataframe['trend'] == 'DOWN'  # Exit if the trend is down
-        #     ),
-        #     'exit_long'] = 1
 
         return dataframe
