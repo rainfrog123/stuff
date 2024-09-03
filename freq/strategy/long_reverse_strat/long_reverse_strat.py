@@ -62,12 +62,14 @@ class LongReversalStrategy(IStrategy):
         # Count duration of current trend
         dataframe['trend_duration'] = (dataframe['trend'] != dataframe['trend'].shift(1)).cumsum()
         dataframe['trend_count'] = dataframe.groupby('trend_duration').cumcount() + 1
-# for debugging
-# dataframe[dataframe['trend_count']]
-# dataframe[dataframe['trend_duration']]
-# only output column trend duration and basic fisrt 4 columns
-# dataframe[['trend_duration', 'open', 'high', 'low', 'close']]
-# dataframe['trend_duration']
+
+        # for debugging
+        # dataframe[dataframe['trend_count']]
+        # dataframe[dataframe['trend_duration']]
+        # only output column trend duration and basic fisrt 4 columns
+        # dataframe[['trend_duration', 'open', 'high', 'low', 'close']]
+        # dataframe['trend_duration']
+
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -97,8 +99,7 @@ class LongReversalStrategy(IStrategy):
             'enter_short'] = 1
 
         return dataframe
-# debugging. 
-# dataframe[dataframe['enter_long'] == 1]
+    
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the exit signal for the given dataframe.
