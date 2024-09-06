@@ -32,7 +32,7 @@ class LongReversalStrategy(IStrategy):
     }
 
     # Stoploss configuration to minimize loss
-    stoploss = -0.004  # 0.4% stoploss
+    stoploss = -0.002  # 0.1% stoploss
 
     # Enable trailing stop functionality
     trailing_stop = True
