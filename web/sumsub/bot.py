@@ -85,7 +85,7 @@ def sign_request(request: requests.Request) -> requests.PreparedRequest:
     now = int(time.time())
     method = request.method.upper()
     path_url = prepared_request.path_url
-    body = b'' if prepared_request.body is None else prepared_request.body
+    body = b'' if prepared_request.body is None else prekpared_request.body
     if isinstance(body, str):
         body = body.encode('utf-8')
     data_to_sign = str(now).encode('utf-8') + method.encode('utf-8') + path_url.encode('utf-8') + body
