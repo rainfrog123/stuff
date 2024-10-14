@@ -11,7 +11,7 @@ import uuid
 import sqlite3
 
 # Use nest_asyncio to allow nested event loops in Jupyter Notebook
-# nest_asyncio.apply()
+nest_asyncio.apply()
 
 BOT_TOKEN = '7580665549:AAEiILYjLzZg34wIFOBZB-FtfUhsjQMBUrA'
 
@@ -171,7 +171,8 @@ async def run_bot():
     # Message handler to respond when the bot is mentioned with "kyc", "full_kyc", or "poa"
     app.add_handler(MessageHandler(filters.TEXT & filters.ChatType.GROUPS, handle_message))
 
-    # Start polling
+    # Initialize and start the bot
+    await app.initialize()
     await app.start()
     await app.updater.start_polling()
     await asyncio.Future()  # Keeps the bot running
