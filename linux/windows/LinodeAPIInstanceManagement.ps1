@@ -1,8 +1,10 @@
-# 778dbc32c7d2e7e75c68a54053011577edc9fef6e811f30233a98eb38ce8e772
 # adc11bb37cb79693d9beacdd803605619d024c686a779e50895b3e30881df1c5
+# 778dbc32c7d2e7e75c68a54053011577edc9fef6e811f30233a98eb38ce8e772                      
+# 4f992316ba02d7f0b8f71704c16a8e853477f1ad943508cc2de58c525b473d57
+# e5a9dadb3e13d693b0eeb31f62b82155a15bcabc07e008f0cf1bb3ad9201df50
 # Define headers and proxy settings for the account
 $Headers = @{
-    "Authorization" = "Bearer adc11bb37cb79693d9beacdd803605619d024c686a779e50895b3e30881df1c5"
+    "Authorization" = "Bearer e5a9dadb3e13d693b0eeb31f62b82155a15bcabc07e008f0cf1bb3ad9201df50"
     "Content-type" = "application/json"
 }
 $Proxy = "http://127.0.0.1:7890"
@@ -50,7 +52,7 @@ $UriDeleteInstance = "https://api.linode.com/v4/linode/instances/" + $LinodeId
 Invoke-WebRequest -Uri $UriDeleteInstance -Method Delete -Headers $Headers -Proxy $Proxy -ProxyUseDefaultCredentials | ConvertFrom-Json | ConvertTo-Json
 
 # Reboot Multiple Linode Instances
-$LinodeIds = @("62780260", "61857931")
+$LinodeIds = @("61857756", "61857931")
 foreach ($LinodeId in $LinodeIds) {
     $UriReboot = "https://api.linode.com/v4/linode/instances/$LinodeId/reboot"
     Invoke-WebRequest -Uri $UriReboot -Method Post -Headers $Headers -Proxy $Proxy -ProxyUseDefaultCredentials | Out-Null
@@ -59,3 +61,9 @@ foreach ($LinodeId in $LinodeIds) {
 
 # List Linode Types
 Invoke-WebRequest -Uri "https://api.linode.com/v4/linode/regions" -Headers $Headers -Proxy $Proxy -ProxyUseDefaultCredentials | ConvertFrom-Json | ConvertTo-Json
+
+# AbbassRenay——bW0YjYZ!43zNTHGpjNC——e5a9dadb3e13d693b0eeb31f62b82155a15bcabc07e008f0cf1bb3ad9201df50
+
+
+# A0D18D00-527F-41AD-AF8A0608C6C310B3
+# 46576C38-2305-48A3-8DA858BA12B01C1B

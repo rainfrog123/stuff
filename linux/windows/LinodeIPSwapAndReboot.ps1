@@ -6,8 +6,8 @@ $Headers = @{
 $Proxy = "http://127.0.0.1:7890"
 
 # Linode IDs (Ensure these are integers)
-$LinodeId1 = 61857931
-$LinodeId2 = 62142187
+$LinodeId1 = 61857756
+$LinodeId2 = 61857931
 
 # Step 1: Retrieve current IP configurations
 $Uri1 = "https://api.linode.com/v4/linode/instances/$LinodeId1"
