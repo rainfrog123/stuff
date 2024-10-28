@@ -1,0 +1,62 @@
+//@version=5
+strategy("TEMA Strategy with Fixed TP/SL", overlay=true, pyramiding=0)
+
+// Input parameters
+tema_period = input.int(50, title="TEMA Period")
+tp_percent_input = input.float(0.2, title="Take Profit (%)", minval=0.0, step=0.1)
+sl_percent_input = input.float(0.25, title="Stop Loss (%)", minval=0.0, step=0.1)
+
+// Calculate Triple Exponential Moving Average (TEMA)
+ema1 = ta.ema(close, tema_period)
+ema2 = ta.ema(ema1, tema_period)
+ema3 = ta.ema(ema2, tema_period)
+tema = 3 * ema1 - 3 * ema2 + ema3
+
+// Establish the trend direction
+var string trend = na
+if tema > tema[1]
+    trend := "UP"
+else if tema < tema[1]
+    trend := "DOWN"
+else
+    trend := "STABLE"
+
+// Identify trend change points
+var string prev_trend = na
+var int trend_duration = 0
+
+if na(prev_trend)
+    prev_trend := trend
+else
+    if trend != prev_trend
+        // Check if previous trend lasted more than 20 bars
+        if trend_duration > 20
+            // Close existing positions
+            strategy.close_all()
+            // Enter new position based on current trend
+            if trend == "UP"
+                strategy.entry("Long", strategy.long)
+            else if trend == "DOWN"
+                strategy.entry("Short", strategy.short)
+        trend_duration := 1
+        prev_trend := trend
+    else
+        trend_duration += 1
+
+// Set up exit orders based on current positions
+if strategy.position_size > 0
+    // For Long Positions
+    tp_price_long = strategy.position_avg_price * (1 + tp_percent_input / 100)
+    sl_price_long = strategy.position_avg_price * (1 - sl_percent_input / 100)
+    strategy.exit("Exit Long", from_entry="Long", limit=tp_price_long, stop=sl_price_long)
+else if strategy.position_size < 0
+    // For Short Positions
+    tp_price_short = strategy.position_avg_price * (1 - tp_percent_input / 100)
+    sl_price_short = strategy.position_avg_price * (1 + sl_percent_input / 100)
+    strategy.exit("Exit Short", from_entry="Short", limit=tp_price_short, stop=sl_price_short)
+
+// Plot the TEMA with different colors for different trends
+plot(tema, color=(trend == "UP" ? color.green : trend == "DOWN" ? color.red : color.gray), title="TEMA")
+
+// Plot warning sign for trend duration greater than 20
+plotshape(trend_duration > 20, title="Trend Duration Warning", location=location.abovebar, color=color.yellow, style=shape.triangleup, size=size.small)
