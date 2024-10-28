@@ -1,6 +1,6 @@
 # Define headers and proxy settings for the source account
 $Headers = @{
-    "Authorization" = "Bearer adc11bb37cb79693d9beacdd803605619d024c686a779e50895b3e30881df1c5"  # Replace with your actual Linode API token
+    "Authorization" = "Bearer 4f992316ba02d7f0b8f71704c16a8e853477f1ad943508cc2de58c525b473d57"  # Replace with your actual Linode API token
     "Content-type" = "application/json"
 }
 
@@ -32,14 +32,14 @@ Write-Output "Service Transfer Token: $TransferToken"
 
 # Define headers and proxy settings for the receiving account
 $Headers = @{
-    "Authorization" = "Bearer 778dbc32c7d2e7e75c68a54053011577edc9fef6e811f30233a98eb38ce8e772"  
+    "Authorization" = "Bearer e5a9dadb3e13d693b0eeb31f62b82155a15bcabc07e008f0cf1bb3ad9201df50"  
     "Content-type" = "application/json"
 }
 
 $Proxy = "http://127.0.0.1:7890"  # Adjust this if your proxy settings differ
 
 # Step 1: Accept the Service Transfer using the provided token
-$ServiceTransferToken = "C71A6193-A07B-4672-B61C845403A2C807"  # Replace with the actual service transfer token
+$ServiceTransferToken = "46576C38-2305-48A3-8DA858BA12B01C1B"  # Replace with the actual service transfer token
 
 # Execute the API request to accept the transfer
 $AcceptTransferResponse = Invoke-WebRequest `
