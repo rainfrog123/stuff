@@ -2,3 +2,4 @@
 /freq/userdir/models
 freq/userdir/strategies/__pycache__/freqai_opaq.cpython-311.pyc
 freq/userdir/backtest_results/.last_result.json
+freq/crontab.log
