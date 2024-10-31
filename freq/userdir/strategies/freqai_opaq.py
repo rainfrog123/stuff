@@ -9,7 +9,7 @@ from freqtrade.strategy import IStrategy
 logger = logging.getLogger(__name__)
 
 class freqai_opaq(IStrategy):
-    minimal_roi = {"0": 100.0, "240": -1}
+    minimal_roi = {"0": 1000000.0}
     plot_config = {
         "main_plot": {}
         # "subplots": {
@@ -17,11 +17,15 @@ class freqai_opaq(IStrategy):
         #     "do_predict": {"do_predict": {"color": "brown"}},
         # },
     }
+
     process_only_new_candles = True
-    stoploss = -0.05
     use_exit_signal = True
     startup_candle_count: int = 40
     can_short = True
+
+    stoploss = -0.005
+    # trailing_stop = True
+    # trailing_stop_positive = 0.005
 
     def feature_engineering_expand_all(
         self, dataframe: DataFrame, period: int, metadata: dict, **kwargs
@@ -84,7 +88,7 @@ class freqai_opaq(IStrategy):
     def populate_entry_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
         enter_long_conditions = [
             df["do_predict"] == 1,
-            df["&-s_close"] > 0.01,
+            df["&-s_close"] > 0.005,
         ]
 
         if enter_long_conditions:
@@ -94,7 +98,7 @@ class freqai_opaq(IStrategy):
 
         enter_short_conditions = [
             df["do_predict"] == 1,
-            df["&-s_close"] < -0.01,
+            df["&-s_close"] < -0.005,
         ]
 
         if enter_short_conditions:
