@@ -6,7 +6,7 @@ freqtrade download-data -c config.json --timerange 20231001- --timeframes 1m 3m 
 # Trades to OHLCV Conversion
 freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
 
-freqtrade backtesting --strategy freqai_opaq --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config_freqai.json --freqaimodel XGBoostRegressor --timerange 20241001-20241030 --datadir  /allah/freqtrade/user_data/data/binance
+freqtrade backtesting --strategy freqai_opaq_classifier --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config_freqai.json --freqaimodel XGBoostRegressor --timerange 20241001-20241030 --datadir  /allah/freqtrade/user_data/data/binance
 
 # Backtesting Commands
 freqtrade backtesting -c config.json --timerange 20231225- --timeframe 1m --strategy LuxAlgoTEMA20Strategy_follow --starting-balance 1000 --cache none
