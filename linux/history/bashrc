@@ -1,0 +1,34 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# Note: PS1 and umask are already set in /etc/profile. You should not
+# need this unless you want different defaults for root.
+# PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
+# umask 022
+
+# You may uncomment the following lines if you want `ls' to be colorized:
+# export LS_OPTIONS='--color=auto'
+# eval "$(dircolors)"
+# alias ls='ls $LS_OPTIONS'
+# alias ll='ls $LS_OPTIONS -l'
+# alias l='ls $LS_OPTIONS -lA'
+#
+# Some more alias to avoid making mistakes:
+# alias rm='rm -i'
+# alias cp='cp -i'
+# alias mv='mv -i'
+PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🚀🚀🚀  $ "
+
+alias ll='ls -alF'
+alias mo='cd  /allah/stuff/freq/userdir/models'
+alias st='cd /allah/stuff/'
+alias ml='cd /allah/stuff/ml'
+alias dt='cd /allah/data'
+alias ka='cd /allah/stuff/ml/kaggle'
+alias sm='cd /allah/stuff/web/smartproxy'
+alias ft='cd /allah/freqtrade/freqtrade'
+alias fq='cd /allah/stuff/freq'
+alias st='cd /allah/stuff/freq/userdir/strategies'
+alias bashrc='code ~/.bashrc'
+alias rc='code ~/.bashrc'
+alias tb='tensorboard --logdir "$(find . -type d -name 'tensorboard' | sort | tail -n 1)"'
+alias cdtb='cd "$(find . -type d -name 'tensorboard' | sort | tail -n 1)"'
