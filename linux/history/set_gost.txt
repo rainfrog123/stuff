@@ -1,0 +1,14 @@
+gost -L=redirect://:10180 -F=socks5://user-sp797yej9h-session-1-country-al:n7x6Tsj73Kpz_DmRkt@gate.visitxiangtan.com:7000 
+
+docker exec ssr wget -qO- https://ipinfo.io/ip
+
+# Flush existing NAT rules (be careful with this in production)
+sudo iptables -t nat -F
+
+# Redirect all outgoing traffic from the Docker subnet to Gost
+sudo iptables -t nat -A PREROUTING -s 172.17.0.0/16 -p tcp -j REDIRECT --to-ports 10180
+
+sudo iptables -t nat -L PREROUTING -v -n
+sudo iptables -t nat -D PREROUTING 2
+
+sudo systemctl restart docker
