@@ -34,3 +34,5 @@ alias bashrc='code ~/.bashrc'
 alias rc='code ~/.bashrc'
 alias tb='tensorboard --logdir "$(find . -type d -name 'tensorboard' | sort | tail -n 1)"'
 alias cdtb='cd "$(find . -type d -name 'tensorboard' | sort | tail -n 1)"'
+
+export DISPLAY=:10
