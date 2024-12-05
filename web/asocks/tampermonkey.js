@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Scrape Full Table Data (Stop When Base Mismatch)
+// @name         Scrape Full Table Data with Position Tracking
 // @namespace    http://tampermonkey.net/
-// @version      1.5
-// @description  Scrape full table data based on dynamically determined base column value and stop on mismatch
+// @version      1.6
+// @description  Scrape full table data based on dynamically determined base column value and stop on mismatch, with position tracking
 // @author       You
 // @match        https://bclub.tk/cvv/?page=*
 // @grant        none
@@ -33,7 +33,7 @@
 
             let hasMatchingData = false; // Flag to track if matching data is found on this page
 
-            rows.forEach(row => {
+            rows.forEach((row, rowIndex) => {
                 // Extract all columns
                 const bin = row.querySelector('td:nth-child(2)')?.textContent.trim();
                 const type = row.querySelector('td:nth-child(3)')?.querySelector('img')?.getAttribute('title') || 'N/A';
@@ -52,6 +52,8 @@
                 // Only save rows where the Base column matches the determined baseName
                 if (base && base === baseName) {
                     extractedData.push({
+                        Page: currentPage,
+                        Row: rowIndex + 1, // Add 1 because rowIndex is zero-based
                         Bin: bin,
                         Type: type,
                         Subtype: subtype,
@@ -98,11 +100,11 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'scraped_data.json';
+        a.download = 'scraped_data_with_positions.json';
         a.click();
         URL.revokeObjectURL(url);
 
-        console.log('Data saved to "scraped_data.json".');
+        console.log('Data saved to "scraped_data_with_positions.json".');
 
         // Clear localStorage
         localStorage.removeItem('scrapedData');
