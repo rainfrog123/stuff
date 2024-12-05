@@ -52,7 +52,7 @@
         "train_period_days": 150,
         "backtest_period_days": 30,
         "live_retrain_hours": 0,
-        "identifier": "unique-id-15",
+        "identifier": "unique-id-5",
         "activate_tensorboard": true,
         "feature_parameters": {
             "include_timeframes": [
