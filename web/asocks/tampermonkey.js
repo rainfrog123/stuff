@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Scrape BIN, Expiry, and Price (Filtered by Base Column)
+// @name         Scrape Full Table Data (Filtered by Base Column)
 // @namespace    http://tampermonkey.net/
 // @version      1.3
-// @description  Scrape BIN, Expiry, and Price columns filtered by Base column from all pages
+// @description  Scrape full table data filtered by Base column from all pages
 // @author       You
 // @match        https://bclub.tk/cvv/?page=*
 // @grant        none
@@ -25,29 +25,37 @@
             const rows = tableBody.querySelectorAll('tr'); // Get all rows in the table body
 
             rows.forEach(row => {
-                // Get the BIN column (2nd column)
-                const binCell = row.querySelector('td:nth-child(2)');
-                const binValue = binCell ? binCell.textContent.trim() : null;
-
-                // Get the Expiry column (5th column)
-                const expiryCell = row.querySelector('td:nth-child(5)');
-                const expiryValue = expiryCell ? expiryCell.textContent.trim() : null;
-
-                // Get the Price column (14th column)
-                const priceCell = row.querySelector('td:nth-child(14)');
-                const priceValue = priceCell ? priceCell.textContent.trim() : null;
-
-                // Get the Base column (13th column)
-                const baseCell = row.querySelector('td:nth-child(13)');
-                const baseValue = baseCell ? baseCell.textContent.trim() : null;
+                // Extract all columns
+                const bin = row.querySelector('td:nth-child(2)')?.textContent.trim();
+                const type = row.querySelector('td:nth-child(3)')?.querySelector('img')?.getAttribute('title') || 'N/A';
+                const subtype = row.querySelector('td:nth-child(4)')?.textContent.trim();
+                const expiry = row.querySelector('td:nth-child(5)')?.textContent.trim();
+                const name = row.querySelector('td:nth-child(6)')?.textContent.trim();
+                const country = row.querySelector('td:nth-child(7)')?.querySelector('img')?.getAttribute('title') || 'N/A';
+                const state = row.querySelector('td:nth-child(8)')?.textContent.trim();
+                const fullAddress = row.querySelector('td:nth-child(9)')?.textContent.trim();
+                const zip = row.querySelector('td:nth-child(10)')?.textContent.trim();
+                const extra = row.querySelector('td:nth-child(11)')?.textContent.trim();
+                const bank = row.querySelector('td:nth-child(12)')?.textContent.trim();
+                const base = row.querySelector('td:nth-child(13)')?.textContent.trim();
+                const price = row.querySelector('td:nth-child(14)')?.textContent.trim();
 
                 // Only save rows where the Base column includes '1205'
-                if (baseValue && baseValue.includes('1205')) {
+                if (base && base.includes('1205')) {
                     extractedData.push({
-                        BIN: binValue,
-                        Expiry: expiryValue,
-                        Price: priceValue,
-                        Base: baseValue
+                        Bin: bin,
+                        Type: type,
+                        Subtype: subtype,
+                        Expiry: expiry,
+                        Name: name,
+                        Country: country,
+                        State: state,
+                        FullAddress: fullAddress,
+                        Zip: zip,
+                        Extra: extra,
+                        Bank: bank,
+                        Base: base,
+                        Price: price
                     });
                 }
             });
@@ -97,3 +105,7 @@
         setTimeout(goToNextPage, 3000);
     });
 })();
+
+
+
+curl -H "Referer: your domain" "https://data.handyapi.com/bin/510805"
