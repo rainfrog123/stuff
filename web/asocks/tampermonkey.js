@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Scrape Full Table Data with Position Tracking
+// @name         Scrape Full Table Data with Position Tracking (Max 30 Pages)
 // @namespace    http://tampermonkey.net/
-// @version      1.6
-// @description  Scrape full table data based on dynamically determined base column value and stop on mismatch, with position tracking
+// @version      1.7
+// @description  Scrape full table data based on dynamically determined base column value and stop on mismatch, with position tracking, limited to 30 pages
 // @author       You
 // @match        https://bclub.tk/cvv/?page=*
 // @grant        none
@@ -11,6 +11,7 @@
 (function () {
     'use strict';
 
+    const maxPages = 30; // Maximum number of pages to scrape
     const extractedData = JSON.parse(localStorage.getItem('scrapedData')) || []; // Restore previous data
     let baseName = localStorage.getItem('baseName'); // Retrieve base name from localStorage
     let currentPage = parseInt(new URL(window.location.href).searchParams.get('page')) || 1;
@@ -88,10 +89,15 @@
     }
 
     function goToNextPage() {
-        const nextPage = currentPage + 1; // Increment the page number
-        const nextPageUrl = `https://bclub.tk/cvv/?page=${nextPage}`;
-        console.log(`Navigating to: ${nextPageUrl}`);
-        window.location.href = nextPageUrl; // Navigate to the next page
+        if (currentPage < maxPages) {
+            const nextPage = currentPage + 1; // Increment the page number
+            const nextPageUrl = `https://bclub.tk/cvv/?page=${nextPage}`;
+            console.log(`Navigating to: ${nextPageUrl}`);
+            window.location.href = nextPageUrl; // Navigate to the next page
+        } else {
+            console.log(`Reached the maximum page limit of ${maxPages}. Stopping scraping.`);
+            saveAndStop();
+        }
     }
 
     function saveAndStop() {
@@ -115,7 +121,7 @@
     window.addEventListener('load', () => {
         scrapeData(); // Scrape current page
 
-        if (localStorage.getItem('baseName')) {
+        if (localStorage.getItem('baseName') && currentPage <= maxPages) {
             // If base name is set and no stopping condition, continue to the next page
             setTimeout(() => {
                 goToNextPage();
