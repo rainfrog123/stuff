@@ -52,7 +52,7 @@
         "train_period_days": 150,
         "backtest_period_days": 30,
         "live_retrain_hours": 0,
-        "identifier": "unique-id-5",
+        "identifier": "unique-id-9",
         "activate_tensorboard": true,
         "feature_parameters": {
             "include_timeframes": [
@@ -64,7 +64,7 @@
                 // "BTC/USDT:USDT"
             ],
             "label_period_candles": 10,
-            "include_shifted_candles": 0,
+            "include_shifted_candles": 3,
             // "DI_threshold": 0.9,
             // "weight_factor": 0.9,
             "principal_component_analysis": false,

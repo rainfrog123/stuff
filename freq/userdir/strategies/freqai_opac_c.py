@@ -18,7 +18,6 @@ class freqai_opaq_classifier(IStrategy):
         #     "do_predict": {"do_predict": {"color": "brown"}},
         # },
     }
-
     process_only_new_candles = True
     use_exit_signal = True
     startup_candle_count: int = 40

@@ -23,7 +23,7 @@ declare -a ip_list
 declare -a city_list
 
 # Loop through sessions 1 to 20
-for session in {20..40}
+for session in {40..60}
 do
     # Construct the proxy string with the current session and additional parameters
     proxy="socks5h://${username}-session-${session}-sessionduration-${session_duration}-os-${os}-country-${country}:${password}@${proxy_server}"
