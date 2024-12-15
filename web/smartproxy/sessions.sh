@@ -9,7 +9,7 @@ proxy_server="gate.smartproxy.com:7000"
 # Additional proxy parameters
 session_duration="60"  # Duration in minutes
 os="ios"               # Operating System
-country="us"           # Country Code
+country="se"           # Country Code
 
 # Check if jq is installed
 if ! command -v jq &> /dev/null
@@ -23,7 +23,7 @@ declare -a ip_list
 declare -a city_list
 
 # Loop through sessions 1 to 20
-for session in {40..60}
+for session in {60..80}
 do
     # Construct the proxy string with the current session and additional parameters
     proxy="socks5h://${username}-session-${session}-sessionduration-${session_duration}-os-${os}-country-${country}:${password}@${proxy_server}"
