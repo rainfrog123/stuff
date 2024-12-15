@@ -8,6 +8,9 @@ freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
 
 freqtrade backtesting --strategy freqai_opaq_classifier --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config_freqai.json --freqaimodel XGBoostRegressor --timerange 20241001-20241030 --datadir  /allah/freqtrade/user_data/data/binance
 
+freqtrade backtesting --strategy TEMA50TrailingStopStrategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20241001-20241030 --datadir  /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000
+
+
 # Backtesting Commands
 freqtrade backtesting -c config.json --timerange 20231225- --timeframe 1m --strategy LuxAlgoTEMA20Strategy_follow --starting-balance 1000 --cache none
 freqtrade backtesting -c fake_1m_config.json --timerange 20100101- --timeframe 1m --strategy fake_1m_strat --eps --starting-balance 1000000000 --cache none

@@ -1,8 +1,10 @@
 from technical.indicators import atr
 import talib.abstract as ta
 import numpy as np
-from freqtrade.strategy import IStrategy
+from freqtrade.strategy import IStrategy, stoploss_from_absolute
+from freqtrade.persistence import Trade
 from pandas import DataFrame
+from datetime import datetime
 
 
 class TEMA50TrailingStopStrategy(IStrategy):
@@ -10,9 +12,9 @@ class TEMA50TrailingStopStrategy(IStrategy):
     A strategy that enters trades when TEMA50 changes direction
     and uses ATR-based trailing stops to manage exits.
     """
-    timeframe = '1m'  # Use 5-minute candles (can be adjusted as needed)
+    timeframe = '3m'  # Use 3-minute candles (can be adjusted as needed)
     can_short: bool = True  # Allow short trades
-    stoploss = -0.10  # Placeholder value, the custom trailing stop logic will override this
+    stoploss = -0.01  # Placeholder value, the custom trailing stop logic will override this
     use_custom_stoploss = True  # Enable custom stoploss logic
     startup_candle_count: int = 50  # Require at least 50 candles for TEMA50 calculation
 
@@ -29,8 +31,11 @@ class TEMA50TrailingStopStrategy(IStrategy):
         dataframe['tema_changed'] = dataframe['tema_direction'] != dataframe['tema_direction'].shift(1)
 
         # Compute ATR for trailing stop
-        atr_period = 14
-        dataframe['atr'] = atr(dataframe, period=atr_period)
+        atr_period = 100
+        dataframe['atr'] = atr(dataframe, atr_period)
+
+        # Calculate ATR percentage
+        dataframe['atr_percentage'] = (dataframe['atr'] / dataframe['close']) * 100
 
         return dataframe
 
@@ -41,14 +46,14 @@ class TEMA50TrailingStopStrategy(IStrategy):
         # Long entry: TEMA50 changes direction to UP
         dataframe.loc[
             dataframe['tema_changed'] & (dataframe['tema_direction'] == 'UP'),
-            'enter_long'
-        ] = 1
+            ['enter_short', 'enter_tag']
+        ] = (1, 'tema50_up')
 
         # Short entry: TEMA50 changes direction to DOWN
         dataframe.loc[
             dataframe['tema_changed'] & (dataframe['tema_direction'] == 'DOWN'),
-            'enter_short'
-        ] = 1
+            ['enter_short', 'enter_tag']
+        ] = (1, 'tema50_down')
 
         return dataframe
 
@@ -58,32 +63,33 @@ class TEMA50TrailingStopStrategy(IStrategy):
         """
         return dataframe
 
-    def custom_stoploss(
-        self, pair: str, trade, current_time: datetime, current_rate: float, current_profit: float, **kwargs
-    ) -> float:
+    def order_filled(self, pair: str, trade: Trade, order, current_time: datetime, **kwargs) -> None:
         """
-        Custom stoploss logic using ATR.
+        Calculate and store the ATR percentage as the stoploss percentage for this trade.
         """
-        # Fetch analyzed dataframe
+        # Get the analyzed dataframe for the pair
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
+        last_candle = dataframe.iloc[-1].squeeze()
 
-        # Ensure dataframe is not empty and ATR is available
-        if dataframe.empty or 'atr' not in dataframe:
-            return self.stoploss
+        atr_percentage = last_candle.get('atr_percentage', None)
+        if atr_percentage is not None:
+            # Convert percentage to a ratio for stoploss (e.g., 0.17% => 0.0017)
+            stoploss_ratio = atr_percentage / 100.0
 
-        # Get the last candle
-        last_candle = dataframe.iloc[-1]
+            # Store this value as a custom field in the trade
+            trade.set_custom_data(key="stoploss_ratio", value=stoploss_ratio)
 
-        # ATR-based trailing stop calculation
-        atr_multiplier = 1.5  # Adjust this multiplier as needed
-        atr_trailing_stop = atr_multiplier * last_candle['atr'] / current_rate
+    def custom_stoploss(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
+                        current_profit: float, **kwargs) -> float:
+        """
+        Custom stoploss logic using the pre-calculated ATR percentage.
+        """
+        # Retrieve the stored stoploss ratio from the trade's custom data
+        stoploss_ratio = trade.get_custom_data("stoploss_ratio", default=None)
 
-        # Ensure trailing stop is within bounds (optional tightening logic)
-        if current_profit > 0.02:  # If profit exceeds 2%, tighten the stop
-            atr_trailing_stop = max(atr_trailing_stop, -0.02)
+        if stoploss_ratio is not None:
+            # Apply the stored stoploss ratio (negative value for stoploss)
+            return -stoploss_ratio*2
 
-        return atr_trailing_stop
-
-
-def leverage():
-    return 1.0
+        # Fallback: Default stoploss
+        return self.stoploss
