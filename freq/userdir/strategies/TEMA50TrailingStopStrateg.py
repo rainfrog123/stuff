@@ -31,7 +31,7 @@ class TEMA50TrailingStopStrategy(IStrategy):
         dataframe['tema_changed'] = dataframe['tema_direction'] != dataframe['tema_direction'].shift(1)
 
         # Compute ATR for trailing stop
-        atr_period = 100
+        atr_period = 14
         dataframe['atr'] = atr(dataframe, atr_period)
 
         # Calculate ATR percentage
@@ -46,13 +46,13 @@ class TEMA50TrailingStopStrategy(IStrategy):
         # Long entry: TEMA50 changes direction to UP
         dataframe.loc[
             dataframe['tema_changed'] & (dataframe['tema_direction'] == 'UP'),
-            ['enter_short', 'enter_tag']
+            ['enter_long', 'enter_tag']
         ] = (1, 'tema50_up')
 
         # Short entry: TEMA50 changes direction to DOWN
         dataframe.loc[
             dataframe['tema_changed'] & (dataframe['tema_direction'] == 'DOWN'),
-            ['enter_short', 'enter_tag']
+            ['enter_long', 'enter_tag']
         ] = (1, 'tema50_down')
 
         return dataframe
@@ -89,7 +89,7 @@ class TEMA50TrailingStopStrategy(IStrategy):
 
         if stoploss_ratio is not None:
             # Apply the stored stoploss ratio (negative value for stoploss)
-            return -stoploss_ratio*2
+            return -stoploss_ratio*2  # Use a multiplier to adjust the stoploss
 
         # Fallback: Default stoploss
         return self.stoploss
