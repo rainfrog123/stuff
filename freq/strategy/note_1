@@ -7,12 +7,12 @@ freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuf
 freqtrade list-strategies --strategy-path /allah/stuff/freq/userdir/strategies
 freqtrade trade --strategy MultiTimeframeTEMAAgreement --userdir /allah/stuff/freq/userdir/ --config /allah/stuff/freq/userdir/mutiple_coins.json --datadir /allah/freqtrade/user_data/data/binance
 freqtrade trade -c config.json --strategy MacdStrategyCombined --starting-balance 10000
-
+freqtrade backtesting-analysis -c /allah/stuff/freq/userdir/user_data/mutiple_coins_BT_v1.json  --datadir /allah/freqtrade/user_data/data/binance
 ## Trades to OHLCV Conversion
 freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
 
 ## Backtesting Commands
-freqtrade backtesting --strategy MultiTimeframeTEMAAgreement --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/mutiple_coins_v2.json --timerange 20241222-20241223 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 1000
+freqtrade backtesting --strategy MultiTimeframeTEMAAgreement --userdir /allah/stuff/freq/userdir/user_data --config /allah/stuff/freq/userdir/user_data/mutiple_coins_BT_v1.json --timerange 20241222-20241223 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000 --eps --export=signals
 freqtrade backtesting --strategy freqai_opaq_classifier --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config_freqai.json --freqaimodel XGBoostRegressor --timerange 20241001-20241030 --datadir /allah/freqtrade/user_data/data/binance
 freqtrade backtesting --strategy TEMA50Trailing_All_Long_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
 freqtrade backtesting --strategy TEMA50Trailing_All_Short_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
