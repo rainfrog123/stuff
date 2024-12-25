@@ -1,71 +1,57 @@
-Act as an English prompt teacher, assisting me by refining my questions for clarity and effectiveness before providing an answer during each conversation.
-# Data Download Commands
-freqtrade download-data -c config.json --timerange 20191001- --timeframes 1m 3m 5m 15m 30m 1h 4h
+## Data Download Commands
 freqtrade download-data -c config.json --timerange 20240101- --timeframes 1m 3m 5m 15m 30m 1h 4h
+freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20230101- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir /allah/freqtrade/user_data/data/binance
+freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/mutiple_coins_v2.json --timerange 20241220- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir /allah/freqtrade/user_data/data/binance
 
-freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20230101- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir  /allah/freqtrade/user_data/data/binance
-
+## Strategy Commands
 freqtrade list-strategies --strategy-path /allah/stuff/freq/userdir/strategies
-
 freqtrade trade --strategy MultiTimeframeTEMAAgreement --userdir /allah/stuff/freq/userdir/ --config /allah/stuff/freq/userdir/mutiple_coins.json --datadir /allah/freqtrade/user_data/data/binance
-
-# Trades to OHLCV Conversion
-freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
-
-freqtrade backtesting --strategy MultiTimeframeTEMAAgreement  --userdir /allah/stuff/freq/userdir/  --config /allah/stuff/freq/userdir/mutiple_coins_example.json --timerange 20241219-20241220 --datadir  /allah/freqtrade/user_data/data/binance --cache none --starting-balance 1000    
-
-freqtrade backtesting --strategy freqai_opaq_classifier --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config_freqai.json --freqaimodel XGBoostRegressor --timerange 20241001-20241030 --datadir  /allah/freqtrade/user_data/data/binance
-
-freqtrade backtesting --strategy TEMA50Trailing_All_Long_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir  /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
-
-freqtrade backtesting --strategy TEMA50Trailing_All_Short_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir  /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
-
-freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/mutiple_coins.json --timerange 20241220- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir  /allah/freqtrade/user_data/data/binance
-
-# Backtesting Commands
-freqtrade backtesting -c config.json --timerange 20231225- --timeframe 1m --strategy LuxAlgoTEMA20Strategy_follow --starting-balance 1000 --cache none
-freqtrade backtesting -c fake_1m_config.json --timerange 20100101- --timeframe 1m --strategy fake_1m_strat --eps --starting-balance 1000000000 --cache none
-freqtrade backtesting -c fake_1m_config.json --timerange 19900101- --timeframe 1m --strategy fake_1m_strat_short --starting-balance 1000 --cache none
-freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --strategy all_entry_strategy_long --eps --starting-balance 1000000000 --cache none
-freqtrade backtesting -c config.json --timerange 20110904- --timeframe 3m --strategy MacdStrategyLong --eps --starting-balance 1000000000 --cache none
-
-freqtrade backtesting --strategy LongReversalStrategy --userdir /allah/stuff/freq/userdir  -c /allah/stuff/freq/userdir/config.json --datadir  /allah/freqtrade/user_data/data/binance --timerange 20240901- --timeframe 3m --starting-balance 10000 --cache none
-
-freqtrade webserver --userdir /allah/stuff/freq/userdir  -c /allah/stuff/freq/userdir/config.json --datadir  /allah/freqtrade/user_data/data/binance
-
-freqtrade hyperopt --strategy ChangePointTrendStrategy --hyperopt-loss SharpeHyperOptLoss --spaces stoploss buy -e 50 --timerange 20240610- -c config.json --disable-param-export --starting-balance 10000
-
-# Trading Commands
 freqtrade trade -c config.json --strategy MacdStrategyCombined --starting-balance 10000
 
-# Listing Commands
-freqtrade list-pairs --exchange binance --trading-mode futures
+## Trades to OHLCV Conversion
+freqtrade trades-to-ohlcv --exchange binance -t 5m 1h 1d --pairs BTC/USDT:USDT
 
-# Plotting Commands
-freqtrade plot-dataframe -p BTC/USDT:USDT --strategy fake_1m_strat_long
-freqtrade plot-dataframe --strategy fake_1s_strat_short -p BTC/USDT:USDT --timerange=20231105-20231106
+## Backtesting Commands
+freqtrade backtesting --strategy MultiTimeframeTEMAAgreement --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/mutiple_coins_v2.json --timerange 20241222-20241223 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 1000
+freqtrade backtesting --strategy freqai_opaq_classifier --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config_freqai.json --freqaimodel XGBoostRegressor --timerange 20241001-20241030 --datadir /allah/freqtrade/user_data/data/binance
+freqtrade backtesting --strategy TEMA50Trailing_All_Long_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
+freqtrade backtesting --strategy TEMA50Trailing_All_Short_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
+freqtrade backtesting -c config.json --timerange 20231225- --timeframe 1m --strategy LuxAlgoTEMA20Strategy_follow --starting-balance 1000 --cache none
+freqtrade backtesting -c fake_1m_config.json --timerange 20100101- --timeframe 1m --strategy fake_1m_strat --eps --starting-balance 1000000000 --cache none
+freqtrade backtesting -c config.json --timerange 20221120- --timeframe 1h --strategy all_entry_strategy_long --eps --starting-balance 1000000000 --cache none
+freqtrade backtesting --strategy LongReversalStrategy --userdir /allah/stuff/freq/userdir -c /allah/stuff/freq/userdir/config.json --datadir /allah/freqtrade/user_data/data/binance --timerange 20240901- --timeframe 3m --starting-balance 10000 --cache none
 
-# Hyperopt Commands
+## Webserver Commands
+freqtrade webserver --userdir /allah/stuff/freq/userdir -c /allah/stuff/freq/userdir/config.json --datadir /allah/freqtrade/user_data/data/binance
+
+## Hyperopt Commands
+freqtrade hyperopt --strategy ChangePointTrendStrategy --hyperopt-loss SharpeHyperOptLoss --spaces stoploss buy -e 50 --timerange 20240610- -c config.json --disable-param-export --starting-balance 10000
 freqtrade hyperopt -c fake_1m_config.json --hyperopt-loss SharpeHyperOptLossDaily --spaces buy sell --strategy fake_1m_strat_long --timerange 19900101- --timeframe 1m --export-filename fake_1m_strat_long_hyperopt --export-directory user_data/hyperopts
-freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces roi stoploss trailing --strategy MyWorkingStrategy --config config.json -e 100
 freqtrade hyperopt --hyperopt-loss ShortTradeDurHyperOptLoss --spaces stoploss buy --strategy LuxAlgoTEMA20Strategy_follow --config config.json -e 50 --timerange 20231220- --timeframe 1m --disable-param-export
 freqtrade hyperopt --hyperopt-loss SharpeHyperOptLossDaily --spaces buy stoploss --strategy LuxAlgoTEMA20Strategy_follow --config config.json -e 50 --timerange 20231215- --timeframe 1m --disable-param-export
 
-# Analysis Commands
+## Listing Commands
+freqtrade list-pairs --exchange binance --trading-mode futures
+
+## Plotting Commands
+freqtrade plot-dataframe -p BTC/USDT:USDT --strategy fake_1m_strat_long
+freqtrade plot-dataframe --strategy fake_1s_strat_short -p BTC/USDT:USDT --timerange=20231105-20231106
+
+## Analysis Commands
 freqtrade backtesting-analysis -c fake_1m_config.json --analysis-groups 0 1 2 3 4 5
 
-# Network Commands
+## Network Commands
 nc -l -p 9012 -c 'nc 172.104.124.82 9000'
 socat TCP-LISTEN:19020,fork TCP:172.104.124.82:9000
 
-# Security and Configuration
+## Security and Configuration
 acl allowed_ips src 103.3.60.27 // 172.104.124.82
 http_access allow allowed_ips
 "cwd": "${fileDirname}"
 "cwd":"/allah/freqtrade"
 "https": "http://172.104.124.82:49150"
 
-# System Commands
+## System Commands
 0 * * * * /bin/bash -c 'source /allah/freqtrade/.venv/bin/activate && cd /allah/freqtrade/ && freqtrade download-data -c config.json --timerange 20220101- --timeframes 1m 3m 5m 15m 30m 1h 4h' 2>&1 | tail -n 5 >> /allah/freqtrade/json_dict/crontab.log
 mv !(history) /allah/stuff/freq/history/   shopt -s extglob
 
@@ -79,6 +65,4 @@ while true; do
     fi
     sleep 600  # 10 minutes
 done
-
-freqtrade download-data -c /allah/stuff/freq/userdir/config.json --timerange 20190101- --timeframes 1m 3m 5m 15m 30m 1h 4h;
 

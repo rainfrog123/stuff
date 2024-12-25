@@ -162,7 +162,7 @@ class MultiTimeframeTEMAAgreement(IStrategy):
 
 
 
-        return 200.0
+        return max_leverage
 
 
     # def custom_stoploss(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,

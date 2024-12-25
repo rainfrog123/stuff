@@ -64,7 +64,8 @@
         },
         {
             "method": "ShuffleFilter",
-            "shuffle_frequency": "candle"  
+            "shuffle_frequency": "candle",
+            "seed": 12
               } ,
         {
             "method": "OffsetFilter",
@@ -108,6 +109,6 @@
     "initial_state": "running",
     "force_entry_enable": false,
     "internals": {
-        "process_throttle_secs": 3
+        "process_throttle_secs": 1
     }
 }
