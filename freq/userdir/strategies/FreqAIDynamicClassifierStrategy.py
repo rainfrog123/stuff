@@ -16,21 +16,15 @@ class FreqAIDynamicClassifierStrategy(IStrategy):
     
     # Strategy-specific configurations
     minimal_roi = {"0": 1000000.0}
-    stoploss = -0.005
+    stoploss = -0.05
     trailing_stop = True
-    process_only_new_candles = True
-    use_exit_signal = True
-    startup_candle_count: int = 40
+    process_only_new_candles = False
+    startup_candle_count: int = 200
     can_short = True
-
+    timeframe = '3m'
     # Plot configuration
     plot_config = {
         "main_plot": {}
-        # Example: Uncomment and customize subplots as needed
-        # "subplots": {
-        #     "&-class": {"&-class": {"color": "blue"}},
-        #     "do_predict": {"do_predict": {"color": "brown"}},
-        # },
     }
 
     def feature_engineering_expand_all(self, dataframe: DataFrame, period: int, metadata: dict, **kwargs) -> DataFrame:
@@ -83,15 +77,25 @@ class FreqAIDynamicClassifierStrategy(IStrategy):
         """
         Map external targets from a parquet file to the main dataframe.
         """
-        self.freqai.class_names = ['LOSE', 'LONG_WIN', 'SHORT_WIN']
-        df = pd.read_parquet("/allah/data/parquet/final_df.parquet")
-        df['target_date'] = pd.to_datetime(df['target_date'])
-        dataframe['date'] = pd.to_datetime(dataframe['date'])
+        self.freqai.class_names = ['LONG_WIN', 'SHORT_WIN']
+        
+        # Load external parquet file
+        external_df = pd.read_parquet("/allah/data/parquet/final_df.parquet")
 
-        # Map targets to the dataframe
-        target_map = df.set_index('target_date')['type'].to_dict()
+        # Ensure `open_date` is a datetime object
+        external_df['open_date'] = pd.to_datetime(external_df['open_date'])
+        
+        # Create `target_date` as 3 minutes before `open_date`
+        external_df['target_date'] = external_df['open_date'] - pd.Timedelta(minutes=3)
+        
+        # Filter for only LONG_WIN and SHORT_WIN
+        # external_df = external_df[external_df['type'].isin(['LONG_WIN', 'SHORT_WIN'])]
+
+        # Map targets to the main dataframe
+        target_map = external_df.set_index('target_date')['type'].to_dict()
         dataframe['type'] = dataframe['date'].map(target_map)
         dataframe['&-target'] = dataframe['type']
+        
         return dataframe
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -101,38 +105,38 @@ class FreqAIDynamicClassifierStrategy(IStrategy):
         dataframe = self.freqai.start(dataframe, metadata, self)
         return dataframe
 
-    def populate_entry_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Define entry conditions for long and short positions based on AI predictions.
         """
  
-    # Long entry conditions (when prediction is 'LONG_WIN')
+        # Long entry conditions (when prediction is 'LONG_WIN')
         enter_long_conditions = [
-            df["do_predict"] == 1,  # Prediction confidence is high
-            df["&-target"] == 'LONG_WIN',  # Predicted to win in a long position
+            dataframe["do_predict"] == 1,  # Prediction confidence is high
+            dataframe["&-target"] == 'LONG_WIN',  # Predicted to win in a long position
         ]
         if enter_long_conditions:
-            df.loc[
+            dataframe.loc[
                 reduce(lambda x, y: x & y, enter_long_conditions), ["enter_long", "enter_tag"]
             ] = (1, "long")
 
         # Short entry conditions (when prediction is 'SHORT_WIN')
         enter_short_conditions = [
-            df["do_predict"] == 1,  # Prediction confidence is high
-            df["&-target"] == 'SHORT_WIN',  # Predicted to win in a short position
+            dataframe["do_predict"] == 1,  # Prediction confidence is high
+            dataframe["&-target"] == 'SHORT_WIN',  # Predicted to win in a short position
         ]
         if enter_short_conditions:
-            df.loc[
+            dataframe.loc[
                 reduce(lambda x, y: x & y, enter_short_conditions), ["enter_short", "enter_tag"]
             ] = (1, "short")
 
-        return df
+        return dataframe
 
 
-    def populate_exit_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Define exit conditions for long and short positions based on AI predictions.
         """
         # Exit long if prediction changes to "down"
 
-        return df
+        return dataframe

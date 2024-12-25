@@ -7,16 +7,16 @@ from pandas import DataFrame
 from datetime import datetime
 
 
-class TEMA50TrailingStopStrategy(IStrategy):
+class TEMA50Trailing_All_Short_Strategy(IStrategy):
     """
     A strategy that enters trades when TEMA50 changes direction
     and uses ATR-based trailing stops to manage exits.
     """
     timeframe = '3m'  # Use 3-minute candles (can be adjusted as needed)
     can_short: bool = True  # Allow short trades
-    stoploss = -0.01  # Placeholder value, the custom trailing stop logic will override this
+    stoploss = -0.91  # Placeholder value, the custom trailing stop logic will override this
     use_custom_stoploss = True  # Enable custom stoploss logic
-    startup_candle_count: int = 50  # Require at least 50 candles for TEMA50 calculation
+    startup_candle_count: int = 150  # Require at least 50 candles for TEMA50 calculation
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
@@ -46,13 +46,13 @@ class TEMA50TrailingStopStrategy(IStrategy):
         # Long entry: TEMA50 changes direction to UP
         dataframe.loc[
             dataframe['tema_changed'] & (dataframe['tema_direction'] == 'UP'),
-            ['enter_long', 'enter_tag']
+            ['enter_short', 'enter_tag']
         ] = (1, 'tema50_up')
 
         # Short entry: TEMA50 changes direction to DOWN
         dataframe.loc[
             dataframe['tema_changed'] & (dataframe['tema_direction'] == 'DOWN'),
-            ['enter_long', 'enter_tag']
+            ['enter_short', 'enter_tag']
         ] = (1, 'tema50_down')
 
         return dataframe
@@ -74,7 +74,7 @@ class TEMA50TrailingStopStrategy(IStrategy):
         atr_percentage = last_candle.get('atr_percentage', None)
         if atr_percentage is not None:
             # Convert percentage to a ratio for stoploss (e.g., 0.17% => 0.0017)
-            stoploss_ratio = atr_percentage / 100.0
+            stoploss_ratio = atr_percentage / 100.0 
 
             # Store this value as a custom field in the trade
             trade.set_custom_data(key="stoploss_ratio", value=stoploss_ratio)
@@ -89,7 +89,7 @@ class TEMA50TrailingStopStrategy(IStrategy):
 
         if stoploss_ratio is not None:
             # Apply the stored stoploss ratio (negative value for stoploss)
-            return -stoploss_ratio*2  # Use a multiplier to adjust the stoploss
+            return -stoploss_ratio*3  # Use a multiplier to adjust the stoploss
 
         # Fallback: Default stoploss
         return self.stoploss
