@@ -83,6 +83,7 @@ class MultiTimeframeTEMAAgreement(IStrategy):
         """
         dataframe['is_trend_aligned_up'] = (
             (dataframe['trend'] == 1) &
+            (dataframe['trend'].shift(1) != 1) & 
             (dataframe['trend_3m'] == 1) &
             (dataframe['trend_5m'] == 1) &
             (dataframe['trend_15m'] == 1) &
@@ -91,6 +92,7 @@ class MultiTimeframeTEMAAgreement(IStrategy):
         )
         dataframe['is_trend_aligned_down'] = (
             (dataframe['trend'] == -1) &
+            (dataframe['trend'].shift(1) != -1) & 
             (dataframe['trend_3m'] == -1) &
             (dataframe['trend_5m'] == -1) &
             (dataframe['trend_15m'] == -1) &
@@ -121,18 +123,23 @@ class MultiTimeframeTEMAAgreement(IStrategy):
     def order_filled(self, pair: str, trade: Trade, order, current_time: datetime, **kwargs) -> None:
         """
         Calculate and store the ATR percentage as the stoploss percentage for this trade.
+        Trigger this only for entry orders.
         """
-        # Get the analyzed dataframe for the pair
-        dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
-        last_candle = dataframe.iloc[-1].squeeze()
+        if (order.ft_order_side == trade.entry_side):
+            # Get the analyzed dataframe for the pair
+            dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
+            last_candle = dataframe.iloc[-1].squeeze()
 
-        atr_percentage = last_candle.get('atr_percentage', None)
-        if atr_percentage is not None:
-            # Convert percentage to a ratio for stoploss (e.g., 0.17% => 0.0017)
-            stoploss_ratio = (atr_percentage / 100.0) * trade.leverage
+            # Calculate ATR percentage and store it in the trade
+            atr_percentage = last_candle.get('atr_percentage', None)
+            if atr_percentage is not None:
+                # Convert percentage to a ratio for stoploss (e.g., 0.17% => 0.0017)
+                stoploss_ratio = (atr_percentage / 100.0) * trade.leverage
 
-            # Store this value as a custom field in the trade
-            trade.set_custom_data(key="stoploss_ratio", value=stoploss_ratio)
+                # Store this value as a custom field in the trade
+                trade.set_custom_data(key="stoploss_ratio", value=stoploss_ratio)
+        return None
+
 
     def custom_stoploss(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
                         current_profit: float, **kwargs) -> float:
@@ -144,7 +151,7 @@ class MultiTimeframeTEMAAgreement(IStrategy):
 
         if stoploss_ratio is not None:
             # Apply the stored stoploss ratio (negative value for stoploss)
-            return (-stoploss_ratio * 2)  # Use a multiplier to adjust the stoploss
+            return (-stoploss_ratio * 1.5)  # Use a multiplier to adjust the stoploss
 
         # Fallback: Default stoploss
         return self.stoploss
@@ -152,8 +159,10 @@ class MultiTimeframeTEMAAgreement(IStrategy):
     def leverage(self, pair: str, current_time: datetime, current_rate: float, proposed_leverage: float,
                  max_leverage: float, entry_tag: Optional[str], side: str, current_profit: Optional[float] = None,
                  **kwargs) -> float:
-        set_leverage = max_leverage
-        return set_leverage
+
+
+
+        return 200.0
 
 
     # def custom_stoploss(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,

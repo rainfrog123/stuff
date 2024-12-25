@@ -1,9 +1,9 @@
 Act as an English prompt teacher, assisting me by refining my questions for clarity and effectiveness before providing an answer during each conversation.
 # Data Download Commands
 freqtrade download-data -c config.json --timerange 20191001- --timeframes 1m 3m 5m 15m 30m 1h 4h
-freqtrade download-data -c config.json --timerange 20231001- --timeframes 1m 3m 5m 15m 30m 1h 4h
+freqtrade download-data -c config.json --timerange 20240101- --timeframes 1m 3m 5m 15m 30m 1h 4h
 
-freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/mutiple_coins.json --timerange 20241220- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir  /allah/freqtrade/user_data/data/binance
+freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20230101- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir  /allah/freqtrade/user_data/data/binance
 
 freqtrade list-strategies --strategy-path /allah/stuff/freq/userdir/strategies
 
@@ -16,7 +16,9 @@ freqtrade backtesting --strategy MultiTimeframeTEMAAgreement  --userdir /allah/s
 
 freqtrade backtesting --strategy freqai_opaq_classifier --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config_freqai.json --freqaimodel XGBoostRegressor --timerange 20241001-20241030 --datadir  /allah/freqtrade/user_data/data/binance
 
-freqtrade backtesting --strategy TEMA50TrailingStopStrategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20241001-20241030 --datadir  /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000
+freqtrade backtesting --strategy TEMA50Trailing_All_Long_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir  /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
+
+freqtrade backtesting --strategy TEMA50Trailing_All_Short_Strategy --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/config.json --timerange 20240101-20241224 --datadir  /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps
 
 freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuff/freq/userdir/mutiple_coins.json --timerange 20241220- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir  /allah/freqtrade/user_data/data/binance
 
