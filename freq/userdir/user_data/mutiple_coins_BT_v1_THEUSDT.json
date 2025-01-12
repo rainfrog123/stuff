@@ -51,7 +51,7 @@
         "secret": "QVJpTFgHIEv74LmCT5clX8o1zAFEEqJqKpg2ePklObM1Ybv9iKNe8jvM7MRjoz07",
         "ccxt_async_config": {},
         "pair_whitelist": [
-                ".*/USDT:USDT"
+                "THE/USDT:USDT"
 ]
         ,
         "pair_blacklist": [
@@ -61,17 +61,8 @@
     "pairlists": [
         {
             "method": "StaticPairList"
-        },
-        {
-            "method": "ShuffleFilter",
-            "shuffle_frequency": "candle",
-            "seed": 12
-              } ,
-        {
-            "method": "OffsetFilter",
-            "offset": 20,  
-            "number_assets": 20  
         }
+   
         
     ],
     "edge": {
