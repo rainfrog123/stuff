@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Monitor TIE Results and Random Bet Calculation
+// @name         Monitor TIE Results and Random Bet Calculation with Iframe Support
 // @namespace    http://tampermonkey.net/
-// @version      2.6
-// @description  Monitor TIE results, dynamically calculate random bet amounts, and simulate betting with multiple clicks for a total bet amount using 0.2 chips.
+// @version      2.4
+// @description  Monitor TIE results, dynamically calculate random bet amounts, and simulate betting with multiple clicks for a total bet amount using 0.2 chips. Supports multiple iframes.
 // @author       Your Name
 // @match        *://client.pragmaticplaylive.net/desktop/*
 // @grant        GM_xmlhttpRequest
@@ -39,16 +39,34 @@
         }
     }
 
-    // Retrieve balance from localStorage
-    function getBalanceFromLocalStorage() {
-        const balance = parseFloat(localStorage.getItem('currentBalance'));
-        if (isNaN(balance)) {
-            console.warn('No valid balance found in localStorage. Defaulting to 0.');
-            return 0;
-        }
-        console.log('Retrieved Balance from localStorage:', balance);
-        return balance;
+    // Retrieve current balance by iterating over all iframes
+    function findBalance() {
+    // Check parent document first
+    const parentBalanceElement = document.querySelector('.balanceContainer .balance .amt');
+    if (parentBalanceElement) {
+        return parseFloat(parentBalanceElement.textContent.replace('$', '').trim()) || 0;
     }
+
+    // Then check iframes
+    const iframes = document.querySelectorAll('iframe');
+    for (let iframe of iframes) {
+        try {
+            const iframeDoc = iframe.contentDocument;
+            if (iframeDoc) {
+                const iframeBalanceElement = iframeDoc.querySelector('.balanceContainer .balance .amt');
+                if (iframeBalanceElement) {
+                    return parseFloat(iframeBalanceElement.textContent.replace('$', '').trim()) || 0;
+                }
+            }
+        } catch (err) {
+            console.warn("Error accessing iframe:", err);
+        }
+    }
+
+    console.warn("Balance not found!");
+    return 0;
+}
+
 
     // Observer for TIE results and betting logic
     function monitorTieResultsAndClickButtons() {
@@ -66,14 +84,10 @@
 
                                 if (parentElement) {
                                     const bankerButton = Array.from(parentElement.querySelectorAll("*"))
-                                        .find((el) => {
-                                            return typeof el.className === "string" && el.className.includes(bankerPrefix);
-                                        });
+                                        .find((el) => el.className && typeof el.className === "string" && el.className.includes(bankerPrefix));
 
                                     const playerButton = Array.from(parentElement.querySelectorAll("*"))
-                                        .find((el) => {
-                                            return typeof el.className === "string" && el.className.includes(playerPrefix);
-                                        });
+                                        .find((el) => el.className && typeof el.className === "string" && el.className.includes(playerPrefix));
 
                                     console.log("Matched 'TIE' result container:", {
                                         timestamp: new Date().toISOString(),
@@ -82,7 +96,7 @@
                                     });
 
                                     if (bankerButton || playerButton) {
-                                        const balance = getBalanceFromLocalStorage();
+                                        const balance = findBalanceInIframes();
                                         if (balance <= 0) {
                                             console.warn("Insufficient balance to place a bet.");
                                             return;
