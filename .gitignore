@@ -1,5 +1,4 @@
-/freq/userdir/backtest_results
+/freq/project_1/user_data/backtest_results
+/freq/project_2/user_data/backtest_results
 /freq/userdir/models
-freq/userdir/strategies/__pycache__/freqai_opaq.cpython-311.pyc
-freq/crontab.log
 /freq/userdir/user_data/backtest_results

@@ -27,7 +27,7 @@ class TrendReversalLabelingStrategy(IStrategy):
     """
     INTERFACE_VERSION = 3
     timeframe = '1m'
-    can_short: bool = False
+    can_short: bool = True
     minimal_roi = {"60": 10000}
     stoploss = -0.004  # 0.4% stoploss
     trailing_stop = True
