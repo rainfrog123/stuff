@@ -29,7 +29,7 @@ class TrendReversalLabelingStrategy(IStrategy):
     timeframe = '1m'
     can_short: bool = True
     minimal_roi = {"60": 10000}
-    stoploss = -0.004  # 0.4% stoploss
+    stoploss = -0.003  # 0.3% stoploss
     trailing_stop = True
     startup_candle_count: int = 50
 
