@@ -12,12 +12,6 @@
 (function () {
     'use strict';
 
-    // Import the seedrandom library for consistent pseudo-random values
-    function seedrandom(seed) {
-        let x = Math.sin(seed) * 10000;
-        return x - Math.floor(x);
-    }
-
     console.log("Betting Handler Script Initialized: Listening for ResultDetected event...");
 
     function simulateClick(element) {
@@ -52,9 +46,8 @@
             const balanceText = balanceElement.textContent.replace('$', '').trim();
             const balance = parseFloat(balanceText);
             if (!isNaN(balance)) {
-                // Save to localStorage
                 localStorage.setItem('currentBalance', balance);
-                // console.log(`Balance updated in localStorage: ${balance}`);
+                console.log(`Balance updated in localStorage: ${balance}`);
                 return balance;
             } else {
                 console.warn("Invalid balance format!");
@@ -66,9 +59,7 @@
     }
 
     function updateBalancePeriodically() {
-        setInterval(() => {
-            getBalance();
-        }, 2000); // Update every 2 seconds
+        setInterval(getBalance, 1000); // Update every 2 seconds
     }
 
     function splitBetAmount(amount) {
@@ -115,11 +106,9 @@
             return;
         }
 
-        const adjustedBalance = balance < 100 ? balance : balance % 100; // Use full balance if less than 100, otherwise last two digits
-        const randomValue = seedrandom(Date.now()); // Use seedrandom for more consistent randomness
-        const randomBetAmount = randomValue * (adjustedBalance / 2); // Random value between 0 and 1/2 of the adjusted balance
-
-        let betAmount = Math.round(randomBetAmount * 100) / 100; // Round only after calculations
+        const adjustedBalance = balance < 100 ? balance : balance % 100;
+        const randomBetAmount = Math.random() * (adjustedBalance / 2);
+        let betAmount = Math.round(randomBetAmount * 100) / 100;
         if (betAmount < 0.2) {
             betAmount = 0.2; // Ensure the minimum bet is 0.2
         }
@@ -129,9 +118,7 @@
         const betChunks = splitBetAmount(betAmount);
         console.log("Bet chunks:", betChunks);
 
-        // Randomize the choice between Player and Banker using seedrandom
-        const choiceRandomValue = seedrandom(Date.now() + 1); // Different seed for choice
-        const betChoice = choiceRandomValue < 0.5 ? "Player" : "Banker";
+        const betChoice = Math.random() < 0.5 ? "Player" : "Banker";
         console.log(`Betting: ${betChoice}`);
 
         setTimeout(() => {
@@ -147,10 +134,6 @@
     window.addEventListener('ResultDetected', function (e) {
         const { name } = e.detail;
         console.log(`Received ResultDetected event with name: ${name}`);
-
-        // Always retrieve balance
-        getBalance();
-
         if (name === "T") { // Only act on "Tie" results
             console.log("Tie detected! Proceeding with betting.");
             handleBet();
