@@ -1,0 +1,42 @@
+//@version=5
+indicator("Profit Ratio Plot with Labels", overlay=true)
+
+// Define the open dates and profit ratios from the dataset
+datetime_array = array.new_float()  // Store timestamps as floats
+profit_ratio_array = array.new_float()  // Store profit ratios
+
+// Add the data to the arrays
+array.push(datetime_array, timestamp(2025, 01, 19, 10, 38))
+array.push(profit_ratio_array, -0.000896)
+
+array.push(datetime_array, timestamp(2025, 01, 19, 10, 40))
+array.push(profit_ratio_array, -0.001312)
+
+array.push(datetime_array, timestamp(2025, 01, 19, 10, 45))
+array.push(profit_ratio_array, -0.001422)
+
+array.push(datetime_array, timestamp(2025, 01, 19, 10, 47))
+array.push(profit_ratio_array, 0.000022)
+
+array.push(datetime_array, timestamp(2025, 01, 19, 10, 52))
+array.push(profit_ratio_array, 0.003011)
+
+// Variable to store the matched profit ratio
+var float matched_profit_ratio = na
+var bool is_matched = false
+
+// Check if the current bar's timestamp matches any in the dataset
+for i = 0 to array.size(datetime_array) - 1
+    if time == array.get(datetime_array, i)
+        matched_profit_ratio := array.get(profit_ratio_array, i)
+        is_matched := true
+
+// Plot the profit ratio as a shape on the chart
+plotshape(series=is_matched, style=shape.circle, location=location.abovebar, color=color.new(color.blue, 0), size=size.small, title="Profit Points")
+
+// Add a label displaying the profit ratio percentage if matched
+if is_matched
+    label.new(x=bar_index, y=high, text=str.tostring(matched_profit_ratio * 100, "#.##") + "%", style=label.style_circle, color=color.new(color.blue, 80))
+
+// Reset the match flag
+is_matched := false

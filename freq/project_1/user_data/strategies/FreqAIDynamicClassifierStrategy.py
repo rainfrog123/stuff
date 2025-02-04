@@ -29,7 +29,10 @@ class FreqAIDynamicClassifierStrategy(IStrategy):
 
     def feature_engineering_expand_all(self, dataframe: DataFrame, period: int, metadata: dict, **kwargs) -> DataFrame:
         """
-        Expand dataframe with advanced TA-based features.
+        *Only functional with FreqAI enabled strategies*
+        This function will automatically expand the defined features on the config defined
+        `indicator_periods_candles`, `include_timeframes`, `include_shifted_candles`, and
+        `include_corr_pairs`.
         """
         dataframe["%-rsi-period"] = ta.RSI(dataframe, timeperiod=period)
         dataframe["%-mfi-period"] = ta.MFI(dataframe, timeperiod=period)
@@ -37,28 +40,33 @@ class FreqAIDynamicClassifierStrategy(IStrategy):
         dataframe["%-sma-period"] = ta.SMA(dataframe, timeperiod=period)
         dataframe["%-ema-period"] = ta.EMA(dataframe, timeperiod=period)
 
-        # Bollinger Bands
         bollinger = qtpylib.bollinger_bands(
             qtpylib.typical_price(dataframe), window=period, stds=2.2
         )
         dataframe["bb_lowerband-period"] = bollinger["lower"]
         dataframe["bb_middleband-period"] = bollinger["mid"]
         dataframe["bb_upperband-period"] = bollinger["upper"]
-        dataframe["%-bb_width-period"] = (
-            dataframe["bb_upperband-period"] - dataframe["bb_lowerband-period"]
-        ) / dataframe["bb_middleband-period"]
-        dataframe["%-close-bb_lower-period"] = dataframe["close"] / dataframe["bb_lowerband-period"]
 
-        # Rate of Change and Relative Volume
+        dataframe["%-bb_width-period"] = (
+            dataframe["bb_upperband-period"]
+            - dataframe["bb_lowerband-period"]
+        ) / dataframe["bb_middleband-period"]
+        dataframe["%-close-bb_lower-period"] = (
+            dataframe["close"] / dataframe["bb_lowerband-period"]
+        )
+
         dataframe["%-roc-period"] = ta.ROC(dataframe, timeperiod=period)
         dataframe["%-relative_volume-period"] = (
             dataframe["volume"] / dataframe["volume"].rolling(period).mean()
         )
+
         return dataframe
 
     def feature_engineering_expand_basic(self, dataframe: DataFrame, metadata: dict, **kwargs) -> DataFrame:
         """
-        Add basic features to the dataframe.
+        *Only functional with FreqAI enabled strategies*
+        This function will automatically expand the defined features on the config defined
+        `include_timeframes`, `include_shifted_candles`, and `include_corr_pairs`.
         """
         dataframe["%-pct-change"] = dataframe["close"].pct_change()
         dataframe["%-raw_volume"] = dataframe["volume"]
@@ -67,20 +75,21 @@ class FreqAIDynamicClassifierStrategy(IStrategy):
 
     def feature_engineering_standard(self, dataframe: DataFrame, metadata: dict, **kwargs) -> DataFrame:
         """
-        Add standard features such as time-related attributes.
+        *Only functional with FreqAI enabled strategies*
+        Final function to be called for feature engineering.
         """
-        dataframe["%-day_of_week"] = dataframe["date"].dt.dayofweek
-        dataframe["%-hour_of_day"] = dataframe["date"].dt.hour
+        dataframe["%-day_of_week"] = (dataframe["date"].dt.dayofweek + 1) / 7
+        dataframe["%-hour_of_day"] = (dataframe["date"].dt.hour + 1) / 25
         return dataframe
 
     def set_freqai_targets(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Map external targets from a parquet file to the main dataframe.
         """
-        self.freqai.class_names = ['LONG_WIN', 'SHORT_WIN']
+        self.freqai.class_names = ['WIN', 'LOSE']
         
         # Load external parquet file
-        external_df = pd.read_parquet("/allah/data/parquet/final_df.parquet")
+        external_df = pd.read_parquet('/allah/data/parquet/filtered_df.parquet')
 
         # Ensure `open_date` is a datetime object
         external_df['open_date'] = pd.to_datetime(external_df['open_date'])
@@ -92,9 +101,9 @@ class FreqAIDynamicClassifierStrategy(IStrategy):
         # external_df = external_df[external_df['type'].isin(['LONG_WIN', 'SHORT_WIN'])]
 
         # Map targets to the main dataframe
-        target_map = external_df.set_index('target_date')['type'].to_dict()
-        dataframe['type'] = dataframe['date'].map(target_map)
-        dataframe['&-target'] = dataframe['type']
+        target_map = external_df.set_index('target_date')['profitability'].to_dict()
+        dataframe['profitability'] = dataframe['date'].map(target_map)
+        dataframe['&-target'] = dataframe['profitability']
         
         return dataframe
 

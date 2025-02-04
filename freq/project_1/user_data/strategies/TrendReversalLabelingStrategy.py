@@ -70,4 +70,6 @@ class TrendReversalLabelingStrategy(IStrategy):
         Populate the exit signals for the strategy.
         This method is left empty for further customization.
         """
+       
+
         return dataframe

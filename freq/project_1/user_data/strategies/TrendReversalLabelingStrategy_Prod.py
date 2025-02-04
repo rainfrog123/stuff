@@ -30,7 +30,7 @@ class TrendReversalLabelingStrategy_Prod(IStrategy):
     timeframe = '1m'
     can_short: bool = True
     minimal_roi = {"60": 10000}
-    stoploss = -0.003*100  # 0.3% stoploss
+    stoploss = -0.003*125  # 0.3% stoploss
     # stoploss = max(-0.005, -ATR_value * factor)  # ATR-based stop-loss
     trailing_stop = True
     startup_candle_count: int = 150
@@ -82,5 +82,20 @@ class TrendReversalLabelingStrategy_Prod(IStrategy):
     def leverage(self, pair: str, current_time: datetime, current_rate: float,
                  proposed_leverage: float, max_leverage: float, entry_tag: Optional[str],
                  side: str, **kwargs) -> float:
-        # return max_leverage
-        return 100.0
+        return max_leverage
+        # return 100.0
+
+    def custom_stake_amount(self, pair: str, current_time: datetime, current_rate: float,
+                            proposed_stake: float, min_stake: float | None, max_stake: float,
+                            leverage: float, entry_tag: str | None, side: str,
+                            **kwargs) -> float:
+
+        # Fetch the total balance in the stake currency
+        # total_balance = self.wallets.get_total_balance(self.config['stake_currency'])
+        total_balance = self.wallets.get_total_stake_amount()
+
+        # Calculate 3/4 (75%) of the total balance
+        stake_amount = total_balance * 0.75
+
+        # Ensure the stake amount is within allowed limits
+        return stake_amount
