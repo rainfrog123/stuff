@@ -2,3 +2,5 @@
 /freq/project_2/user_data/backtest_results
 /freq/userdir/models
 /freq/userdir/user_data/backtest_results
+events.out.tfevents.*
+

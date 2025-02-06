@@ -9,7 +9,7 @@ proxy_server="gate.smartproxy.com:7000"
 # Additional proxy parameters
 session_duration="60"  # Duration in minutes
 os="ios"               # Operating System
-country="se"           # Country Code
+country="us"           # Country Code
 
 # Check if jq is installed
 if ! command -v jq &> /dev/null
@@ -19,7 +19,7 @@ then
 fi
 
 # Initialize an array to store IPs and cities
-declare -a ip_list
+declare -a ip_list  
 declare -a city_list
 
 # Loop through sessions 1 to 20
