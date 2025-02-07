@@ -1,0 +1,5 @@
+requests==2.31.0
+aiohttp==3.9.1
+asyncio==3.4.3
+paramiko==3.4.0
+speedtest-cli==2.1.3 
