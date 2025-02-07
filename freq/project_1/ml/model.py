@@ -8,7 +8,7 @@ from pytorch_lightning.loggers import TensorBoardLogger
 import os
 
 class CryptoPricePredictor(pl.LightningModule):
-    def __init__(self, input_dim, hidden_dim=128, learning_rate=1e-3):
+    def __init__(self, input_dim, hidden_dim=128, learning_rate=1e-3, dropout=0.2):
         super().__init__()
         self.save_hyperparameters()
         
@@ -18,7 +18,7 @@ class CryptoPricePredictor(pl.LightningModule):
         self.layer3 = nn.Linear(hidden_dim, 2)  # 2 output classes for binary classification
         
         # Dropout for regularization
-        self.dropout = nn.Dropout(0.2)
+        self.dropout = nn.Dropout(dropout)
         
         self.learning_rate = learning_rate
 

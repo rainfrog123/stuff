@@ -7,4 +7,5 @@ optuna
 ray[tune]
 tensorboard
 pyarrow
-torchinfo 
+torchinfo
+plotly 

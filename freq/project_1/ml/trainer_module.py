@@ -38,17 +38,24 @@ def get_callbacks(checkpoint_dir):
         )
     ]
 
-def create_trainer(callbacks):
-    return Trainer(
-        max_epochs=100,
+def create_trainer(callbacks, *, max_epochs=100):
+    """Create a PyTorch Lightning trainer.
+    
+    Args:
+        callbacks: List of callbacks to use during training
+        max_epochs: Maximum number of epochs to train for (default: 100)
+    """
+    trainer = pl.Trainer(
+        max_epochs=max_epochs,
         callbacks=callbacks,
-        logger=True,
+        logger=TensorBoardLogger('lightning_logs', name='crypto_predictor'),
         accelerator='auto',
         devices=1,
         enable_progress_bar=True,
         enable_model_summary=True,
         log_every_n_steps=1
     )
+    return trainer
 
 def train_model(trainer, model, data_module):
     try:
