@@ -19,58 +19,40 @@ class CryptoDataset(Dataset):
         return self.features[idx], self.targets[idx]
 
 class CryptoDataModule(LightningDataModule):
-    def __init__(self, directory_path, batch_size=64, num_workers=4, feature_indices=None, features_data=None):
+    def __init__(self, directory_path, batch_size=64, num_workers=4):
         super().__init__()
         self.directory_path = directory_path
         self.batch_size = batch_size
         self.num_workers = num_workers
-        self.feature_indices = feature_indices
-        self._features_data = None
-        self._labels_data = None
+        
+        # Initialize data holders
+        self.train_dataset = None
+        self.val_dataset = None
+        self.test_dataset = None
         self.scaler = StandardScaler()
         self.label_encoder = LabelEncoder()
         self.input_dim = None
         self.num_classes = None
-        
-        # Store the features data if provided
-        if features_data is not None:
-            if not isinstance(features_data, pd.DataFrame):
-                raise ValueError("features_data must be a pandas DataFrame")
-            self._features_data = features_data.copy()
 
     def prepare_data(self):
-        """Verify data files exist and are valid."""
-        features_path = os.path.join(self.directory_path, FEATURES_FILE)
-        labels_path = os.path.join(self.directory_path, LABELS_FILE)
-        
-        # Check if files exist
-        if not os.path.exists(features_path):
-            raise FileNotFoundError(f"Features file not found: {features_path}")
-        if not os.path.exists(labels_path):
-            raise FileNotFoundError(f"Labels file not found: {labels_path}")
+        """Load and prepare the data."""
+        try:
+            # Load feature data
+            features_path = os.path.join(self.directory_path, FEATURES_FILE)
+            if not os.path.exists(features_path):
+                raise FileNotFoundError(f"Features file not found: {features_path}")
+            self._features_data = pd.read_parquet(features_path)
+            if self._features_data.empty:
+                raise ValueError("Features data is empty")
             
-        # Verify files can be read
-        try:
-            pd.read_parquet(features_path)
-            pd.read_parquet(labels_path)
-        except Exception as e:
-            raise ValueError(f"Error reading data files: {str(e)}")
-
-    def _load_data(self):
-        """Load data if not already loaded."""
-        try:
-            if self._features_data is None:
-                features_path = os.path.join(self.directory_path, FEATURES_FILE)
-                self._features_data = pd.read_parquet(features_path)
-                if self._features_data.empty:
-                    raise ValueError("Features data is empty")
-                    
-            if self._labels_data is None:
-                labels_path = os.path.join(self.directory_path, LABELS_FILE)
-                self._labels_data = pd.read_parquet(labels_path)
-                if self._labels_data.empty:
-                    raise ValueError("Labels data is empty")
-                    
+            # Load label data
+            labels_path = os.path.join(self.directory_path, LABELS_FILE)
+            if not os.path.exists(labels_path):
+                raise FileNotFoundError(f"Labels file not found: {labels_path}")
+            self._labels_data = pd.read_parquet(labels_path)
+            if self._labels_data.empty:
+                raise ValueError("Labels data is empty")
+            
             # Verify data alignment
             if len(self._features_data) != len(self._labels_data):
                 raise ValueError("Features and labels have different lengths")
@@ -97,34 +79,28 @@ class CryptoDataModule(LightningDataModule):
 
     def setup(self, stage=None):
         """Setup data for training, validation, and test."""
-        # Load data if not already loaded
-        self._load_data()
-        
-        if self._features_data is None:
-            raise RuntimeError("Features data not loaded")
+        if self._features_data is None or self._labels_data is None:
+            raise RuntimeError("Data not loaded. Call prepare_data() first.")
             
-        # Get features
-        if self.feature_indices is not None:
-            if max(self.feature_indices) >= self._features_data.shape[1]:
-                raise ValueError("Feature indices out of bounds")
-            features = self._features_data.iloc[:, self.feature_indices].values
-        else:
-            features = self._features_data.values
-            
-        print(f"Original features shape: {features.shape}")
-        
-        # Preprocess features
-        features = self._preprocess_features(features)
+        # Get and preprocess features
+        features = self._preprocess_features(self._features_data)
         
         # Process labels
         targets = self.label_encoder.fit_transform(self._labels_data['&-target'])
         targets = targets.reshape(-1, 1)
         
-        # Store number of classes
+        # Store number of classes and input dimensions
         self.num_classes = len(self.label_encoder.classes_)
+        self.input_dim = features.shape[1]
+        
+        # Print data info
+        print(f"\nData Information:")
+        print(f"Total samples: {len(features)}")
+        print(f"Input dimensions: {self.input_dim}")
+        print(f"Number of classes: {self.num_classes}")
         print(f"Target classes: {self.label_encoder.classes_}")
 
-        # Split data efficiently
+        # Split data
         total_samples = len(features)
         train_size = int(0.7 * total_samples)
         val_size = int(0.15 * total_samples)
@@ -140,28 +116,21 @@ class CryptoDataModule(LightningDataModule):
                 targets[train_size:train_size + val_size]
             )
             
+            print(f"\nDataset splits:")
+            print(f"Training set size: {len(self.train_dataset)}")
+            print(f"Validation set size: {len(self.val_dataset)}")
+            
         if stage in (None, 'test'):
             self.test_dataset = CryptoDataset(
                 features[train_size + val_size:],
                 targets[train_size + val_size:]
             )
-
-        # Update input dimension based on actual data
-        self.input_dim = features.shape[1]
-        
-        # Print setup info
-        print(f"\nDataset splits:")
-        print(f"Training set size: {train_size}")
-        print(f"Validation set size: {val_size}")
-        print(f"Test set size: {total_samples - train_size - val_size}")
-        print(f"Input dimensions: {self.input_dim}")
-        print(f"Number of classes: {self.num_classes}")
+            print(f"Test set size: {len(self.test_dataset)}")
         
         # Clear memory
         del features, targets
-        if stage == 'fit':
-            del self._features_data
-            del self._labels_data
+        self._features_data = None
+        self._labels_data = None
 
     def train_dataloader(self):
         if self.train_dataset is None:

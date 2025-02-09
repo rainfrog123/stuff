@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+backend/venv/
+frontend/node_modules/
+
+# Build outputs
+dist/
+build/
+frontend/build/
+backend/__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+*.log
+*.swp
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+env/
+venv/
+ENV/

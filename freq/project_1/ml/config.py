@@ -10,18 +10,14 @@ BATCH_SIZE = 64
 NUM_WORKERS = 4
 MAX_EPOCHS = 50
 
-# Model hyperparameters
+# Model settings
 HIDDEN_DIM = 128
 LEARNING_RATE = 1e-3
 DROPOUT = 0.2
 
-# Optimization settings
-N_TRIALS = 100
-FEATURE_RANGE = (100, 500)
-HIDDEN_DIM_RANGE = (64, 512)
-LEARNING_RATE_RANGE = (1e-5, 1e-2)
-DROPOUT_RANGE = (0.1, 0.5)
-BATCH_SIZES = [32, 64, 128, 256]
+# Create necessary directories
+os.makedirs('checkpoints', exist_ok=True)
+os.makedirs('lightning_logs', exist_ok=True)
 
 # Directory settings
 def setup_directories():
@@ -30,7 +26,6 @@ def setup_directories():
     dirs = {
         'checkpoint': os.path.join(base_dir, 'checkpoints'),
         'tensorboard': os.path.join(base_dir, 'lightning_logs'),
-        'results': os.path.join(base_dir, 'results')
     }
     
     for dir_path in dirs.values():
