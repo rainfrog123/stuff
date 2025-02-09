@@ -15,120 +15,57 @@ class CryptoPricePredictor(pl.LightningModule):
         # Network layers
         self.layer1 = nn.Linear(input_dim, hidden_dim)
         self.layer2 = nn.Linear(hidden_dim, hidden_dim)
-        self.layer3 = nn.Linear(hidden_dim, 2)  # 2 output classes for binary classification
-        
-        # Dropout for regularization
+        self.layer3 = nn.Linear(hidden_dim, 2)  # Binary classification
         self.dropout = nn.Dropout(dropout)
         
-        self.learning_rate = learning_rate
-
-        # Metrics for WIN class (class 1)
-        self.train_precision = Precision(task='binary')
-        self.train_recall = Recall(task='binary')
-        self.train_f1 = F1Score(task='binary')
-        
-        self.val_precision = Precision(task='binary')
-        self.val_recall = Recall(task='binary')
-        self.val_f1 = F1Score(task='binary')
-        
-        self.test_precision = Precision(task='binary')
-        self.test_recall = Recall(task='binary')
-        self.test_f1 = F1Score(task='binary')
+        # Metrics
+        metrics = lambda: {'precision': Precision(task='binary'),
+                         'recall': Recall(task='binary'),
+                         'f1': F1Score(task='binary')}
+        self.train_metrics = metrics()
+        self.val_metrics = metrics()
+        self.test_metrics = metrics()
 
     def forward(self, x):
         x = F.relu(self.layer1(x))
         x = self.dropout(x)
         x = F.relu(self.layer2(x))
         x = self.dropout(x)
-        return self.layer3(x)  # Raw logits, no activation needed due to cross entropy loss
-
-    def training_step(self, batch, batch_idx):
+        return self.layer3(x)
+    
+    def _step(self, batch, metrics, prefix):
         x, y = batch
-        y = y.squeeze()  # Remove extra dimension from targets
+        y = y.squeeze()
         logits = self(x)
         loss = F.cross_entropy(logits, y)
         
-        # Calculate accuracy
-        preds = torch.argmax(logits, dim=1)
-        acc = (preds == y).float().mean()
-        
-        # Calculate WIN class metrics
-        probs = F.softmax(logits, dim=1)[:, 1]  # Probability of WIN class
-        precision = self.train_precision(probs, y)
-        recall = self.train_recall(probs, y)
-        f1 = self.train_f1(probs, y)
-        
         # Log metrics
-        self.log('train_loss', loss, prog_bar=True)
-        self.log('train_acc', acc, prog_bar=True)
-        self.log('train_win_precision', precision, prog_bar=True)
-        self.log('train_win_recall', recall, prog_bar=True)
-        self.log('train_win_f1', f1, prog_bar=True)
+        self.log(f'{prefix}_loss', loss, prog_bar=True)
+        probs = F.softmax(logits, dim=1)[:, 1]
+        
+        for name, metric in metrics.items():
+            value = metric(probs, y)
+            self.log(f'{prefix}_{name}', value, prog_bar=True)
+        
         return loss
 
+    def training_step(self, batch, batch_idx):
+        return self._step(batch, self.train_metrics, 'train')
+
     def validation_step(self, batch, batch_idx):
-        x, y = batch
-        y = y.squeeze()  # Remove extra dimension from targets
-        logits = self(x)
-        val_loss = F.cross_entropy(logits, y)
-        
-        # Calculate accuracy
-        preds = torch.argmax(logits, dim=1)
-        acc = (preds == y).float().mean()
-        
-        # Calculate WIN class metrics
-        probs = F.softmax(logits, dim=1)[:, 1]  # Probability of WIN class
-        precision = self.val_precision(probs, y)
-        recall = self.val_recall(probs, y)
-        f1 = self.val_f1(probs, y)
-        
-        # Log metrics
-        self.log('val_loss', val_loss, prog_bar=True)
-        self.log('val_acc', acc, prog_bar=True)
-        self.log('val_win_precision', precision, prog_bar=True)
-        self.log('val_win_recall', recall, prog_bar=True)
-        self.log('val_win_f1', f1, prog_bar=True)
-        return val_loss
+        return self._step(batch, self.val_metrics, 'val')
 
     def test_step(self, batch, batch_idx):
-        x, y = batch
-        y = y.squeeze()  # Remove extra dimension from targets
-        logits = self(x)
-        test_loss = F.cross_entropy(logits, y)
-        
-        # Calculate accuracy
-        preds = torch.argmax(logits, dim=1)
-        acc = (preds == y).float().mean()
-        
-        # Calculate WIN class metrics
-        probs = F.softmax(logits, dim=1)[:, 1]  # Probability of WIN class
-        precision = self.test_precision(probs, y)
-        recall = self.test_recall(probs, y)
-        f1 = self.test_f1(probs, y)
-        
-        # Log metrics
-        self.log('test_loss', test_loss)
-        self.log('test_acc', acc)
-        self.log('test_win_precision', precision)
-        self.log('test_win_recall', recall)
-        self.log('test_win_f1', f1)
-        return test_loss
+        return self._step(batch, self.test_metrics, 'test')
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate)
+        optimizer = torch.optim.Adam(self.parameters(), lr=self.hparams.learning_rate)
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, 
-            mode='min', 
-            factor=0.5, 
-            patience=5, 
-            verbose=True
+            optimizer, mode='min', factor=0.5, patience=5, verbose=True
         )
         return {
             "optimizer": optimizer,
-            "lr_scheduler": {
-                "scheduler": scheduler,
-                "monitor": "val_loss"
-            }
+            "lr_scheduler": {"scheduler": scheduler, "monitor": "val_loss"}
         }
 
 def setup_directories():

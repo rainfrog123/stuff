@@ -6,3 +6,4 @@ events.out.tfevents.*
 *.ckpt
 /freq/project_1/ml/lightning_logs
 *.pyc
+/allah/stuff/web/alt_calculator
