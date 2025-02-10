@@ -16,13 +16,21 @@ import {
   Button,
   Divider,
   IconButton,
+  Link,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Snackbar,
 } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { differenceInDays, startOfToday } from 'date-fns';
+import { differenceInDays, startOfToday, addDays } from 'date-fns';
 import Summary from './components/Summary';
 import { RATES_DATA } from './constants/rates';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import { bugReports } from './bugReports';
 
 const theme = createTheme({
   palette: {
@@ -142,25 +150,95 @@ const theme = createTheme({
   },
 });
 
+const BugReportDialog = ({ open, onClose }) => {
+  const [comment, setComment] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleSubmit = () => {
+    if (!comment.trim()) return;
+
+    const reports = JSON.parse(localStorage.getItem('bugReports') || '[]');
+    const newReport = {
+      id: reports.length + 1,
+      date: new Date().toISOString(),
+      comment: comment.trim()
+    };
+
+    reports.push(newReport);
+    localStorage.setItem('bugReports', JSON.stringify(reports));
+    
+    setComment('');
+    setShowSuccess(true);
+    onClose();
+
+    // Redirect to BBS page after a short delay
+    setTimeout(() => {
+      window.location.href = 'bbs.html';
+    }, 1500);
+  };
+
+  return (
+    <>
+      <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+        <DialogTitle>Report a Bug</DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            Please describe the issue you encountered. Bug reporting will close on February 13, and it will run locally, managed by JH.
+          </Typography>
+          <TextField
+            autoFocus
+            multiline
+            rows={4}
+            fullWidth
+            variant="outlined"
+            label="Describe the bug"
+            placeholder="What happened? What did you expect to happen?"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            sx={{ mt: 1 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button 
+            onClick={handleSubmit}
+            variant="contained"
+            disabled={!comment.trim()}
+          >
+            Submit Report
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={1500}
+        onClose={() => setShowSuccess(false)}
+        message="Thank you for your report! Redirecting to reports page..."
+      />
+    </>
+  );
+};
+
 function App() {
   const [roomPeriods, setRoomPeriods] = useState([
     {
       id: 1,
-      roomType: '',
+      roomType: 'Ensuite Single',
       capacity: '1',
       checkIn: startOfToday(),
-      checkOut: null,
+      checkOut: addDays(startOfToday(), 7),
       season: 'High',
     }
   ]);
   const [formData, setFormData] = useState({
-    property: '',
+    property: 'Alt_CM',
     extraDiscount: 0,
     checkIn: null,
     checkOut: null,
     hasRoomChange: false
   });
   const [calculation, setCalculation] = useState(null);
+  const [bugReportOpen, setBugReportOpen] = useState(false);
 
   const handleChange = (field) => (event) => {
     setFormData(prev => ({
@@ -177,6 +255,14 @@ function App() {
         [field]: value
       };
 
+      // If this is a check-in date change, update the checkout date to 7 days later
+      if (field === 'checkIn' && value) {
+        newPeriods[index] = {
+          ...newPeriods[index],
+          checkOut: addDays(value, 7)
+        };
+      }
+
       // If this is a check-out date change, update the next period's check-in date
       if (field === 'checkOut' && index < newPeriods.length - 1) {
         newPeriods[index + 1] = {
@@ -191,14 +277,16 @@ function App() {
 
   const addRoomPeriod = () => {
     const lastPeriod = roomPeriods[roomPeriods.length - 1];
+    const newCheckIn = lastPeriod?.checkOut || startOfToday();
+    
     setRoomPeriods(prev => [
       ...prev,
       {
         id: prev.length + 1,
-        roomType: '',
+        roomType: lastPeriod?.roomType || 'Ensuite Single',
         capacity: '1',
-        checkIn: lastPeriod?.checkOut || startOfToday(),
-        checkOut: null,
+        checkIn: newCheckIn,
+        checkOut: addDays(newCheckIn, 7),
         season: lastPeriod?.season || 'High',
       }
     ]);
@@ -369,9 +457,26 @@ function App() {
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Container maxWidth="md" sx={{ py: 4 }}>
-          <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+          <Link
+            component="button"
+            variant="h4"
+            onClick={() => window.location.reload()}
+            align="center"
+            gutterBottom
+            sx={{
+              mb: 4,
+              textDecoration: 'none',
+              color: 'text.primary',
+              display: 'block',
+              width: '100%',
+              '&:hover': {
+                color: 'primary.main',
+                cursor: 'pointer',
+              },
+            }}
+          >
             Alt Calculator
-          </Typography>
+          </Link>
           <Paper>
             <Box sx={{ mb: 3 }}>
               <FormControl fullWidth>
@@ -426,8 +531,40 @@ function App() {
               <Summary calculation={calculation} formData={formData} />
             </Box>
           )}
+
+          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center', gap: 2 }}>
+            <Button
+              variant="outlined"
+              startIcon={<BugReportIcon />}
+              onClick={() => setBugReportOpen(true)}
+              sx={{ 
+                opacity: 0.7,
+                '&:hover': {
+                  opacity: 1
+                }
+              }}
+            >
+              Report a Bug
+            </Button>
+            <Button
+              variant="text"
+              onClick={() => window.location.href = 'bbs.html'}
+              sx={{ 
+                opacity: 0.7,
+                '&:hover': {
+                  opacity: 1
+                }
+              }}
+            >
+              View All Reports
+            </Button>
+          </Box>
         </Container>
       </LocalizationProvider>
+      <BugReportDialog 
+        open={bugReportOpen}
+        onClose={() => setBugReportOpen(false)}
+      />
     </ThemeProvider>
   );
 }
