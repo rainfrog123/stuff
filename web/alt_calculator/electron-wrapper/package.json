@@ -1,0 +1,43 @@
+{
+  "name": "alt-calculator-electron",
+  "version": "1.0.0",
+  "description": "Alt Calculator Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build": "cd ../client && npm run build && cd ../electron-wrapper && electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^27.3.11",
+    "electron-builder": "^24.13.3",
+    "electron-is-dev": "^3.0.1"
+  },
+  "build": {
+    "appId": "com.alt.calculator",
+    "files": [
+      "../client/build/**/*",
+      "main.js",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    }
+  }
+}

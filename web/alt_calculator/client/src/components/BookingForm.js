@@ -16,6 +16,12 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 const BookingForm = ({ formData, onChange, onNext, onBack, rates }) => {
   const handleDateChange = (field) => (date) => {
+    console.log('Date change:', {
+      field,
+      date,
+      isValid: date instanceof Date,
+      value: date?.toString()
+    });
     onChange(field, date);
   };
 
@@ -138,19 +144,19 @@ const BookingForm = ({ formData, onChange, onNext, onBack, rates }) => {
           </Grid>
         )}
 
-        {isExtension && (
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={formData.overrideSevenDayRule}
-                  onChange={handleSwitchChange('overrideSevenDayRule')}
-                />
-              }
-              label="Override 7-Day Rule for Long-Stay Discount"
-            />
-          </Grid>
-        )}
+{isExtension && (
+  <Grid item xs={12}>
+    <FormControlLabel
+      control={
+        <Switch
+          checked={formData.overrideSevenDayRule}
+          onChange={handleSwitchChange('overrideSevenDayRule')}
+        />
+      }
+      label="Disable Including Original Stay for Long-Stay Discount"
+    />
+  </Grid>
+)}
       </Grid>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>

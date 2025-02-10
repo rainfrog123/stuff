@@ -19,7 +19,7 @@ print_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# Check if ports are in use
+# Check if port is in use
 check_port() {
     local pid=$(lsof -Pi :$1 -sTCP:LISTEN -t)
     if [ ! -z "$pid" ]; then
@@ -32,25 +32,21 @@ check_port() {
 
 # Clean install function
 clean_install() {
-    local dir=$1
-    if [ -d "$dir/node_modules" ]; then
-        print_status "Cleaning $dir/node_modules..."
-        rm -rf "$dir/node_modules"
+    if [ -d "client/node_modules" ]; then
+        print_status "Cleaning node_modules..."
+        rm -rf "client/node_modules"
     fi
-    if [ -f "$dir/package-lock.json" ]; then
-        rm -f "$dir/package-lock.json"
+    if [ -f "client/package-lock.json" ]; then
+        rm -f "client/package-lock.json"
     fi
-    print_status "Installing dependencies in $dir..."
-    cd $dir && npm install
+    print_status "Installing dependencies..."
+    cd client && npm install
     cd ..
 }
 
 # Cleanup function
 cleanup() {
-    print_status "Shutting down servers..."
-    if [ ! -z "$SERVER_PID" ]; then
-        kill $SERVER_PID 2>/dev/null
-    fi
+    print_status "Shutting down client..."
     if [ ! -z "$CLIENT_PID" ]; then
         kill $CLIENT_PID 2>/dev/null
     fi
@@ -63,32 +59,19 @@ trap cleanup SIGINT SIGTERM
 # Main execution
 print_status "Setting up development environment..."
 
-# Check ports
+# Check port
 check_port 3000
-check_port 5000
 
 # Check for clean flag
 if [ "$1" == "--clean" ]; then
     print_status "Performing clean install..."
-    clean_install "server"
-    clean_install "client"
+    clean_install
 else
     print_status "Skipping clean install..."
 fi
 
-# Start servers
-print_status "Starting development servers..."
-
-# Start backend
-cd server
-node server.js &
-SERVER_PID=$!
-cd ..
-
-# Wait for backend to start
-sleep 2
-
 # Start frontend
+print_status "Starting development server..."
 cd client
 npm start &
 CLIENT_PID=$!
@@ -97,8 +80,7 @@ cd ..
 # Keep script running
 print_success "Development environment is ready!"
 print_status "Frontend: http://localhost:3000"
-print_status "Backend: http://localhost:5000"
-print_status "Press Ctrl+C to stop all servers"
+print_status "Press Ctrl+C to stop the server"
 
 # Wait for Ctrl+C
 wait
