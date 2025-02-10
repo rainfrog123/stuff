@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Paper,
@@ -14,14 +14,15 @@ import {
   MenuItem,
   TextField,
   Button,
-  FormControlLabel,
-  Switch,
+  Divider,
+  IconButton,
 } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { differenceInDays, isWithinDays } from 'date-fns';
+import { differenceInDays, startOfToday } from 'date-fns';
 import Summary from './components/Summary';
 import { RATES_DATA } from './constants/rates';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,11 @@ const theme = createTheme({
       fontSize: '1.75rem',
       fontWeight: 500,
     },
+    h6: {
+      fontSize: '1.125rem',
+      fontWeight: 500,
+      color: '#1d1d1f',
+    },
     subtitle1: {
       fontSize: '0.9375rem',
       fontWeight: 500,
@@ -51,7 +57,7 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          padding: '20px',
+          padding: '24px',
           boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
           borderRadius: '12px',
         },
@@ -103,6 +109,7 @@ const theme = createTheme({
           textTransform: 'none',
           fontWeight: 500,
           fontSize: '0.9375rem',
+          padding: '8px 16px',
           boxShadow: 'none',
           '&:hover': {
             boxShadow: 'none',
@@ -113,7 +120,7 @@ const theme = createTheme({
           color: '#1d1d1f',
           '&:hover': {
             borderColor: '#b8b8bf',
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(0,0,0,0.02)',
           },
         },
         contained: {
@@ -121,6 +128,14 @@ const theme = createTheme({
           '&:hover': {
             backgroundColor: '#0066d9',
           },
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          margin: '24px 0',
+          borderColor: '#e1e1e6',
         },
       },
     },
@@ -133,22 +148,17 @@ function App() {
       id: 1,
       roomType: '',
       capacity: '1',
-      checkIn: null,
+      checkIn: startOfToday(),
       checkOut: null,
       season: 'High',
     }
   ]);
   const [formData, setFormData] = useState({
     property: '',
-    calculationType: 'new',
     extraDiscount: 0,
-    checkIn: null,      // For new bookings
-    checkOut: null,     // For new bookings
-    originalCheckIn: null,     // For extensions
-    originalCheckOut: null,    // For extensions
-    extendedCheckOut: null,   // New field for extension end date
-    overrideSevenDayRule: false,
-    amountPaid: 0,     // New field for amount already paid
+    checkIn: null,
+    checkOut: null,
+    hasRoomChange: false
   });
   const [calculation, setCalculation] = useState(null);
 
@@ -166,6 +176,15 @@ function App() {
         ...newPeriods[index],
         [field]: value
       };
+
+      // If this is a check-out date change, update the next period's check-in date
+      if (field === 'checkOut' && index < newPeriods.length - 1) {
+        newPeriods[index + 1] = {
+          ...newPeriods[index + 1],
+          checkIn: value
+        };
+      }
+
       return newPeriods;
     });
   };
@@ -178,9 +197,9 @@ function App() {
         id: prev.length + 1,
         roomType: '',
         capacity: '1',
-        checkIn: lastPeriod?.checkOut || null,
+        checkIn: lastPeriod?.checkOut || startOfToday(),
         checkOut: null,
-        season: 'High',
+        season: lastPeriod?.season || 'High',
       }
     ]);
   };
@@ -190,22 +209,7 @@ function App() {
     return RATES_DATA[formData.property].roomTypes || [];
   };
 
-  // Helper function to get long-stay discount
-  const getLongStayDiscount = (totalNights, originalCheckIn, isExtension) => {
-    // If override is ON, don't include original stay in total nights calculation
-    if (isExtension && formData.overrideSevenDayRule) {
-      // Only use extension nights for discount calculation
-      const extensionNights = differenceInDays(
-        new Date(formData.checkOut),
-        new Date(formData.originalCheckOut)
-      );
-      if (extensionNights >= 29) return 0.50;
-      if (extensionNights >= 19) return 0.35;
-      if (extensionNights >= 9) return 0.20;
-      return 0;
-    }
-
-    // Normal discount calculation using total nights
+  const getLongStayDiscount = (totalNights) => {
     if (totalNights >= 29) return 0.50;
     if (totalNights >= 19) return 0.35;
     if (totalNights >= 9) return 0.20;
@@ -213,59 +217,26 @@ function App() {
   };
 
   const calculateTotal = () => {
-    const isExtension = formData.calculationType === 'extension';
-    
-    // Validate inputs based on calculation type
     if (!formData.property) {
       alert('Please select a property');
       return;
     }
 
-    if (isExtension) {
-      if (!formData.originalCheckIn || !formData.originalCheckOut || !formData.checkOut) {
-        alert('Please fill in all required dates');
-        return;
-      }
-      // Validate room periods
-      if (roomPeriods.some(p => !p.roomType || !p.capacity)) {
-        alert('Please fill in room type and capacity');
-        return;
-      }
-    } else {
-      // New booking validation
-      if (roomPeriods.some(p => !p.roomType || !p.checkIn || !p.checkOut || !p.capacity || !p.season)) {
-        alert('Please fill in all room period details');
-        return;
-      }
+    if (roomPeriods.some(p => !p.roomType || !p.checkIn || !p.checkOut || !p.capacity || !p.season)) {
+      alert('Please fill in all room period details');
+      return;
     }
 
-    // Calculate total nights from original check-in to extended check-out for extensions
-    let totalNights = 0;
-    if (isExtension) {
-      totalNights = differenceInDays(
-        new Date(formData.checkOut),
-        new Date(formData.originalCheckIn)
-      );
-    } else {
-      // For new bookings, sum up all room periods
-      totalNights = roomPeriods.reduce((sum, period) => {
-        const nights = differenceInDays(new Date(period.checkOut), new Date(period.checkIn));
-        return sum + nights;
-      }, 0);
-    }
+    const totalNights = roomPeriods.reduce((sum, period) => {
+      const nights = differenceInDays(new Date(period.checkOut), new Date(period.checkIn));
+      return sum + nights;
+    }, 0);
 
-    // Get long-stay discount based on total nights
-    const longStayDiscount = getLongStayDiscount(
-      totalNights,
-      formData.originalCheckIn,
-      isExtension
-    );
+    const longStayDiscount = getLongStayDiscount(totalNights);
 
-    // Calculate for extension period only
     const results = roomPeriods.map(period => {
-      // For extensions, use originalCheckIn as start date and checkOut as end date
-      const startDate = isExtension ? new Date(formData.originalCheckIn) : new Date(period.checkIn);
-      const endDate = isExtension ? new Date(formData.checkOut) : new Date(period.checkOut);
+      const startDate = new Date(period.checkIn);
+      const endDate = new Date(period.checkOut);
       const nights = differenceInDays(endDate, startDate);
       const baseRate = RATES_DATA[formData.property][period.season][period.roomType];
       
@@ -273,52 +244,62 @@ function App() {
       if (period.capacity === '2') {
         rate *= 1.2;
       }
-      rate *= (1 - longStayDiscount);
 
       return {
         ...period,
         checkIn: startDate,
         checkOut: endDate,
         nights,
-        baseRate,
-        rate,
+        baseRate: rate, // This is the rate after capacity adjustment but before long-stay discount
+        rate: rate * (1 - longStayDiscount),
         subtotal: rate * nights
       };
     });
 
-    // Calculate totals
-    const subtotal = results.reduce((sum, r) => sum + r.subtotal, 0);
-    const extraDiscount = subtotal * (formData.extraDiscount / 100);
-    const totalBeforeVat = subtotal - extraDiscount;
+    const subtotalBeforeDiscounts = results.reduce((sum, r) => sum + r.subtotal, 0);
+    const longStayDiscountAmount = subtotalBeforeDiscounts * longStayDiscount;
+    const subtotalAfterLongStay = subtotalBeforeDiscounts - longStayDiscountAmount;
+    const extraDiscount = subtotalAfterLongStay * (formData.extraDiscount / 100);
+    const totalBeforeVat = subtotalAfterLongStay - extraDiscount;
     const vat = totalBeforeVat * 0.07;
     const grandTotal = totalBeforeVat + vat;
-    const remainingAmount = isExtension ? grandTotal - Number(formData.amountPaid) : grandTotal;
 
     setCalculation({
       periods: results,
-      subtotal,
+      subtotalBeforeDiscounts,
+      longStayDiscountAmount,
       extraDiscount,
       vat,
       grandTotal,
-      remainingAmount,
-      amountPaid: Number(formData.amountPaid),
       longStayDiscount: longStayDiscount * 100,
-      totalNights,
-      originalNights: isExtension ? differenceInDays(
-        new Date(formData.originalCheckOut),
-        new Date(formData.originalCheckIn)
-      ) : 0
+      totalNights
     });
   };
 
+  const deleteRoomPeriod = (indexToDelete) => {
+    setRoomPeriods(prev => prev.filter((_, index) => index !== indexToDelete));
+  };
+
   const renderRoomPeriod = (period, index) => (
-    <Box key={period.id} sx={{ mb: 1.5 }}>
-      <Typography variant="subtitle1" sx={{ mb: 1, color: '#1d1d1f' }}>
-        Room Period {index + 1}
-      </Typography>
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <FormControl fullWidth size="small">
+    <Box key={period.id} sx={{ mb: 3 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, justifyContent: 'space-between' }}>
+        <Typography variant="h6">
+          Room Period {index + 1}
+        </Typography>
+        {index > 0 && (
+          <IconButton 
+            onClick={() => deleteRoomPeriod(index)}
+            color="error"
+            size="small"
+            sx={{ ml: 1 }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        )}
+      </Box>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth>
             <InputLabel>Room Type</InputLabel>
             <Select
               value={period.roomType}
@@ -331,8 +312,8 @@ function App() {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth size="small">
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth>
             <InputLabel>Season</InputLabel>
             <Select
               value={period.season}
@@ -346,8 +327,8 @@ function App() {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth size="small">
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth>
             <InputLabel>Capacity</InputLabel>
             <Select
               value={period.capacity}
@@ -360,193 +341,91 @@ function App() {
           </FormControl>
         </Grid>
         <Grid item xs={12} md={6}>
-          <DatePicker
-            label="Check-in Date"
-            value={period.checkIn}
-            onChange={(date) => handleRoomPeriodChange(index, 'checkIn', date)}
-            renderInput={(params) => <TextField {...params} fullWidth size="small" />}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <DatePicker
-            label="Check-out Date"
-            value={period.checkOut}
-            onChange={(date) => handleRoomPeriodChange(index, 'checkOut', date)}
-            renderInput={(params) => <TextField {...params} fullWidth size="small" />}
-          />
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <DatePicker
+              label="Check-in Date"
+              value={period.checkIn}
+              onChange={(date) => handleRoomPeriodChange(index, 'checkIn', date)}
+              renderInput={(params) => <TextField {...params} fullWidth />}
+              minDate={index === 0 ? startOfToday() : roomPeriods[index - 1]?.checkOut || startOfToday()}
+            />
+            <DatePicker
+              label="Check-out Date"
+              value={period.checkOut}
+              onChange={(date) => handleRoomPeriodChange(index, 'checkOut', date)}
+              renderInput={(params) => <TextField {...params} fullWidth />}
+              minDate={period.checkIn || startOfToday()}
+              disabled={!period.checkIn}
+            />
+          </Box>
         </Grid>
       </Grid>
+      {index < roomPeriods.length - 1 && <Divider sx={{ my: 3 }} />}
     </Box>
   );
-
-  const handleDateChange = (field) => (date) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: date
-    }));
-  };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Container maxWidth="md" sx={{ mt: 2, mb: 2 }}>
-          <Typography variant="h4" align="center" gutterBottom>Alt Calculator</Typography>
-          <Paper elevation={1} sx={{ p: 3, borderRadius: 2 }}>
-            <Grid container spacing={1.5}>
-              <Grid item xs={12} md={6}>
-                <FormControl fullWidth size="small">
-                  <InputLabel>Property</InputLabel>
-                  <Select value={formData.property} label="Property" onChange={handleChange('property')}>
-                    <MenuItem value="Alt_CM">Alt Chiang Mai</MenuItem>
-                    <MenuItem value="Alt_PR">Alt Ping River</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <FormControl fullWidth size="small">
-                  <InputLabel>Calculation Type</InputLabel>
-                  <Select value={formData.calculationType} label="Calculation Type" onChange={handleChange('calculationType')}>
-                    <MenuItem value="new">New Booking</MenuItem>
-                    <MenuItem value="extension">Booking Extension</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+        <Container maxWidth="md" sx={{ py: 4 }}>
+          <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+            Alt Calculator
+          </Typography>
+          <Paper>
+            <Box sx={{ mb: 3 }}>
+              <FormControl fullWidth>
+                <InputLabel>Property</InputLabel>
+                <Select 
+                  value={formData.property} 
+                  label="Property" 
+                  onChange={handleChange('property')}
+                >
+                  <MenuItem value="Alt_CM">Alt Chiang Mai</MenuItem>
+                  <MenuItem value="Alt_PR">Alt Ping River</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
 
-              {formData.calculationType === 'new' && (
-                <>
-                  {roomPeriods.map((period, index) => renderRoomPeriod(period, index))}
-                  <Grid item xs={12}>
-                    <Button onClick={addRoomPeriod} variant="outlined" fullWidth>
-                      Add Room Period
-                    </Button>
-                  </Grid>
-                </>
-              )}
+            {roomPeriods.map((period, index) => renderRoomPeriod(period, index))}
+            
+            <Box sx={{ mb: 3 }}>
+              <Button 
+                onClick={addRoomPeriod} 
+                variant="outlined" 
+                fullWidth
+                sx={{ height: 48 }}
+              >
+                Add Room Period
+              </Button>
+            </Box>
 
-              {formData.calculationType === 'extension' && (
-                <Grid container spacing={1.5} sx={{ mt: 1 }}>
-                  <Grid item xs={12} md={6}>
-                    <DatePicker
-                      label="Original Check-in Date"
-                      value={formData.originalCheckIn}
-                      onChange={(date) => handleDateChange('originalCheckIn')(date)}
-                      renderInput={(params) => <TextField {...params} fullWidth size="small" />}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <DatePicker
-                      label="Original Check-out Date"
-                      value={formData.originalCheckOut}
-                      onChange={(date) => handleDateChange('originalCheckOut')(date)}
-                      renderInput={(params) => <TextField {...params} fullWidth size="small" />}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <DatePicker
-                      label="Extended Check-out Date"
-                      value={formData.checkOut}
-                      onChange={(date) => handleDateChange('checkOut')(date)}
-                      renderInput={(params) => <TextField {...params} fullWidth size="small" />}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      fullWidth
-                      size="small"
-                      label="Amount Already Paid (฿)"
-                      type="number"
-                      value={formData.amountPaid}
-                      onChange={handleChange('amountPaid')}
-                      InputProps={{ inputProps: { min: 0 } }}
-                    />
-                  </Grid>
-                  
-                  {roomPeriods.map((period, index) => (
-                    <React.Fragment key={period.id}>
-                      <Grid item xs={12} md={6}>
-                        <FormControl fullWidth size="small">
-                          <InputLabel>Room Type</InputLabel>
-                          <Select
-                            value={period.roomType}
-                            label="Room Type"
-                            onChange={(e) => handleRoomPeriodChange(index, 'roomType', e.target.value)}
-                          >
-                            {getRoomTypes().map((type) => (
-                              <MenuItem key={type} value={type}>{type}</MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <FormControl fullWidth size="small">
-                          <InputLabel>Season</InputLabel>
-                          <Select
-                            value={period.season}
-                            label="Season"
-                            onChange={(e) => handleRoomPeriodChange(index, 'season', e.target.value)}
-                          >
-                            <MenuItem value="Rack">Rack Rate</MenuItem>
-                            <MenuItem value="High">High Season</MenuItem>
-                            <MenuItem value="Medium">Medium Season</MenuItem>
-                            <MenuItem value="Low">Low Season</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <FormControl fullWidth size="small">
-                          <InputLabel>Capacity</InputLabel>
-                          <Select
-                            value={period.capacity}
-                            label="Capacity"
-                            onChange={(e) => handleRoomPeriodChange(index, 'capacity', e.target.value)}
-                          >
-                            <MenuItem value="1">1 Person</MenuItem>
-                            <MenuItem value="2">2 Persons (+20%)</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                    </React.Fragment>
-                  ))}
-
-                  <Grid item xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={formData.overrideSevenDayRule}
-                          onChange={(e) => handleChange('overrideSevenDayRule')({ target: { value: e.target.checked } })}
-                        />
-                      }
-                      label="Disable Including Original Stay for Long-Stay Discount"
-                    />
-                  </Grid>
-                </Grid>
-              )}
-
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  size="small"
-                  label="Extra Discount (%)"
-                  type="number"
-                  value={formData.extraDiscount}
-                  onChange={handleChange('extraDiscount')}
-                  InputProps={{ inputProps: { min: 0, max: 100 } }}
-                />
-              </Grid>
-            </Grid>
+            <Box sx={{ mb: 3 }}>
+              <TextField
+                fullWidth
+                label="Extra Discount (%)"
+                type="number"
+                value={formData.extraDiscount}
+                onChange={handleChange('extraDiscount')}
+                InputProps={{ inputProps: { min: 0, max: 100 } }}
+              />
+            </Box>
 
             <Button
               variant="contained"
               fullWidth
               onClick={calculateTotal}
-              sx={{ mt: 3, py: 1.25 }}
+              sx={{ height: 48 }}
             >
               Calculate
             </Button>
           </Paper>
 
-          {calculation && <Summary calculation={calculation} formData={formData} />}
+          {calculation && (
+            <Box sx={{ mt: 3 }}>
+              <Summary calculation={calculation} formData={formData} />
+            </Box>
+          )}
         </Container>
       </LocalizationProvider>
     </ThemeProvider>

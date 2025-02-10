@@ -39,7 +39,6 @@ const Summary = ({ calculation, formData }) => {
       maximumFractionDigits: 0
     }).format(amount);
 
-  const isExtension = formData.calculationType === 'extension';
   const season = calculation.periods[0]?.season || 'N/A';
 
   return (
@@ -51,26 +50,8 @@ const Summary = ({ calculation, formData }) => {
           Property: {formData.property === 'Alt_CM' ? 'Alt Chiang Mai' : 'Alt Ping River'}
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
-          Calculation Type: {formData.calculationType === 'new' ? 'New Booking' : 'Booking Extension'}
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
           Season: {season === 'Rack' ? 'Rack Rate' : `${season} Season`}
         </Typography>
-        {isExtension && (
-          <>
-            <Typography variant="subtitle1" gutterBottom>
-              Original Stay: {formatDate(formData.originalCheckIn)} - {formatDate(formData.originalCheckOut)}
-              {' '}({calculation.originalNights} nights)
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              Total Period: {formatDate(formData.originalCheckIn)} - {formatDate(formData.checkOut)}
-              {' '}({calculation.totalNights} nights)
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              7-Day Rule Override: {formData.overrideSevenDayRule ? 'Yes' : 'No'}
-            </Typography>
-          </>
-        )}
       </Paper>
 
       <TableContainer component={Paper} sx={{ mb: 3 }}>
@@ -80,43 +61,41 @@ const Summary = ({ calculation, formData }) => {
               <TableCell>Period</TableCell>
               <TableCell>Room Type</TableCell>
               <TableCell>Capacity</TableCell>
-              <TableCell align="right">Base Rate</TableCell>
-              <TableCell align="right">Final Rate</TableCell>
+              <TableCell align="right">Rate</TableCell>
               <TableCell align="right">Nights</TableCell>
               <TableCell align="right">Subtotal</TableCell>
+              <TableCell align="right">Discounts</TableCell>
+              <TableCell align="right">Final Amount</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {isExtension && (
-              <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-                <TableCell>
-                  {formatDate(formData.originalCheckIn)} - {formatDate(formData.originalCheckOut)}
-                </TableCell>
-                <TableCell>-</TableCell>
-                <TableCell>-</TableCell>
-                <TableCell align="right">-</TableCell>
-                <TableCell align="right">-</TableCell>
-                <TableCell align="right">{calculation.originalNights}</TableCell>
-                <TableCell align="right" sx={{ color: 'error.main' }}>
-                  -{formatCurrency(calculation.amountPaid)}
-                </TableCell>
-              </TableRow>
-            )}
-            {calculation.periods.map((period, index) => (
-              <TableRow key={index}>
-                <TableCell>
-                  {formatDate(period.startDate || period.checkIn)} - {formatDate(period.endDate || period.checkOut)}
-                </TableCell>
-                <TableCell>{period.roomType}</TableCell>
-                <TableCell>
-                  {period.capacity} {period.capacity === '2' && '(+20%)'}
-                </TableCell>
-                <TableCell align="right">{formatCurrency(period.baseRate)}</TableCell>
-                <TableCell align="right">{formatCurrency(period.rate)}</TableCell>
-                <TableCell align="right">{period.nights}</TableCell>
-                <TableCell align="right">{formatCurrency(period.subtotal)}</TableCell>
-              </TableRow>
-            ))}
+            {calculation.periods.map((period, index) => {
+              const subtotal = period.baseRate * period.nights;
+              const longStayDiscount = subtotal * (calculation.longStayDiscount / 100);
+              const subtotalAfterLongStay = subtotal - longStayDiscount;
+              const extraDiscount = subtotalAfterLongStay * (formData.extraDiscount / 100);
+              const totalDiscounts = longStayDiscount + extraDiscount;
+              const finalAmount = subtotal - totalDiscounts;
+
+              return (
+                <TableRow key={index}>
+                  <TableCell>
+                    {formatDate(period.startDate || period.checkIn)} - {formatDate(period.endDate || period.checkOut)}
+                  </TableCell>
+                  <TableCell>{period.roomType}</TableCell>
+                  <TableCell>
+                    {period.capacity} {period.capacity === '2' && '(+20%)'}
+                  </TableCell>
+                  <TableCell align="right">{formatCurrency(period.baseRate)}</TableCell>
+                  <TableCell align="right">{period.nights}</TableCell>
+                  <TableCell align="right">{formatCurrency(subtotal)}</TableCell>
+                  <TableCell align="right" sx={{ color: 'error.main' }}>
+                    -{formatCurrency(totalDiscounts)}
+                  </TableCell>
+                  <TableCell align="right">{formatCurrency(finalAmount)}</TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -126,23 +105,18 @@ const Summary = ({ calculation, formData }) => {
           <Typography variant="subtitle1">
             Total Nights: {calculation.totalNights}
           </Typography>
+          <Divider sx={{ my: 1 }} />
+          <Typography variant="subtitle1">
+            Subtotal: {formatCurrency(calculation.subtotalBeforeDiscounts)}
+          </Typography>
           {calculation.longStayDiscount > 0 && (
-            <Typography variant="subtitle1">
-              Long-stay Discount: {calculation.longStayDiscount}%
+            <Typography variant="subtitle1" color="error">
+              Long-stay Discount ({calculation.longStayDiscount}%): -{formatCurrency(calculation.longStayDiscountAmount)}
             </Typography>
           )}
           {formData.extraDiscount > 0 && (
-            <Typography variant="subtitle1">
-              Extra Discount: {formData.extraDiscount}%
-            </Typography>
-          )}
-          <Divider sx={{ my: 1 }} />
-          <Typography variant="subtitle1">
-            Subtotal: {formatCurrency(calculation.subtotal)}
-          </Typography>
-          {calculation.extraDiscount > 0 && (
             <Typography variant="subtitle1" color="error">
-              Extra Discount: -{formatCurrency(calculation.extraDiscount)}
+              Extra Discount ({formData.extraDiscount}%): -{formatCurrency(calculation.extraDiscount)}
             </Typography>
           )}
           <Typography variant="subtitle1">
@@ -151,17 +125,6 @@ const Summary = ({ calculation, formData }) => {
           <Typography variant="h6" sx={{ mt: 1 }}>
             Total: {formatCurrency(calculation.grandTotal)}
           </Typography>
-          {isExtension && (
-            <>
-              <Divider sx={{ my: 1 }} />
-              <Typography variant="subtitle1" color="text.secondary">
-                Amount Already Paid: {formatCurrency(calculation.amountPaid)}
-              </Typography>
-              <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
-                Remaining Amount to Pay: {formatCurrency(calculation.remainingAmount)}
-              </Typography>
-            </>
-          )}
         </Box>
       </Paper>
     </Box>
