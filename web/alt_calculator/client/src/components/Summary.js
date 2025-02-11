@@ -50,7 +50,7 @@ const Summary = ({ calculation, formData }) => {
           Property: {formData.property === 'Alt_CM' ? 'Alt Chiang Mai' : 'Alt Ping River'}
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
-          Season: {season === 'Rack' ? 'Rack Rate' : `${season} Season`}
+          Rate Type: {season}
         </Typography>
       </Paper>
 
