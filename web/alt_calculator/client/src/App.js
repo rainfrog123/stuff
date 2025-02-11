@@ -363,16 +363,16 @@ function App() {
         </Grid>
         <Grid item xs={12} md={6}>
           <FormControl fullWidth>
-            <InputLabel>Season</InputLabel>
+            <InputLabel>Rate Type</InputLabel>
             <Select
               value={period.season}
-              label="Season"
+              label="Rate Type"
               onChange={(e) => handleRoomPeriodChange(index, 'season', e.target.value)}
             >
-              <MenuItem value="Rack">Rack Rate</MenuItem>
-              <MenuItem value="High">High Season</MenuItem>
-              <MenuItem value="Medium">Medium Season</MenuItem>
-              <MenuItem value="Low">Low Season</MenuItem>
+              <MenuItem value="Rack">Rack</MenuItem>
+              <MenuItem value="High">High</MenuItem>
+              <MenuItem value="Medium">Medium</MenuItem>
+              <MenuItem value="Low">Low</MenuItem>
             </Select>
           </FormControl>
         </Grid>
