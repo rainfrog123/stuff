@@ -151,71 +151,32 @@ const theme = createTheme({
 });
 
 const BugReportDialog = ({ open, onClose }) => {
-  const [comment, setComment] = useState('');
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  const handleSubmit = () => {
-    if (!comment.trim()) return;
-
-    const reports = JSON.parse(localStorage.getItem('bugReports') || '[]');
-    const newReport = {
-      id: reports.length + 1,
-      date: new Date().toISOString(),
-      comment: comment.trim()
-    };
-
-    reports.push(newReport);
-    localStorage.setItem('bugReports', JSON.stringify(reports));
-    
-    setComment('');
-    setShowSuccess(true);
-    onClose();
-
-    // Redirect to BBS page after a short delay
-    setTimeout(() => {
-      window.location.href = 'bbs.html';
-    }, 1500);
-  };
-
   return (
-    <>
-      <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-        <DialogTitle>Report a Bug</DialogTitle>
-        <DialogContent>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            Please describe the issue you encountered. Bug reporting will close on February 13, and it will run locally, managed by JH.
-          </Typography>
-          <TextField
-            autoFocus
-            multiline
-            rows={4}
-            fullWidth
-            variant="outlined"
-            label="Describe the bug"
-            placeholder="What happened? What did you expect to happen?"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            sx={{ mt: 1 }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
-          <Button 
-            onClick={handleSubmit}
-            variant="contained"
-            disabled={!comment.trim()}
-          >
-            Submit Report
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Snackbar
-        open={showSuccess}
-        autoHideDuration={1500}
-        onClose={() => setShowSuccess(false)}
-        message="Thank you for your report! Redirecting to reports page..."
-      />
-    </>
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
+      <DialogContent sx={{ p: 0 }}>
+        <Typography 
+          variant="body2" 
+          sx={{ 
+            p: 2, 
+            textAlign: 'center',
+            backgroundColor: '#fff'
+          }}
+        >
+          The beta testing period will last from 11 Feb to 18 Feb, and bug reports will close on 15 Feb.
+        </Typography>
+        <Box
+          component="img"
+          src="/de6721d437903ebddcbd087f8f2cb4f.jpg"
+          alt="WhatsApp QR"
+          sx={{
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            backgroundColor: '#00A884'  // WhatsApp green background
+          }}
+        />
+      </DialogContent>
+    </Dialog>
   );
 };
 
@@ -545,18 +506,6 @@ function App() {
               }}
             >
               Report a Bug
-            </Button>
-            <Button
-              variant="text"
-              onClick={() => window.location.href = 'bbs.html'}
-              sx={{ 
-                opacity: 0.7,
-                '&:hover': {
-                  opacity: 1
-                }
-              }}
-            >
-              View All Reports
             </Button>
           </Box>
         </Container>
