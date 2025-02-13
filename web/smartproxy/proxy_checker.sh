@@ -7,7 +7,7 @@ password="15yFvupp9fbN_zzP0D"
 proxy_server="gate.smartproxy.com:7000"
 session_duration="60"
 os="ios"
-country="us"
+country="be"
 
 # IPQS Configuration
 ipqs_api_key="740F92cS9nqqV41L0u7jfbSepB3dff08"
@@ -67,7 +67,14 @@ for ip in "${ip_list[@]}"; do
             
             # If fraud score is less than 50, print the corresponding proxy link
             if [ "$fraud_score" -lt 50 ]; then
-                echo "Low fraud score detected! SOCKS Link: ${proxy_links[$ip]}"
+                # Find the index of this IP in ip_list to get corresponding city
+                for i in "${!ip_list[@]}"; do
+                    if [[ "${ip_list[$i]}" = "${ip}" ]]; then
+                        echo "Low fraud score detected! City: ${city_list[$i]}"
+                        echo "SOCKS Link: ${proxy_links[$ip]}"
+                        break
+                    fi
+                done
             fi
         else
             error_message=$(echo "$response" | jq -r '.message')
