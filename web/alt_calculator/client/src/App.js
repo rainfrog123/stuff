@@ -18,10 +18,6 @@ import {
   IconButton,
   Link,
   Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Snackbar,
 } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -30,8 +26,6 @@ import Summary from './components/Summary';
 import { getRates, initializeRates } from './api/rates';
 import { RATES_DATA } from './constants/rates';
 import DeleteIcon from '@mui/icons-material/Delete';
-import BugReportIcon from '@mui/icons-material/BugReport';
-import { bugReports } from './bugReports';
 import AdminPanel from './components/AdminPanel';
 
 const theme = createTheme({
@@ -50,17 +44,23 @@ const theme = createTheme({
   typography: {
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
     h4: {
-      fontSize: '1.75rem',
+      fontSize: '1.5rem',
       fontWeight: 500,
     },
     h6: {
-      fontSize: '1.125rem',
+      fontSize: '1rem',
       fontWeight: 500,
       color: '#1d1d1f',
     },
     subtitle1: {
-      fontSize: '0.9375rem',
+      fontSize: '0.875rem',
       fontWeight: 500,
+    },
+    body1: {
+      fontSize: '0.875rem',
+    },
+    body2: {
+      fontSize: '0.8125rem',
     },
   },
   components: {
@@ -152,35 +152,35 @@ const theme = createTheme({
   },
 });
 
-const BugReportDialog = ({ open, onClose }) => {
-  return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
-      <DialogContent sx={{ p: 0 }}>
-        <Typography 
-          variant="body2" 
-          sx={{ 
-            p: 2, 
-            textAlign: 'center',
-            backgroundColor: '#fff'
-          }}
-        >
-          The beta testing period will last from 11 Feb to 18 Feb, and bug reports will close on 15 Feb.
-        </Typography>
-        <Box
-          component="img"
-          src="/de6721d437903ebddcbd087f8f2cb4f.jpg"
-          alt="WhatsApp QR"
-          sx={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            backgroundColor: '#00A884'  // WhatsApp green background
-          }}
-        />
-      </DialogContent>
-    </Dialog>
-  );
-};
+const BusinessCardDialog = ({ open, onClose }) => (
+  <Dialog 
+    open={open} 
+    onClose={onClose}
+    maxWidth="xs"
+    PaperProps={{
+      sx: {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        overflow: 'hidden',
+        p: 0,
+      }
+    }}
+  >
+    <Box
+      component="img"
+      src="/business-card.jpg"
+      alt="Jeffrey's Business Card"
+      sx={{
+        width: '100%',
+        maxWidth: '200px',
+        height: 'auto',
+        display: 'block',
+        borderRadius: '8px',
+        margin: '0 auto',
+      }}
+    />
+  </Dialog>
+);
 
 function App() {
   const [roomPeriods, setRoomPeriods] = useState([
@@ -201,30 +201,81 @@ function App() {
     hasRoomChange: false
   });
   const [calculation, setCalculation] = useState(null);
-  const [bugReportOpen, setBugReportOpen] = useState(false);
   const [rates, setRates] = useState(RATES_DATA);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [businessCardOpen, setBusinessCardOpen] = useState(false);
+  const [thaiTime, setThaiTime] = useState(new Date().toLocaleTimeString('en-US', {
+    timeZone: 'Asia/Bangkok',
+    hour12: false,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  }));
+  const [weather, setWeather] = useState(null);
+
+  const handleRatesUpdate = (newRates) => {
+    console.log('Updating rates in App:', newRates);
+    setRates(newRates);
+  };
 
   useEffect(() => {
     const loadRates = async () => {
       try {
         setLoading(true);
-        // Initialize with default rates if none exist
         const loadedRates = await initializeRates(RATES_DATA);
         setRates(loadedRates);
         setError(null);
       } catch (err) {
         console.error('Failed to load rates:', err);
         setError('Failed to load rates. Using default rates.');
-        setRates(RATES_DATA); // Fallback to default rates
+        setRates(RATES_DATA);
       } finally {
         setLoading(false);
       }
     };
 
     loadRates();
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setThaiTime(new Date().toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Bangkok',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      }));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        // Simulating weather data until we have an API key
+        setWeather({
+          main: {
+            temp: 28,
+          },
+          weather: [
+            {
+              description: "sunny"
+            }
+          ]
+        });
+      } catch (error) {
+        console.error('Error fetching weather:', error);
+      }
+    };
+
+    fetchWeather();
+    const interval = setInterval(fetchWeather, 300000); // Update every 5 minutes
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleChange = (field) => (event) => {
@@ -451,7 +502,7 @@ function App() {
             >
               Back to Calculator
             </Button>
-            <AdminPanel />
+            <AdminPanel onRatesUpdate={handleRatesUpdate} />
           </Box>
         </Container>
       </ThemeProvider>
@@ -463,27 +514,20 @@ function App() {
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Container maxWidth="lg">
-          <Box sx={{ my: 4 }}>
+          <Box sx={{ my: 4, minHeight: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
               <Typography variant="h4" component="h1" gutterBottom>
                 Alt Calculator
               </Typography>
-              <Box>
-                <IconButton 
-                  onClick={() => setBugReportOpen(true)} 
-                  sx={{ mr: 1 }}
-                >
-                  <BugReportIcon />
-                </IconButton>
-                <Button 
-                  variant="outlined"
-                  onClick={() => setIsAdmin(true)}
-                >
-                  Admin Panel
-                </Button>
-              </Box>
+              <Button 
+                variant="outlined"
+                onClick={() => setIsAdmin(true)}
+              >
+                Admin Panel
+              </Button>
             </Box>
-            <Paper>
+            
+            <Paper sx={{ mb: 3, flex: 1 }}>
               <Box sx={{ mb: 3 }}>
                 <FormControl fullWidth>
                   <InputLabel>Property</InputLabel>
@@ -538,12 +582,59 @@ function App() {
               </Box>
             )}
           </Box>
+
+          <Box 
+            component="footer" 
+            sx={{ 
+              py: 2, 
+              textAlign: 'center',
+              color: 'text.secondary',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px'
+            }}
+          >
+            <div style={{ 
+              fontSize: '1.1rem',
+              fontWeight: 500
+            }}>
+              {weather && weather.main && weather.weather ? (
+                `chiangmai: ${Math.round(weather.main.temp)}°C ${weather.weather[0].description}`
+              ) : (
+                'chiangmai: loading weather...'
+              )}
+            </div>
+            <div style={{ 
+              fontSize: '0.65rem',
+              fontStyle: 'italic',
+              marginTop: '4px'
+            }}>
+              designed by <Link
+                component="button"
+                onClick={() => setBusinessCardOpen(true)}
+                sx={{ 
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  fontStyle: 'italic',
+                  padding: 0,
+                  fontSize: 'inherit',
+                  '&:hover': {
+                    textDecoration: 'underline',
+                    cursor: 'pointer'
+                  }
+                }}
+              >
+                jeffrey
+              </Link> • a gift to alt community
+            </div>
+          </Box>
+
+          <BusinessCardDialog 
+            open={businessCardOpen}
+            onClose={() => setBusinessCardOpen(false)}
+          />
         </Container>
       </LocalizationProvider>
-      <BugReportDialog 
-        open={bugReportOpen}
-        onClose={() => setBugReportOpen(false)}
-      />
     </ThemeProvider>
   );
 }
