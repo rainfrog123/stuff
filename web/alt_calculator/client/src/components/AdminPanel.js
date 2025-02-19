@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { getRates, updateRates } from '../api/rates';
 
-export default function AdminPanel() {
+export default function AdminPanel({ onRatesUpdate }) {
   const [rates, setRates] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -23,6 +23,9 @@ export default function AdminPanel() {
     try {
       const currentRates = await getRates();
       setRates(JSON.stringify(currentRates, null, 2));
+      if (onRatesUpdate) {
+        onRatesUpdate(currentRates);
+      }
     } catch (err) {
       setError('Failed to load rates');
     }
@@ -39,6 +42,9 @@ export default function AdminPanel() {
       }
 
       await updateRates(parsedRates);
+      if (onRatesUpdate) {
+        onRatesUpdate(parsedRates);
+      }
       setSuccess('Rates updated successfully');
       setError('');
     } catch (err) {
