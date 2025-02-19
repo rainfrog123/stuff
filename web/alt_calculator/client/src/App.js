@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Paper,
@@ -27,10 +27,12 @@ import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { differenceInDays, startOfToday, addDays } from 'date-fns';
 import Summary from './components/Summary';
+import { getRates, initializeRates } from './api/rates';
 import { RATES_DATA } from './constants/rates';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import { bugReports } from './bugReports';
+import AdminPanel from './components/AdminPanel';
 
 const theme = createTheme({
   palette: {
@@ -200,6 +202,30 @@ function App() {
   });
   const [calculation, setCalculation] = useState(null);
   const [bugReportOpen, setBugReportOpen] = useState(false);
+  const [rates, setRates] = useState(RATES_DATA);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const loadRates = async () => {
+      try {
+        setLoading(true);
+        // Initialize with default rates if none exist
+        const loadedRates = await initializeRates(RATES_DATA);
+        setRates(loadedRates);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to load rates:', err);
+        setError('Failed to load rates. Using default rates.');
+        setRates(RATES_DATA); // Fallback to default rates
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadRates();
+  }, []);
 
   const handleChange = (field) => (event) => {
     setFormData(prev => ({
@@ -254,8 +280,7 @@ function App() {
   };
 
   const getRoomTypes = () => {
-    if (!formData.property) return [];
-    return RATES_DATA[formData.property].roomTypes || [];
+    return rates[formData.property]?.roomTypes || [];
   };
 
   const getLongStayDiscount = (totalNights) => {
@@ -266,8 +291,8 @@ function App() {
   };
 
   const calculateTotal = () => {
-    if (!formData.property) {
-      alert('Please select a property');
+    if (!rates[formData.property]) {
+      setError('Property rates not found');
       return;
     }
 
@@ -287,7 +312,7 @@ function App() {
       const startDate = new Date(period.checkIn);
       const endDate = new Date(period.checkOut);
       const nights = differenceInDays(endDate, startDate);
-      const baseRate = RATES_DATA[formData.property][period.season][period.roomType];
+      const baseRate = rates[formData.property][period.season][period.roomType];
       
       let rate = baseRate;
       if (period.capacity === '2') {
@@ -413,100 +438,105 @@ function App() {
     </Box>
   );
 
+  if (isAdmin) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="lg">
+          <Box sx={{ my: 4 }}>
+            <Button 
+              variant="outlined" 
+              onClick={() => setIsAdmin(false)}
+              sx={{ mb: 2 }}
+            >
+              Back to Calculator
+            </Button>
+            <AdminPanel />
+          </Box>
+        </Container>
+      </ThemeProvider>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Container maxWidth="md" sx={{ py: 4 }}>
-          <Link
-            component="button"
-            variant="h4"
-            onClick={() => window.location.reload()}
-            align="center"
-            gutterBottom
-            sx={{
-              mb: 4,
-              textDecoration: 'none',
-              color: 'text.primary',
-              display: 'block',
-              width: '100%',
-              '&:hover': {
-                color: 'primary.main',
-                cursor: 'pointer',
-              },
-            }}
-          >
-            Alt Calculator
-          </Link>
-          <Paper>
-            <Box sx={{ mb: 3 }}>
-              <FormControl fullWidth>
-                <InputLabel>Property</InputLabel>
-                <Select 
-                  value={formData.property} 
-                  label="Property" 
-                  onChange={handleChange('property')}
+        <Container maxWidth="lg">
+          <Box sx={{ my: 4 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Alt Calculator
+              </Typography>
+              <Box>
+                <IconButton 
+                  onClick={() => setBugReportOpen(true)} 
+                  sx={{ mr: 1 }}
                 >
-                  <MenuItem value="Alt_CM">Alt Chiang Mai</MenuItem>
-                  <MenuItem value="Alt_PR">Alt Ping River</MenuItem>
-                </Select>
-              </FormControl>
+                  <BugReportIcon />
+                </IconButton>
+                <Button 
+                  variant="outlined"
+                  onClick={() => setIsAdmin(true)}
+                >
+                  Admin Panel
+                </Button>
+              </Box>
             </Box>
+            <Paper>
+              <Box sx={{ mb: 3 }}>
+                <FormControl fullWidth>
+                  <InputLabel>Property</InputLabel>
+                  <Select 
+                    value={formData.property} 
+                    label="Property" 
+                    onChange={handleChange('property')}
+                  >
+                    <MenuItem value="Alt_CM">Alt Chiang Mai</MenuItem>
+                    <MenuItem value="Alt_PR">Alt Ping River</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
 
-            {roomPeriods.map((period, index) => renderRoomPeriod(period, index))}
-            
-            <Box sx={{ mb: 3 }}>
-              <Button 
-                onClick={addRoomPeriod} 
-                variant="outlined" 
+              {roomPeriods.map((period, index) => renderRoomPeriod(period, index))}
+              
+              <Box sx={{ mb: 3 }}>
+                <Button 
+                  onClick={addRoomPeriod} 
+                  variant="outlined" 
+                  fullWidth
+                  sx={{ height: 48 }}
+                >
+                  Add Room Period
+                </Button>
+              </Box>
+
+              <Box sx={{ mb: 3 }}>
+                <TextField
+                  fullWidth
+                  label="Extra Discount (%)"
+                  type="number"
+                  value={formData.extraDiscount}
+                  onChange={handleChange('extraDiscount')}
+                  InputProps={{ inputProps: { min: 0, max: 100 } }}
+                />
+              </Box>
+
+              <Button
+                variant="contained"
                 fullWidth
+                onClick={calculateTotal}
                 sx={{ height: 48 }}
               >
-                Add Room Period
+                Calculate
               </Button>
-            </Box>
+            </Paper>
 
-            <Box sx={{ mb: 3 }}>
-              <TextField
-                fullWidth
-                label="Extra Discount (%)"
-                type="number"
-                value={formData.extraDiscount}
-                onChange={handleChange('extraDiscount')}
-                InputProps={{ inputProps: { min: 0, max: 100 } }}
-              />
-            </Box>
-
-            <Button
-              variant="contained"
-              fullWidth
-              onClick={calculateTotal}
-              sx={{ height: 48 }}
-            >
-              Calculate
-            </Button>
-          </Paper>
-
-          {calculation && (
-            <Box sx={{ mt: 3 }}>
-              <Summary calculation={calculation} formData={formData} />
-            </Box>
-          )}
-
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center', gap: 2 }}>
-            <Button
-              variant="outlined"
-              startIcon={<BugReportIcon />}
-              onClick={() => setBugReportOpen(true)}
-              sx={{ 
-                opacity: 0.7,
-                '&:hover': {
-                  opacity: 1
-                }
-              }}
-            >
-              Report a Bug
-            </Button>
+            {calculation && (
+              <Box sx={{ mt: 3 }}>
+                <Summary calculation={calculation} formData={formData} />
+              </Box>
+            )}
           </Box>
         </Container>
       </LocalizationProvider>

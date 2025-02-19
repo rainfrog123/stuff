@@ -363,12 +363,10 @@ def main():
             elif choice == "4":
                 instance_id = select_instance(manager)
                 if instance_id:
-                    confirm = input(f"Are you sure you want to delete instance {instance_id}? (y/N): ")
-                    if confirm.lower() == 'y':
-                        if manager.delete_instance(instance_id):
-                            print("Instance deleted successfully!")
-                        else:
-                            print("Failed to delete instance!")
+                    if manager.delete_instance(instance_id):
+                        print("Instance deleted successfully!")
+                    else:
+                        print("Failed to delete instance!")
             elif choice == "5":
                 instance_id = select_instance(manager)
                 if instance_id:
