@@ -59,13 +59,13 @@ class AsiaDeployer:
         self.root_pass = "4dwlq5!H4uA26A8"
         # All regions in JP, SG, AU
         self.target_regions = [
-            "jp-osa",      # Osaka, JP
-            "jp-tyo-3",    # Tokyo 3, JP
-            "ap-northeast", # Tokyo 2, JP
-            "sg-sin-2",    # Singapore 2, SG
-            "ap-south",    # Singapore, SG
-            "ap-southeast", # Sydney, AU
-            "au-mel",      # Melbourne, AU
+            # "jp-osa",      # Osaka, JP
+            # "jp-tyo-3",    # Tokyo 3, JP
+            # "ap-northeast", # Tokyo 2, JP
+            # "sg-sin-2",    # Singapore 2, SG
+            # "ap-south",    # Singapore, SG
+            # "ap-southeast", # Sydney, AU
+            # "au-mel",      # Melbourne, AU
         ]
 
     def deploy_instance(self, region: str) -> dict:
