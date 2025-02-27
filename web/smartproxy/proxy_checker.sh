@@ -7,7 +7,7 @@ password="15yFvupp9fbN_zzP0D"
 proxy_server="gate.smartproxy.com:7000"
 session_duration="60"
 os="ios"
-country="be"
+country="tw"
 
 # IPQS Configuration
 ipqs_api_key="740F92cS9nqqV41L0u7jfbSepB3dff08"
