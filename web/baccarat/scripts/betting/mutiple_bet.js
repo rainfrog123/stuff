@@ -1,214 +1,267 @@
-// Function to monitor and log elements with "TIE" in their content along with parent element content
-function monitorTieResultsAndClickButtons() {
-    const targetPrefix = "GameResultAndYouWin_winContainer__";
-    const bankerPrefix = "betPositionBGTemp mobile banker";
-    const playerPrefix = "betPositionBGTemp mobile player";
+// ==UserScript==
+// @name         Baccarat Auto-Betting System
+// @namespace    http://tampermonkey.net/
+// @version      3.1
+// @description  Automatically places bets on banker or player regardless of TIE count
+// @author       Your Name
+// @match        *://client.pragmaticplaylive.net/desktop/*
+// @grant        GM_xmlhttpRequest
+// @grant        GM_addStyle
+// @grant        GM_log
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @run-at       document-start
+// ==/UserScript==
 
-    // Observer to detect changes in the DOM
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            mutation.addedNodes.forEach((node) => {
-                // Ensure the node is an HTMLElement
-                if (node.nodeType === 1 && node instanceof HTMLElement) {
-                    // Check each class in the node's class list
-                    const classList = node.className.split(/\s+/); // Split class string into an array
-                    const matchedClass = classList.find((cls) => cls.startsWith(targetPrefix));
-                    if (matchedClass) {
-                        // Check if the node or its children contain the word "TIE"
-                        const textContent = node.textContent.trim();
-                        if (/TIE/i.test(textContent)) { // Case-insensitive match for "TIE"
-                            const parentElement = node.parentElement; // Get the parent element
+(function () {
+    'use strict';
 
-                            if (parentElement) {
-                                // Dynamically identify the BANKER and PLAYER buttons using the prefixes
-                                const bankerButton = Array.from(parentElement.querySelectorAll("*")).find((el) => {
-                                    return el.className && typeof el.className === "string" && el.className.includes(bankerPrefix);
-                                });
+    // Configuration
+    const CONFIG = {
+        chipValue: 0.2,                  // Value of each chip click
+        minBetAmount: 0.2,               // Minimum bet amount
+        maxBalancePercentage: 0.25,      // Maximum percentage of balance to bet
+        clickDelay: 10,                  // Delay between clicks in milliseconds
+        betDelayMin: 6000,               // Minimum delay before placing bet (ms)
+        betDelayRandom: 3000,            // Additional random delay (ms)
+        counterSelector: '.TileStatistics_round-mobile-counter__cjd3w',
+        bankerPrefix: "betPositionBGTemp mobile banker",
+        playerPrefix: "betPositionBGTemp mobile player",
+        balanceKey: 'currentBalance'
+    };
 
-                                const playerButton = Array.from(parentElement.querySelectorAll("*")).find((el) => {
-                                    return el.className && typeof el.className === "string" && el.className.includes(playerPrefix);
-                                });
+    // Generate a cryptographically secure random number between 0 and 1
+    function secureRandom() {
+        // Use Web Crypto API for better randomness
+        const array = new Uint32Array(1);
+        window.crypto.getRandomValues(array);
+        // Convert to a number between 0 and 1
+        return array[0] / (0xFFFFFFFF + 1);
+    }
 
-                                console.log("Matched 'TIE' result container appeared:", {
-                                    timestamp: new Date().toISOString(),
-                                    outerHTML: node.outerHTML, // Save the node's outerHTML
-                                    textContent: textContent, // Save the visible text content of the node
-                                    parentOuterHTML: parentElement.outerHTML, // Save the parent's outerHTML
-                                    bankerButtonFound: !!bankerButton, // Check if banker button exists
-                                    playerButtonFound: !!playerButton, // Check if player button exists
-                                    bankerButtonHTML: bankerButton ? bankerButton.outerHTML : "Not found", // Print banker button details
-                                    playerButtonHTML: playerButton ? playerButton.outerHTML : "Not found", // Print player button details
-                                });
+    // Generate a true binary 50:50 choice (0 or 1)
+    function secureBinaryChoice() {
+        // Get 8 random bits and use just 1 bit for the decision
+        // This ensures a perfect 50:50 distribution
+        const array = new Uint8Array(1);
+        window.crypto.getRandomValues(array);
+        // Use just the least significant bit (0 or 1)
+        return array[0] & 1;
+    }
 
-                                // Randomly click on BANKER or PLAYER after a delay of 2 seconds
-                                if (bankerButton || playerButton) {
-                                    setTimeout(() => {
-                                        const randomChoice = Math.random() < 0.5 ? "banker" : "player";
-                                        if (randomChoice === "banker" && bankerButton) {
-                                            bankerButton.click();
-                                            console.log("Clicked on the BANKER button.");
-                                        } else if (randomChoice === "player" && playerButton) {
-                                            playerButton.click();
-                                            console.log("Clicked on the PLAYER button.");
-                                        } else {
-                                            console.log("No button to click.");
-                                        }
-                                    }, 5000); // 5-second delay
-                                }
-                            }
-                        }
+    // Get random delay
+    function getRandomDelay() {
+        return CONFIG.betDelayMin + (secureRandom() * CONFIG.betDelayRandom);
+    }
+
+    // Retrieve balance from localStorage
+    function getBalance() {
+        const balance = parseFloat(localStorage.getItem(CONFIG.balanceKey));
+        return isNaN(balance) ? 0 : balance;
+    }
+
+    // Calculate bet amount based on balance
+    function calculateBetAmount() {
+        const balance = getBalance();
+        if (balance <= 0) return 0;
+        
+        // Cap the balance at 100 for calculation purposes
+        const effectiveBalance = balance > 100 ? 100 : balance;
+        
+        const maxBetAmount = effectiveBalance * CONFIG.maxBalancePercentage;
+        const randomValue = secureRandom();
+        let betAmount = Math.round((randomValue * maxBetAmount) * 100) / 100;
+        
+        return Math.max(betAmount, CONFIG.minBetAmount);
+    }
+
+    // Simulate clicks for a total bet amount
+    function simulateBetClicks(button, totalAmount) {
+        if (!button || totalAmount <= 0) return;
+        
+        const clicks = Math.floor(totalAmount / CONFIG.chipValue);
+        
+        for (let i = 0; i < clicks; i++) {
+            setTimeout(() => {
+                try { button.click(); } 
+                catch (error) { /* Ignore click errors */ }
+            }, i * CONFIG.clickDelay);
+        }
+    }
+
+    // Find betting buttons in parent element
+    function findBettingButtons(parentElement) {
+        if (!parentElement) return { bankerButton: null, playerButton: null };
+        
+        try {
+            const bankerButton = Array.from(parentElement.querySelectorAll("*"))
+                .find((el) => el.className && typeof el.className === 'string' && el.className.includes(CONFIG.bankerPrefix));
+
+            const playerButton = Array.from(parentElement.querySelectorAll("*"))
+                .find((el) => el.className && typeof el.className === 'string' && el.className.includes(CONFIG.playerPrefix));
+                
+            return { bankerButton, playerButton };
+        } catch (error) {
+            return { bankerButton: null, playerButton: null };
+        }
+    }
+
+    // Extract table identifier
+    function getTableIdentifier(parentElement) {
+        try {
+            const fullText = parentElement.textContent || '';
+            return fullText.split('$')[0].trim() || 'Unknown Table';
+        } catch (error) {
+            return 'Unknown Table';
+        }
+    }
+
+    // Generate a consistent color for a table based on its name
+    function getTableColor(tableName) {
+        // List of distinct colors for different tables
+        const tableColors = [
+            '#4CAF50', // Green
+            '#9C27B0', // Purple
+            '#E91E63', // Pink
+            '#3F51B5', // Indigo
+            '#009688', // Teal
+            '#FF9800', // Orange
+            '#795548', // Brown
+            '#607D8B'  // Blue Grey
+        ];
+        
+        // Generate a hash from the table name to get a consistent color
+        let hash = 0;
+        for (let i = 0; i < tableName.length; i++) {
+            hash = tableName.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        
+        // Use the hash to select a color from the array
+        const colorIndex = Math.abs(hash) % tableColors.length;
+        return tableColors[colorIndex];
+    }
+
+    // Place bet on a randomly chosen side
+    function placeBet(tableId, bankerButton, playerButton, tieCount) {
+        const betAmount = calculateBetAmount();
+        if (betAmount <= 0 || (!bankerButton && !playerButton)) return;
+        
+        // Use binary choice for perfect 50:50 distribution
+        const randomChoice = secureBinaryChoice() === 0 ? "banker" : "player";
+        const targetButton = randomChoice === "banker" ? bankerButton : playerButton;
+        
+        if (!targetButton) return;
+        
+        // Colorful logging based on table and bet type
+        const colors = {
+            banker: '#FF5722', // Orange for banker
+            player: '#2196F3'  // Blue for player
+        };
+        
+        // Generate a consistent color for the table name based on the table ID
+        const tableColor = getTableColor(tableId);
+        
+        // Log with colors and TIE count
+        console.log(
+            `%c${tableId}: %cBetting ${betAmount} on %c${randomChoice.toUpperCase()} %cafter TIE count ${tieCount}`,
+            `color: ${tableColor}; font-weight: bold`,
+            'color: #333',
+            `color: ${colors[randomChoice]}; font-weight: bold`,
+            'color: #666'
+        );
+        
+        // Add random delay before placing bet
+        setTimeout(() => {
+            simulateBetClicks(targetButton, betAmount);
+        }, getRandomDelay());
+    }
+
+    // Setup observer for TIE counter changes
+    function setupTieCounterObserver(counter) {
+        if (!counter) return;
+        
+        try {
+            const parentElement = counter.parentElement?.parentElement?.parentElement?.parentElement?.parentElement;
+            if (!parentElement) return;
+            
+            const tableId = getTableIdentifier(parentElement);
+            
+            // Find the TIE counter element
+            const tieCounter = counter.nextElementSibling?.nextElementSibling?.nextElementSibling;
+            if (!tieCounter) return;
+            
+            // Find betting buttons
+            const { bankerButton, playerButton } = findBettingButtons(parentElement);
+            
+            // Create and setup the observer
+            const observer = new MutationObserver((mutations) => {
+                for (const mutation of mutations) {
+                    if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                        const newValueMatch = tieCounter.textContent.match(/\d+/);
+                        if (!newValueMatch) continue;
+                        
+                        // Get the TIE count
+                        const tieCount = parseInt(newValueMatch[0]);
+                        
+                        // Place bet regardless of TIE count
+                        placeBet(tableId, bankerButton, playerButton, tieCount);
+                        break; // Process only once per batch of mutations
                     }
                 }
             });
-        });
-    });
-
-    // Start observing the document body for changes
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-    });
-
-    console.log("Monitoring for dynamic TIE results and clicking buttons...");
-}
-
-// Run the monitoring function
-monitorTieResultsAndClickButtons();
-
-
-
-
-// ==UserScript==
-// @name         Monitor TIE Results and Random Bet Calculation
-// @namespace    http://tampermonkey.net/
-// @version      2.1
-// @description  Monitor TIE results, dynamically calculate random bet amounts, and simulate betting with multiple clicks for a total bet amount using 0.2 chips.
-// @author       Your Name
-// @match        *://client.pragmaticplaylive.net/desktop/baccaratgame/*
-// @grant        none
-// ==/UserScript==
-
-    (function() {
-        'use strict';
-
-        const targetPrefix = "GameResultAndYouWin_winContainer__";
-        const bankerPrefix = "betPositionBGTemp mobile banker";
-        const playerPrefix = "betPositionBGTemp mobile player";
-
-        // Seed-based random generator
-        function seedrandom(seed) {
-            let x = Math.sin(seed) * 10000;
-            return x - Math.floor(x);
-        }
-
-        // Simulate clicks for a total bet amount using 0.2 chips
-        function simulateBetClicks(button, totalAmount) {
-            const chipValue = 0.2;
-            const clicks = Math.floor(totalAmount / chipValue);
-
-            for (let i = 0; i < clicks; i++) {
-                setTimeout(() => {
-                    button.click();
-                    console.log(`Clicked ${i + 1} out of ${clicks} for bet amount: ${totalAmount}`);
-                }, i * 100); // 200ms delay between clicks to avoid issues
-            }
-        }
-
-        // Retrieve current balance (mocked or actual implementation)
-        async function getBalance() {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    const balanceElement = document.querySelector('.balanceContainer .balance .amt');
-                    if (balanceElement) {
-                        const balanceText = balanceElement.textContent.replace('$', '').trim();
-                        const balance = parseFloat(balanceText);
-                        if (!isNaN(balance)) {
-                            resolve(balance);
-                        } else {
-                            console.warn("Invalid balance format!");
-                            resolve(0);
-                        }
-                    } else {
-                        console.warn("Unable to retrieve balance!");
-                        resolve(0);
-                    }
-                }, 1000);
-            });
-        }
-
-        // Observer for TIE results and betting logic
-        function monitorTieResultsAndClickButtons() {
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    mutation.addedNodes.forEach((node) => {
-                        if (node.nodeType === 1 && node instanceof HTMLElement) {
-                            const classList = node.className.split(/\s+/);
-                            const matchedClass = classList.find((cls) => cls.startsWith(targetPrefix));
-
-                            if (matchedClass) {
-                                const textContent = node.textContent.trim();
-                                if (/TIE/i.test(textContent)) {
-                                    const parentElement = node.parentElement;
-
-                                    if (parentElement) {
-                                        const bankerButton = Array.from(parentElement.querySelectorAll("*")).find((el) => {
-                                            return el.className && typeof el.className === "string" && el.className.includes(bankerPrefix);
-                                        });
-
-                                        const playerButton = Array.from(parentElement.querySelectorAll("*")).find((el) => {
-                                            return el.className && typeof el.className === "string" && el.className.includes(playerPrefix);
-                                        });
-
-                                        console.log("Matched 'TIE' result container:", {
-                                            timestamp: new Date().toISOString(),
-                                            bankerButtonFound: !!bankerButton,
-                                            playerButtonFound: !!playerButton,
-                                        });
-
-                                        if (bankerButton || playerButton) {
-                                            getBalance().then((balance) => {
-                                                if (balance <= 0) {
-                                                    console.warn("Insufficient balance to place a bet.");
-                                                    return;
-                                                }
-
-                                                const adjustedBalance = balance < 100 ? balance : balance % 100;
-                                                const randomValue = seedrandom(Date.now());
-                                                let betAmount = Math.round((randomValue * (adjustedBalance / 2)) * 100) / 100;
-
-                                                if (betAmount < 0.2) betAmount = 0.2;
-
-                                                console.log(`Calculated Bet Amount: ${betAmount}`);
-
-                                                const randomChoice = Math.random() < 0.5 ? "banker" : "player";
-                                                const targetButton = randomChoice === "banker" ? bankerButton : playerButton;
-
-                                                if (targetButton) {
-                                                    console.log(`Betting on: ${randomChoice.toUpperCase()}`);
-                                                    setTimeout(() => {
-                                                        simulateBetClicks(targetButton, betAmount);
-                                                    }, 5000); // 2-second delay before betting
-                                                } else {
-                                                    console.warn("No valid button to click.");
-                                                }
-                                            });
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-                });
-            });
-
-            observer.observe(document.body, {
+            
+            // Start observing
+            observer.observe(tieCounter, {
                 childList: true,
+                characterData: true,
                 subtree: true,
             });
-
-            console.log("Monitoring for dynamic TIE results and betting...");
+            
+            // Log with table color
+            const tableColor = getTableColor(tableId);
+            console.log(
+                `%c${tableId}: %cMonitoring for TIE counter changes (will bet on any change)...`,
+                `color: ${tableColor}; font-weight: bold`,
+                'color: #666; font-style: italic'
+            );
+        } catch (error) {
+            // Silently ignore errors
         }
+    }
 
-        // Start monitoring
-        monitorTieResultsAndClickButtons();
-    })();
+    // Start monitoring for TIE counters
+    function startMonitoring() {
+        try {
+            const counters = document.querySelectorAll(CONFIG.counterSelector);
+            
+            if (!counters || counters.length === 0) {
+                setTimeout(startMonitoring, 5000);
+                return;
+            }
+            
+            // Setup observers for each counter
+            counters.forEach(setupTieCounterObserver);
+            
+            // Colorful logging for system start
+            console.log(
+                '%cMonitoring system started successfully',
+                'color: #4CAF50; font-weight: bold; font-size: 14px'
+            );
+        } catch (error) {
+            setTimeout(startMonitoring, 5000);
+        }
+    }
+
+    // Initialize the system
+    function initialize() {
+        // Wait for DOM to be fully loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startMonitoring);
+        } else {
+            startMonitoring();
+        }
+    }
+
+    // Start the system
+    initialize();
+})();
