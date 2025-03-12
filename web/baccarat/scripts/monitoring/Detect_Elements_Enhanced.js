@@ -67,7 +67,6 @@
                 }
             });
             window.dispatchEvent(event);
-            console.log(`Event dispatched: ${name} at ${new Date().toISOString()}`);
             return true;
         } catch (error) {
             console.error("Error dispatching event:", error);
@@ -81,15 +80,6 @@
             if (isTargetElement(node)) {
                 const result = getResultType(node);
                 if (result) {
-                    const valueElement = node.querySelector(CONFIG.SELECTORS.VALUE);
-                    const value = valueElement ? valueElement.textContent.trim() : 'unknown';
-                    
-                    console.log(`New ${result} Element Detected:`, {
-                        value,
-                        timestamp: new Date().toISOString(),
-                        element: node
-                    });
-
                     dispatchCustomEvent(result);
                 }
             }
