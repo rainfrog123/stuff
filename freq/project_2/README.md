@@ -1,62 +1,103 @@
-# Binance ETH/USDT Trade Data Tools
+# Binance Trades Manager
 
-This project contains tools for downloading, processing, and analyzing Binance ETH/USDT trade data.
+A Python tool for downloading and aggregating Binance ETH/USDT perpetual futures trade data.
 
-## Sub-projects
+## Features
 
-### 1. Binance Trades Downloader
+- Download monthly ETH/USDT perpetual futures trade data from Binance
+- Convert CSV files to Parquet format for efficient storage and faster queries
+- Aggregate trade data across multiple months
+- Sample data for analysis
+- List available data files
 
-A package for downloading and processing Binance ETH/USDT trade data.
+## Installation
 
+1. Clone this repository:
 ```bash
-cd binance_trades_downloader
-pip install -e .
+git clone <repository-url>
+cd <repository-directory>
 ```
 
-See [binance_trades_downloader/README.md](binance_trades_downloader/README.md) for more details.
-
-### 2. Binance Trade Aggregator
-
-A package for aggregating and analyzing Binance ETH/USDT trade data from Parquet files.
-
+2. Install dependencies:
 ```bash
-cd binance_trade_aggregator
-pip install -e .
+pip install -r requirements.txt
 ```
 
-See [binance_trade_aggregator/README.md](binance_trade_aggregator/README.md) for more details.
+## Usage
 
-## Workflow
+The script provides three main commands:
 
-1. Use `binance_trades_downloader` to download and process trade data:
-   ```bash
-   download-trades
-   ```
+### 1. Download Trade Data
 
-2. Use `binance_trade_aggregator` to analyze the downloaded data:
-   ```bash
-   aggregate-trades 2023-01 --end_date 2023-02 --sample_rate 0.01
-   ```
+Download monthly trade data from Binance:
+
+```bash
+python binance_trades_manager.py download [--start_year YEAR] [--start_month MONTH] [--output_dir DIR]
+```
+
+Options:
+- `--start_year`: Starting year (default: 2019)
+- `--start_month`: Starting month (default: 11)
+- `--output_dir`: Custom output directory (optional)
+
+Example:
+```bash
+python binance_trades_manager.py download --start_year 2022 --start_month 1
+```
+
+### 2. Aggregate Trade Data
+
+Load and aggregate trade data for a specific date range:
+
+```bash
+python binance_trades_manager.py aggregate START_DATE [--end_date END_DATE] [--columns COL1 COL2 ...] [--sample_rate RATE] [--output FILE] [--data_dir DIR]
+```
+
+Options:
+- `START_DATE`: Start date in format YYYY-MM or YYYY-MM-DD
+- `--end_date`: End date in format YYYY-MM or YYYY-MM-DD (optional)
+- `--columns`: Specific columns to load (optional)
+- `--sample_rate`: Sample rate between 0 and 1 (optional)
+- `--output`: Output file path (.csv or .parquet) (optional)
+- `--data_dir`: Custom data directory (optional)
+
+Example:
+```bash
+python binance_trades_manager.py aggregate 2023-01 --end_date 2023-03 --sample_rate 0.1 --output trades_sample.parquet
+```
+
+### 3. List Available Data
+
+List available data files:
+
+```bash
+python binance_trades_manager.py list [--data_dir DIR]
+```
+
+Options:
+- `--data_dir`: Custom data directory (optional)
+
+Example:
+```bash
+python binance_trades_manager.py list
+```
 
 ## Data Structure
 
-The trade data is stored in Parquet files at `/allah/data/trades/eth_usdt_monthly_trades/` with the following format:
-- File naming: `ETHUSDT-trades-YYYY-MM.parquet`
-- Columns:
-  - `id`: Trade ID
-  - `price`: Trade price in USDT
-  - `qty`: Trade quantity in ETH
-  - `quote_qty`: Trade value in USDT (price * qty)
-  - `time`: Timestamp in milliseconds
-  - `is_buyer_maker`: Whether the buyer was the maker
+The downloaded data is stored in Parquet format with the following naming convention:
+```
+ETHUSDT-trades-YYYY-MM.parquet
+```
 
-## Requirements
+Each file contains the trade data for a specific month.
 
-- Python 3.11+
-- pandas
-- pyarrow
-- matplotlib
-- seaborn
-- tqdm
-- requests
-- humanize 
+## Notes
+
+- The script automatically checks for existing files and only downloads missing data
+- Files are downloaded as ZIP, extracted as CSV, and then converted to Parquet format
+- The original ZIP and CSV files are deleted after processing to save disk space
+- The script checks available disk space before downloading to prevent disk full errors
+
+## License
+
+[MIT License](LICENSE) 

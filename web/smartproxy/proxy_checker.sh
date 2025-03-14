@@ -7,7 +7,7 @@ password="15yFvupp9fbN_zzP0D"
 proxy_server="gate.smartproxy.com:7000"
 session_duration="60"
 os="ios"
-country="de"
+country="dk"
 
 # IPQS Configuration
 ipqs_api_key="740F92cS9nqqV41L0u7jfbSepB3dff08"
@@ -23,11 +23,12 @@ fi
 # Initialize arrays and associative array for proxy links
 declare -a ip_list
 declare -a city_list
+declare -a country_list
 declare -A proxy_links
 
 echo "Phase 1: Collecting IPs from SmartProxy..."
 # Loop through sessions
-for session in {80..95}
+for session in {50..70}
 do
     proxy="socks5h://${username}-session-${session}-sessionduration-${session_duration}-os-${os}-country-${country}:${password}@${proxy_server}"
     response=$(curl -s -x "$proxy" "$base_url")
@@ -35,17 +36,21 @@ do
     if [ $? -eq 0 ]; then
         ip=$(echo $response | jq -r '.proxy.ip')
         city=$(echo $response | jq -r '.city.name')
+        country_code=$(echo $response | jq -r '.country.code')
+        country_name=$(echo $response | jq -r '.country.name')
+        
         if [ "$ip" != "null" ]; then
             ip_list+=("$ip")
             city_list+=("$city")
+            country_list+=("$country_name")
             # Store the proxy link with its corresponding IP
             proxy_links["$ip"]="$proxy"
-            echo "Session $session: IP = $ip, City = $city"
+            printf "Session %2d: %-15s (%s, %s)\n" "$session" "$ip" "$city" "$country_name"
         else
-            echo "Session $session: Failed to retrieve IP or City."
+            printf "Session %2d: Failed to connect\n" "$session"
         fi
     else
-        echo "Session $session: Failed to connect using the proxy."
+        printf "Session %2d: Failed to connect\n" "$session"
     fi
 done
 
@@ -63,25 +68,30 @@ for ip in "${ip_list[@]}"; do
         success=$(echo "$response" | jq -r '.success')
         if [ "$success" = "true" ]; then
             fraud_score=$(echo "$response" | jq -r '.fraud_score')
-            echo "IP: $ip - Fraud Score: $fraud_score"
+            
+            # Find the index of this IP in ip_list to get corresponding city and country
+            for i in "${!ip_list[@]}"; do
+                if [[ "${ip_list[$i]}" = "${ip}" ]]; then
+                    city="${city_list[$i]}"
+                    country="${country_list[$i]}"
+                    break
+                fi
+            done
+            
+            printf "IP: %-15s Score: %3d - %s, %s\n" "$ip" "$fraud_score" "$city" "$country"
             
             # If fraud score is less than 50, print the corresponding proxy link
             if [ "$fraud_score" -lt 50 ]; then
-                # Find the index of this IP in ip_list to get corresponding city
-                for i in "${!ip_list[@]}"; do
-                    if [[ "${ip_list[$i]}" = "${ip}" ]]; then
-                        echo "Low fraud score detected! City: ${city_list[$i]}"
-                        echo "SOCKS Link: ${proxy_links[$ip]}"
-                        break
-                    fi
-                done
+                echo "✓ SOCKS:"
+                echo "${proxy_links[$ip]}"
+                echo ""
             fi
         else
             error_message=$(echo "$response" | jq -r '.message')
-            echo "IP: $ip - API request was not successful: $error_message"
+            echo "IP: $ip - API error: $error_message"
         fi
     else
-        echo "IP: $ip - Failed to connect to the IPQS API"
+        echo "IP: $ip - Failed to connect to IPQS API"
     fi
 
     # Add a small delay to respect API rate limits
