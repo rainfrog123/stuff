@@ -8,7 +8,7 @@ import zipfile
 import shutil
 import argparse
 import io
-from datetime import datetime
+from datetime import datetime, timedelta
 from tqdm import tqdm
 import humanize
 import pandas as pd
@@ -18,17 +18,17 @@ from matplotlib.dates import DateFormatter
 import matplotlib.dates as mdates
 from tabulate import tabulate
 
-# Base URL for Binance data
-BASE_URL = "https://data.binance.vision/data/futures/um/monthly/trades/ETHUSDT"
+# Base URL for Binance daily data
+BASE_URL = "https://data.binance.vision/data/futures/um/daily/trades/ETHUSDT"
 
 # Default directories
 DEFAULT_OUTPUT_DIR = "/allah/data/trades"
-# Use the existing directory with data files instead of creating a new timestamped one
-DEFAULT_DATA_DIR = os.path.join(DEFAULT_OUTPUT_DIR, "eth_usdt_monthly_trades")
+# Use the existing directory with data files
+DEFAULT_DATA_DIR = os.path.join(DEFAULT_OUTPUT_DIR, "eth_usdt_daily_trades")
 
-class BinanceTradesManager:
+class BinanceDailyTradesManager:
     """
-    Class for downloading and aggregating Binance monthly trade data
+    Class for downloading and aggregating Binance daily trade data
     """
     
     def __init__(self, trades_dir=None):
@@ -150,11 +150,11 @@ class BinanceTradesManager:
         """
         existing_files = set()
         for file in glob.glob(os.path.join(self.trades_dir, "*.parquet")):
-            # Extract year and month from filename
+            # Extract date from filename
             basename = os.path.basename(file)
             if basename.startswith("ETHUSDT-trades-"):
-                year_month = basename.split("ETHUSDT-trades-")[1].split(".")[0]  # e.g., "2019-11"
-                existing_files.add(year_month)
+                date_str = basename.split("ETHUSDT-trades-")[1].split(".")[0]  # e.g., "2025-03-01"
+                existing_files.add(date_str)
         return existing_files
 
     def extract_and_convert(self, zip_path, extract_path):
@@ -181,13 +181,13 @@ class BinanceTradesManager:
             print(f"Error extracting zip: {e}")
             return False
 
-    def download_monthly_trades(self, start_year=2019, start_month=11):
+    def download_daily_trades(self, year=2025, month=3):
         """
-        Download monthly ETH/USDT perpetual futures trade data from Binance
+        Download daily ETH/USDT perpetual futures trade data from Binance
         
         Args:
-            start_year (int): Starting year (default: 2019)
-            start_month (int): Starting month (default: 11)
+            year (int): Year to download (default: 2025)
+            month (int): Month to download (default: 3)
         """
         # Get list of already processed files
         existing_files = self.get_existing_files()
@@ -195,46 +195,46 @@ class BinanceTradesManager:
         if existing_files:
             print("Date range:", min(existing_files), "to", max(existing_files))
         
-        # Get current date
-        current_date = datetime.now()
-        current_year = current_date.year
-        current_month = current_date.month
+        # Generate list of days to download for the specified month
+        days_to_download = []
         
-        # Generate list of months to download
-        months_to_download = []
-        for year in range(start_year, current_year + 1):
-            for month in range(1, 13):
-                # Skip future months
-                if year == current_year and month > current_month:
-                    continue
-                # Skip months before start date
-                if year == start_year and month < start_month:
-                    continue
-                # Format month with leading zero
-                month_str = f"{month:02d}"
-                year_month = f"{year}-{month_str}"
-                
-                # Check if parquet file already exists
-                parquet_filename = f"ETHUSDT-trades-{year_month}.parquet"
-                parquet_path = os.path.join(self.trades_dir, parquet_filename)
-                if os.path.exists(parquet_path):
-                    print(f"Skipping {year_month} - parquet file already exists")
-                    continue
-                
-                months_to_download.append((year, month))
+        # Create a datetime for the first day of the specified month
+        first_day = datetime(year, month, 1)
         
-        if not months_to_download:
+        # Determine the number of days in the specified month
+        if month == 12:
+            next_month = datetime(year + 1, 1, 1)
+        else:
+            next_month = datetime(year, month + 1, 1)
+        
+        num_days = (next_month - first_day).days
+        
+        # Generate date range for the specified month
+        for day in range(1, num_days + 1):
+            date = first_day + timedelta(days=day-1)
+            date_str = date.strftime('%Y-%m-%d')
+            
+            # Check if parquet file already exists
+            parquet_filename = f"ETHUSDT-trades-{date_str}.parquet"
+            parquet_path = os.path.join(self.trades_dir, parquet_filename)
+            if os.path.exists(parquet_path):
+                print(f"Skipping {date_str} - parquet file already exists")
+                continue
+            
+            days_to_download.append(date)
+        
+        if not days_to_download:
             print("\nAll files are up to date!")
             return
         
-        total_files = len(months_to_download)
+        total_files = len(days_to_download)
         print(f"\nFiles to download: {total_files}")
         
         # Download and process files
         processed_count = 0
-        for idx, (year, month) in enumerate(months_to_download, 1):
-            month_str = f"{month:02d}"
-            zip_filename = f"ETHUSDT-trades-{year}-{month_str}.zip"
+        for idx, date in enumerate(days_to_download, 1):
+            date_str = date.strftime('%Y-%m-%d')
+            zip_filename = f"ETHUSDT-trades-{date_str}.zip"
             
             # Create URLs and paths
             zip_url = f"{BASE_URL}/{zip_filename}"
@@ -298,32 +298,31 @@ class BinanceTradesManager:
     
     def parse_date(self, date_str):
         """
-        Parse date string in format YYYY-MM
-        Returns a tuple of (year, month)
+        Parse date string in format YYYY-MM-DD
+        Returns a datetime object
         """
         try:
-            if len(date_str) == 7:  # YYYY-MM format
-                dt = datetime.strptime(date_str, "%Y-%m")
-                return dt.year, dt.month
+            if len(date_str) == 10:  # YYYY-MM-DD format
+                return datetime.strptime(date_str, "%Y-%m-%d")
             else:
-                raise ValueError(f"Invalid date format: {date_str}. Use YYYY-MM")
+                raise ValueError(f"Invalid date format: {date_str}. Use YYYY-MM-DD")
         except ValueError as e:
             print(f"Error parsing date: {e}")
             sys.exit(1)
     
-    def get_monthly_dates(self):
+    def get_daily_dates(self):
         """
-        Get list of available monthly dates
+        Get list of available daily dates
         
         Returns:
-        - List of dates in format YYYY-MM
+        - List of dates in format YYYY-MM-DD
         """
-        all_files = glob.glob(os.path.join(self.trades_dir, "ETHUSDT-trades-????-??.parquet"))
+        all_files = glob.glob(os.path.join(self.trades_dir, "ETHUSDT-trades-????-??-??.parquet"))
         dates = []
         
         for file_path in all_files:
             file_name = os.path.basename(file_path)
-            # Extract date from filename (format: ETHUSDT-trades-YYYY-MM.parquet)
+            # Extract date from filename (format: ETHUSDT-trades-YYYY-MM-DD.parquet)
             try:
                 date_part = file_name.split('-trades-')[1].split('.')[0]
                 dates.append(date_part)
@@ -341,39 +340,38 @@ class BinanceTradesManager:
         If end_date is None, only get files for start_date
         
         Parameters:
-        - start_date: string in format 'YYYY-MM'
-        - end_date: string in format 'YYYY-MM' (optional)
+        - start_date: string in format 'YYYY-MM-DD'
+        - end_date: string in format 'YYYY-MM-DD' (optional)
         
         Returns:
         - List of file paths
         """
-        start_year, start_month = self.parse_date(start_date)
+        start_dt = self.parse_date(start_date)
         
         if end_date:
-            end_year, end_month = self.parse_date(end_date)
+            end_dt = self.parse_date(end_date)
         else:
             # If no end date provided, use the same as start date
-            end_year, end_month = start_year, start_month
+            end_dt = start_dt
         
         # Validate dates
-        if (end_year < start_year) or (end_year == start_year and end_month < start_month):
+        if end_dt < start_dt:
             raise ValueError("End date must be after or equal to start date")
         
         # Get all Parquet files
-        all_files = glob.glob(os.path.join(self.trades_dir, "ETHUSDT-trades-????-??.parquet"))
+        all_files = glob.glob(os.path.join(self.trades_dir, "ETHUSDT-trades-????-??-??.parquet"))
         
         # Filter files based on date range
         filtered_files = []
         for file_path in all_files:
             file_name = os.path.basename(file_path)
-            # Extract date from filename (format: ETHUSDT-trades-YYYY-MM.parquet)
+            # Extract date from filename (format: ETHUSDT-trades-YYYY-MM-DD.parquet)
             try:
                 date_part = file_name.split('-trades-')[1].split('.')[0]
-                file_year, file_month = map(int, date_part.split('-'))
+                file_dt = datetime.strptime(date_part, "%Y-%m-%d")
                 
                 # Check if file is within date range
-                if (file_year > start_year or (file_year == start_year and file_month >= start_month)) and \
-                   (file_year < end_year or (file_year == end_year and file_month <= end_month)):
+                if start_dt <= file_dt <= end_dt:
                     filtered_files.append(file_path)
             except (IndexError, ValueError):
                 # Skip files that don't match the expected format
@@ -454,8 +452,8 @@ class BinanceTradesManager:
         Load trades for a specific date range
         
         Parameters:
-        - start_date: string in format 'YYYY-MM'
-        - end_date: string in format 'YYYY-MM' (optional)
+        - start_date: string in format 'YYYY-MM-DD'
+        - end_date: string in format 'YYYY-MM-DD' (optional)
         - columns: List of columns to load (optional)
         - sample_rate: Float between 0 and 1 for random sampling (optional)
         - verbose: Whether to print progress information
@@ -477,13 +475,13 @@ class BinanceTradesManager:
         
         return self.load_parquet_files(files, columns, sample_rate, verbose)
 
-    def visualize_trades(self, df, timeframe='5m', price_col='price', save_path=None):
+    def visualize_trades(self, df, timeframe='1min', price_col='price', save_path=None):
         """
         Visualize trade data with the specified timeframe
         
         Parameters:
         - df: DataFrame with trade data
-        - timeframe: Timeframe for resampling (default: '5m')
+        - timeframe: Timeframe for resampling (default: '1min')
         - price_col: Column name for price data (default: 'price')
         - save_path: Path to save the figure (optional)
         
@@ -544,33 +542,33 @@ def main():
     pd.set_option('display.width', None)
     pd.set_option('display.float_format', lambda x: '%.5f' % x)
     
-    parser = argparse.ArgumentParser(description='Binance Trades Manager - Download and Analyze ETH/USDT Monthly Trade Data')
+    parser = argparse.ArgumentParser(description='Binance Daily Trades Manager - Download and Analyze ETH/USDT Daily Trade Data')
     subparsers = parser.add_subparsers(dest='command', help='Command to run')
     
     # Download command
-    download_parser = subparsers.add_parser('download', help='Download monthly trade data')
-    download_parser.add_argument('--start_year', type=int, default=2019, help='Starting year (default: 2019)')
-    download_parser.add_argument('--start_month', type=int, default=11, help='Starting month (default: 11)')
+    download_parser = subparsers.add_parser('download', help='Download daily trade data')
+    download_parser.add_argument('--year', type=int, default=2025, help='Year to download (default: 2025)')
+    download_parser.add_argument('--month', type=int, default=3, help='Month to download (default: 3)')
     download_parser.add_argument('--output_dir', type=str, help='Output directory (optional)')
     
     # List command
-    list_parser = subparsers.add_parser('list', help='List available monthly dates')
+    list_parser = subparsers.add_parser('list', help='List available daily dates')
     list_parser.add_argument('--data_dir', type=str, help='Data directory (optional)')
     
     # Aggregate command
-    aggregate_parser = subparsers.add_parser('aggregate', help='Aggregate monthly trade data')
-    aggregate_parser.add_argument('start_date', type=str, help='Start date in format YYYY-MM')
-    aggregate_parser.add_argument('--end_date', type=str, help='End date in format YYYY-MM (optional)')
+    aggregate_parser = subparsers.add_parser('aggregate', help='Aggregate daily trade data')
+    aggregate_parser.add_argument('start_date', type=str, help='Start date in format YYYY-MM-DD')
+    aggregate_parser.add_argument('--end_date', type=str, help='End date in format YYYY-MM-DD (optional)')
     aggregate_parser.add_argument('--columns', type=str, nargs='+', help='Columns to load (optional)')
     aggregate_parser.add_argument('--sample_rate', type=float, help='Sample rate between 0 and 1 (optional)')
     aggregate_parser.add_argument('--output', type=str, help='Output file path (optional)')
     aggregate_parser.add_argument('--data_dir', type=str, help='Data directory (optional)')
     
     # Visualize command
-    visualize_parser = subparsers.add_parser('visualize', help='Visualize monthly trade data')
-    visualize_parser.add_argument('start_date', type=str, help='Start date in format YYYY-MM')
-    visualize_parser.add_argument('--end_date', type=str, help='End date in format YYYY-MM (optional)')
-    visualize_parser.add_argument('--timeframe', type=str, default='5m', help='Timeframe for resampling (default: 5m)')
+    visualize_parser = subparsers.add_parser('visualize', help='Visualize daily trade data')
+    visualize_parser.add_argument('start_date', type=str, help='Start date in format YYYY-MM-DD')
+    visualize_parser.add_argument('--end_date', type=str, help='End date in format YYYY-MM-DD (optional)')
+    visualize_parser.add_argument('--timeframe', type=str, default='1min', help='Timeframe for resampling (default: 1min)')
     visualize_parser.add_argument('--sample_rate', type=float, default=0.1, help='Sample rate between 0 and 1 (default: 0.1)')
     visualize_parser.add_argument('--save', type=str, help='Path to save the figure (optional)')
     visualize_parser.add_argument('--data_dir', type=str, help='Data directory (optional)')
@@ -579,27 +577,27 @@ def main():
     
     if args.command == 'download':
         # Initialize manager with output directory if provided
-        manager = BinanceTradesManager(args.output_dir if hasattr(args, 'output_dir') and args.output_dir else None)
+        manager = BinanceDailyTradesManager(args.output_dir if hasattr(args, 'output_dir') and args.output_dir else None)
         # Download trades
-        manager.download_monthly_trades(args.start_year, args.start_month)
+        manager.download_daily_trades(args.year, args.month)
     
     elif args.command == 'list':
         # Initialize manager with data directory if provided
-        manager = BinanceTradesManager(args.data_dir if hasattr(args, 'data_dir') and args.data_dir else None)
+        manager = BinanceDailyTradesManager(args.data_dir if hasattr(args, 'data_dir') and args.data_dir else None)
         
-        # Get monthly dates
-        monthly_dates = manager.get_monthly_dates()
-        if monthly_dates:
-            print(f"\nMonthly data files ({len(monthly_dates)}):")
-            for date in monthly_dates:
+        # Get daily dates
+        daily_dates = manager.get_daily_dates()
+        if daily_dates:
+            print(f"\nDaily data files ({len(daily_dates)}):")
+            for date in daily_dates:
                 print(f"  - {date}")
-            print(f"\nDate range: {monthly_dates[0]} to {monthly_dates[-1]}")
+            print(f"\nDate range: {daily_dates[0]} to {daily_dates[-1]}")
         else:
-            print("No monthly data files found")
+            print("No daily data files found")
     
     elif args.command == 'aggregate':
         # Initialize manager with data directory if provided
-        manager = BinanceTradesManager(args.data_dir if hasattr(args, 'data_dir') and args.data_dir else None)
+        manager = BinanceDailyTradesManager(args.data_dir if hasattr(args, 'data_dir') and args.data_dir else None)
         # Load data
         df = manager.load_trades(args.start_date, args.end_date, args.columns, args.sample_rate)
         
@@ -634,7 +632,7 @@ def main():
     
     elif args.command == 'visualize':
         # Initialize manager with data directory if provided
-        manager = BinanceTradesManager(args.data_dir if hasattr(args, 'data_dir') and args.data_dir else None)
+        manager = BinanceDailyTradesManager(args.data_dir if hasattr(args, 'data_dir') and args.data_dir else None)
         # Load data
         print(f"Loading data from {args.start_date} to {args.end_date or args.start_date} (sample rate: {args.sample_rate})")
         df = manager.load_trades(args.start_date, args.end_date, sample_rate=args.sample_rate)
