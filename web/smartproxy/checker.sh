@@ -7,7 +7,7 @@ password="15yFvupp9fbN_zzP0D"
 proxy_server="gate.smartproxy.com:7000"
 session_duration="60"
 os="ios"
-country="dk"
+country="fi"
 
 # IPQS Configuration
 ipqs_api_key="740F92cS9nqqV41L0u7jfbSepB3dff08"
@@ -28,7 +28,7 @@ declare -A proxy_links
 
 echo "Phase 1: Collecting IPs from SmartProxy..."
 # Loop through sessions
-for session in {50..70}
+for session in {10..30}
 do
     proxy="socks5h://${username}-session-${session}-sessionduration-${session_duration}-os-${os}-country-${country}:${password}@${proxy_server}"
     response=$(curl -s -x "$proxy" "$base_url")
