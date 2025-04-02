@@ -7,3 +7,4 @@ events.out.tfevents.*
 /freq/project_1/ml/lightning_logs
 *.pyc
 /allah/stuff/web/alt_calculator
+/freq/project_2/labeled_data/lstm_data/
