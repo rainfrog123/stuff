@@ -8,3 +8,6 @@ events.out.tfevents.*
 *.pyc
 /allah/stuff/web/alt_calculator
 /freq/project_2/labeled_data/lstm_data/
+*.npy
+*.parquet
+*.csv
