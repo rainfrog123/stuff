@@ -782,7 +782,7 @@ def main():
     args = parser.parse_args()
 
     # Get API token
-    api_token = args.token or "631d8d13ec21eff1ee1f7df8ecac180a0c932b5587ab178ea854b962dfca9af8"
+    api_token = args.token or "19756de4a2fcc796663de2eb65efececb9cfec81e853103d174ec202bdd5e2a6"
 
     # Get proxy if provided
     proxy = args.proxy
