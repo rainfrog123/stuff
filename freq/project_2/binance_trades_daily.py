@@ -544,9 +544,22 @@ def main():
     # Initialize the Binance Trades Manager
     manager = BinanceDailyTradesManager()
     
-    # Always download March 2025 data
-    print("Checking and downloading ETH/USDT trades data for March 2025...")
-    manager.download_daily_trades(year=2025, month=3)
+    # Download data from March 2025 to today
+    start_date = datetime(2025, 3, 1)
+    today = datetime.now()
+    
+    print(f"Downloading ETH/USDT trades data from March 2025 to today ({today.strftime('%Y-%m-%d')})...")
+    
+    current_date = start_date
+    while current_date <= today:
+        print(f"\nProcessing {current_date.strftime('%B %Y')}...")
+        manager.download_daily_trades(year=current_date.year, month=current_date.month)
+        
+        # Move to next month
+        if current_date.month == 12:
+            current_date = datetime(current_date.year + 1, 1, 1)
+        else:
+            current_date = datetime(current_date.year, current_date.month + 1, 1)
     
     # Display available dates after download
     daily_dates = manager.get_daily_dates()

@@ -52,7 +52,7 @@ class LSTMDataModule(pl.LightningDataModule):
         data_dir: str = "./lstm_data",
         batch_size: int = 64,
         num_workers: int = 4,
-        file_prefix: str = "lstm_profit_data",
+        file_prefix: str = "trade_outcome_data",
         val_split: float = 0.2,
         test_split: float = 0.1
     ):
@@ -63,11 +63,10 @@ class LSTMDataModule(pl.LightningDataModule):
         self.file_prefix = file_prefix
         self.val_split = val_split
         self.test_split = test_split
-        
         self.train_idx = None
         self.val_idx = None
         self.test_idx = None
-        
+        self.price_data = None
         self.X = None
         self.y = None
         self.features = None
@@ -193,7 +192,10 @@ class BasicLSTMModel(pl.LightningModule):
         num_layers: int = 2,
         dropout: float = 0.2,
         learning_rate: float = 0.001,
-        class_weights: Optional[torch.Tensor] = None
+        weight_decay: float = 0.0,
+        class_weights: Optional[torch.Tensor] = None,
+        fc_size: int = 64,
+        use_batch_norm: bool = True,
     ):
         super().__init__()
         self.save_hyperparameters()
@@ -208,13 +210,23 @@ class BasicLSTMModel(pl.LightningModule):
             bidirectional=False
         )
         
+        # Batch normalization (optional)
+        self.use_batch_norm = use_batch_norm
+        if use_batch_norm:
+            self.batch_norm = nn.BatchNorm1d(hidden_size)
+        
         # Fully connected layers for classification
-        self.fc = nn.Sequential(
-            nn.Linear(hidden_size, 64),
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(64, 2)  # Binary classification: 0=unprofitable, 1=profitable
-        )
+        fc_layers = []
+        
+        # First layer with optional batch norm
+        fc_layers.append(nn.Linear(hidden_size, fc_size))
+        fc_layers.append(nn.ReLU())
+        fc_layers.append(nn.Dropout(dropout))
+        
+        # Second layer (output)
+        fc_layers.append(nn.Linear(fc_size, 2))  # Binary classification: 0=unprofitable, 1=profitable
+        
+        self.fc = nn.Sequential(*fc_layers)
         
         # Loss function with class weighting if provided
         self.class_weights = class_weights
@@ -248,12 +260,16 @@ class BasicLSTMModel(pl.LightningModule):
             # Sample a random example to inspect
             sample_idx = np.random.randint(0, x.shape[0])
             sample = x[sample_idx]
-            print(f"Sample input - Direction: {sample[0, 0].item():.4f}, RSI: {sample[0, 1].item():.4f}, VWAP: {sample[0, 2].item():.4f}")
+            print(f"Sample input (first 3 features) - {sample[0, 0].item():.4f}, {sample[0, 1].item():.4f}, {sample[0, 2].item():.4f}")
         
         lstm_out, _ = self.lstm(x)
         
         # Use only the last output of the LSTM
         last_output = lstm_out[:, -1, :]
+        
+        # Apply batch normalization if enabled
+        if self.use_batch_norm:
+            last_output = self.batch_norm(last_output)
         
         # Pass through fully connected layers
         output = self.fc(last_output)
@@ -407,7 +423,8 @@ class BasicLSTMModel(pl.LightningModule):
     def configure_optimizers(self):
         optimizer = optim.Adam(
             self.parameters(),
-            lr=self.hparams.learning_rate
+            lr=self.hparams.learning_rate,
+            weight_decay=self.hparams.weight_decay
         )
         
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(
@@ -434,11 +451,15 @@ def train_model(
     batch_size: int = 32,
     max_epochs: int = 50,
     learning_rate: float = 0.001,
+    weight_decay: float = 0.0,
     hidden_size: int = 100,
     num_layers: int = 2,
     dropout: float = 0.3,
-    file_prefix: str = "lstm_profit_data",
-    class_weight_ratio: float = 1.0  # 1.0 means balanced
+    file_prefix: str = "trade_outcome_data",
+    class_weight_ratio: float = 1.0,  # 1.0 means balanced
+    log_dir: str = "logs",
+    fc_size: int = 64,
+    use_batch_norm: bool = True
 ):
     """Main training function"""
     # Set up data module
@@ -455,7 +476,8 @@ def train_model(
     # Set up class weights
     class_weights = None
     if class_weight_ratio != 1.0:
-        weights = torch.FloatTensor([class_weight_ratio, 1.0])
+        # Weight for unprofitable (0) and profitable (1) classes
+        weights = torch.FloatTensor([1.0, class_weight_ratio])
         weights = weights / weights.sum()
         class_weights = weights
         print(f"Using class weights: {weights}")
@@ -467,13 +489,16 @@ def train_model(
         num_layers=num_layers,
         dropout=dropout,
         learning_rate=learning_rate,
-        class_weights=class_weights
+        weight_decay=weight_decay,
+        class_weights=class_weights,
+        fc_size=fc_size,
+        use_batch_norm=use_batch_norm
     )
     
     # Set up callbacks
     checkpoint_callback = ModelCheckpoint(
         dirpath="checkpoints",
-        filename="lstm-{epoch:02d}-{val_f1:.4f}",
+        filename=f"lstm-{file_prefix}-{{epoch:02d}}-{{val_f1:.4f}}",
         save_top_k=3,
         monitor="val_f1",
         mode="max"
@@ -487,12 +512,12 @@ def train_model(
     )
     
     # Set up logger
-    logger = TensorBoardLogger("logs", name="lstm_trading")
+    logger = TensorBoardLogger(log_dir, name=f"lstm_{file_prefix}")
     
     # Train model
     trainer = pl.Trainer(
         max_epochs=max_epochs,
-        accelerator="cpu",
+        accelerator="cpu",  # Use "gpu" if available
         devices=1,
         callbacks=[checkpoint_callback, early_stopping],
         logger=logger,
@@ -502,20 +527,30 @@ def train_model(
     trainer.fit(model, dm)
     
     # Test model
-    trainer.test(model, datamodule=dm)
+    results = trainer.test(model, datamodule=dm)
+    
+    # Extract and format results
+    result_dict = {
+        "accuracy": results[0]["test_accuracy"],
+        "precision": results[0]["test_precision"],
+        "recall": results[0]["test_recall"],
+        "f1": results[0]["test_f1"]
+    }
     
     # Save final model
     os.makedirs("models", exist_ok=True)
-    trainer.save_checkpoint("models/lstm_final.ckpt")
+    model_path = f"models/lstm_{file_prefix}_final.ckpt"
+    trainer.save_checkpoint(model_path)
+    print(f"Final model saved to {model_path}")
     
-    return model
+    return model, result_dict
 
 
 def main():
     """Entry point"""
     # Configure data directory and file prefix
     data_dir = "./lstm_data"
-    file_prefix = "lstm_profit_data"  # Uses the profit/loss data
+    file_prefix = "trade_outcome_data"  # Uses the trade outcome data
     
     # Verify data files exist
     X_file = os.path.join(data_dir, f"{file_prefix}_X.npy")
@@ -531,100 +566,24 @@ def main():
     if not os.path.exists(X_file):
         print(f"Error: X data file {X_file} not found")
         # Try finding files with similar names
-        npy_files = [f for f in files if f.endswith('.npy') and 'X' in f]
+        npy_files = [f for f in files if f.endswith('.npy') and '_X' in f]
         if npy_files:
             print(f"Found other X files: {npy_files}")
             # Suggest using the first one
             file_prefix = npy_files[0].replace('_X.npy', '')
             print(f"Will try using prefix: {file_prefix}")
+            
+            # Update file paths with new prefix
+            X_file = os.path.join(data_dir, f"{file_prefix}_X.npy")
+            y_file = os.path.join(data_dir, f"{file_prefix}_y.npy")
+            
+            # Double-check that they exist
+            if not os.path.exists(X_file) or not os.path.exists(y_file):
+                print(f"Error: Data files not found even after updating prefix")
+                return
         else:
             print("No suitable X data files found")
             return
-    
-    # Filter features if needed
-    filter_features = True
-    
-    if filter_features:
-        # No need to re-import modules that are already imported at the top
-        # Load and filter data
-        feature_file = os.path.join(data_dir, f"{file_prefix}_features.txt")
-        X_file = os.path.join(data_dir, f"{file_prefix}_X.npy")
-        y_file = os.path.join(data_dir, f"{file_prefix}_y.npy")
-        metadata_file = os.path.join(data_dir, f"{file_prefix}_metadata.json")
-        
-        # Check if files exist again after possible prefix update
-        if not os.path.exists(X_file) or not os.path.exists(y_file):
-            print(f"Error: Data files not found even after updating prefix")
-            return
-        
-        X_data = np.load(X_file)
-        y_data = np.load(y_file)
-        
-        print(f"Loaded data shapes - X: {X_data.shape}, y: {y_data.shape}")
-        
-        if os.path.exists(feature_file):
-            with open(feature_file, 'r') as f:
-                all_features = [line.strip() for line in f.readlines()]
-            
-            print(f"Original features: {all_features}")
-            
-            # Filter to only keep direction, rsi_14, and vwap_60
-            keep_features = ['direction', 'rsi_14', 'vwap_60']
-            feature_indices = [i for i, feat in enumerate(all_features) if feat in keep_features]
-            
-            if not feature_indices:
-                print(f"Warning: None of the features {keep_features} found in {all_features}")
-                print("Using all features instead")
-                X_filtered = X_data
-                filtered_features = all_features
-            else:
-                X_filtered = X_data[:, :, feature_indices]
-                filtered_features = [all_features[i] for i in feature_indices]
-                print(f"Filtered to features: {filtered_features}")
-        else:
-            print(f"Feature file {feature_file} not found, using all features")
-            X_filtered = X_data
-            filtered_features = [f"feature_{i}" for i in range(X_data.shape[2])]
-        
-        print(f"Original X shape: {X_data.shape}, Filtered X shape: {X_filtered.shape}")
-        
-        # Save filtered data with a new prefix
-        filtered_prefix = f"{file_prefix}_filtered"
-        filtered_X_file = os.path.join(data_dir, f"{filtered_prefix}_X.npy")
-        filtered_y_file = os.path.join(data_dir, f"{filtered_prefix}_y.npy")
-        
-        np.save(filtered_X_file, X_filtered)
-        np.save(filtered_y_file, y_data)
-        print(f"Saved filtered data to {filtered_X_file} and {filtered_y_file}")
-        
-        with open(os.path.join(data_dir, f"{filtered_prefix}_features.txt"), 'w') as f:
-            for feat in filtered_features:
-                f.write(f"{feat}\n")
-        
-        # Create or update metadata
-        if os.path.exists(metadata_file):
-            with open(metadata_file, 'r') as f:
-                metadata = json.load(f)
-        else:
-            unique_classes, counts = np.unique(y_data, return_counts=True)
-            class_distribution = {str(int(cls)): int(count) for cls, count in zip(unique_classes, counts)}
-            metadata = {
-                'class_distribution': class_distribution
-            }
-        
-        metadata['X_shape'] = [int(X_filtered.shape[0]), int(X_filtered.shape[1]), int(X_filtered.shape[2])]
-        metadata['y_shape'] = [int(y_data.shape[0])]
-        metadata['sequence_length'] = int(X_filtered.shape[1])
-        metadata['num_features'] = int(X_filtered.shape[2])
-        metadata['feature_columns'] = filtered_features
-        
-        with open(os.path.join(data_dir, f"{filtered_prefix}_metadata.json"), 'w') as f:
-            json.dump(metadata, f, indent=2)
-        
-        print(f"Saved filtered metadata to {os.path.join(data_dir, f'{filtered_prefix}_metadata.json')}")
-        
-        # Update file_prefix to use the filtered data
-        file_prefix = filtered_prefix
     
     # Launch TensorBoard
     tb_thread = launch_tensorboard("logs", port=6006)
@@ -635,8 +594,9 @@ def main():
     num_layers = 2
     dropout = 0.2
     learning_rate = 0.001
+    weight_decay = 0.0001  # L2 regularization
     max_epochs = 50
-    class_weight_ratio = 0.9  # Slightly favor class 1 (profitable)
+    class_weight_ratio = 2.0  # Higher weight for profitable trades
     
     # Train model
     print("\n" + "="*80)
@@ -644,20 +604,31 @@ def main():
     print(f"File prefix: {file_prefix}")
     print(f"Data files: {os.path.join(data_dir, f'{file_prefix}_X.npy')} and {os.path.join(data_dir, f'{file_prefix}_y.npy')}")
     print(f"Model: {hidden_size} hidden units, {num_layers} layers, {dropout} dropout")
-    print(f"Training: batch_size={batch_size}, lr={learning_rate}, epochs={max_epochs}")
+    print(f"Training: batch_size={batch_size}, lr={learning_rate}, weight_decay={weight_decay}, epochs={max_epochs}")
+    print(f"Class weight ratio (profitable:unprofitable): {class_weight_ratio}")
     print("="*80 + "\n")
     
-    model = train_model(
+    model, results = train_model(
         data_dir=data_dir,
         batch_size=batch_size,
         max_epochs=max_epochs,
         learning_rate=learning_rate,
+        weight_decay=weight_decay,
         hidden_size=hidden_size,
         num_layers=num_layers,
         dropout=dropout,
         file_prefix=file_prefix,
         class_weight_ratio=class_weight_ratio
     )
+    
+    # Print final results
+    print("\n" + "="*80)
+    print("Training complete! Final results:")
+    print(f"Accuracy: {results['accuracy']:.4f}")
+    print(f"Precision: {results['precision']:.4f}")
+    print(f"Recall: {results['recall']:.4f}")
+    print(f"F1 Score: {results['f1']:.4f}")
+    print("="*80 + "\n")
     
     # Keep TensorBoard running
     try:

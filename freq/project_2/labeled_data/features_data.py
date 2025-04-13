@@ -113,6 +113,11 @@ def prepare_lstm_sequences(df: pd.DataFrame,
     for col in feature_columns:
         working_df[col] = working_df[col].fillna(0)
     
+    # Apply log transformation to volume before normalization
+    if 'volume' in feature_columns:
+        print("Applying log transformation to volume data")
+        working_df['volume'] = np.log1p(working_df['volume'])  # log(volume + 1)
+    
     # Normalize features if requested
     scaler_dict = {}
     if normalize:
@@ -142,7 +147,19 @@ def prepare_lstm_sequences(df: pd.DataFrame,
             
         # Get sequence of features including the labeled row itself
         start_idx = idx - (sequence_length - 1)
-        X_seq = working_df.iloc[start_idx:(idx+1)][feature_columns].values
+        
+        # Make a copy of the sequence
+        X_seq_df = working_df.iloc[start_idx:(idx+1)][feature_columns].copy()
+        
+        # If 'direction' is in the feature columns, make it static for the entire sequence
+        # by setting all values to the direction of the entry point (the target row)
+        if 'direction' in feature_columns:
+            entry_direction = working_df.loc[idx, 'direction']
+            X_seq_df['direction'] = entry_direction
+            
+        # Convert to numpy array
+
+        X_seq = X_seq_df.values
         
         # Get target value from the labeled row
         y_val = working_df.loc[idx, target_column]
@@ -154,52 +171,6 @@ def prepare_lstm_sequences(df: pd.DataFrame,
     print(f"Created {len(X_sequences)} valid sequences")
     
     return np.array(X_sequences), np.array(y_values), scaler_dict
-
-
-def balance_dataset(X: np.ndarray, y: np.ndarray, random_state: int = 42) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Balance the dataset for binary profit/loss classification
-    
-    Args:
-        X: Input sequences
-        y: Target values (-1=unprofitable, 1=profitable)
-        random_state: Random seed for reproducibility
-        
-    Returns:
-        Tuple of (balanced_X, balanced_y)
-    """
-    # Get counts for each class
-    unique_classes, counts = np.unique(y, return_counts=True)
-    print(f"Original class distribution: {dict(zip(unique_classes, counts))}")
-    
-    # Balance the dataset
-    balanced_indices = []
-    np.random.seed(random_state)
-    
-    # Find the class with the minimum number of samples
-    min_count = min(counts)
-    
-    for cls in unique_classes:
-        cls_indices = np.where(y == cls)[0]
-        if len(cls_indices) > min_count:
-            # Undersample the majority class
-            balanced_indices.extend(np.random.choice(cls_indices, size=min_count, replace=False))
-        else:
-            # Keep all samples from the minority class
-            balanced_indices.extend(cls_indices)
-    
-    # Shuffle the indices
-    np.random.shuffle(balanced_indices)
-    
-    # Get balanced dataset
-    balanced_X = X[balanced_indices]
-    balanced_y = y[balanced_indices]
-    
-    # Print new distribution
-    unique_classes, counts = np.unique(balanced_y, return_counts=True)
-    print(f"Balanced class distribution: {dict(zip(unique_classes, counts))}")
-    
-    return balanced_X, balanced_y
 
 
 def add_custom_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -215,7 +186,7 @@ def add_custom_features(df: pd.DataFrame) -> pd.DataFrame:
     # This is where you can customize your features
     result_df = df.copy()
     
-    # -- ADD ONLY RSI_14 AND VWAP_60 INDICATORS --
+    # -- ADD ONLY RSI_14 INDICATOR --
     
     # 1. Calculate RSI (Relative Strength Index)
     # First, calculate price changes
@@ -241,15 +212,8 @@ def add_custom_features(df: pd.DataFrame) -> pd.DataFrame:
     # Calculate the RSI
     result_df['rsi_14'] = 100 - (100 / (1 + rs))
     
-    # 2. Calculate VWAP (Volume-Weighted Average Price)
-    # Use only window size 60
-    window = 60  # 5min in 5s timeframe
-    
-    # Calculate typical price
-    typical_price = (result_df['high'] + result_df['low'] + result_df['close']) / 3
-    
-    # Calculate VWAP
-    result_df['vwap_60'] = (typical_price * result_df['volume']).rolling(window=window).sum() / result_df['volume'].rolling(window=window).sum()
+    # Note: We're using raw volume directly instead of VWAP
+    # Volume is already in the original dataframe, so no calculation needed
     
     # Print the list of added features
     original_columns = set(df.columns)
@@ -318,10 +282,10 @@ def main():
     # Load data - returns the full dataset including NaN values
     df = load_labeled_data(input_file)
     
-    # Add custom features - now only RSI_14 and VWAP_60
+    # Add custom features - now only RSI_14
     df_with_features = add_custom_features(df)
     
-    # Define feature columns - SIMPLIFIED TO ONLY RSI_14, VWAP_60, AND DIRECTION
+    # Define feature columns - SIMPLIFIED TO ONLY RSI_14, VOLUME, AND DIRECTION
     feature_columns = [
         # Direction as a static feature (long/short)
         'direction',
@@ -329,8 +293,8 @@ def main():
         # RSI indicator (dynamic feature)
         'rsi_14',
         
-        # VWAP indicator (dynamic feature)
-        'vwap_60'
+        # Volume (dynamic feature)
+        'volume'
     ]
     
     # Remove any features that don't exist in the dataframe
@@ -345,21 +309,22 @@ def main():
         normalize=True
     )
     
-    # Balance the dataset
-    X_balanced, y_balanced = balance_dataset(X, y)
+    # Print the class distribution
+    unique_classes, counts = np.unique(y, return_counts=True)
+    print(f"Class distribution: {dict(zip(unique_classes, counts))}")
     
     # Save processed data
     save_processed_data(
-        X_balanced, 
-        y_balanced, 
+        X, 
+        y, 
         scaler_dict,
         feature_columns,
         output_dir,
-        file_prefix="lstm_profit_data"  # Different prefix for profit/loss classification
+        file_prefix="trade_outcome_data"  # Better name for binary classification
     )
     
     # Save the full processed DataFrame as parquet (for reference)
-    processed_df_path = os.path.join(output_dir, "processed_profit_features.parquet")
+    processed_df_path = os.path.join(output_dir, "processed_trade_features.parquet")
     df_with_features.to_parquet(processed_df_path)
     print(f"Saved processed features dataframe to {processed_df_path}")
 

@@ -47,23 +47,29 @@
                 "https": ""
             }
         },
+        "use_public_trades": true,
         "key": "ofQzX3gGAKS777NyYIovAy1XyqLzGC2UJPMh9jqIYEfieFRy3DCkZJl15VYA2zXo",
         "secret": "QVJpTFgHIEv74LmCT5clX8o1zAFEEqJqKpg2ePklObM1Ybv9iKNe8jvM7MRjoz07",
         "ccxt_async_config": {},
         "pair_whitelist": [
             "ETH/USDT:USDT"
-]
-        ,
+        ],
         "pair_blacklist": [
             "BNB/.*"
         ]
+    },
+    "orderflow": {
+        "cache_size": 1000,
+        "max_candles": 1500,
+        "scale": 0.005,
+        "imbalance_volume": 0,
+        "imbalance_ratio": 3,
+        "stacked_imbalance_range": 3
     },
     "pairlists": [
         {
             "method": "StaticPairList"
         }
-   
-        
     ],
     "edge": {
         "enabled": false,
@@ -96,10 +102,10 @@
         "username": "freqtrader",
         "password": "jingxian"
     },
-    "bot_name": "freqtrade_2",
+    "bot_name": "freqtrade_1",
     "initial_state": "running",
     "force_entry_enable": false,
     "internals": {
-        "process_throttle_secs": 0.5
+        "process_throttle_secs": 1
     }
-}
+} 

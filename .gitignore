@@ -8,6 +8,19 @@ events.out.tfevents.*
 *.pyc
 /allah/stuff/web/alt_calculator
 /freq/project_2/labeled_data/lstm_data/
+/freq/project_2/labeled_data/logs/
 *.npy
 *.parquet
 *.csv
+
+# Database files
+*.db
+
+
+# Image files - visualization outputs
+*.png
+
+
+# JSON result/output files
+*_results_*.json
+*_params_*.json
