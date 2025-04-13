@@ -22,7 +22,7 @@ from freqtrade.strategy import (
 )
 
 # --- Custom Strategy Class ---
-class TrendReversalLabelingStrategy_Prod(IStrategy):
+class TrendRevATR(IStrategy):
     """
     Strategy for labeling trend reversals in trading data for machine learning tasks.
     """
