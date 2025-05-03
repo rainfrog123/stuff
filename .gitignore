@@ -24,3 +24,11 @@ events.out.tfevents.*
 # JSON result/output files
 *_results_*.json
 *_params_*.json
+
+# Additional binary files
+*.feather
+*.sqlite*
+
+# ML Training files
+*.yaml
+*/*/logs/*

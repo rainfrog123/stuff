@@ -2,6 +2,25 @@
 
 A Python tool for downloading and aggregating Binance ETH/USDT perpetual futures trade data.
 
+## Project Structure
+
+```
+project_2/
+├── data/                     # Data storage
+│   ├── raw/                  # Raw downloaded data
+│   ├── processed/            # Processed data files
+│   └── labeled_data/         # Labeled datasets for ML
+├── scripts/                  # Utility scripts
+│   ├── data_collection/      # Data downloading scripts
+│   ├── data_processing/      # Data processing & labeling scripts
+│   └── analysis/             # Analysis scripts
+├── notebooks/                # Jupyter notebooks
+├── models/                   # ML model definitions & training
+├── indicators/               # Technical indicators
+│   └── tv/                   # TradingView indicators
+└── user_data/                # FreqTrade user data
+```
+
 ## Features
 
 - Download monthly ETH/USDT perpetual futures trade data from Binance
@@ -32,7 +51,7 @@ The script provides three main commands:
 Download monthly trade data from Binance:
 
 ```bash
-python binance_trades_manager.py download [--start_year YEAR] [--start_month MONTH] [--output_dir DIR]
+python scripts/data_collection/binance_trades_monthly.py download [--start_year YEAR] [--start_month MONTH] [--output_dir DIR]
 ```
 
 Options:
@@ -42,7 +61,7 @@ Options:
 
 Example:
 ```bash
-python binance_trades_manager.py download --start_year 2022 --start_month 1
+python scripts/data_collection/binance_trades_monthly.py download --start_year 2022 --start_month 1
 ```
 
 ### 2. Aggregate Trade Data
@@ -50,7 +69,7 @@ python binance_trades_manager.py download --start_year 2022 --start_month 1
 Load and aggregate trade data for a specific date range:
 
 ```bash
-python binance_trades_manager.py aggregate START_DATE [--end_date END_DATE] [--columns COL1 COL2 ...] [--sample_rate RATE] [--output FILE] [--data_dir DIR]
+python scripts/data_collection/binance_trades_monthly.py aggregate START_DATE [--end_date END_DATE] [--columns COL1 COL2 ...] [--sample_rate RATE] [--output FILE] [--data_dir DIR]
 ```
 
 Options:
@@ -63,7 +82,7 @@ Options:
 
 Example:
 ```bash
-python binance_trades_manager.py aggregate 2023-01 --end_date 2023-03 --sample_rate 0.1 --output trades_sample.parquet
+python scripts/data_collection/binance_trades_monthly.py aggregate 2023-01 --end_date 2023-03 --sample_rate 0.1 --output data/processed/trades_sample.parquet
 ```
 
 ### 3. List Available Data
@@ -71,7 +90,7 @@ python binance_trades_manager.py aggregate 2023-01 --end_date 2023-03 --sample_r
 List available data files:
 
 ```bash
-python binance_trades_manager.py list [--data_dir DIR]
+python scripts/data_collection/binance_trades_monthly.py list [--data_dir DIR]
 ```
 
 Options:
@@ -79,7 +98,7 @@ Options:
 
 Example:
 ```bash
-python binance_trades_manager.py list
+python scripts/data_collection/binance_trades_monthly.py list
 ```
 
 ## Data Structure

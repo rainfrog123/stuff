@@ -1,0 +1,8 @@
+
+# Large binary files
+*.ckpt
+*.parquet
+*.feather
+*.npy
+*.sqlite*
+

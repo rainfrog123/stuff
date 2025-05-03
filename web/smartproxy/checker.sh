@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # SmartProxy Configuration
-base_url="https://ip.smartproxy.com/json"
+base_url="https://ip.decodo.com/json"
 username="user-sp5uwd5fih"
 password="15yFvupp9fbN_zzP0D"
-proxy_server="gate.smartproxy.com:7000"
+proxy_server="gate.decodo.com:7000"
 session_duration="60"
 os="ios"
-country="fi"
+country="be"
 
 # IPQS Configuration
 ipqs_api_key="740F92cS9nqqV41L0u7jfbSepB3dff08"
@@ -28,7 +28,7 @@ declare -A proxy_links
 
 echo "Phase 1: Collecting IPs from SmartProxy..."
 # Loop through sessions
-for session in {10..30}
+for session in {1..21}
 do
     proxy="socks5h://${username}-session-${session}-sessionduration-${session_duration}-os-${os}-country-${country}:${password}@${proxy_server}"
     response=$(curl -s -x "$proxy" "$base_url")
