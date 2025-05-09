@@ -14,15 +14,12 @@ def patched_validate_timeframes(self, timeframe: str | None) -> None:
     """
     Patched version of validate_timeframes that allows 5s when use_public_trades is enabled
     """
-    # If timeframe is 5s and we're using public trades, allow it
-    if timeframe == '5s' and self._config.get('exchange', {}).get('use_public_trades', False):
-        logger.info("Allowing 5s timeframe because use_public_trades is enabled")
+    if timeframe == '5s':
+        logger.info("Allowing 5s timeframe (patch modified)")
         return
-    
-    # Otherwise use the original validation
     return original_validate_timeframes(self, timeframe)
 
 # Apply the patch
 Exchange.validate_timeframes = patched_validate_timeframes
 
-logger.info("Applied patch to allow 5s timeframe with use_public_trades") 
+logger.info("Applied MODIFIED patch to allow 5s timeframe") 
