@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Database module for storing and retrieving market data.
+Split into separate databases for trades and candles.
 """
 
 import logging
@@ -11,7 +12,7 @@ import json
 import os
 from contextlib import contextmanager
 
-from config import DB_PATH, DATA_DIR
+from config import TRADES_DB_PATH, CANDLES_DB_PATH, DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -19,18 +20,32 @@ logger = logging.getLogger(__name__)
 os.makedirs(DATA_DIR, exist_ok=True)
 
 class MarketDatabase:
-    """SQLite database for storing market data (trades and candles)."""
+    """
+    Database manager for market data with separate databases for trades and candles.
+    """
     
-    def __init__(self, db_path=DB_PATH):
-        """Initialize the database with the specified path."""
-        self.db_path = db_path
+    def __init__(self, trades_db_path=TRADES_DB_PATH, candles_db_path=CANDLES_DB_PATH):
+        """Initialize the databases with the specified paths."""
+        self.trades_db_path = trades_db_path
+        self.candles_db_path = candles_db_path
         self._create_tables()
-        logger.info(f"Initialized database at {db_path}")
+        logger.info(f"Initialized trades database at {trades_db_path}")
+        logger.info(f"Initialized candles database at {candles_db_path}")
     
     @contextmanager
-    def get_connection(self):
-        """Context manager for database connections."""
-        conn = sqlite3.connect(self.db_path)
+    def get_trades_connection(self):
+        """Context manager for trades database connections."""
+        conn = sqlite3.connect(self.trades_db_path)
+        conn.row_factory = sqlite3.Row  # Return rows as dictionaries
+        try:
+            yield conn
+        finally:
+            conn.close()
+    
+    @contextmanager
+    def get_candles_connection(self):
+        """Context manager for candles database connections."""
+        conn = sqlite3.connect(self.candles_db_path)
         conn.row_factory = sqlite3.Row  # Return rows as dictionaries
         try:
             yield conn
@@ -39,10 +54,10 @@ class MarketDatabase:
     
     def _create_tables(self):
         """Create necessary tables if they don't exist."""
-        with self.get_connection() as conn:
+        # Create trades table
+        with self.get_trades_connection() as conn:
             cursor = conn.cursor()
             
-            # Create trades table
             cursor.execute('''
             CREATE TABLE IF NOT EXISTS trades (
                 id TEXT PRIMARY KEY,
@@ -60,7 +75,12 @@ class MarketDatabase:
             # Create index on timestamp and symbol for faster queries
             cursor.execute('CREATE INDEX IF NOT EXISTS idx_trades_ts_symbol ON trades (timestamp, symbol)')
             
-            # Create candles table for aggregated 5s data
+            conn.commit()
+        
+        # Create candles table
+        with self.get_candles_connection() as conn:
+            cursor = conn.cursor()
+            
             cursor.execute('''
             CREATE TABLE IF NOT EXISTS candles (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -82,11 +102,11 @@ class MarketDatabase:
             conn.commit()
     
     def insert_trades(self, trades, symbol):
-        """Insert multiple trades for a symbol into the database."""
+        """Insert multiple trades for a symbol into the trades database."""
         if not trades:
             return 0
         
-        with self.get_connection() as conn:
+        with self.get_trades_connection() as conn:
             cursor = conn.cursor()
             inserted = 0
             
@@ -120,8 +140,8 @@ class MarketDatabase:
             return inserted
     
     def insert_candle(self, candle, symbol):
-        """Insert a 5s candle for a symbol into the database."""
-        with self.get_connection() as conn:
+        """Insert a 5s candle for a symbol into the candles database."""
+        with self.get_candles_connection() as conn:
             cursor = conn.cursor()
             
             try:
@@ -150,11 +170,11 @@ class MarketDatabase:
                 return 0
     
     def insert_candles(self, candles, symbol):
-        """Insert multiple 5s candles for a symbol into the database."""
+        """Insert multiple 5s candles for a symbol into the candles database."""
         if not candles:
             return 0
         
-        with self.get_connection() as conn:
+        with self.get_candles_connection() as conn:
             cursor = conn.cursor()
             inserted = 0
             
@@ -188,7 +208,7 @@ class MarketDatabase:
     
     def get_latest_trade_timestamp(self, symbol):
         """Get the timestamp of the latest trade for a symbol."""
-        with self.get_connection() as conn:
+        with self.get_trades_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT MAX(timestamp) as max_ts FROM trades WHERE symbol = ?', (symbol,))
             result = cursor.fetchone()
@@ -196,7 +216,7 @@ class MarketDatabase:
     
     def get_latest_candle_timestamp(self, symbol):
         """Get the timestamp of the latest candle for a symbol."""
-        with self.get_connection() as conn:
+        with self.get_candles_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT MAX(timestamp) as max_ts FROM candles WHERE symbol = ?', (symbol,))
             result = cursor.fetchone()
@@ -221,7 +241,7 @@ class MarketDatabase:
             query += ' LIMIT ?'
             params.append(limit)
         
-        with self.get_connection() as conn:
+        with self.get_trades_connection() as conn:
             return pd.read_sql_query(query, conn, params=params)
     
     def get_candles(self, symbol, start_time=None, end_time=None, limit=None):
@@ -243,34 +263,113 @@ class MarketDatabase:
             query += ' LIMIT ?'
             params.append(limit)
         
-        with self.get_connection() as conn:
+        with self.get_candles_connection() as conn:
             return pd.read_sql_query(query, conn, params=params)
     
+    def prune_old_data(self, symbol, data_type, cutoff_timestamp):
+        """
+        Remove data older than the specified cutoff timestamp.
+        
+        Args:
+            symbol: The trading pair symbol.
+            data_type: Either 'trades' or 'candles'.
+            cutoff_timestamp: Remove data older than this timestamp (in milliseconds).
+            
+        Returns:
+            Number of records deleted.
+        """
+        try:
+            if data_type == "trades":
+                with self.get_trades_connection() as conn:
+                    cursor = conn.cursor()
+                    cursor.execute(
+                        'DELETE FROM trades WHERE symbol = ? AND timestamp < ?',
+                        (symbol, cutoff_timestamp)
+                    )
+                    deleted = cursor.rowcount
+                    conn.commit()
+                    return deleted
+            elif data_type == "candles":
+                with self.get_candles_connection() as conn:
+                    cursor = conn.cursor()
+                    cursor.execute(
+                        'DELETE FROM candles WHERE symbol = ? AND timestamp < ?',
+                        (symbol, cutoff_timestamp)
+                    )
+                    deleted = cursor.rowcount
+                    conn.commit()
+                    return deleted
+            else:
+                logger.error(f"Invalid data type for pruning: {data_type}")
+                return 0
+        except Exception as e:
+            logger.error(f"Error pruning old {data_type} for {symbol}: {e}")
+            return 0
+    
     def prune_old_trades(self, symbol, max_trades):
-        """Keep only the most recent max_trades for a symbol."""
-        with self.get_connection() as conn:
+        """Remove oldest trades beyond the maximum count to keep database size in check."""
+        with self.get_trades_connection() as conn:
             cursor = conn.cursor()
             
+            # Get count of trades for the symbol
             cursor.execute('SELECT COUNT(*) as count FROM trades WHERE symbol = ?', (symbol,))
-            count = cursor.fetchone()['count']
+            result = cursor.fetchone()
+            total_trades = result['count'] if result else 0
             
-            if count > max_trades:
-                # Get the timestamp to delete trades before
-                cursor.execute('''
-                SELECT timestamp FROM trades 
-                WHERE symbol = ? 
-                ORDER BY timestamp DESC 
-                LIMIT 1 OFFSET ?
-                ''', (symbol, max_trades - 1))
-                
+            if total_trades > max_trades:
+                # Find the timestamp cutoff for deletion
+                excess = total_trades - max_trades
+                cursor.execute(
+                    'SELECT timestamp FROM trades WHERE symbol = ? ORDER BY timestamp ASC LIMIT 1 OFFSET ?',
+                    (symbol, excess)
+                )
                 result = cursor.fetchone()
                 if result:
-                    cutoff_timestamp = result['timestamp']
-                    cursor.execute('DELETE FROM trades WHERE symbol = ? AND timestamp < ?', 
-                                 (symbol, cutoff_timestamp))
+                    cutoff_ts = result['timestamp']
+                    
+                    # Delete trades older than the cutoff
+                    cursor.execute(
+                        'DELETE FROM trades WHERE symbol = ? AND timestamp < ?',
+                        (symbol, cutoff_ts)
+                    )
                     deleted = cursor.rowcount
                     conn.commit()
                     logger.info(f"Pruned {deleted} old trades for {symbol}")
                     return deleted
             
-            return 0 
+            return 0
+
+    def optimize_database(self):
+        """Perform optimization tasks on both databases."""
+        # Optimize trades database
+        try:
+            with self.get_trades_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute('VACUUM')
+                cursor.execute('ANALYZE')
+                
+                # Get database statistics
+                cursor.execute("SELECT COUNT(*) as count FROM trades")
+                trades_count = cursor.fetchone()['count']
+            
+            # Optimize candles database
+            with self.get_candles_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute('VACUUM')
+                cursor.execute('ANALYZE')
+                
+                # Get database statistics
+                cursor.execute("SELECT COUNT(*) as count FROM candles")
+                candles_count = cursor.fetchone()['count']
+            
+            logger.info(f"Databases optimized. Current stats: {trades_count} trades, {candles_count} candles")
+            return True
+        except Exception as e:
+            logger.error(f"Error optimizing databases: {e}")
+            return False
+    
+    def close(self):
+        """Close any remaining database resources."""
+        # SQLite connections are automatically closed by the context manager
+        # This method is here for compatibility and future extensions
+        pass 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Data collector that uses CCXT's WebSocket functionality to fetch real-time trade data
+Data collector that uses Binance's aggTrade WebSocket functionality to fetch aggregated trade data
 and generate 5-second candles, storing everything in a local database.
 Only keeps 1 hour of 5-second data.
 """
@@ -11,10 +11,11 @@ import os
 import sys
 import time
 import signal
+import json
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-import ccxt.pro as ccxtpro
+import websockets
 import ccxt
 
 from database import MarketDatabase
@@ -39,23 +40,28 @@ logger = logging.getLogger(__name__)
 # Define retention period - 1 hour in milliseconds
 RETENTION_PERIOD_MS = 60 * 60 * 1000
 
-class DataCollector:
+# Binance WebSocket URL
+BINANCE_WS_URL = "wss://stream.binance.com:9443/ws"
+
+class AggTradeDataCollector:
     """
-    Collects real-time trade data and generates 5-second candles,
+    Collects real-time aggregated trade data and generates 5-second candles,
     storing everything in a local SQLite database. Only keeps 1 hour of data.
     """
     
     def __init__(self):
         """Initialize the data collector."""
         self.db = MarketDatabase()
-        self.exchange = None
         self.running = False
         self.tasks = {}
+        self.websockets = {}
         self.latest_trades = {symbol: [] for symbol in SYMBOLS}
         self.latest_trade_ids = {symbol: set() for symbol in SYMBOLS}
-        self.candle_buffers = {symbol: [] for symbol in SYMBOLS}
         self.last_update_time = {symbol: 0 for symbol in SYMBOLS}
         self.last_candle_time = {symbol: 0 for symbol in SYMBOLS}
+        
+        # Setting up exchange for symbol normalization
+        self.exchange = getattr(ccxt, EXCHANGE)(EXCHANGE_CREDENTIALS)
         
         # Handle shutdown signals
         signal.signal(signal.SIGINT, self.signal_handler)
@@ -65,26 +71,12 @@ class DataCollector:
         """Handle shutdown signals gracefully."""
         logger.info("Shutdown signal received. Cleaning up...")
         self.running = False
-        
-    async def init_exchange(self):
-        """Initialize the exchange connection with CCXT."""
-        try:
-            # Initialize WebSocket exchange
-            exchange_class = getattr(ccxtpro, EXCHANGE)
-            self.exchange = exchange_class(EXCHANGE_CREDENTIALS)
-            
-            # Load markets for symbol normalization
-            await self.exchange.load_markets()
-            
-            logger.info(f"Successfully connected to {EXCHANGE} exchange")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to initialize exchange: {e}")
-            return False
     
     def normalize_timestamp(self, timestamp_ms, interval_sec=5):
-        """Normalize timestamp to the nearest 5-second interval."""
-        timestamp_sec = timestamp_ms / 1000
+        """Normalize timestamp to the nearest 5-second interval with TradingView offset."""
+        # Add 2800ms offset to match TradingView's bucketing - based on our research
+        adjusted_ts = timestamp_ms + 2800
+        timestamp_sec = adjusted_ts / 1000
         normalized_sec = int(timestamp_sec // interval_sec) * interval_sec
         return int(normalized_sec * 1000)
     
@@ -98,7 +90,7 @@ class DataCollector:
             'timestamp': trade['timestamp'],
             'price': float(trade['price']),
             'amount': float(trade['amount']),
-            'side': trade['side']
+            'side': trade.get('side', 'buy' if trade.get('m', False) else 'sell')  # Adapt to aggTrade format
         } for trade in trades])
         
         # Normalize timestamps to 5-second intervals
@@ -125,40 +117,79 @@ class DataCollector:
         
         return sorted(candles, key=lambda x: x[0])
     
-    async def process_trade_updates(self, symbol):
-        """Process trade updates for a symbol using WebSockets."""
+    def format_symbol_for_binance(self, symbol):
+        """Convert CCXT symbol format to Binance WebSocket format."""
+        # Remove / and convert to lowercase: BTC/USDT -> btcusdt
+        return symbol.replace('/', '').lower()
+    
+    def parse_aggtrade(self, aggtrade_msg, symbol):
+        """Parse aggTrade message from Binance WebSocket."""
+        try:
+            data = json.loads(aggtrade_msg)
+            # Check if it's a ping message
+            if 'ping' in data:
+                return None
+            
+            # For combined streams, the data is nested
+            if 'data' in data:
+                data = data['data']
+            
+            # Format the trade data to match our existing structure
+            trade = {
+                'id': str(data['a']),               # Aggregate trade ID
+                'timestamp': data['T'],             # Trade time
+                'datetime': datetime.fromtimestamp(data['T'] / 1000).isoformat(),
+                'symbol': symbol,
+                'price': float(data['p']),
+                'amount': float(data['q']),
+                'm': data['m'],                     # Is the buyer the market maker?
+                'side': 'sell' if data['m'] else 'buy',  # Derive side from m
+                'info': aggtrade_msg                # Store original message
+            }
+            return trade
+        except Exception as e:
+            logger.error(f"Error parsing aggTrade message: {e}")
+            return None
+    
+    async def process_aggtrade_updates(self, symbol):
+        """Process aggTrade updates for a symbol using direct WebSocket connection."""
+        binance_symbol = self.format_symbol_for_binance(symbol)
+        ws_url = f"{BINANCE_WS_URL}/{binance_symbol}@aggTrade"
         attempt = 0
         
         while self.running and attempt < MAX_RECONNECT_ATTEMPTS:
             try:
-                logger.info(f"Starting WebSocket connection for {symbol}")
+                logger.info(f"Starting aggTrade WebSocket connection for {symbol} at {ws_url}")
                 
-                # Subscribe to trades
-                while self.running:
-                    trades = await self.exchange.watch_trades(symbol)
+                async with websockets.connect(ws_url) as websocket:
+                    self.websockets[symbol] = websocket
                     
-                    if trades:
-                        # Filter out duplicates
-                        new_trades = []
-                        for trade in trades:
-                            if trade['id'] not in self.latest_trade_ids[symbol]:
-                                self.latest_trade_ids[symbol].add(trade['id'])
-                                new_trades.append(trade)
-                                self.latest_trades[symbol].append(trade)
+                    # Send ping every 20 seconds to keep connection alive
+                    ping_task = asyncio.create_task(self.ping_websocket(websocket, symbol))
+                    
+                    while self.running:
+                        message = await websocket.recv()
                         
-                        # Keep trade buffer size limited
-                        if len(self.latest_trades[symbol]) > MAX_TRADES:
-                            excess = len(self.latest_trades[symbol]) - MAX_TRADES
-                            self.latest_trades[symbol] = self.latest_trades[symbol][excess:]
+                        # Parse the aggTrade message
+                        trade = self.parse_aggtrade(message, symbol)
+                        
+                        if trade and trade['id'] not in self.latest_trade_ids[symbol]:
+                            # Add to our collections
+                            self.latest_trade_ids[symbol].add(trade['id'])
+                            self.latest_trades[symbol].append(trade)
                             
-                            # Also update the ID set
-                            self.latest_trade_ids[symbol] = set(
-                                trade['id'] for trade in self.latest_trades[symbol]
-                            )
-                        
-                        # Process new trades
-                        if new_trades:
-                            self.db.insert_trades(new_trades, symbol)
+                            # Keep trade buffer size limited
+                            if len(self.latest_trades[symbol]) > MAX_TRADES:
+                                excess = len(self.latest_trades[symbol]) - MAX_TRADES
+                                self.latest_trades[symbol] = self.latest_trades[symbol][excess:]
+                                
+                                # Also update the ID set
+                                self.latest_trade_ids[symbol] = set(
+                                    trade['id'] for trade in self.latest_trades[symbol]
+                                )
+                            
+                            # Insert into database
+                            self.db.insert_trades([trade], symbol)
                             self.last_update_time[symbol] = time.time()
                             
                             # Check if it's time to generate a new candle
@@ -171,17 +202,46 @@ class DataCollector:
                                 if candles:
                                     self.db.insert_candles(candles, symbol)
                                 self.last_candle_time[symbol] = normalized_time
+                    
+                    # Cancel ping task when exiting the loop
+                    ping_task.cancel()
+                    try:
+                        await ping_task
+                    except asyncio.CancelledError:
+                        pass
                 
                 # Reset attempt counter on successful execution
                 attempt = 0
+            except (websockets.exceptions.ConnectionClosed, 
+                    websockets.exceptions.ConnectionClosedError,
+                    websockets.exceptions.ConnectionClosedOK) as e:
+                logger.warning(f"WebSocket connection closed for {symbol}: {e}")
+                attempt += 1
+                await asyncio.sleep(RECONNECT_DELAY)
             except Exception as e:
-                logger.error(f"Error in WebSocket connection for {symbol}: {e}")
+                logger.error(f"Error in aggTrade WebSocket connection for {symbol}: {e}")
                 attempt += 1
                 logger.info(f"Reconnect attempt {attempt}/{MAX_RECONNECT_ATTEMPTS} in {RECONNECT_DELAY} seconds")
                 await asyncio.sleep(RECONNECT_DELAY)
         
         if attempt >= MAX_RECONNECT_ATTEMPTS:
             logger.error(f"Failed to maintain WebSocket connection for {symbol} after {MAX_RECONNECT_ATTEMPTS} attempts")
+    
+    async def ping_websocket(self, websocket, symbol):
+        """Send periodic pings to keep the WebSocket connection alive."""
+        try:
+            while True:
+                await asyncio.sleep(20)  # Send ping every 20 seconds
+                if websocket.open:
+                    await websocket.send(json.dumps({"ping": int(time.time() * 1000)}))
+                    logger.debug(f"Sent ping to {symbol} WebSocket")
+                else:
+                    logger.warning(f"WebSocket for {symbol} is closed, stopping ping")
+                    break
+        except asyncio.CancelledError:
+            logger.debug(f"Ping task for {symbol} was cancelled")
+        except Exception as e:
+            logger.error(f"Error in ping task for {symbol}: {e}")
     
     def generate_latest_candle(self, symbol):
         """Generate a candle from the latest trades for a symbol."""
@@ -223,14 +283,9 @@ class DataCollector:
         """Run the data collection system."""
         self.running = True
         
-        # Initialize exchange
-        if not await self.init_exchange():
-            logger.error("Failed to initialize exchange. Exiting.")
-            return False
-        
         # Start WebSocket connections for each symbol
         for symbol in SYMBOLS:
-            self.tasks[symbol] = asyncio.create_task(self.process_trade_updates(symbol))
+            self.tasks[symbol] = asyncio.create_task(self.process_aggtrade_updates(symbol))
         
         # Start maintenance task
         maintenance_task = asyncio.create_task(self.maintenance_task())
@@ -249,23 +304,24 @@ class DataCollector:
         """Stop the data collection system."""
         self.running = False
         
+        # Close all WebSocket connections
+        for symbol, websocket in self.websockets.items():
+            if websocket and not websocket.closed:
+                await websocket.close()
+        
         # Cancel all tasks
         for symbol, task in self.tasks.items():
             if not task.done():
                 task.cancel()
         
-        # Close exchange
-        if self.exchange:
-            await self.exchange.close()
-        
         # Close database
         self.db.close()
         
-        logger.info("Data collection system stopped")
+        logger.info("AggTrade data collection system stopped")
 
 async def main():
-    """Main entry point for the data collection system."""
-    collector = DataCollector()
+    """Main entry point for the aggTrade data collection system."""
+    collector = AggTradeDataCollector()
     
     try:
         await collector.run()

@@ -8,11 +8,16 @@ from pathlib import Path
 
 # Base directory
 BASE_DIR = Path(__file__).parent.absolute()
-DATA_DIR = os.path.join(BASE_DIR, "data")
-LOG_DIR = os.path.join(BASE_DIR, "logs")
+DATA_DIR = "/allah/data"  # Changed to store data in /allah/data
+LOG_DIR = os.path.join(DATA_DIR, "logs")  # Changed to store logs in /allah/data/logs
+
+# Ensure data directory exists
+os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(LOG_DIR, exist_ok=True)  # Ensure logs directory exists
 
 # Database settings
-DB_PATH = os.path.join(DATA_DIR, "market_data.db")
+TRADES_DB_PATH = os.path.join(DATA_DIR, "trades.db")
+CANDLES_DB_PATH = os.path.join(DATA_DIR, "candles_5s.db")
 
 # Exchange settings
 EXCHANGE = "binance"

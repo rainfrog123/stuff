@@ -1,0 +1,29 @@
+2025-05-09 10:52:04,662 - database - INFO - Initialized database at /allah/stuff/freq/project_2/5s_data_system/data/market_data.db
+2025-05-09 10:52:04,663 - __main__ - INFO - Starting 5-second data collection system
+2025-05-09 10:52:08,147 - __main__ - INFO - Successfully connected to binance exchange
+2025-05-09 10:52:08,147 - __main__ - INFO - Fetching 60 minutes of historical trade data for ETH/USDT
+2025-05-09 10:52:08,396 - __main__ - INFO - Fetched 500 historical trades for ETH/USDT
+2025-05-09 10:52:08,431 - __main__ - INFO - Generated 2 historical 5s candles for ETH/USDT
+2025-05-09 10:52:08,432 - __main__ - INFO - Started WebSocket data collection for ETH/USDT
+2025-05-09 10:52:08,453 - database - INFO - Database optimized. Current stats: 500 trades, 2 candles
+2025-05-09 10:52:08,453 - __main__ - INFO - Database maintenance complete
+2025-05-09 10:52:08,453 - __main__ - INFO - Starting WebSocket connection for ETH/USDT
+2025-05-09 10:53:08,509 - database - INFO - Database optimized. Current stats: 8993 trades, 14 candles
+2025-05-09 10:53:08,509 - __main__ - INFO - Database maintenance complete
+2025-05-09 10:53:08,509 - __main__ - INFO - ETH/USDT: Last update 0.1 seconds ago
+2025-05-09 10:53:44,753 - __main__ - INFO - Shutdown signal received. Cleaning up...
+2025-05-09 10:54:08,511 - __main__ - INFO - Data collection stopped
+2025-05-09 10:54:08,512 - __main__ - INFO - Stopping data collection system...
+2025-05-09 10:54:08,764 - __main__ - INFO - Database connections closed
+2025-05-09 10:54:08,764 - __main__ - INFO - Data collection system stopped
+2025-05-09 11:38:26,763 - database - INFO - Initialized trades database at /allah/data/trades.db
+2025-05-09 11:38:26,764 - database - INFO - Initialized candles database at /allah/data/candles_5s.db
+2025-05-09 11:38:26,764 - __main__ - INFO - Starting 5-second data collection system
+2025-05-09 11:38:29,834 - __main__ - INFO - Successfully connected to binance exchange
+2025-05-09 11:38:29,834 - __main__ - INFO - Fetching 60 minutes of historical trade data for ETH/USDT
+2025-05-09 11:38:30,106 - __main__ - INFO - Fetched 500 historical trades for ETH/USDT
+2025-05-09 11:38:30,129 - __main__ - INFO - Generated 4 historical 5s candles for ETH/USDT
+2025-05-09 11:38:30,130 - __main__ - INFO - Started WebSocket data collection for ETH/USDT
+2025-05-09 11:38:30,143 - database - INFO - Databases optimized. Current stats: 500 trades, 4 candles
+2025-05-09 11:38:30,144 - __main__ - INFO - Database maintenance complete
+2025-05-09 11:38:30,144 - __main__ - INFO - Starting WebSocket connection for ETH/USDT

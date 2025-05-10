@@ -25,7 +25,7 @@ class DataAccess:
     
     def get_available_symbols(self):
         """Get a list of all available symbols in the database."""
-        with self.db.get_connection() as conn:
+        with self.db.get_candles_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT DISTINCT symbol FROM candles')
             symbols = [row['symbol'] for row in cursor.fetchall()]
@@ -192,7 +192,8 @@ class DataAccess:
         info = {}
         
         for symbol in self.get_available_symbols():
-            with self.db.get_connection() as conn:
+            # Get latest candle info from candles database
+            with self.db.get_candles_connection() as conn:
                 cursor = conn.cursor()
                 
                 # Get latest candle info
@@ -200,34 +201,54 @@ class DataAccess:
                 SELECT MAX(timestamp) as latest_candle_ts, COUNT(*) as candle_count 
                 FROM candles WHERE symbol = ?
                 ''', (symbol,))
-                candle_info = cursor.fetchone()
+                candle_result = cursor.fetchone()
+                
+                # Get earliest candle info
+                cursor.execute('''
+                SELECT MIN(timestamp) as first_data_ts
+                FROM candles WHERE symbol = ?
+                ''', (symbol,))
+                first_data_result = cursor.fetchone()
+            
+            # Get latest trade info from trades database
+            with self.db.get_trades_connection() as conn:
+                cursor = conn.cursor()
                 
                 # Get latest trade info
                 cursor.execute('''
                 SELECT MAX(timestamp) as latest_trade_ts, COUNT(*) as trade_count 
                 FROM trades WHERE symbol = ?
                 ''', (symbol,))
-                trade_info = cursor.fetchone()
-                
-                # Get first data timestamp
-                cursor.execute('''
-                SELECT MIN(timestamp) as first_data_ts 
-                FROM candles WHERE symbol = ?
-                ''', (symbol,))
-                first_data = cursor.fetchone()
-                
-                latest_candle_time = pd.to_datetime(candle_info['latest_candle_ts'], unit='ms') if candle_info['latest_candle_ts'] else None
-                latest_trade_time = pd.to_datetime(trade_info['latest_trade_ts'], unit='ms') if trade_info['latest_trade_ts'] else None
-                first_data_time = pd.to_datetime(first_data['first_data_ts'], unit='ms') if first_data['first_data_ts'] else None
-                
-                info[symbol] = {
-                    'latest_candle': str(latest_candle_time) if latest_candle_time else None,
-                    'latest_trade': str(latest_trade_time) if latest_trade_time else None,
-                    'first_data': str(first_data_time) if first_data_time else None,
-                    'candle_count': candle_info['candle_count'],
-                    'trade_count': trade_info['trade_count'],
-                    'time_span': str(latest_candle_time - first_data_time) if latest_candle_time and first_data_time else None
-                }
+                trade_result = cursor.fetchone()
+            
+            # Process results
+            latest_candle_ts = candle_result['latest_candle_ts'] if candle_result and candle_result['latest_candle_ts'] else 0
+            latest_trade_ts = trade_result['latest_trade_ts'] if trade_result and trade_result['latest_trade_ts'] else 0
+            first_data_ts = first_data_result['first_data_ts'] if first_data_result and first_data_result['first_data_ts'] else 0
+            
+            # Convert timestamps to datetime
+            latest_candle = datetime.fromtimestamp(latest_candle_ts / 1000) if latest_candle_ts else None
+            latest_trade = datetime.fromtimestamp(latest_trade_ts / 1000) if latest_trade_ts else None
+            first_data = datetime.fromtimestamp(first_data_ts / 1000) if first_data_ts else None
+            
+            # Calculate time span
+            time_span = None
+            if latest_trade and first_data:
+                time_delta = latest_trade - first_data
+                days = time_delta.days
+                hours, remainder = divmod(time_delta.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                time_span = f"{days} days {hours:02d}:{minutes:02d}:{seconds:02d}"
+            
+            # Store info for symbol
+            info[symbol] = {
+                'first_data': first_data,
+                'latest_candle': latest_candle,
+                'latest_trade': latest_trade,
+                'time_span': time_span,
+                'candle_count': candle_result['candle_count'] if candle_result else 0,
+                'trade_count': trade_result['trade_count'] if trade_result else 0
+            }
         
         return info
 
