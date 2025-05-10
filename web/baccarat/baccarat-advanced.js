@@ -62,7 +62,7 @@
         const CONFIG = {
             chipValue: 0.2,                  // Value of each chip click
             minBetAmount: 0.2,               // Minimum bet amount
-            maxBalancePercentage: 0.5,       // Maximum percentage of balance to bet (changed from 0.25 to 0.5)
+            maxBalancePercentage: 0.25,      // Maximum percentage of balance to bet
             clickDelay: 10,                  // Delay between clicks in milliseconds
             betDelayMin: 6000,               // Minimum delay before placing bet (ms)
             betDelayRandom: 3000,            // Additional random delay (ms)
@@ -70,7 +70,7 @@
             bankerPrefix: "betPositionBGTemp mobile banker",
             playerPrefix: "betPositionBGTemp mobile player",
             balanceKey: 'currentBalance',
-            maxTablesToMonitor: 3,           // Maximum number of tables to bet on
+            maxTablesToMonitor: 5,           // Maximum number of tables to bet on (increased from 3 to 5)
             tableAnalysisInterval: 30000,    // Analyze tables every 30 seconds
             recentRoundsToConsider: 20,      // Consider only the most recent 20 rounds for alternation rate
             minRoundsForAnalysis: 10,        // Minimum rounds needed for analysis
@@ -203,11 +203,12 @@
                 // Extract all use elements which represent the markers
                 const markers = Array.from(bigRoadSvg.querySelectorAll('use'));
                 
-                // Map markers to results (P for Player, B for Banker)
+                // Map markers to results (P for Player, B for Banker, T for Tie)
                 const results = markers.map(marker => {
                     const href = marker.getAttribute('xlink:href') || '';
                     if (href.includes('bigroad-P')) return 'P'; // Player
                     if (href.includes('bigroad-B')) return 'B'; // Banker
+                    if (href.includes('bigroad-T')) return 'T'; // Tie
                     return null;
                 }).filter(result => result !== null);
                 
@@ -248,6 +249,14 @@
             return calculateRecentAlternationRate(results);
         }
 
+        // Count tie results in a table
+        function countTies(results) {
+            if (results.length < CONFIG.minRoundsForAnalysis) return 999; // High value for tables with insufficient data
+            
+            // Count ties in the results
+            return results.filter(result => result === 'T').length;
+        }
+
         // Analyze all tables and update scores
         function analyzeAllTables() {
             try {
@@ -265,7 +274,7 @@
                     // Extract results from big road
                     const results = extractBigRoadData(parentElement);
                     
-                    // Calculate recent alternation rate
+                    // Calculate recent alternation rate (keeping for reference)
                     const recentResults = results.slice(-CONFIG.recentRoundsToConsider);
                     
                     let alternationPct = 0;
@@ -279,8 +288,8 @@
                         alternationPct = (alternations / (recentResults.length - 1)) * 100;
                     }
                     
-                    // Calculate score (now just the recent alternation rate)
-                    const score = calculateTableScore(results);
+                    // Count ties in the results
+                    const tieCount = countTies(results);
                     
                     // Store or update table data
                     TABLES.data[tableId] = {
@@ -288,15 +297,16 @@
                         counter: counter,
                         results: results,
                         recentResults: recentResults,
-                        score: score,
-                        alternationPct: alternationPct,
+                        score: calculateTableScore(results), // Keep for reference
+                        alternationPct: alternationPct,      // Keep for reference
+                        tieCount: tieCount,                  // New property for tie count
                         lastUpdated: Date.now()
                     };
                 });
                 
-                // Sort tables by score and select top tables
+                // Sort tables by tie count (ascending) and select top tables
                 const sortedTables = Object.entries(TABLES.data)
-                    .sort((a, b) => b[1].score - a[1].score)
+                    .sort((a, b) => a[1].tieCount - b[1].tieCount)
                     .slice(0, CONFIG.maxTablesToMonitor)
                     .map(entry => entry[0]);
                 
@@ -311,7 +321,7 @@
                 
                 // Log top tables
                 console.log(
-                    '%cTop Tables for Betting:',
+                    '%cTop Tables for Betting (Least Ties):',
                     'color: #FF9800; font-weight: bold; font-size: 12px'
                 );
                 
@@ -319,7 +329,7 @@
                     const table = TABLES.data[tableId];
                     const tableColor = getTableColor(tableId);
                     console.log(
-                        `%c${index + 1}. ${tableId}: %cRecent Alternation Rate: ${table.alternationPct.toFixed(1)}% | Recent Rounds: ${table.recentResults.length} of ${table.results.length}`,
+                        `%c${index + 1}. ${tableId}: %cTie Count: ${table.tieCount} | Recent Rounds: ${table.recentResults.length} of ${table.results.length}`,
                         `color: ${tableColor}; font-weight: bold`,
                         'color: #333'
                     );
@@ -426,7 +436,7 @@
             // Calculate the effective balance (modulo 100)
             const effectiveBalance = balance % 100;
             
-            // Calculate bet amount - 50% of effective balance (was 25%)
+            // Calculate bet amount - 25% of effective balance
             const rawBetAmount = effectiveBalance * CONFIG.maxBalancePercentage;
             
             // Round to nearest chip value
@@ -615,7 +625,7 @@
                 const content = document.getElementById('stats-content');
                 if (!content) return;
                 
-                let html = '<div style="margin-bottom: 5px;"><b>Top Tables:</b></div>';
+                let html = '<div style="margin-bottom: 5px;"><b>Top Tables (Least Ties):</b></div>';
                 
                 if (CONFIG.targetTables.length === 0) {
                     html += '<div style="color: #FFD700;">Analyzing tables...</div>';
@@ -632,7 +642,7 @@
                         html += `
                             <div style="margin-bottom: 5px; border-bottom: 1px solid #444; padding-bottom: 5px;">
                                 <div style="color: ${tableColor}; font-weight: bold;">${index + 1}. ${tableId}</div>
-                                <div>Recent Alternation: <span style="color:#FFD700">${table.alternationPct.toFixed(1)}%</span></div>
+                                <div>Tie Count: <span style="color:#FFD700">${table.tieCount}</span></div>
                                 <div>Recent (${table.recentResults.length} of ${table.results.length}): <span style="color: #FFD700;">${recentPattern}</span></div>
                                 <div>Full Road: ${table.results.join('')}</div>
                             </div>
