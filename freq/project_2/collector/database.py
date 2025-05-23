@@ -12,7 +12,7 @@ import json
 import os
 from contextlib import contextmanager
 
-from config import TRADES_DB_PATH, CANDLES_DB_PATH, DATA_DIR
+from settings import TRADES_DB_PATH, CANDLES_DB_PATH, DATA_DIR
 
 logger = logging.getLogger(__name__)
 

@@ -31,7 +31,7 @@ EXCHANGE_CREDENTIALS = {
 }
 
 # Data collection settings
-SYMBOLS = ["ETH/USDT"]  # List of trading pairs to collect
+SYMBOLS = ["ETH/USDT:USDT"]  # List of trading pairs to collect - futures format
 MAX_TRADES = 10000  # Maximum number of trades to keep per symbol
 CANDLE_TIMEFRAME = "5s"  # 5-second candles
 

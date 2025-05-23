@@ -5,6 +5,8 @@ freqtrade download-data --userdir /allah/stuff/freq/userdir --config /allah/stuf
 ## Strategy Commands
 freqtrade trade --strategy TrendRevATR --userdir /allah/stuff/freq/project_2/user_data --config /allah/stuff/freq/project_2/user_data/config_prod.json 
 
+freqtrade trade --strategy Test5sStrategy --userdir /allah/stuff/freq/project_2/user_data --config /allah/stuff/freq/project_2/user_data/config_test_5s.json 
+
 freqtrade list-strategies --strategy-path /allah/stuff/freq/userdir/strategies
 freqtrade backtesting-analysis -c /allah/stuff/freq/userdir/user_data/mutiple_coins_BT_v1.json  --datadir /allah/freqtrade/user_data/data/binance
 ## Trades to OHLCV Conversion
