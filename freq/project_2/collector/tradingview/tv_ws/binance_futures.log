@@ -1,0 +1,51 @@
+2025-05-23 22:35:06,431 - INFO - Starting Binance Futures ETHUSDT tracker
+2025-05-23 22:35:06,431 - INFO - Connecting to TradingView with session ID: tkfi0***
+2025-05-23 22:35:06,432 - INFO - Listening for Binance Futures ETHUSDT updates for 20 seconds...
+2025-05-23 22:35:06,513 - INFO - Websocket connected
+2025-05-23 22:35:06,513 - INFO - WebSocket connection opened!
+2025-05-23 22:35:06,513 - INFO - Chart session ID: cs_bbrrdsivjuyi
+2025-05-23 22:35:06,514 - INFO - Quote session ID: qs_pqtnzexqweta
+2025-05-23 22:35:06,514 - INFO - Successfully subscribed to BINANCE:ETHUSDT.P and BINANCEFUTURES:ETHUSDT
+2025-05-23 22:35:11,480 - INFO - 2025-05-23 22:35:11 | cs_bbrrdsivjuyi | ⚪ None | None%
+2025-05-23 22:35:16,753 - INFO - 2025-05-23 22:35:16 | cs_bbrrdsivjuyi | ⚪ None | None%
+2025-05-23 22:35:22,006 - INFO - 2025-05-23 22:35:22 | cs_bbrrdsivjuyi | ⚪ None | None%
+2025-05-23 22:35:26,447 - INFO - Connection closed
+2025-05-23 22:35:26,447 - INFO - WebSocket connection closed: None - None
+2025-05-23 22:35:26,447 - INFO - ETHUSDT tracking completed
+2025-05-23 22:36:33,713 - INFO - Starting Binance Futures ETHUSDT tracker
+2025-05-23 22:36:33,713 - INFO - Connecting to TradingView with session ID: tkfi0***
+2025-05-23 22:36:33,714 - INFO - Listening for Binance Futures ETHUSDT updates for 30 seconds...
+2025-05-23 22:36:33,827 - INFO - Websocket connected
+2025-05-23 22:36:33,827 - INFO - WebSocket connection opened!
+2025-05-23 22:36:33,827 - INFO - Chart session ID: cs_xjnwjvwqafrq
+2025-05-23 22:36:33,827 - INFO - Quote session ID: qs_vesgvrlwosev
+2025-05-23 22:36:33,827 - INFO - Adding symbol: BINANCE:ETHUSDT.P
+2025-05-23 22:36:33,828 - INFO - Adding symbol: BINANCEFUTURES:ETHUSDT
+2025-05-23 22:36:33,828 - INFO - Adding symbol: BINANCE:ETHUSDT_PERP
+2025-05-23 22:36:33,828 - INFO - Adding symbol: BINANCE:ETHUSDT
+2025-05-23 22:36:33,828 - INFO - Successfully subscribed to Binance ETHUSDT futures symbols
+2025-05-23 22:36:33,994 - INFO - WebSocket connection closed: 1000 - 
+2025-05-23 22:36:34,714 - ERROR - WebSocket thread died. Attempting to restart...
+2025-05-23 22:36:34,779 - INFO - Websocket connected
+2025-05-23 22:36:34,780 - INFO - WebSocket connection opened!
+2025-05-23 22:36:34,780 - INFO - Chart session ID: cs_lkmpuohciaza
+2025-05-23 22:36:34,780 - INFO - Quote session ID: qs_loetkfnqzljd
+2025-05-23 22:36:34,780 - INFO - Adding symbol: BINANCE:ETHUSDT.P
+2025-05-23 22:36:34,780 - INFO - Adding symbol: BINANCEFUTURES:ETHUSDT
+2025-05-23 22:36:34,780 - INFO - Adding symbol: BINANCE:ETHUSDT_PERP
+2025-05-23 22:36:34,781 - INFO - Adding symbol: BINANCE:ETHUSDT
+2025-05-23 22:36:34,781 - INFO - Successfully subscribed to Binance ETHUSDT futures symbols
+2025-05-23 22:36:34,946 - INFO - WebSocket connection closed: 1000 - 
+2025-05-23 22:36:35,715 - ERROR - WebSocket thread died. Attempting to restart...
+2025-05-23 22:36:35,782 - INFO - Websocket connected
+2025-05-23 22:36:35,782 - INFO - WebSocket connection opened!
+2025-05-23 22:36:35,783 - INFO - Chart session ID: cs_xzqczbrcpmsd
+2025-05-23 22:36:35,783 - INFO - Quote session ID: qs_sahqxttgttzx
+2025-05-23 22:36:35,783 - INFO - Adding symbol: BINANCE:ETHUSDT.P
+2025-05-23 22:36:35,783 - INFO - Adding symbol: BINANCEFUTURES:ETHUSDT
+2025-05-23 22:36:35,783 - INFO - Adding symbol: BINANCE:ETHUSDT_PERP
+2025-05-23 22:36:35,783 - INFO - Adding symbol: BINANCE:ETHUSDT
+2025-05-23 22:36:35,784 - INFO - Successfully subscribed to Binance ETHUSDT futures symbols
+2025-05-23 22:37:03,732 - INFO - WebSocket connection closed: None - None
+2025-05-23 22:37:03,732 - INFO - Connection closed
+2025-05-23 22:37:03,733 - INFO - ETHUSDT tracking completed

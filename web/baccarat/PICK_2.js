@@ -62,11 +62,11 @@
             bankerPrefix: "betPositionBGTemp mobile banker",
             playerPrefix: "betPositionBGTemp mobile player",
             balanceKey: 'currentBalance',
-            maxTablesToMonitor: 5,           // Maximum number of tables to bet on
+            maxTablesToMonitor: 1,           // Only one table at a time
             minRoundsForAnalysis: 4,         // Minimum rounds requirement (at least 4 rounds)
             successfulBetsCounter: 0,        // Counter for successful bets
-            refreshTablesAfter: 10,          // Refresh tables after X successful bets
-            targetTables: [],                // Array to store target tables for betting
+            refreshTablesAfter: 1,           // Always refresh after every successful bet
+            targetTables: [],                // Array to store target tables for betting (will only have one)
             stats: {                         // Statistics for bet wins/losses
                 totalBets: 0,
                 wins: 0,
@@ -90,18 +90,8 @@
 
         // Generate a binary 50:50 choice (0 or 1) using crypto for better randomness
         function binaryChoice() {
-            try {
-                // Use crypto.randomUUID() for cryptographically secure randomness
-                const uuid = crypto.randomUUID();
-                // Take the first character and check if it's even or odd (in hex)
-                const firstChar = uuid.charAt(0);
-                const hexValue = parseInt(firstChar, 16);
-                return (hexValue % 2 === 0) ? 0 : 1;
-            } catch (error) {
-                // Fallback to Math.random if crypto API is not available
-                console.error('[Baccarat] Crypto API not available, falling back to Math.random');
-                return Math.random() < 0.5 ? 0 : 1;
-            }
+            // Use Math.random for 50/50
+            return Math.random() < 0.5 ? 0 : 1;
         }
 
         // Get random delay
@@ -352,46 +342,31 @@
             return Math.round(weightedScore);
         }
 
-        // Analyze all tables and randomly select 5
+        // Analyze all tables and randomly select 1 after every successful bet
         function analyzeAllTables() {
             try {
                 // Find all table elements
                 const counters = document.querySelectorAll(CONFIG.counterSelector);
                 if (!counters || counters.length === 0) return;
-                
-                // Process each table
                 let tableCount = 0;
                 let allEligibleTables = [];
-                
                 counters.forEach(counter => {
                     const parentElement = counter.parentElement?.parentElement?.parentElement?.parentElement?.parentElement;
                     if (!parentElement) return;
-                    
                     const tableId = getTableIdentifier(parentElement);
                     tableCount++;
-                    
-                    // Get actual round number from the counter text - improved extraction
                     let actualRoundCount = 0;
-                    // The exact text format is "#30" as shown in the example
                     const roundText = counter.textContent.trim();
                     if (roundText.startsWith('#')) {
-                        // Extract number after # character
                         const roundNumber = parseInt(roundText.substring(1));
                         if (!isNaN(roundNumber)) {
                             actualRoundCount = roundNumber;
                         }
                     }
-                    
-                    // Extract results from big road (for pattern analysis)
                     const results = extractBigRoadData(parentElement);
-                    
-                    // Only consider tables with enough rounds of history
-                    // Use the actual round count from counter, not the results array length
                     if (actualRoundCount >= CONFIG.minRoundsForAnalysis) {
                         allEligibleTables.push(tableId);
                     }
-                    
-                    // Create table data object
                     const tableData = {
                         element: parentElement,
                         counter: counter,
@@ -399,55 +374,26 @@
                         roundCount: actualRoundCount,
                         lastUpdated: Date.now()
                     };
-                    
-                    // Store table data
                     TABLES.data[tableId] = tableData;
                 });
-                
-                // Check if we need to refresh our target tables
-                // Either on first run or after X successful bets
-                if (!CONFIG.targetTables.length || 
-                    CONFIG.successfulBetsCounter >= CONFIG.refreshTablesAfter) {
-                    
-                    // Shuffle eligible tables and pick 5 randomly
-                    shuffleArray(allEligibleTables);
-                    const randomTables = allEligibleTables.slice(0, CONFIG.maxTablesToMonitor);
-                    
-                    // Check if the selected tables have changed
-                    const tablesChanged = hasTablesChanged(CONFIG.targetTables, randomTables);
-                    
-                    // Update target tables
-                    CONFIG.targetTables = randomTables;
-                    
-                    // Reset successful bets counter
-                    CONFIG.successfulBetsCounter = 0;
-                    
-                    // Generate a single concise log of selected tables
-                    if (tablesChanged || !window.BACCARAT_AUTO_BETTING_INSTANCE.lastTargetTables.length) {
-                        // Store current selection for future comparison
-                        window.BACCARAT_AUTO_BETTING_INSTANCE.lastTargetTables = [...randomTables];
-                        
-                        let tableLog = `%c[Baccarat] Analysis: Found ${tableCount} tables (${allEligibleTables.length} with >${CONFIG.minRoundsForAnalysis-1} rounds)\n`;
-                        tableLog += `%cRandomly selected ${randomTables.length} tables:\n`;
-                        
-                        randomTables.forEach((tableId, index) => {
-                            const table = TABLES.data[tableId];
-                            // Use the exact round number from counter
-                            const rounds = table.roundCount;
-                            tableLog += `${index + 1}. ${tableId}: Rounds: ${rounds}\n\n`;
-                        });
-                        
-                        // Output the single consolidated log
-                        console.log(tableLog, 'color: #4CAF50; font-weight: bold', 'color: #FF9800; font-weight: bold');
-                    }
+                // Always shuffle and pick one table after every successful bet
+                shuffleArray(allEligibleTables);
+                const randomTables = allEligibleTables.slice(0, 1); // Only one table
+                const tablesChanged = hasTablesChanged(CONFIG.targetTables, randomTables);
+                CONFIG.targetTables = randomTables;
+                if (tablesChanged || !window.BACCARAT_AUTO_BETTING_INSTANCE.lastTargetTables.length) {
+                    window.BACCARAT_AUTO_BETTING_INSTANCE.lastTargetTables = [...randomTables];
+                    let tableLog = `%c[Baccarat] Analysis: Found ${tableCount} tables (${allEligibleTables.length} with >${CONFIG.minRoundsForAnalysis-1} rounds)\n`;
+                    tableLog += `%cRandomly selected 1 table:\n`;
+                    randomTables.forEach((tableId, index) => {
+                        const table = TABLES.data[tableId];
+                        const rounds = table.roundCount;
+                        tableLog += `${index + 1}. ${tableId}: Rounds: ${rounds}\n\n`;
+                    });
+                    console.log(tableLog, 'color: #4CAF50; font-weight: bold', 'color: #FF9800; font-weight: bold');
                 }
-                
-                // Update timestamp
                 TABLES.lastAnalysis = Date.now();
-                
-                // Clean up observers and setup new ones for selected tables
                 updateObservers();
-                
             } catch (error) {
                 console.error('[Baccarat] Error analyzing tables:', error);
             }
@@ -455,29 +401,9 @@
         
         // Fisher-Yates shuffle algorithm for randomizing tables using crypto for better randomness
         function shuffleArray(array) {
-            try {
-                for (let i = array.length - 1; i > 0; i--) {
-                    // For each position, generate a new UUID to get a random index
-                    const uuid = crypto.randomUUID();
-                    // Use multiple characters from the UUID for better distribution
-                    const bytes = [
-                        parseInt(uuid.charAt(0), 16),
-                        parseInt(uuid.charAt(1), 16),
-                        parseInt(uuid.charAt(2), 16),
-                        parseInt(uuid.charAt(3), 16)
-                    ];
-                    // Combine the bytes and mod by i+1 to get an index in range
-                    const j = ((bytes[0] << 12) | (bytes[1] << 8) | (bytes[2] << 4) | bytes[3]) % (i + 1);
-                    // Swap elements
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-            } catch (error) {
-                // Fallback to standard Math.random if crypto API is not available
-                console.error('[Baccarat] Crypto API not available for shuffle, falling back to Math.random');
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
             return array;
         }
@@ -653,6 +579,9 @@
                         
                         // Set up result checking
                         checkBetResult(tableId, parentElement, betChoice, betAmount, roundNumber);
+                        
+                        // Analyze all tables and pick a new table after a successful bet
+                        analyzeAllTables();
                     }
                 }, 2000); // Back to original 2 second delay
             }, getRandomDelay());

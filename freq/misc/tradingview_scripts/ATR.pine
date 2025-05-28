@@ -1,0 +1,31 @@
+//@version=6
+indicator("ATR Trailing Stop", overlay=true)
+
+// User Inputs
+length = input.int(14, title='ATR Length')
+atrMultiplier = input.float(1.5, title='ATR Multiplier')
+
+// Calculate ATR
+atr = ta.atr(length)
+
+// Initialize variables for trailing stop
+var float longStop = na
+var float shortStop = na
+var int direction = 0
+
+// Determine trailing stop level
+longStopPrev = nz(longStop[1], low - atr * atrMultiplier)
+shortStopPrev = nz(shortStop[1], high + atr * atrMultiplier)
+
+// Update Stops
+longStop := close > longStopPrev ? math.max(longStopPrev, low - atr * atrMultiplier) : low - atr * atrMultiplier
+shortStop := close < shortStopPrev ? math.min(shortStopPrev, high + atr * atrMultiplier) : high + atr * atrMultiplier
+
+// Determine Trend Direction
+if close > shortStopPrev
+    direction := 1
+if close < longStopPrev
+    direction := -1
+
+// Plot Trailing Stop
+plot(direction == 1 ? longStop : shortStop, color= direction == 1 ? color.green : color.red, linewidth=2, title='ATR Trailing Stop')

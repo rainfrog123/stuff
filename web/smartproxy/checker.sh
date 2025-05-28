@@ -13,7 +13,7 @@ country="de"           # two-letter country code
 # asn=""              # ASN number
 
 # Session prefix (p = persistent, r = random)
-session_prefix="p"
+session_prefix="aaxx"
 
 # Define number of sessions to test
 num_sessions=30
@@ -22,6 +22,9 @@ num_sessions=30
 ipqs_api_key="740F92cS9nqqV41L0u7jfbSepB3dff08"
 ipqs_base_url="https://ipqualityscore.com/api/json/ip/${ipqs_api_key}"
 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+
+# Maximum number of concurrent processes
+max_concurrent=10
 
 # Check for required tools
 if ! command -v jq &> /dev/null; then
@@ -59,6 +62,10 @@ build_auth_string() {
     echo "${auth_string}:${password}"
 }
 
+# Create a temporary directory for results
+TEMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TEMP_DIR"' EXIT
+
 # Initialize arrays and associative array for proxy links
 declare -a ip_list
 declare -a city_list
@@ -69,7 +76,7 @@ declare -A fraud_scores
 declare -a clean_ips
 
 echo "====================================== 🚀🚀🚀"
-echo "Decodo SmartProxy IP Checker"
+echo "Decodo SmartProxy IP Checker (Async Mode)"
 echo "======================================"
 echo "Proxy server: $proxy_server"
 if [[ -n "$city" ]]; then
@@ -78,107 +85,174 @@ else
     echo "Location: $country"
 fi
 echo "Session duration: $session_duration minutes"
+echo "Concurrent sessions: $max_concurrent"
 echo "======================================"
 
 echo "Phase 1: Collecting IPs from SmartProxy..."
-# Loop through session names
-for i in $(seq 1 $num_sessions)
-do
-    session="${session_prefix}$i"
-    auth_string=$(build_auth_string "$session")
-    
-    echo -n "Testing session: ${session}... "
-    response=$(curl -s -U "${auth_string}" -x "${proxy_server}" "${base_url}")
 
+# Function to test a single session
+test_session() {
+    local session="$1"
+    local result_file="$2"
+    
+    local auth_string=$(build_auth_string "$session")
+    local response=$(curl -s -U "${auth_string}" -x "${proxy_server}" "${base_url}")
+    
     if [ $? -eq 0 ]; then
-        ip=$(echo $response | jq -r '.proxy.ip')
-        city=$(echo $response | jq -r '.city.name')
-        country_code=$(echo $response | jq -r '.country.code')
-        country_name=$(echo $response | jq -r '.country.name')
+        local ip=$(echo $response | jq -r '.proxy.ip')
+        local city=$(echo $response | jq -r '.city.name')
+        local country_code=$(echo $response | jq -r '.country.code')
+        local country_name=$(echo $response | jq -r '.country.name')
         
         if [ "$ip" != "null" ]; then
-            # Check if this IP is already in our list
-            duplicate=false
-            for existing_ip in "${ip_list[@]}"; do
-                if [[ "$existing_ip" == "$ip" ]]; then
-                    duplicate=true
-                    echo "DUPLICATE IP: $ip"
-                    break
-                fi
-            done
-            
-            if ! $duplicate; then
-                ip_list+=("$ip")
-                city_list+=("$city")
-                country_list+=("$country_name")
-                # Store the proxy details and session name
-                clean_cmd=$(echo "${auth_string}" | sed 's/"//g')
-                proxy_links["$ip"]="$clean_cmd"
-                session_to_ip["$session"]="$ip"
-                echo "OK - $ip ($city)"
-            fi
+            # Write results to temp file
+            echo "${session}|${ip}|${city}|${country_code}|${country_name}|${auth_string}" > "$result_file"
+            echo "OK - $session: $ip ($city)"
         else
-            echo "Failed to get IP"
+            echo "Failed to get IP for session $session"
         fi
     else
-        echo "Failed to connect"
+        echo "Failed to connect for session $session"
+    fi
+}
+
+# Launch session tests in parallel with a limit on concurrent processes
+active_procs=0
+for i in $(seq 1 $num_sessions); do
+    session="${session_prefix}$i"
+    result_file="${TEMP_DIR}/session_${session}.result"
+    
+    # Launch in background
+    test_session "$session" "$result_file" &
+    
+    # Count active processes and limit if necessary
+    active_procs=$((active_procs + 1))
+    if (( active_procs >= max_concurrent )); then
+        wait -n  # Wait for any child process to finish
+        active_procs=$((active_procs - 1))
+    fi
+done
+
+# Wait for all remaining processes to complete
+wait
+
+echo "All session tests completed. Processing results..."
+
+# Process results from temporary files
+for result_file in "${TEMP_DIR}"/session_*.result; do
+    if [ -f "$result_file" ]; then
+        IFS='|' read -r session ip city country_code country_name auth_string < "$result_file"
+        
+        # Check if this IP is already in our list
+        duplicate=false
+        for existing_ip in "${ip_list[@]}"; do
+            if [[ "$existing_ip" == "$ip" ]]; then
+                duplicate=true
+                echo "DUPLICATE IP: $ip (Session: $session)"
+                break
+            fi
+        done
+        
+        if ! $duplicate; then
+            ip_list+=("$ip")
+            city_list+=("$city")
+            country_list+=("$country_name")
+            # Store the proxy details and session name
+            clean_cmd=$(echo "${auth_string}" | sed 's/"//g')
+            proxy_links["$ip"]="$clean_cmd"
+            session_to_ip["$session"]="$ip"
+        fi
     fi
 done
 
 echo -e "\nPhase 2: Checking IPs with IPQS..."
-# Check each IP with IPQS
-for ip in "${ip_list[@]}"; do
-    url="${ipqs_base_url}/${ip}"
-    response=$(curl -s "$url" \
+
+# Function to check a single IP
+check_ip() {
+    local ip="$1"
+    local result_file="$2"
+    
+    local url="${ipqs_base_url}/${ip}"
+    local response=$(curl -s "$url" \
         --get \
         --data-urlencode "strictness=3" \
         --data-urlencode "user_agent=$user_agent" \
         --data-urlencode "user_language=en-US")
 
     if [ $? -eq 0 ]; then
-        success=$(echo "$response" | jq -r '.success')
+        local success=$(echo "$response" | jq -r '.success')
         if [ "$success" = "true" ]; then
-            fraud_score=$(echo "$response" | jq -r '.fraud_score')
-            fraud_scores["$ip"]=$fraud_score
-            
-            # Find the index of this IP in ip_list to get corresponding city and country
-            for i in "${!ip_list[@]}"; do
-                if [[ "${ip_list[$i]}" = "${ip}" ]]; then
-                    city="${city_list[$i]}"
-                    country="${country_list[$i]}"
-                    break
-                fi
-            done
-            
-            # Find session names associated with this IP
-            sessions_with_ip=""
-            for session in "${!session_to_ip[@]}"; do
-                if [[ "${session_to_ip[$session]}" == "$ip" ]]; then
-                    if [[ -z "$sessions_with_ip" ]]; then
-                        sessions_with_ip="$session"
-                    else
-                        sessions_with_ip="$sessions_with_ip, $session"
-                    fi
-                fi
-            done
-            
-            # Print minimal info with score
-            printf "IP: %-45s Score: %3d - %s (Sessions: %s)\n" "$ip" "$fraud_score" "$city" "$sessions_with_ip"
-            
-            # If fraud score is less than 50, add to clean IPs array
-            if [ "$fraud_score" -lt 50 ]; then
-                clean_ips+=("$ip")
-            fi
+            local fraud_score=$(echo "$response" | jq -r '.fraud_score')
+            # Write result to temp file
+            echo "${ip}|${fraud_score}" > "$result_file"
         else
-            error_message=$(echo "$response" | jq -r '.message')
+            local error_message=$(echo "$response" | jq -r '.message')
             echo "IP: $ip - API error: $error_message"
         fi
     else
         echo "IP: $ip - Failed to connect to IPQS API"
     fi
+}
 
-    # Add a small delay to respect API rate limits
-    sleep 1
+# Launch IP checks in parallel with a limit on concurrent processes
+active_procs=0
+for ip in "${ip_list[@]}"; do
+    result_file="${TEMP_DIR}/ip_${ip}.result"
+    
+    # Launch in background
+    check_ip "$ip" "$result_file" &
+    
+    # Count active processes and limit if necessary
+    active_procs=$((active_procs + 1))
+    if (( active_procs >= max_concurrent )); then
+        wait -n  # Wait for any child process to finish
+        active_procs=$((active_procs - 1))
+    fi
+    
+    # Add a small delay to avoid hitting API rate limits
+    sleep 0.2
+done
+
+# Wait for all remaining processes to complete
+wait
+
+echo "All IP checks completed. Processing results..."
+
+# Process results from temporary files
+for result_file in "${TEMP_DIR}"/ip_*.result; do
+    if [ -f "$result_file" ]; then
+        IFS='|' read -r ip fraud_score < "$result_file"
+        fraud_scores["$ip"]=$fraud_score
+        
+        # Find the index of this IP in ip_list to get corresponding city and country
+        for i in "${!ip_list[@]}"; do
+            if [[ "${ip_list[$i]}" = "${ip}" ]]; then
+                city="${city_list[$i]}"
+                country="${country_list[$i]}"
+                break
+            fi
+        done
+        
+        # Find session names associated with this IP
+        sessions_with_ip=""
+        for session in "${!session_to_ip[@]}"; do
+            if [[ "${session_to_ip[$session]}" == "$ip" ]]; then
+                if [[ -z "$sessions_with_ip" ]]; then
+                    sessions_with_ip="$session"
+                else
+                    sessions_with_ip="$sessions_with_ip, $session"
+                fi
+            fi
+        done
+        
+        # Print minimal info with score
+        printf "IP: %-45s Score: %3d - %s (Sessions: %s)\n" "$ip" "$fraud_score" "$city" "$sessions_with_ip"
+        
+        # If fraud score is less than 50, add to clean IPs array
+        if [ "$fraud_score" -lt 50 ]; then
+            clean_ips+=("$ip")
+        fi
+    fi
 done
 
 echo -e "\n====================================== 🚀🚀🚀"
