@@ -545,7 +545,7 @@ def main():
     manager = BinanceDailyTradesManager()
     
     # Download data from March 2025 to today
-    start_date = datetime(2025, 3, 1)
+    start_date = datetime(2025, 5, 1)
     today = datetime.now()
     
     print(f"Downloading ETH/USDT trades data from March 2025 to today ({today.strftime('%Y-%m-%d')})...")

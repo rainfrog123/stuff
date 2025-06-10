@@ -1,64 +1,42 @@
-# 5-Second Candle Trading System for FreqTrade
+# FreqTrade 5-Second Trading Project
 
-This system enables FreqTrade to seamlessly work with 5-second candles from Binance by intercepting the normal data flow and providing custom 5s candle data in the background.
+This project contains trading strategies and configurations for FreqTrade with 5-second timeframe support.
 
-## How It Works
+## Current Implementation
 
-1. **Custom Data Provider**: Intercepts FreqTrade's normal data requests and provides 5s candle data
-2. **Background Data Fetching**: Automatically fetches trades from Binance and aggregates them into 5s candles
-3. **Seamless Integration**: Works with your existing trading strategies - just run with the custom wrapper
+The project uses a custom DataProvider located in `/allah/freqtrade/freqtrade/data/custom_dataprovider_5s.py` that reads 5-second candles from a local SQLite database at `/allah/data/tv_candles.db`.
 
-## Quick Start
+## Available Strategies
 
-To run FreqTrade with 5-second candle support:
+- `Test5sStrategy.py` - Simple volume-based strategy for testing 5s timeframe
+- `TrendRevATR.py` - ATR-based trend reversal strategy
+- `FastTEMA_ReversalTrader.py` - TEMA-based reversal trading strategy  
+- `FreqAIDynamicClassifierStrategy.py` - AI-based classification strategy
+- `TrendReversalLabelingStrategy.py` - Strategy for labeling trend reversals
 
-```bash
-/allah/freqtrade/.venv/bin/python3 /allah/stuff/freq/project_2/user_data/scripts/run_with_custom_candles.py --prefetch trade
-```
+## Configuration Files
 
-This will:
-1. Prefetch some initial 5s candle data
-2. Start FreqTrade with the custom data provider
-3. Run the TrendRevATR_Custom strategy (which is a wrapper around TrendRevATR)
+- `config_test_5s.json` - Test configuration for 5s trading
+- `config_prod.json` - Production configuration
+- `config_debug.json` - Debug configuration with verbose logging
+- `config_freqai.json` - FreqAI configuration
 
-## Advanced Usage
+## Scripts
 
-### Custom Command Line Arguments
+- `fetch_binance_trades.py` - Fetches trade data from Binance
+- `integrate_custom_candles.py` - Integration utilities for custom candle data
 
-Pass any standard FreqTrade arguments after your script arguments:
+## Usage
 
-```bash
-/allah/freqtrade/.venv/bin/python3 /allah/stuff/freq/project_2/user_data/scripts/run_with_custom_candles.py --prefetch --pairs ETH/USDT:USDT BTC/USDT:USDT trade --dry-run
-```
-
-### Use with Any Strategy
-
-To use your own strategy with 5s candles, create a wrapper similar to TrendRevATR_Custom:
-
-```python
-from user_data.strategies.YourStrategy import YourStrategy
-from user_data.custom_data_provider import CustomFiveSecondProvider
-
-class YourStrategy_Custom(YourStrategy):
-    # Same implementation as TrendRevATR_Custom
-    # ...
-```
-
-Then run with:
+Run FreqTrade with 5s strategies:
 
 ```bash
-/allah/freqtrade/.venv/bin/python3 /allah/stuff/freq/project_2/user_data/scripts/run_with_custom_candles.py trade --strategy YourStrategy_Custom
+/allah/freqtrade/.venv/bin/python3 /allah/freqtrade/freqtrade/main.py trade \
+  --strategy Test5sStrategy \
+  --config user_data/config_test_5s.json \
+  --userdir /allah/stuff/freq/project_2/user_data
 ```
 
-## Files Overview
+## Data Requirements
 
-- `custom_data_provider.py` - Custom data provider that delivers 5s candle data
-- `strategies/TrendRevATR_Custom.py` - Wrapper for TrendRevATR that loads the custom provider
-- `scripts/run_with_custom_candles.py` - Launcher script that runs FreqTrade with 5s support
-- `scripts/fetch_binance_trades.py` - Script to fetch and aggregate trades into 5s candles
-
-## Troubleshooting
-
-- **No Data Showing**: Make sure you've prefetched data with the `--prefetch` flag
-- **API Connection Issues**: Check your Binance API key in the config
-- **Errors at Startup**: Check log files for specific error messages 
+Ensure the SQLite database `/allah/data/tv_candles.db` contains 5-second candle data with the proper schema expected by the CustomDataProvider5s class 

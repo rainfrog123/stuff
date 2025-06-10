@@ -1,0 +1,59 @@
+
+
+Monitor started at: 2025-06-09 20:10:33 CST
+
+================================================================================
+APPOINTMENT AVAILABLE DETECTED - 2025-06-10 00:20:32 CST
+================================================================================
+
+Slot Available:
+  Schedule ID: 818915632828887040
+  Date: 2025-06-17 (7天后)
+  Department: 耳鼻喉眩晕专科
+  Location: 门诊大楼2楼A1区10诊室-10诊室
+  Hospital Area: 华西坝院区
+  Changed Field: availableCount
+  Previous Value: 0
+  Current Value: 10
+  Schedule Range: 0
+
+Slot Available:
+  Schedule ID: 818915632957841408
+  Date: 2025-06-17 (7天后)
+  Department: 耳鼻喉眩晕专科
+  Location: 门诊大楼2楼A1区10诊室-10诊室
+  Hospital Area: 华西坝院区
+  Changed Field: availableCount
+  Previous Value: 0
+  Current Value: 10
+  Schedule Range: 1
+
+================================================================================
+
+================================================================================
+APPOINTMENT AVAILABLE DETECTED - 2025-06-10 07:00:24 CST
+================================================================================
+
+Slot Available:
+  Schedule ID: 816053775136739328
+  Date: 2025-06-10 (今天)
+  Department: 耳鼻喉眩晕专科
+  Location: 门诊大楼2楼A1区10诊室-10诊室
+  Hospital Area: 华西坝院区
+  Changed Field: availableCount
+  Previous Value: 0
+  Current Value: 1
+  Schedule Range: 0
+
+Slot Available:
+  Schedule ID: 816053775051612160
+  Date: 2025-06-10 (今天)
+  Department: 耳鼻喉眩晕专科
+  Location: 门诊大楼2楼A1区10诊室-10诊室
+  Hospital Area: 华西坝院区
+  Changed Field: availableCount
+  Previous Value: 0
+  Current Value: 1
+  Schedule Range: 1
+
+================================================================================

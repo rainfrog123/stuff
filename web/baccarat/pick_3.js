@@ -63,16 +63,9 @@
             playerPrefix: "betPositionBGTemp mobile player",
             balanceKey: 'currentBalance',
             minRoundsForAnalysis: 4,         // Minimum rounds requirement (at least 4 rounds)
-            successfulBetsCounter: 0,        // Counter for successful bets
-            roundsPerCycle: 10,              // Each cycle lasts 10 rounds
-            currentCycleRounds: 0,           // Track current cycle progress
-            targetTables: [],                // Array to store target tables for betting (half of all eligible)
-            stats: {                         // Statistics for bet wins/losses
-                totalBets: 0,
-                wins: 0,
-                losses: 0,
-                profitLoss: 0,               // Overall profit/loss
-                pendingBets: {}              // Tracks bets waiting for results
+            targetTables: [],                // Array to store all eligible tables for betting
+            stats: {                         // Statistics for bet placement
+                totalBets: 0
             }
         };
 
@@ -397,27 +390,7 @@
             }
         }
 
-        // Select half of all eligible tables for the current cycle using crypto randomness
-        function selectTablesForCycle() {
-            const allEligibleTables = Object.keys(TABLES.data).filter(tableId => {
-                const tableData = TABLES.data[tableId];
-                return tableData.roundCount >= CONFIG.minRoundsForAnalysis;
-            });
-            
-            // Calculate half of all eligible tables
-            const halfOfTables = Math.floor(allEligibleTables.length / 2);
-            
-            // Use crypto-secure shuffle
-            shuffleArray(allEligibleTables);
-            CONFIG.targetTables = allEligibleTables.slice(0, halfOfTables);
-            
-            console.log(`%c[Baccarat] Selected ${CONFIG.targetTables.length} tables (half of ${allEligibleTables.length} eligible) for new ${CONFIG.roundsPerCycle}-round cycle:`,
-                'color: #FF9800; font-weight: bold');
-            console.log(`%c${CONFIG.targetTables.join(', ')}`,
-                'color: #FF9800; font-weight: bold');
-        }
-
-        // Analyze all tables and randomly select half, refresh after 10 rounds
+        // Analyze all tables and bet on all eligible tables
         function analyzeAllTables() {
             try {
                 // Find all table elements
@@ -443,14 +416,6 @@
                         allEligibleTables.push(tableId);
                     }
                     
-                    // Initialize tie counter for this table if not exists
-                    if (!(tableId in TABLES.tieCounters)) {
-                        const statsCounts = parentElement.querySelectorAll('.TileStatistics_main-bet-mobile-count__8CSkP');
-                        if (statsCounts && statsCounts.length >= 3) {
-                            TABLES.tieCounters[tableId] = parseInt(statsCounts[2].textContent, 10) || 0;
-                        }
-                    }
-                    
                     const tableData = {
                         element: parentElement,
                         counter: counter,
@@ -461,22 +426,15 @@
                     TABLES.data[tableId] = tableData;
                 });
                 
-                // Select new tables only if we have no targets OR if current cycle is complete
-                if (CONFIG.targetTables.length === 0 || CONFIG.currentCycleRounds >= CONFIG.roundsPerCycle) {
-                    // Reset cycle counter
-                    CONFIG.currentCycleRounds = 0;
-                    CONFIG.successfulBetsCounter = 0;
-                    
-                    // Select half of all eligible tables for new cycle
-                    selectTablesForCycle();
-                    
-                    let tableLog = `%c[Baccarat] Analysis: Found ${tableCount} tables (${allEligibleTables.length} with >${CONFIG.minRoundsForAnalysis-1} rounds)\n`;
-                    tableLog += `%cStarting new ${CONFIG.roundsPerCycle}-round cycle with ${CONFIG.targetTables.length} tables (half of ${allEligibleTables.length})\n`;
-                    console.log(tableLog, 'color: #4CAF50; font-weight: bold', 'color: #FF9800; font-weight: bold');
-                    
-                    TABLES.lastAnalysis = Date.now();
-                    updateObservers();
-                }
+                // Set target tables to ALL eligible tables
+                CONFIG.targetTables = allEligibleTables;
+                
+                let tableLog = `%c[Baccarat] Analysis: Found ${tableCount} tables (${allEligibleTables.length} with >${CONFIG.minRoundsForAnalysis-1} rounds)\n`;
+                tableLog += `%cBetting on ALL ${CONFIG.targetTables.length} eligible tables\n`;
+                console.log(tableLog, 'color: #4CAF50; font-weight: bold', 'color: #FF9800; font-weight: bold');
+                
+                TABLES.lastAnalysis = Date.now();
+                updateObservers();
             } catch (error) {
                 console.error('[Baccarat] Error analyzing tables:', error);
             }
@@ -556,17 +514,8 @@
                             }
                             
                             if (roundNumber > 0) {
-                                // Bet on every round finish (no T+1 condition)
+                                // Bet on every round finish - simple and direct
                                 placeBet(tableId, bankerButton, playerButton, roundNumber);
-                                
-                                // Increment cycle round counter
-                                CONFIG.currentCycleRounds++;
-                                
-                                // Check if cycle is complete
-                                if (CONFIG.currentCycleRounds >= CONFIG.roundsPerCycle) {
-                                    console.log(`%c[Baccarat] Cycle complete (${CONFIG.currentCycleRounds}/${CONFIG.roundsPerCycle} rounds), will select new tables`,
-                                        'color: #2196F3; font-weight: bold');
-                                }
                                 
                                 break; // Process only once per batch of mutations
                             }
@@ -629,13 +578,9 @@
             // Generate a consistent color for the table name based on the table ID
             const tableColor = getTableColor(tableId);
             
-            // Get the parent element to check for bet success
-            const parentElement = bankerButton?.parentElement?.parentElement?.parentElement?.parentElement || 
-                                  playerButton?.parentElement?.parentElement?.parentElement?.parentElement;
-            
             // Log bet placement
             console.log(
-                `%c[Baccarat] ${tableId}: %c${betChoice.toUpperCase()} $${betAmount} %c[Balance: $${Math.round(balance)}] [${CONFIG.currentCycleRounds + 1}/${CONFIG.roundsPerCycle}]`,
+                `%c[Baccarat] ${tableId}: %c${betChoice.toUpperCase()} $${betAmount} %c[Balance: $${Math.round(balance)}]`,
                 `color: ${tableColor}; font-weight: bold`,
                 `color: ${colors[betChoice]}; font-weight: bold`,
                 'color: #999; font-style: italic'
@@ -643,38 +588,11 @@
             
             // Add random delay before placing bet
             setTimeout(() => {
-                // Attempt to place the bet
+                // Place the bet - no result tracking
                 simulateBetClicks(targetButton, betAmount);
                 
-                // Check if bet was placed successfully after a short delay
-                setTimeout(() => {
-                    const success = parentElement && isBetPlaced(parentElement);
-                    if (success) {
-                        // Increment successful bets counter
-                        CONFIG.successfulBetsCounter++;
-                        
-                        // Store the bet info for tracking result later
-                        CONFIG.stats.totalBets++;
-                        
-                        // Track this bet for result checking
-                        CONFIG.stats.pendingBets[tableId] = {
-                            amount: betAmount,
-                            choice: betChoice,
-                            roundNumber: roundNumber,
-                            timestamp: Date.now()
-                        };
-                        
-                        console.log(
-                            `%c[Baccarat] ${tableId}: %cBET SUCCESS ✓ %c(${betChoice.toUpperCase()} $${betAmount}) [Cycle: ${CONFIG.currentCycleRounds}/${CONFIG.roundsPerCycle}]`,
-                            `color: ${tableColor}; font-weight: bold`,
-                            'color: #4CAF50; font-weight: bold',
-                            `color: ${colors[betChoice]}`
-                        );
-                        
-                        // Set up result checking
-                        checkBetResult(tableId, parentElement, betChoice, betAmount, roundNumber);
-                    }
-                }, 2000);
+                // Simply count the bet
+                CONFIG.stats.totalBets++;
             }, getRandomDelay());
         }
 
@@ -708,115 +626,6 @@
             }
         }
 
-        // Function to check bet result (win/loss)
-        function checkBetResult(tableId, parentElement, betChoice, betAmount, roundNumber) {
-            if (!parentElement) return;
-            
-            // Set an interval to check for result
-            const resultInterval = setInterval(() => {
-                try {
-                    // Check if this bet is still pending
-                    if (!CONFIG.stats.pendingBets[tableId]) {
-                        clearInterval(resultInterval);
-                        return;
-                    }
-                    
-                    // Look for win message container
-                    const winMessage = parentElement.querySelector('.GameResultAndYouWin_winContainer__qC7gx');
-                    
-                    // Look for the round counter to see if it changed (round is over)
-                    const counter = parentElement.querySelector(CONFIG.counterSelector);
-                    const newRoundText = counter?.textContent.trim() || '';
-                    let newRoundNumber = 0;
-                    
-                    if (newRoundText.startsWith('#')) {
-                        // Extract number after # character
-                        const parsedNumber = parseInt(newRoundText.substring(1));
-                        if (!isNaN(parsedNumber)) {
-                            newRoundNumber = parsedNumber;
-                        }
-                    }
-                    
-                    // If round changed and no win message, it's a loss
-                    if (newRoundNumber > roundNumber || newRoundNumber === 1) {
-                        if (!winMessage) {
-                            // It's a loss
-                            const tableColor = getTableColor(tableId);
-                            
-                            // Calculate loss amount (depending on banker/player)
-                            const lossAmount = betChoice === 'banker' ? betAmount : betAmount;
-                            CONFIG.stats.losses++;
-                            CONFIG.stats.profitLoss -= lossAmount;
-                            
-                            console.log(
-                                `%c[Baccarat] ${tableId}: %cBET LOST ✗ %c(${betChoice.toUpperCase()} -$${lossAmount}) %c[W:${CONFIG.stats.wins}/L:${CONFIG.stats.losses}, P/L:$${CONFIG.stats.profitLoss.toFixed(2)}]`,
-                                `color: ${tableColor}; font-weight: bold`,
-                                'color: #F44336; font-weight: bold',
-                                `color: #F44336`,
-                                'color: #999; font-style: italic'
-                            );
-                            
-                            // Remove from pending bets
-                            delete CONFIG.stats.pendingBets[tableId];
-                            clearInterval(resultInterval);
-                        }
-                    }
-                    
-                    // Check for win message
-                    if (winMessage) {
-                        // Find win amount
-                        const winAmountEl = winMessage.querySelector('.GameResultAndYouWin_youWinAmount__cu0np');
-                        const winAmountText = winAmountEl?.textContent || '';
-                        let winAmount = 0;
-                        
-                        // Extract win amount (format: "$0.40")
-                        if (winAmountText.startsWith('$')) {
-                            winAmount = parseFloat(winAmountText.substring(1));
-                        }
-                        
-                        // Calculate profit (win amount - bet amount)
-                        const profitAmount = winAmount - betAmount;
-                        CONFIG.stats.wins++;
-                        CONFIG.stats.profitLoss += profitAmount;
-                        
-                        const tableColor = getTableColor(tableId);
-                        console.log(
-                            `%c[Baccarat] ${tableId}: %cBET WON ✓ %c(${betChoice.toUpperCase()} +$${profitAmount.toFixed(2)}) %c[W:${CONFIG.stats.wins}/L:${CONFIG.stats.losses}, P/L:$${CONFIG.stats.profitLoss.toFixed(2)}]`,
-                            `color: ${tableColor}; font-weight: bold`,
-                            'color: #4CAF50; font-weight: bold',
-                            `color: #4CAF50`,
-                            'color: #999; font-style: italic'
-                        );
-                        
-                        // Remove from pending bets
-                        delete CONFIG.stats.pendingBets[tableId];
-                        clearInterval(resultInterval);
-                    }
-                } catch (error) {
-                    console.error('[Baccarat] Error checking bet result:', error);
-                    clearInterval(resultInterval);
-                }
-            }, 2000); // Check every 2 seconds
-            
-            // Store interval reference
-            window.BACCARAT_AUTO_BETTING_INSTANCE.intervals.add(resultInterval);
-            
-            // Safety timeout to clear interval after 2 minutes if no result
-            setTimeout(() => {
-                clearInterval(resultInterval);
-                
-                // If still pending, remove from pending bets
-                if (CONFIG.stats.pendingBets[tableId]) {
-                    console.log(
-                        `%c[Baccarat] ${tableId}: %cBet result timeout - could not determine outcome`,
-                        `color: ${getTableColor(tableId)}; font-weight: bold`,
-                        'color: #FF9800; font-weight: bold'
-                    );
-                    delete CONFIG.stats.pendingBets[tableId];
-                }
-            }, 120000); // 2 minute timeout
-        }
-
         // Start monitoring
         function startMonitoring() {
             try {
@@ -828,15 +637,15 @@
                 
                 // Log system start with table count
                 console.log(
-                    '%c[Baccarat] Crypto-Random Cycle Betting System started (v' + window.BACCARAT_AUTO_BETTING_INSTANCE.version + ')',
+                    '%c[Baccarat] Crypto-Secure All-Table Betting System started (v' + window.BACCARAT_AUTO_BETTING_INSTANCE.version + ')',
                     'color: #4CAF50; font-weight: bold; font-size: 14px'
                 );
                 console.log(
-                    `%c[Baccarat] Monitoring ${engagingTablesCount} tables per cycle (half of all eligible tables)`,
+                    `%c[Baccarat] Monitoring ALL ${engagingTablesCount} eligible tables`,
                     'color: #FF9800; font-weight: bold'
                 );
                 console.log(
-                    `%c[Baccarat] Strategy: Crypto-secure random betting, ${CONFIG.roundsPerCycle}-round cycles, bet on every round finish`,
+                    `%c[Baccarat] Strategy: Crypto-secure random betting, bet on every round finish, no result tracking`,
                     'color: #4CAF50; font-style: italic;'
                 );
             } catch (error) {
