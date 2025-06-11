@@ -36,10 +36,10 @@ class AppointmentMonitor:
             "appCode": "HXGYAPP",
             "hospitalAreaCode": "F0017",
             "tabAreaCode": "",
-            "cardId": "0",
+            "cardId": "806596678557749240",
             "encrypt": "B+dltOVPkHRvQmtQWA65vA==",
             "deptCategoryCode": "6100-EBHK",
-            "appointmentType": "2"
+            "appointmentType": "-1"
         }
         
         
@@ -123,7 +123,7 @@ class AppointmentMonitor:
         if self.is_peak_hour():
             return 5.0  # 5 seconds during peak hours
         else:
-            return random.uniform(20, 40)  # 20-40 seconds normally
+            return random.uniform(15, 25)  # 15-25 seconds normally
     
     def send_request(self) -> Dict[str, Any]:
         """Send the API request and return the response"""
@@ -145,6 +145,15 @@ class AppointmentMonitor:
             print(f"Request error: {e}")
             return None
     
+    def get_time_period_label(self, schedule_range: int) -> str:
+        """Get time period label based on scheduleRange"""
+        if schedule_range == 0:
+            return "上午"
+        elif schedule_range == 1:
+            return "下午"
+        else:
+            return f"时段{schedule_range}"
+    
     def extract_remaining_numbers(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Extract all remainingNum entries from the response"""
         remaining_entries = []
@@ -160,12 +169,15 @@ class AppointmentMonitor:
             schedule_id = item.get("sysScheduleId")
             if schedule_id and schedule_id not in seen_ids:
                 seen_ids.add(schedule_id)
+                schedule_range = item.get("scheduleRange", 0)
                 remaining_entries.append({
                     "id": schedule_id,
                     "scheduleDate": item.get("scheduleDate"),
-                    "scheduleRange": item.get("scheduleRange", 0),
+                    "scheduleRange": schedule_range,
+                    "timePeriod": self.get_time_period_label(schedule_range),
                     "remainingNum": item.get("remainingNum", 0),
                     "availableCount": item.get("availableCount", 0),
+                    "status": item.get("status", 0),
                     "deptName": item.get("deptName"),
                     "hospitalAreaName": item.get("hospitalAreaName"),
                     "dayDesc": item.get("dayDesc"),
@@ -187,45 +199,61 @@ class AppointmentMonitor:
         return remaining_entries
     
     def check_for_changes(self, current_entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Check for appointments that changed from 0 to positive remaining numbers"""
+        """Check for appointments that changed in availableCount (0→positive) or status (2→any)"""
         changes = []
         
         for entry in current_entries:
             entry_id = entry["id"]
-            current_remaining = entry["remainingNum"]
             current_available = entry["availableCount"]
+            current_status = entry["status"]
             
-            # Check both remainingNum and availableCount
-            for field_name, current_value in [("remainingNum", current_remaining), ("availableCount", current_available)]:
-                key = f"{entry_id}_{field_name}"
-                previous_value = self.previous_remaining.get(key, 0)
-                
-                # Detect change from 0 to positive number
-                if previous_value == 0 and current_value > 0:
-                    change_info = entry.copy()
-                    change_info["changed_field"] = field_name
-                    change_info["previous_value"] = previous_value
-                    change_info["current_value"] = current_value
-                    changes.append(change_info)
-                
-                # Update tracking
-                self.previous_remaining[key] = current_value
+            change_detected = False
+            changed_fields = []
+            
+            # Check availableCount changes from 0 to positive
+            available_key = f"{entry_id}_availableCount"
+            previous_available = self.previous_remaining.get(available_key, 0)
+            
+            if previous_available == 0 and current_available > 0:
+                change_detected = True
+                changed_fields.append(f"availableCount: {previous_available} → {current_available}")
+            
+            # Update availableCount tracking
+            self.previous_remaining[available_key] = current_available
+            
+            # Check status changes from 2 to 1
+            status_key = f"{entry_id}_status"
+            previous_status = self.previous_remaining.get(status_key, 2)  # Default to 2 for first time
+            
+            if previous_status == 2 and current_status != 2:
+                change_detected = True
+                changed_fields.append(f"status: {previous_status} → {current_status}")
+            
+            # Update status tracking
+            self.previous_remaining[status_key] = current_status
+            
+            # If any change detected, add to changes dict (only one entry per appointment slot)
+            if change_detected:
+                change_info = entry.copy()
+                change_info["changed_fields"] = changed_fields
+                change_info["changes_summary"] = ", ".join(changed_fields)
+                changes.append(change_info)
         
         return changes
     
     def log_regular_check(self, entries: List[Dict[str, Any]], timestamp: str, iteration: int):
         """Log regular checks to reg.log"""
         with open(self.reg_log_file, "a", encoding="utf-8") as f:
-            total_remaining = sum(e["remainingNum"] for e in entries)
             total_available = sum(e["availableCount"] for e in entries)
+            total_active_status = sum(1 for e in entries if e["status"] == 1)
             is_peak = self.is_peak_hour()
             peak_marker = " [PEAK]" if is_peak else ""
-            f.write(f"[{timestamp}] Check #{iteration}{peak_marker} - Total remaining: {total_remaining}, available: {total_available}\n")
+            f.write(f"[{timestamp}] Check #{iteration}{peak_marker} - Total available: {total_available}, active status: {total_active_status}\n")
             
             # Log details of each slot
             for entry in entries:
-                f.write(f"  {entry['scheduleDate']} ({entry['dayDesc']}) - "
-                       f"Remaining: {entry['remainingNum']}, Available: {entry['availableCount']} - "
+                f.write(f"  {entry['scheduleDate']} {entry['timePeriod']} ({entry['dayDesc']}) - "
+                       f"Available: {entry['availableCount']}, Status: {entry['status']} - "
                        f"{entry['deptName']} - {entry['hospitalAreaName']}\n")
 
     def log_success(self, changes: List[Dict[str, Any]], full_response: Dict[str, Any]):
@@ -240,13 +268,11 @@ class AppointmentMonitor:
             for change in changes:
                 f.write(f"\nSlot Available:\n")
                 f.write(f"  Schedule ID: {change['id']}\n")
-                f.write(f"  Date: {change['scheduleDate']} ({change['dayDesc']})\n")
+                f.write(f"  Date: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})\n")
                 f.write(f"  Department: {change['deptName']}\n")
                 f.write(f"  Location: {change['admLocation']}\n")
                 f.write(f"  Hospital Area: {change['hospitalAreaName']}\n")
-                f.write(f"  Changed Field: {change['changed_field']}\n")
-                f.write(f"  Previous Value: {change['previous_value']}\n")
-                f.write(f"  Current Value: {change['current_value']}\n")
+                f.write(f"  Changes: {change['changes_summary']}\n")
                 f.write(f"  Schedule Range: {change['scheduleRange']}\n")
             
             f.write(f"\n{'='*80}\n")
@@ -259,11 +285,11 @@ class AppointmentMonitor:
         
         for i, change in enumerate(changes, 1):
             print(f"\n  Slot {i}:")
-            print(f"    📅 Date: {change['scheduleDate']} ({change['dayDesc']})")
+            print(f"    📅 Date: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})")
             print(f"    🏥 Department: {change['deptName']}")
             print(f"    📍 Location: {change['admLocation']}")
             print(f"    🏢 Hospital Area: {change['hospitalAreaName']}")
-            print(f"    🔄 {change['changed_field']}: {change['previous_value']} → {change['current_value']}")
+            print(f"    🔄 Changes: {change['changes_summary']}")
         
         print(f"\n📋 Details logged to: {self.log_file}")
         print("="*60)
@@ -306,11 +332,11 @@ class AppointmentMonitor:
                 desp_lines.extend([
                     f"",
                     f"**时段 {i}:**",
-                    f"- 📅 日期: {change['scheduleDate']} ({change['dayDesc']})",
+                    f"- 📅 日期: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})",
                     f"- 🏥 科室: {change['deptName']}",
                     f"- 📍 地点: {change['admLocation']}",
                     f"- 🏢 院区: {change['hospitalAreaName']}",
-                    f"- 🔄 变化: {change['changed_field']} {change['previous_value']} → {change['current_value']}",
+                    f"- 🔄 变化: {change['changes_summary']}",
                     f"- 💰 费用: 挂号费17元 + 服务费2元"
                 ])
             
@@ -327,7 +353,7 @@ class AppointmentMonitor:
             notification_data = {
                 "title": title,
                 "desp": desp,
-                "short": f"发现{len(changes)}个预约时段 - {changes[0]['scheduleDate']}",
+                "short": f"发现{len(changes)}个预约时段 - {changes[0]['scheduleDate']} {changes[0]['timePeriod']}",
                 "noip": "1"  # Hide IP for privacy
             }
             
@@ -356,10 +382,11 @@ class AppointmentMonitor:
         print(f"🔍 Starting appointment monitor...")
         print(f"📋 Success logging to: {self.log_file}")
         print(f"📝 Regular logging to: {self.reg_log_file}")
-        print(f"⏰ Normal: 20-40s intervals | Peak: 5s intervals (7:59-8:04 AM/PM 中国时间)")
+        print(f"⏰ Normal: 15-25s intervals | Peak: 5s intervals (7:59-8:04 AM/PM 中国时间)")
         print(f"🎯 Monitoring doctor: 戴晴晴 (耳鼻喉眩晕专科)")
         print(f"🛡️ Anti-detection: Dynamic timestamps, randomized intervals, rotating User-Agents")
         print(f"📱 WeChat notifications: Enabled via Server酱")
+        print(f"🔍 Monitoring: availableCount (0→positive), status (2→any), time periods (上午/下午)")
         print("="*60)
         
         # Initialize log files
@@ -397,9 +424,9 @@ class AppointmentMonitor:
                             self.notify_user(changes)
                         else:
                             # Show summary of current state
-                            total_remaining = sum(e["remainingNum"] for e in current_entries)
                             total_available = sum(e["availableCount"] for e in current_entries)
-                            print(f"[{timestamp}] No new slots. Total remaining: {total_remaining}, available: {total_available}")
+                            total_active_status = sum(1 for e in current_entries if e["status"] == 1)
+                            print(f"[{timestamp}] No new slots. Total available: {total_available}, active status: {total_active_status}")
                     else:
                         print(f"[{timestamp}] No appointment data found in response")
                 else:
