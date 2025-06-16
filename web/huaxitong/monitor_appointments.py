@@ -14,7 +14,7 @@ class AppointmentMonitor:
         self.url = "https://hytapiv2.cd120.com/cloud/appointment/doctorListModel/selDoctorDetailsTwo"
         self.headers = {
             "Host": "hytapiv2.cd120.com",
-            "UUID": "25FEFB37-9D3D-4FA1-B7E8-81F7FB0A2FAD",
+            "UUID": "25FEFB37-9D3D-4FA1-B7E8-81F7FB0B2FAD",
             "Mac": "Found",
             "Accept": "*/*",
             "Client-Version": "7.1.1",
@@ -27,20 +27,42 @@ class AppointmentMonitor:
             "Connection": "keep-alive",
             "Cookie": "acw_tc=ac11000117494466537182414e0065099ed81684c064d896c8d5bd165b0c3e"
         }
-        # Base payload template (timestamp will be updated dynamically)
-        self.payload_template = {
-            "hospitalCode": "HID0101",
-            "deptCode": "1649",
-            "doctorId": "4028b881646e3d8701646e3d876301f6",
-            "channelCode": "PATIENT_IOS",
-            "appCode": "HXGYAPP",
-            "hospitalAreaCode": "F0017",
-            "tabAreaCode": "",
-            "cardId": "806596678557749240",
-            "encrypt": "B+dltOVPkHRvQmtQWA65vA==",
-            "deptCategoryCode": "6100-EBHK",
-            "appointmentType": "-1"
-        }
+        
+        # Multiple doctors to monitor
+        self.doctors = [
+            {
+                "name": "戴晴晴 (耳鼻喉眩晕专科)",
+                "payload": {
+                    "hospitalCode": "HID0101",
+                    "deptCode": "1649",
+                    "doctorId": "4028b881646e3d8701646e3d876301f6",
+                    "channelCode": "PATIENT_IOS",
+                    "appCode": "HXGYAPP",
+                    "hospitalAreaCode": "F0017",
+                    "tabAreaCode": "",
+                    "cardId": "806596678557749240",
+                    "encrypt": "MR+DrCZkmnCtWy7tdyTqkA==",
+                    "deptCategoryCode": "6100-EBHK",
+                    "appointmentType": "1"
+                }
+            },
+            {
+                "name": "刘晓雪 (美容烧伤整形)",
+                "payload": {
+                    "hospitalCode": "HID0101",
+                    "deptCode": "252",
+                    "doctorId": "1304365985897254912",
+                    "channelCode": "PATIENT_IOS",
+                    "appCode": "HXGYAPP",
+                    "hospitalAreaCode": "HID0101",
+                    "tabAreaCode": "",
+                    "cardId": "806596678557749248",
+                    "encrypt": "av/fT19icmjZpzHsUeV7Xg==",
+                    "deptCategoryCode": "4110-MRSSZX",
+                    "appointmentType": "1"
+                }
+            }
+        ]
         
         
         # Dynamic user agent generation data
@@ -60,7 +82,7 @@ class AppointmentMonitor:
         ]
         self.scale_values = ["2.00", "3.00"]
         
-        # Track previous state of remaining numbers
+        # Track previous state of remaining numbers for each doctor
         self.previous_remaining = {}
         self.log_file = "success.log"
         self.reg_log_file = "reg.log"
@@ -73,9 +95,9 @@ class AppointmentMonitor:
         self.last_notification_time = 0  # Track last notification timestamp
         self.notification_cooldown = 300  # 5 minutes in seconds
         
-    def get_current_payload(self) -> Dict[str, Any]:
-        """Generate payload with current timestamp"""
-        payload = self.payload_template.copy()
+    def get_current_payload(self, doctor_payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Generate payload with current timestamp for specific doctor"""
+        payload = doctor_payload.copy()
         # Use current timestamp (Unix timestamp as string)
         payload["timestamp"] = str(int(time.time()))
         return payload
@@ -125,24 +147,24 @@ class AppointmentMonitor:
         else:
             return random.uniform(15, 25)  # 15-25 seconds normally
     
-    def send_request(self) -> Dict[str, Any]:
-        """Send the API request and return the response"""
+    def send_request(self, doctor_payload: Dict[str, Any], doctor_name: str) -> Dict[str, Any]:
+        """Send the API request and return the response for specific doctor"""
         try:
             # Add small random delay before request (0.5-2 seconds)
             time.sleep(random.uniform(0.5, 2.0))
             
             # Get dynamic payload and headers
-            payload = self.get_current_payload()
+            payload = self.get_current_payload(doctor_payload)
             headers = self.get_randomized_headers()
             
             response = requests.post(self.url, headers=headers, json=payload, timeout=30)
             if response.status_code == 200:
                 return response.json()
             else:
-                print(f"Error: HTTP {response.status_code}")
+                print(f"Error for {doctor_name}: HTTP {response.status_code}")
                 return None
         except requests.exceptions.RequestException as e:
-            print(f"Request error: {e}")
+            print(f"Request error for {doctor_name}: {e}")
             return None
     
     def get_time_period_label(self, schedule_range: int) -> str:
@@ -154,7 +176,7 @@ class AppointmentMonitor:
         else:
             return f"时段{schedule_range}"
     
-    def extract_remaining_numbers(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def extract_remaining_numbers(self, data: Dict[str, Any], doctor_name: str) -> List[Dict[str, Any]]:
         """Extract all remainingNum entries from the response"""
         remaining_entries = []
         seen_ids = set()  # Track unique schedule IDs to avoid duplicates
@@ -186,19 +208,33 @@ class AppointmentMonitor:
         
         # Check sourceItemsRespVos
         source_items = response_data.get("sourceItemsRespVos", [])
+        if source_items is None:
+            source_items = []
         for item in source_items:
+            # Filter for 华西坝院区 only for 刘晓雪
+            if "刘晓雪" in doctor_name and item.get("hospitalAreaCode") != "HID0101":
+                continue
             add_entry_if_unique(item)
         
         # Check nested sourceItems structure  
         source_items_nested = response_data.get("sourceItems", [])
+        if source_items_nested is None:
+            source_items_nested = []
         for area in source_items_nested:
+            if area is None:
+                continue
+            # Filter for 华西坝院区 only for 刘晓雪
+            if "刘晓雪" in doctor_name and area.get("areaCode") != "HID0101":
+                continue
             area_items = area.get("sourceItemsRespVos", [])
+            if area_items is None:
+                area_items = []
             for item in area_items:
                 add_entry_if_unique(item)
         
         return remaining_entries
     
-    def check_for_changes(self, current_entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def check_for_changes(self, current_entries: List[Dict[str, Any]], doctor_name: str) -> List[Dict[str, Any]]:
         """Check for appointments that changed in availableCount (0→positive) or status (2→any)"""
         changes = []
         
@@ -211,7 +247,7 @@ class AppointmentMonitor:
             changed_fields = []
             
             # Check availableCount changes from 0 to positive
-            available_key = f"{entry_id}_availableCount"
+            available_key = f"{doctor_name}_{entry_id}_availableCount"
             previous_available = self.previous_remaining.get(available_key, 0)
             
             if previous_available == 0 and current_available > 0:
@@ -221,8 +257,8 @@ class AppointmentMonitor:
             # Update availableCount tracking
             self.previous_remaining[available_key] = current_available
             
-            # Check status changes from 2 to 1
-            status_key = f"{entry_id}_status"
+            # Check status changes FROM 2 to any other value
+            status_key = f"{doctor_name}_{entry_id}_status"
             previous_status = self.previous_remaining.get(status_key, 2)  # Default to 2 for first time
             
             if previous_status == 2 and current_status != 2:
@@ -250,8 +286,13 @@ class AppointmentMonitor:
             peak_marker = " [PEAK]" if is_peak else ""
             f.write(f"[{timestamp}] Check #{iteration}{peak_marker} - Total available: {total_available}, active status: {total_active_status}\n")
             
-            # Log details of each slot
+            # Log details of each slot grouped by doctor
+            current_doctor = ""
             for entry in entries:
+                doctor_name = entry.get("doctor_name", "Unknown")
+                if doctor_name != current_doctor:
+                    f.write(f"  --- {doctor_name} ---\n")
+                    current_doctor = doctor_name
                 f.write(f"  {entry['scheduleDate']} {entry['timePeriod']} ({entry['dayDesc']}) - "
                        f"Available: {entry['availableCount']}, Status: {entry['status']} - "
                        f"{entry['deptName']} - {entry['hospitalAreaName']}\n")
@@ -265,15 +306,25 @@ class AppointmentMonitor:
             f.write(f"APPOINTMENT AVAILABLE DETECTED - {timestamp}\n")
             f.write(f"{'='*80}\n")
             
+            # Group changes by doctor
+            changes_by_doctor = {}
             for change in changes:
-                f.write(f"\nSlot Available:\n")
-                f.write(f"  Schedule ID: {change['id']}\n")
-                f.write(f"  Date: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})\n")
-                f.write(f"  Department: {change['deptName']}\n")
-                f.write(f"  Location: {change['admLocation']}\n")
-                f.write(f"  Hospital Area: {change['hospitalAreaName']}\n")
-                f.write(f"  Changes: {change['changes_summary']}\n")
-                f.write(f"  Schedule Range: {change['scheduleRange']}\n")
+                doctor_name = change.get("doctor_name", "Unknown")
+                if doctor_name not in changes_by_doctor:
+                    changes_by_doctor[doctor_name] = []
+                changes_by_doctor[doctor_name].append(change)
+            
+            for doctor_name, doctor_changes in changes_by_doctor.items():
+                f.write(f"\n--- {doctor_name} ---\n")
+                for change in doctor_changes:
+                    f.write(f"\nSlot Available:\n")
+                    f.write(f"  Schedule ID: {change['id']}\n")
+                    f.write(f"  Date: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})\n")
+                    f.write(f"  Department: {change['deptName']}\n")
+                    f.write(f"  Location: {change['admLocation']}\n")
+                    f.write(f"  Hospital Area: {change['hospitalAreaName']}\n")
+                    f.write(f"  Changes: {change['changes_summary']}\n")
+                    f.write(f"  Schedule Range: {change['scheduleRange']}\n")
             
             f.write(f"\n{'='*80}\n")
     
@@ -283,13 +334,25 @@ class AppointmentMonitor:
         print(f"Time: {datetime.now(self.cst_tz).strftime('%Y-%m-%d %H:%M:%S CST')}")
         print(f"Found {len(changes)} new available slot(s):")
         
-        for i, change in enumerate(changes, 1):
-            print(f"\n  Slot {i}:")
-            print(f"    📅 Date: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})")
-            print(f"    🏥 Department: {change['deptName']}")
-            print(f"    📍 Location: {change['admLocation']}")
-            print(f"    🏢 Hospital Area: {change['hospitalAreaName']}")
-            print(f"    🔄 Changes: {change['changes_summary']}")
+        # Group by doctor for display
+        changes_by_doctor = {}
+        for change in changes:
+            doctor_name = change.get("doctor_name", "Unknown")
+            if doctor_name not in changes_by_doctor:
+                changes_by_doctor[doctor_name] = []
+            changes_by_doctor[doctor_name].append(change)
+        
+        slot_counter = 1
+        for doctor_name, doctor_changes in changes_by_doctor.items():
+            print(f"\n  👨‍⚕️ {doctor_name}:")
+            for change in doctor_changes:
+                print(f"    Slot {slot_counter}:")
+                print(f"      📅 Date: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})")
+                print(f"      🏥 Department: {change['deptName']}")
+                print(f"      📍 Location: {change['admLocation']}")
+                print(f"      🏢 Hospital Area: {change['hospitalAreaName']}")
+                print(f"      🔄 Changes: {change['changes_summary']}")
+                slot_counter += 1
         
         print(f"\n📋 Details logged to: {self.log_file}")
         print("="*60)
@@ -299,7 +362,8 @@ class AppointmentMonitor:
         
         # Try to send system notification (if available)
         try:
-            os.system(f'notify-send "Appointment Available" "{len(changes)} new slot(s) found for {changes[0]["deptName"]}"')
+            doctors_list = ", ".join(set(c.get("doctor_name", "Unknown") for c in changes))
+            os.system(f'notify-send "Appointment Available" "{len(changes)} new slot(s) found for {doctors_list}"')
         except:
             pass  # Ignore if notify-send is not available
     
@@ -317,28 +381,51 @@ class AppointmentMonitor:
             # Prepare notification content
             title = f"🎉 预约成功监控 - 发现{len(changes)}个空位!"
             
+            # Group changes by doctor
+            changes_by_doctor = {}
+            for change in changes:
+                doctor_name = change.get("doctor_name", "Unknown")
+                if doctor_name not in changes_by_doctor:
+                    changes_by_doctor[doctor_name] = []
+                changes_by_doctor[doctor_name].append(change)
+            
+            doctors_list = ", ".join(changes_by_doctor.keys())
+            
             # Build detailed message content in Markdown
             desp_lines = [
                 f"## 📅 预约信息",
-                f"**医生**: 戴晴晴",
-                f"**科室**: 耳鼻喉眩晕专科", 
+                f"**医生**: {doctors_list}",
                 f"**时间**: {datetime.now(self.cst_tz).strftime('%Y-%m-%d %H:%M:%S CST')}",
                 f"**发现**: {len(changes)} 个可预约时段",
                 "",
                 "### 📋 可预约时段详情:"
             ]
             
-            for i, change in enumerate(changes, 1):
+            slot_counter = 1
+            for doctor_name, doctor_changes in changes_by_doctor.items():
                 desp_lines.extend([
                     f"",
-                    f"**时段 {i}:**",
-                    f"- 📅 日期: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})",
-                    f"- 🏥 科室: {change['deptName']}",
-                    f"- 📍 地点: {change['admLocation']}",
-                    f"- 🏢 院区: {change['hospitalAreaName']}",
-                    f"- 🔄 变化: {change['changes_summary']}",
-                    f"- 💰 费用: 挂号费17元 + 服务费2元"
+                    f"### 👨‍⚕️ {doctor_name}"
                 ])
+                
+                for change in doctor_changes:
+                    # Determine fee based on doctor
+                    if "刘晓雪" in doctor_name:
+                        fee_info = "挂号费90元 + 服务费2元"
+                    else:
+                        fee_info = "挂号费17元 + 服务费2元"
+                    
+                    desp_lines.extend([
+                        f"",
+                        f"**时段 {slot_counter}:**",
+                        f"- 📅 日期: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})",
+                        f"- 🏥 科室: {change['deptName']}",
+                        f"- 📍 地点: {change['admLocation']}",
+                        f"- 🏢 院区: {change['hospitalAreaName']}",
+                        f"- 🔄 变化: {change['changes_summary']}",
+                        f"- 💰 费用: {fee_info}"
+                    ])
+                    slot_counter += 1
             
             desp_lines.extend([
                 "",
@@ -383,10 +470,13 @@ class AppointmentMonitor:
         print(f"📋 Success logging to: {self.log_file}")
         print(f"📝 Regular logging to: {self.reg_log_file}")
         print(f"⏰ Normal: 15-25s intervals | Peak: 5s intervals (7:59-8:04 AM/PM 中国时间)")
-        print(f"🎯 Monitoring doctor: 戴晴晴 (耳鼻喉眩晕专科)")
+        print(f"🎯 Monitoring {len(self.doctors)} doctors:")
+        for i, doctor in enumerate(self.doctors, 1):
+            print(f"   {i}. {doctor['name']}")
         print(f"🛡️ Anti-detection: Dynamic timestamps, randomized intervals, rotating User-Agents")
         print(f"📱 WeChat notifications: Enabled via Server酱")
         print(f"🔍 Monitoring: availableCount (0→positive), status (2→any), time periods (上午/下午)")
+        print(f"🏥 刘晓雪: Only monitoring 华西坝院区 (HID0101)")
         print("="*60)
         
         # Initialize log files
@@ -402,35 +492,68 @@ class AppointmentMonitor:
                 iteration += 1
                 timestamp = datetime.now(self.cst_tz).strftime("%Y-%m-%d %H:%M:%S CST")
                 
-                print(f"[{timestamp}] Check #{iteration} - Sending request...")
+                print(f"[{timestamp}] Check #{iteration} - Checking {len(self.doctors)} doctors...")
                 
-                # Send request
-                response_data = self.send_request()
+                all_changes = []
+                all_entries = []
                 
-                if response_data:
-                    # Extract remaining numbers
-                    current_entries = self.extract_remaining_numbers(response_data)
+                # Check each doctor
+                for doctor in self.doctors:
+                    doctor_name = doctor["name"]
+                    doctor_payload = doctor["payload"]
                     
-                    if current_entries:
-                        # Log regular check
-                        self.log_regular_check(current_entries, timestamp, iteration)
+                    print(f"[{timestamp}] Checking {doctor_name}...")
+                    
+                    # Send request for this doctor
+                    response_data = self.send_request(doctor_payload, doctor_name)
+                    
+                    if response_data:
+                        # Extract remaining numbers for this doctor
+                        current_entries = self.extract_remaining_numbers(response_data, doctor_name)
                         
-                        # Check for changes
-                        changes = self.check_for_changes(current_entries)
-                        
-                        if changes:
-                            # Log and notify
-                            self.log_success(changes, response_data)
-                            self.notify_user(changes)
-                        else:
-                            # Show summary of current state
+                        if current_entries:
+                            # Add doctor name to entries for logging
+                            for entry in current_entries:
+                                entry["doctor_name"] = doctor_name
+                            all_entries.extend(current_entries)
+                            
+                            # Check for changes for this doctor
+                            changes = self.check_for_changes(current_entries, doctor_name)
+                            if changes:
+                                # Add doctor name to changes
+                                for change in changes:
+                                    change["doctor_name"] = doctor_name
+                                all_changes.extend(changes)
+                                
+                            # Show summary for this doctor
                             total_available = sum(e["availableCount"] for e in current_entries)
                             total_active_status = sum(1 for e in current_entries if e["status"] == 1)
-                            print(f"[{timestamp}] No new slots. Total available: {total_available}, active status: {total_active_status}")
+                            print(f"[{timestamp}] {doctor_name}: {total_available} available, {total_active_status} active")
+                        else:
+                            print(f"[{timestamp}] {doctor_name}: No appointment data found")
                     else:
-                        print(f"[{timestamp}] No appointment data found in response")
+                        print(f"[{timestamp}] {doctor_name}: Failed to get response")
+                    
+                    # Small delay between doctors
+                    time.sleep(random.uniform(1, 3))
+                
+                # Log and notify if any changes found
+                if all_entries:
+                    # Log regular check for all doctors
+                    self.log_regular_check(all_entries, timestamp, iteration)
+                    
+                if all_changes:
+                    # Log and notify about all changes
+                    self.log_success(all_changes, {"combined_changes": True})
+                    self.notify_user(all_changes)
                 else:
-                    print(f"[{timestamp}] Failed to get response")
+                    # Show overall summary
+                    total_available = sum(e["availableCount"] for e in all_entries)
+                    total_active_status = sum(1 for e in all_entries if e["status"] == 1)
+                    print(f"[{timestamp}] Overall: No new slots. Total available: {total_available}, active status: {total_active_status}")
+                    
+                if not all_entries:
+                    print(f"[{timestamp}] No appointment data found for any doctor")
                 
                 # Get appropriate wait time based on current time
                 wait_time = self.get_wait_time()

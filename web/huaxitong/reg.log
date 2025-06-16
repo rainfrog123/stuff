@@ -1,39 +1,2388 @@
 
 
-Monitor started at: 2025-06-11 13:56:17 CST
-[2025-06-11 13:56:17 CST] Check #1 - Total available: 0, active status: 0
-  2025-06-11 下午 (今天) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-  2025-06-12 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 上午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 下午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-18 下午 (7天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-[2025-06-11 13:56:37 CST] Check #2 - Total available: 0, active status: 0
-  2025-06-11 下午 (今天) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-  2025-06-12 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 上午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 下午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-18 下午 (7天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-[2025-06-11 13:56:59 CST] Check #3 - Total available: 0, active status: 0
-  2025-06-11 下午 (今天) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-  2025-06-12 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 上午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 下午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-18 下午 (7天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-[2025-06-11 13:57:23 CST] Check #4 - Total available: 0, active status: 0
-  2025-06-11 下午 (今天) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-  2025-06-12 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 上午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 下午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-18 下午 (7天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-[2025-06-11 13:57:48 CST] Check #5 - Total available: 0, active status: 0
-  2025-06-11 下午 (今天) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-  2025-06-12 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 上午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 下午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-18 下午 (7天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-[2025-06-11 13:58:08 CST] Check #6 - Total available: 0, active status: 0
-  2025-06-11 下午 (今天) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
-  2025-06-12 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 上午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-17 下午 (6天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
-  2025-06-18 下午 (7天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+Monitor started at: 2025-06-16 18:55:29 CST
+[2025-06-16 18:55:29 CST] Check #1 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:56:00 CST] Check #2 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:56:31 CST] Check #3 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:57:01 CST] Check #4 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:57:29 CST] Check #5 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:57:57 CST] Check #6 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:58:23 CST] Check #7 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:58:51 CST] Check #8 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:59:18 CST] Check #9 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 18:59:48 CST] Check #10 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:00:15 CST] Check #11 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:00:40 CST] Check #12 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:01:13 CST] Check #13 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:01:44 CST] Check #14 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:02:10 CST] Check #15 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:02:32 CST] Check #16 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:02:58 CST] Check #17 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:03:23 CST] Check #18 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:03:48 CST] Check #19 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:04:16 CST] Check #20 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:04:42 CST] Check #21 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:05:06 CST] Check #22 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:05:35 CST] Check #23 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:06:03 CST] Check #24 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:06:32 CST] Check #25 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:07:00 CST] Check #26 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:07:23 CST] Check #27 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:07:56 CST] Check #28 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:08:23 CST] Check #29 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:08:52 CST] Check #30 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:09:23 CST] Check #31 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:09:47 CST] Check #32 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:10:19 CST] Check #33 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:10:41 CST] Check #34 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:11:10 CST] Check #35 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:11:39 CST] Check #36 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:12:05 CST] Check #37 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:12:36 CST] Check #38 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:13:02 CST] Check #39 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:13:27 CST] Check #40 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:13:51 CST] Check #41 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:14:17 CST] Check #42 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:14:47 CST] Check #43 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:15:11 CST] Check #44 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:15:37 CST] Check #45 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:16:07 CST] Check #46 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:16:39 CST] Check #47 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:17:09 CST] Check #48 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:17:37 CST] Check #49 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:18:11 CST] Check #50 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:18:40 CST] Check #51 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:19:05 CST] Check #52 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:19:28 CST] Check #53 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:20:00 CST] Check #54 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:20:25 CST] Check #55 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:20:49 CST] Check #56 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:21:19 CST] Check #57 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:21:48 CST] Check #58 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:22:19 CST] Check #59 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:22:48 CST] Check #60 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:23:17 CST] Check #61 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:23:45 CST] Check #62 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:24:14 CST] Check #63 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:24:41 CST] Check #64 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:25:13 CST] Check #65 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:25:40 CST] Check #66 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:26:07 CST] Check #67 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:26:38 CST] Check #68 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:27:09 CST] Check #69 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:27:40 CST] Check #70 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:28:09 CST] Check #71 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:28:38 CST] Check #72 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:29:07 CST] Check #73 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:29:31 CST] Check #74 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:29:59 CST] Check #75 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:30:31 CST] Check #76 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:31:03 CST] Check #77 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:31:34 CST] Check #78 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:32:01 CST] Check #79 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:32:27 CST] Check #80 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:32:54 CST] Check #81 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:33:23 CST] Check #82 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:33:53 CST] Check #83 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:34:21 CST] Check #84 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:34:43 CST] Check #85 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:35:12 CST] Check #86 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:35:38 CST] Check #87 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:36:02 CST] Check #88 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:36:29 CST] Check #89 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:36:58 CST] Check #90 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:37:21 CST] Check #91 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:37:46 CST] Check #92 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:38:18 CST] Check #93 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:38:47 CST] Check #94 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:39:20 CST] Check #95 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:39:47 CST] Check #96 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:40:11 CST] Check #97 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:40:37 CST] Check #98 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:41:03 CST] Check #99 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:41:28 CST] Check #100 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:41:54 CST] Check #101 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:42:16 CST] Check #102 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:42:40 CST] Check #103 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:43:06 CST] Check #104 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:43:40 CST] Check #105 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:44:01 CST] Check #106 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:44:26 CST] Check #107 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:44:48 CST] Check #108 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:45:19 CST] Check #109 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:45:43 CST] Check #110 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:46:15 CST] Check #111 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:46:44 CST] Check #112 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:47:14 CST] Check #113 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:47:41 CST] Check #114 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:48:14 CST] Check #115 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:48:41 CST] Check #116 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:49:05 CST] Check #117 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:49:37 CST] Check #118 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:50:08 CST] Check #119 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:50:34 CST] Check #120 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:50:59 CST] Check #121 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:51:29 CST] Check #122 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:51:59 CST] Check #123 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:52:26 CST] Check #124 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:52:52 CST] Check #125 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:53:23 CST] Check #126 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:53:54 CST] Check #127 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:54:24 CST] Check #128 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:54:51 CST] Check #129 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:55:19 CST] Check #130 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:55:50 CST] Check #131 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:56:21 CST] Check #132 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:56:44 CST] Check #133 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:57:12 CST] Check #134 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:57:41 CST] Check #135 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:58:05 CST] Check #136 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:58:39 CST] Check #137 - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:59:07 CST] Check #138 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:59:19 CST] Check #139 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:59:32 CST] Check #140 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:59:44 CST] Check #141 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 19:59:55 CST] Check #142 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:00:07 CST] Check #143 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:00:20 CST] Check #144 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:00:36 CST] Check #145 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:00:48 CST] Check #146 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:01:02 CST] Check #147 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:01:14 CST] Check #148 [PEAK] - Total available: 4, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 4, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:01:27 CST] Check #149 [PEAK] - Total available: 7, active status: 1
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 1, Status: 1 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:01:42 CST] Check #150 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:01:54 CST] Check #151 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:02:05 CST] Check #152 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:02:17 CST] Check #153 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:02:30 CST] Check #154 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:02:43 CST] Check #155 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:02:54 CST] Check #156 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:03:07 CST] Check #157 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:03:20 CST] Check #158 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:03:34 CST] Check #159 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:03:46 CST] Check #160 [PEAK] - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:04:01 CST] Check #161 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:04:26 CST] Check #162 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:04:55 CST] Check #163 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:05:25 CST] Check #164 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:05:55 CST] Check #165 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:06:23 CST] Check #166 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:06:54 CST] Check #167 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:07:21 CST] Check #168 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:07:53 CST] Check #169 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:08:20 CST] Check #170 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:08:48 CST] Check #171 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:09:14 CST] Check #172 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:09:44 CST] Check #173 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:10:08 CST] Check #174 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:10:37 CST] Check #175 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:11:02 CST] Check #176 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:11:27 CST] Check #177 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:11:56 CST] Check #178 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:12:20 CST] Check #179 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:12:42 CST] Check #180 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:13:09 CST] Check #181 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:13:32 CST] Check #182 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:14:00 CST] Check #183 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:14:28 CST] Check #184 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:15:00 CST] Check #185 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:15:32 CST] Check #186 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:15:59 CST] Check #187 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:16:22 CST] Check #188 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:16:48 CST] Check #189 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:17:20 CST] Check #190 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:17:47 CST] Check #191 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:18:20 CST] Check #192 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:18:43 CST] Check #193 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:19:12 CST] Check #194 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:19:40 CST] Check #195 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:20:02 CST] Check #196 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:20:28 CST] Check #197 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:20:52 CST] Check #198 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:21:21 CST] Check #199 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:21:51 CST] Check #200 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:22:14 CST] Check #201 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:22:36 CST] Check #202 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:23:05 CST] Check #203 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:23:31 CST] Check #204 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:24:02 CST] Check #205 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:24:36 CST] Check #206 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:25:02 CST] Check #207 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:25:34 CST] Check #208 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:25:59 CST] Check #209 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:26:28 CST] Check #210 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:26:56 CST] Check #211 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:27:21 CST] Check #212 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:27:50 CST] Check #213 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:28:18 CST] Check #214 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:28:43 CST] Check #215 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:29:14 CST] Check #216 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:29:45 CST] Check #217 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:30:13 CST] Check #218 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:30:45 CST] Check #219 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:31:19 CST] Check #220 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:31:44 CST] Check #221 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:32:08 CST] Check #222 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:32:34 CST] Check #223 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:33:04 CST] Check #224 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:33:27 CST] Check #225 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:33:55 CST] Check #226 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:34:26 CST] Check #227 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:34:53 CST] Check #228 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:35:21 CST] Check #229 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:35:46 CST] Check #230 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:36:10 CST] Check #231 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:36:35 CST] Check #232 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:37:02 CST] Check #233 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:37:24 CST] Check #234 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:37:55 CST] Check #235 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:38:17 CST] Check #236 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:38:42 CST] Check #237 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:39:15 CST] Check #238 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:39:40 CST] Check #239 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:40:03 CST] Check #240 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:40:32 CST] Check #241 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:41:02 CST] Check #242 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:41:33 CST] Check #243 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:41:55 CST] Check #244 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:42:23 CST] Check #245 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:42:49 CST] Check #246 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:43:21 CST] Check #247 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:43:47 CST] Check #248 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:44:14 CST] Check #249 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:44:42 CST] Check #250 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:45:11 CST] Check #251 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:45:40 CST] Check #252 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:46:12 CST] Check #253 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:46:45 CST] Check #254 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:47:17 CST] Check #255 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:47:44 CST] Check #256 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:48:15 CST] Check #257 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:48:47 CST] Check #258 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:49:09 CST] Check #259 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:49:38 CST] Check #260 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:50:10 CST] Check #261 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:50:32 CST] Check #262 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:51:03 CST] Check #263 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:51:31 CST] Check #264 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区
+[2025-06-16 20:51:58 CST] Check #265 - Total available: 6, active status: 0
+  --- 戴晴晴 (耳鼻喉眩晕专科) ---
+  2025-06-17 上午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-17 下午 (明天) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  2025-06-18 下午 (2天后) - Available: 0, Status: 2 - （锦江）耳鼻喉眩晕专科 - 锦江院区
+  2025-06-19 下午 (3天后) - Available: 0, Status: 2 - 耳鼻喉眩晕专科 - 华西坝院区
+  --- 刘晓雪 (美容烧伤整形) ---
+  2025-06-16 上午 (今天) - Available: 0, Status: 2 - 美容烧伤整形 - 华西坝院区
+  2025-06-23 上午 (7天后) - Available: 6, Status: 2 - 美容烧伤整形 - 华西坝院区

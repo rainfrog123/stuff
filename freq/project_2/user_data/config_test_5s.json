@@ -86,9 +86,12 @@
         "remove_pumps": false
     },
     "telegram": {
-        "enabled": false,
-        "token": "",
-        "chat_id": ""
+        "enabled": true,
+        "token": "YOUR_TELEGRAM_BOT_TOKEN",
+        "chat_id": "YOUR_TELEGRAM_CHAT_ID",
+        "notification_settings": {
+            "strategy_msg": "on"
+        }
     },
     "api_server": {
         "enabled": false,
@@ -104,7 +107,7 @@
     },
     "bot_name": "freqtrade_1",
     "initial_state": "running",
-    "force_entry_enable": false,
+    "force_entry_enable": true,
     "internals": {
         "process_throttle_secs": 1
     }
