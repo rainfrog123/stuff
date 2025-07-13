@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Appointment Monitor Startup Script with Safety Protection
-# This script starts the appointment monitor in a tmux session with built-in safety limits
+# Hospital Monitor Startup Script with Safety Protection
+# This script starts the hospital monitor in a tmux session with built-in safety limits
 
-SESSION_NAME="appointment_monitor"
+SESSION_NAME="hospital_monitor"
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PYTHON_PATH="/allah/freqtrade/.venv/bin/python3"
 
@@ -15,7 +15,7 @@ MAX_LOG_SIZE_MB=50
 SAFETY_CHECK_INTERVAL=60
 SAFETY_PID_FILE="$SCRIPT_DIR/.monitor_safety.pid"
 
-echo "🚀 Starting monitor with safety protection..."
+echo "🦷 Starting hospital monitor with safety protection..."
 
 # Function to check if process is running
 check_process() {
@@ -101,22 +101,35 @@ safety_monitor() {
         
         if [ -n "$exceeded" ]; then
             echo "🚨 SAFETY LIMIT EXCEEDED: $exceeded"
-            echo "⛔ Automatically stopping monitor for safety..."
+            echo "🔄 Automatically restarting monitor for continuous operation..."
             
             # Kill the monitor session
             tmux kill-session -t "$SESSION_NAME" 2>/dev/null
             
-            # Clean up logs
-            echo "🧹 Cleaning up oversized logs..."
+            # Clean up logs (clear completely for fresh start)
+            echo "🧹 Clearing logs for fresh restart..."
             if [ -f "$SCRIPT_DIR/reg.log" ]; then
-                tail -n 1000 "$SCRIPT_DIR/reg.log" > "$SCRIPT_DIR/reg.log.tmp" && mv "$SCRIPT_DIR/reg.log.tmp" "$SCRIPT_DIR/reg.log"
+                > "$SCRIPT_DIR/reg.log"
             fi
             if [ -f "$SCRIPT_DIR/success.log" ]; then
-                tail -n 1000 "$SCRIPT_DIR/success.log" > "$SCRIPT_DIR/success.log.tmp" && mv "$SCRIPT_DIR/success.log.tmp" "$SCRIPT_DIR/success.log"
+                > "$SCRIPT_DIR/success.log"
             fi
             
-            echo "⛔ Monitor terminated automatically due to safety limits"
-            break
+            # Wait a moment for cleanup
+            sleep 2
+            
+            # Start fresh monitor session
+            echo "🚀 Starting fresh monitor session..."
+            tmux new-session -d -s "$SESSION_NAME" -c "$SCRIPT_DIR"
+            tmux send-keys -t "$SESSION_NAME" "cd '$SCRIPT_DIR'" Enter
+            tmux send-keys -t "$SESSION_NAME" "$PYTHON_PATH hospital_monitor.py" Enter
+            
+            # Reset safety monitor timer
+            start_time=$(date +%s)
+            check_count=0
+            
+            echo "✅ Monitor restarted successfully - continuing 24/7 operation"
+            echo "🔄 Safety monitor reset - next restart in 24 hours"
         fi
         
         # Status update every 10 checks (10 minutes by default)
@@ -146,8 +159,8 @@ if [ ! -f "$PYTHON_PATH" ]; then
 fi
 
 # Check if monitor script exists
-if [ ! -f "$SCRIPT_DIR/monitor_appointments.py" ]; then
-    echo "❌ Error: monitor_appointments.py not found in $SCRIPT_DIR"
+if [ ! -f "$SCRIPT_DIR/hospital_monitor.py" ]; then
+    echo "❌ Error: hospital_monitor.py not found in $SCRIPT_DIR"
     exit 1
 fi
 
@@ -182,26 +195,28 @@ fi
 # Create new tmux session and start the monitor
 tmux new-session -d -s "$SESSION_NAME" -c "$SCRIPT_DIR"
 tmux send-keys -t "$SESSION_NAME" "cd '$SCRIPT_DIR'" Enter
-tmux send-keys -t "$SESSION_NAME" "$PYTHON_PATH monitor_appointments.py" Enter
+tmux send-keys -t "$SESSION_NAME" "$PYTHON_PATH hospital_monitor.py" Enter
 
 # Start safety monitor in background
 safety_monitor &
 SAFETY_MONITOR_PID=$!
 
-echo "✅ Monitor started in tmux session: $SESSION_NAME"
-echo "🛡️ Safety monitor active (PID: $SAFETY_MONITOR_PID) with limits:"
+echo "✅ 🦷 Hospital monitor started in tmux session: $SESSION_NAME"
+echo "🛡️ Safety monitor active (PID: $SAFETY_MONITOR_PID) - 24/7 CONTINUOUS MONITORING"
 echo "   📊 Max CPU: ${MAX_CPU_PERCENT}%"
 echo "   🧠 Max Memory: ${MAX_MEMORY_MB}MB"
-echo "   ⏱️ Max Runtime: ${MAX_RUNTIME_HOURS}h"
+echo "   🔄 Auto-restart: Every ${MAX_RUNTIME_HOURS}h (keeps running forever)"
 echo "   📄 Max Log Size: ${MAX_LOG_SIZE_MB}MB"
 echo "   🔍 Check Interval: ${SAFETY_CHECK_INTERVAL}s"
 echo ""
-echo "📋 Useful commands:"
-echo "   tail -f $SCRIPT_DIR/reg.log          # Monitor regular logs"
-echo "   tail -f $SCRIPT_DIR/success.log      # Monitor success alerts"  
-echo "   tail -f $SCRIPT_DIR/reg.log $SCRIPT_DIR/success.log  # Monitor both"
-echo "   tmux attach -t $SESSION_NAME         # View monitor session"
-echo "   ./stop.sh                            # Stop monitor"
-echo "   ps aux | grep monitor                # Check safety monitor"
+echo "🦷 Target: 牙周病科 (Periodontal Department)"
+echo "⏰ Check interval: 30 seconds"
+echo "📱 WeChat notifications: Enabled"
+echo "🔄 System will auto-restart every 24h but NEVER stop monitoring"
 echo ""
-echo "🚨 The safety monitor will automatically stop the process if limits are exceeded!" 
+echo "📋 Useful commands:"
+echo "   tail -f $SCRIPT_DIR/reg.log           # Monitor regular logs"
+echo "   tail -f $SCRIPT_DIR/success.log       # Monitor success logs"
+echo "   tmux attach-session -t $SESSION_NAME  # Attach to session"
+echo "   ./stop.sh                             # Stop monitor"
+echo "   ./restart.sh                          # Restart monitor" 

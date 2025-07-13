@@ -6,14 +6,14 @@ username="user-sp5uwd5fih"
 password="15yFvupp9fbN_zzP0D"
 proxy_server="gate.decodo.com:7000"
 session_duration="60"  # in minutes (1-1440)
-country="de"           # two-letter country code
+country="uk"           # two-letter country code
 # city="Hamburg"         # city name (use underscores for spaces)
 # state=""            # state code (for US - use us_state_name format)
 # continent=""        # continent code (eu, na, as, sa, af, oc)
 # asn=""              # ASN number
 
 # Session prefix (p = persistent, r = random)
-session_prefix="aaxx"
+session_prefix="aax"
 
 # Define number of sessions to test
 num_sessions=30

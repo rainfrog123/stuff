@@ -14,54 +14,86 @@ class AppointmentMonitor:
         self.url = "https://hytapiv2.cd120.com/cloud/appointment/doctorListModel/selDoctorDetailsTwo"
         self.headers = {
             "Host": "hytapiv2.cd120.com",
-            "UUID": "25FEFB37-9D3D-4FA1-B7E8-81F7FB0B2FAD",
-            "Mac": "Found",
+            "UUID": "25FEFB37-9D3D-4FA1-B7E8-81F7FB0A2FAD",
+            "Mac": "Not Found",
             "Accept": "*/*",
             "Client-Version": "7.1.1",
             "Accept-Encoding": "gzip, deflate, br",
             "Accept-Language": "en-GB;q=1",
-            "token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzQ5Mzc5NjE5LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTE5NzE2MTl9.oC6rNfjBJ-pykrsPDfkY0qORCrKHTMuBPAkwXAN3ITw***HXGYAPP",
-            "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzQ5Mzc5NjE5LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTE5NzE2MTl9.oC6rNfjBJ-pykrsPDfkY0qORCrKHTMuBPAkwXAN3ITw***HXGYAPP",
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzUyMDY3MTI2LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTQ2NTkxMjZ9.cqAJ3RaGREQ9dxrhBgP_rxiZQfZIpMMDDP756Vk-KPo***HXGYAPP",
+            "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzUyMDY3MTI2LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTQ2NTkxMjZ9.cqAJ3RaGREQ9dxrhBgP_rxiZQfZIpMMDDP756Vk-KPo***HXGYAPP",
             "Content-Type": "application/json",
             "User-Agent": "hua yi tong/7.1.1 (iPhone; iOS 15.7.1; Scale/3.00)",
             "Connection": "keep-alive",
-            "Cookie": "acw_tc=ac11000117494466537182414e0065099ed81684c064d896c8d5bd165b0c3e"
+            "Cookie": "acw_tc=1a0c39d517520671325397305e006fd461912cc23204c81632e69d6d08fbc3"
         }
         
         # Multiple doctors to monitor
         self.doctors = [
+            # {
+            #     "name": "戴晴晴 (耳鼻喉眩晕专科)",
+            #     "payload": {
+            #         "hospitalCode": "HID0101",
+            #         "deptCode": "1649",
+            #         "doctorId": "4028b881646e3d8701646e3d876301f6",
+            #         "channelCode": "PATIENT_IOS",
+            #         "appCode": "HXGYAPP",
+            #         "hospitalAreaCode": "F0017",
+            #         "tabAreaCode": "",
+            #         "cardId": "806596678557749240",
+            #         "encrypt": "MR+DrCZkmnCtWy7tdyTqkA==",
+            #         "deptCategoryCode": "6100-EBHK",
+            #         "appointmentType": "1"
+            #     }
+            # },
+            # {
+            #     "name": "王茹 (美容烧伤整形-四级专家)",
+            #     "payload": {
+            #         "hospitalCode": "HID0101",
+            #         "deptCode": "",
+            #         "doctorId": "4028b881646e3d8701646e3d871f0071",
+            #         "channelCode": "PATIENT_IOS",
+            #         "appCode": "HXGYAPP",
+            #         "hospitalAreaCode": "",
+            #         "tabAreaCode": "",
+            #         "cardId": "",
+            #         "encrypt": "FU+k39GWflNAKvkCDVD+oQ==",
+            #         "deptCategoryCode": "",
+            #         "appointmentType": "1"
+            #     }
+            # },
             {
-                "name": "戴晴晴 (耳鼻喉眩晕专科)",
+                "name": "李正勇 (美容烧伤整形-一级专家)",
                 "payload": {
                     "hospitalCode": "HID0101",
-                    "deptCode": "1649",
-                    "doctorId": "4028b881646e3d8701646e3d876301f6",
+                    "deptCode": "",
+                    "doctorId": "4028b082715335fa017153530154008d",
                     "channelCode": "PATIENT_IOS",
                     "appCode": "HXGYAPP",
-                    "hospitalAreaCode": "F0017",
+                    "hospitalAreaCode": "",
                     "tabAreaCode": "",
-                    "cardId": "806596678557749240",
-                    "encrypt": "MR+DrCZkmnCtWy7tdyTqkA==",
-                    "deptCategoryCode": "6100-EBHK",
-                    "appointmentType": "1"
-                }
-            },
-            {
-                "name": "刘晓雪 (美容烧伤整形)",
-                "payload": {
-                    "hospitalCode": "HID0101",
-                    "deptCode": "252",
-                    "doctorId": "1304365985897254912",
-                    "channelCode": "PATIENT_IOS",
-                    "appCode": "HXGYAPP",
-                    "hospitalAreaCode": "HID0101",
-                    "tabAreaCode": "",
-                    "cardId": "806596678557749248",
-                    "encrypt": "av/fT19icmjZpzHsUeV7Xg==",
-                    "deptCategoryCode": "4110-MRSSZX",
+                    "cardId": "",
+                    "encrypt": "FU+k39GWflNAKvkCDVD+oQ==",
+                    "deptCategoryCode": "",
                     "appointmentType": "1"
                 }
             }
+            # {
+            #     "name": "伍俊良 (美容烧伤整形-四级专家)",
+            #     "payload": {
+            #         "hospitalCode": "HID0101",
+            #         "deptCode": "",
+            #         "doctorId": "4028b881646e3d8701646e3d87190048",
+            #         "channelCode": "PATIENT_IOS",
+            #         "appCode": "HXGYAPP",
+            #         "hospitalAreaCode": "",
+            #         "tabAreaCode": "",
+            #         "cardId": "",
+            #         "encrypt": "jdMJ/J+qvttOzzmkISTAoQ==",
+            #         "deptCategoryCode": "",
+            #         "appointmentType": "1"
+            #     }
+            # }
         ]
         
         
@@ -159,9 +191,17 @@ class AppointmentMonitor:
             
             response = requests.post(self.url, headers=headers, json=payload, timeout=30)
             if response.status_code == 200:
-                return response.json()
+                response_data = response.json()
+                # Debug: Print response structure
+                print(f"DEBUG - {doctor_name} API Response Code: {response_data.get('code')}")
+                print(f"DEBUG - {doctor_name} API Response Message: {response_data.get('msg')}")
+                if response_data.get('data'):
+                    source_items = response_data.get('data', {}).get('sourceItemsRespVos', [])
+                    print(f"DEBUG - {doctor_name} Found {len(source_items) if source_items else 0} source items")
+                return response_data
             else:
                 print(f"Error for {doctor_name}: HTTP {response.status_code}")
+                print(f"DEBUG - Response text: {response.text[:200]}...")
                 return None
         except requests.exceptions.RequestException as e:
             print(f"Request error for {doctor_name}: {e}")
@@ -211,8 +251,8 @@ class AppointmentMonitor:
         if source_items is None:
             source_items = []
         for item in source_items:
-            # Filter for 华西坝院区 only for 刘晓雪
-            if "刘晓雪" in doctor_name and item.get("hospitalAreaCode") != "HID0101":
+            # Filter for 华西坝院区 only for beauty doctors (王茹, 李正勇, 伍俊良)
+            if ("王茹" in doctor_name or "李正勇" in doctor_name or "伍俊良" in doctor_name) and item.get("hospitalAreaCode") != "HID0101":
                 continue
             add_entry_if_unique(item)
         
@@ -223,8 +263,8 @@ class AppointmentMonitor:
         for area in source_items_nested:
             if area is None:
                 continue
-            # Filter for 华西坝院区 only for 刘晓雪
-            if "刘晓雪" in doctor_name and area.get("areaCode") != "HID0101":
+            # Filter for 华西坝院区 only for beauty doctors (王茹, 李正勇, 伍俊良)
+            if ("王茹" in doctor_name or "李正勇" in doctor_name or "伍俊良" in doctor_name) and area.get("areaCode") != "HID0101":
                 continue
             area_items = area.get("sourceItemsRespVos", [])
             if area_items is None:
@@ -410,8 +450,10 @@ class AppointmentMonitor:
                 
                 for change in doctor_changes:
                     # Determine fee based on doctor
-                    if "刘晓雪" in doctor_name:
+                    if "李正勇" in doctor_name:
                         fee_info = "挂号费90元 + 服务费2元"
+                    elif "王茹" in doctor_name or "伍俊良" in doctor_name:
+                        fee_info = "挂号费20元 + 服务费2元"
                     else:
                         fee_info = "挂号费17元 + 服务费2元"
                     
@@ -476,7 +518,7 @@ class AppointmentMonitor:
         print(f"🛡️ Anti-detection: Dynamic timestamps, randomized intervals, rotating User-Agents")
         print(f"📱 WeChat notifications: Enabled via Server酱")
         print(f"🔍 Monitoring: availableCount (0→positive), status (2→any), time periods (上午/下午)")
-        print(f"🏥 刘晓雪: Only monitoring 华西坝院区 (HID0101)")
+        print(f"🏥 李正勇: Only monitoring 华西坝院区 (HID0101)")
         print("="*60)
         
         # Initialize log files

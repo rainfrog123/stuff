@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Stop Appointment Monitor Script with Safety Monitor Cleanup
+# Stop Hospital Monitor Script with Safety Monitor Cleanup
 
-SESSION_NAME="appointment_monitor"
+SESSION_NAME="hospital_monitor"
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 SAFETY_PID_FILE="$SCRIPT_DIR/.monitor_safety.pid"
 
-echo "🛑 Stopping monitor and safety systems..."
+echo "🛑 Stopping hospital monitor and safety systems..."
 
 # Stop safety monitor first
 if [ -f "$SAFETY_PID_FILE" ]; then
@@ -36,13 +36,13 @@ else
 fi
 
 # Kill any remaining monitoring processes as backup
-monitor_pids=$(pgrep -f "monitor_appointments.py" 2>/dev/null)
+monitor_pids=$(pgrep -f "hospital_monitor.py" 2>/dev/null)
 if [ -n "$monitor_pids" ]; then
     echo "🧹 Cleaning up remaining monitor processes..."
     echo "$monitor_pids" | xargs kill 2>/dev/null
     sleep 2
     # Force kill if still running
-    remaining_pids=$(pgrep -f "monitor_appointments.py" 2>/dev/null)
+    remaining_pids=$(pgrep -f "hospital_monitor.py" 2>/dev/null)
     if [ -n "$remaining_pids" ]; then
         echo "$remaining_pids" | xargs kill -9 2>/dev/null
     fi
@@ -60,4 +60,4 @@ if [ -f "reg.log" ]; then
     echo "🧹 reg.log cleared"
 fi
 
-echo "✅ All monitoring systems stopped and cleaned up" 
+echo "✅ 🦷 Hospital monitor systems stopped and cleaned up" 

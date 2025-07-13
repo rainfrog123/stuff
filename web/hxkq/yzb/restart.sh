@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Restart Appointment Monitor Script with Safety Support
+# Restart Hospital Monitor Script with Safety Support
 # Stops the current monitor and safety systems, then starts fresh ones
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-SESSION_NAME="appointment_monitor"
+SESSION_NAME="hospital_monitor"
 SAFETY_PID_FILE="$SCRIPT_DIR/.monitor_safety.pid"
 
-echo "🔄 Restarting monitor with safety systems..."
+echo "🔄 Restarting hospital monitor with safety systems..."
 
 # Check if monitor is currently running
 if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
@@ -35,7 +35,7 @@ while [ $wait_count -lt $MAX_WAIT ]; do
         # Check if safety monitor PID file is gone
         if [ ! -f "$SAFETY_PID_FILE" ]; then
             # Check if any monitor processes are still running
-            if ! pgrep -f "monitor_appointments.py" >/dev/null 2>&1; then
+            if ! pgrep -f "hospital_monitor.py" >/dev/null 2>&1; then
                 echo "✅ Clean shutdown confirmed"
                 break
             fi
@@ -62,7 +62,9 @@ if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
     if [ -f "$SAFETY_PID_FILE" ]; then
         echo "🎉 Restart completed successfully!"
         echo "✅ Monitor session: Active"
-        echo "🛡️ Safety monitor: Active" 
+        echo "🛡️ Safety monitor: Active"
+        echo "🦷 Target: 牙周病科 (Periodontal Department)"
+        echo "⏰ Check interval: 30 seconds"
     else
         echo "⚠️ Monitor started but safety monitor may not be active"
     fi
