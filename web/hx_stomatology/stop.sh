@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Stop Hospital Monitor Script with Safety Monitor Cleanup
+# Stop Stomatology Monitor Script with Safety Monitor Cleanup
 
-SESSION_NAME="hospital_monitor"
+SESSION_NAME="stomatology_monitor"
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-SAFETY_PID_FILE="$SCRIPT_DIR/.monitor_safety.pid"
+SAFETY_PID_FILE="$SCRIPT_DIR/.stomatology_safety.pid"
 
-echo "🛑 Stopping hospital monitor and safety systems..."
+echo "🛑 Stopping Stomatology Monitor and safety systems..."
 
 # Stop safety monitor first
 if [ -f "$SAFETY_PID_FILE" ]; then
@@ -36,13 +36,13 @@ else
 fi
 
 # Kill any remaining monitoring processes as backup
-monitor_pids=$(pgrep -f "hospital_monitor.py" 2>/dev/null)
+monitor_pids=$(pgrep -f "stomatology_monitor.py" 2>/dev/null)
 if [ -n "$monitor_pids" ]; then
     echo "🧹 Cleaning up remaining monitor processes..."
     echo "$monitor_pids" | xargs kill 2>/dev/null
     sleep 2
     # Force kill if still running
-    remaining_pids=$(pgrep -f "hospital_monitor.py" 2>/dev/null)
+    remaining_pids=$(pgrep -f "stomatology_monitor.py" 2>/dev/null)
     if [ -n "$remaining_pids" ]; then
         echo "$remaining_pids" | xargs kill -9 2>/dev/null
     fi
@@ -51,13 +51,13 @@ fi
 
 # Clear log files
 cd "$SCRIPT_DIR"
-if [ -f "success.log" ]; then
-    > success.log
-    echo "🧹 success.log cleared"
+if [ -f "stomatology_success.log" ]; then
+    > stomatology_success.log
+    echo "🧹 stomatology_success.log cleared"
 fi
-if [ -f "reg.log" ]; then
-    > reg.log
-    echo "🧹 reg.log cleared"
+if [ -f "stomatology_reg.log" ]; then
+    > stomatology_reg.log
+    echo "🧹 stomatology_reg.log cleared"
 fi
 
-echo "✅ 🦷 Hospital monitor systems stopped and cleaned up" 
+echo "✅ All monitoring systems stopped and cleaned up" 
