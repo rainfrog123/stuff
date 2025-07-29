@@ -4,7 +4,8 @@ set -e  # Exit on error
 
 # Update and upgrade system
 sudo apt update && sudo apt upgrade -y
-
+sudo apt install -y zsh
+echo 'PROMPT="%~ $ "' >> ~/.zshrc
 # Install Docker and Docker Compose
 sudo apt install -y docker.io docker-compose
 sudo apt install -y tmux htop x11-apps

@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Baccarat Balance Detector
 // @namespace    http://tampermonkey.net/
-// @version      1.4
-// @description  Detects balance using a specific selector and stores it in localStorage (no UI indicator)
+// @version      1.5
+// @description  Detects balance using robust DOM traversal and stores it in localStorage (no UI indicator)
 // @author       You
 // @match        *://client.pragmaticplaylive.net/desktop/baccarat/*
 // @grant        GM_setValue
@@ -21,13 +21,7 @@
         // Balance detection settings
         STORAGE_KEY: 'currentBalance',    // Key used in localStorage
 
-        // DOM selectors for different game interfaces
-        SELECTORS: {
-            // Only use this specific selector for balance
-            //BACCARAT_BALANCE: '[data-testid="wallet-balance-value"] span span', // Updated selector
-            //BACCARAT_BALANCE: '.sm_sn.iI_iJ .sm_sp span', // Updated selector
-            BACCARAT_BALANCE: '.tw_tz span', // Updated selector
-        },
+        // No longer using specific CSS selectors - using robust DOM traversal instead
 
         // Balance validation settings
         VALIDATION: {
@@ -86,49 +80,59 @@
     // ==========================================
 
     /**
-     * Try to detect balance using the specific selector
+     * Try to detect balance using robust DOM traversal
      */
     function detectBalance() {
         try {
-            // Get all elements matching our selector
-            const balanceElements = document.querySelectorAll(CONFIG.SELECTORS.BACCARAT_BALANCE);
+            // Find the div with "Balance" text using robust method
+            const balanceLabel = [...document.querySelectorAll('div')]
+                .find(el => el.textContent.trim() === 'Balance');
 
-            if (balanceElements.length === 0) {
-                Logger.verbose('No balance elements found');
+            if (!balanceLabel) {
+                Logger.verbose('Balance label not found');
                 return;
             }
 
-            // Log how many elements were found
-            if (balanceElements.length > 1) {
-                Logger.verbose(`Found ${balanceElements.length} balance elements`);
+            // Get the parent container
+            const balanceContainer = balanceLabel.parentElement;
+            if (!balanceContainer) {
+                Logger.verbose('Balance container not found');
+                return;
             }
 
-            // Process each element
-            for (const element of balanceElements) {
-                const balance = extractNumericValue(element.textContent);
+            // Find the balance value element (sibling div with span)
+            const balanceValueDiv = balanceContainer.querySelector('div:not(:first-child) span');
+            if (!balanceValueDiv) {
+                Logger.verbose('Balance value element not found');
+                return;
+            }
 
-                if (balance !== null && balance >= CONFIG.VALIDATION.MIN_VALID_BALANCE) {
-                    Logger.verbose(`Balance detected: ${balance.toFixed(2)}`);
+            const balanceText = balanceValueDiv.textContent;
+            const balance = extractNumericValue(balanceText);
 
-                    // Get previous balance for comparison
-                    const previousBalance = localStorage.getItem(CONFIG.STORAGE_KEY);
-                    const previousBalanceNum = previousBalance ? parseFloat(previousBalance) : null;
+            if (balance !== null && balance >= CONFIG.VALIDATION.MIN_VALID_BALANCE) {
+                Logger.verbose(`Balance detected: ${balance.toFixed(2)} from text: "${balanceText}"`);
 
-                    // Update storage if balance changed
-                    if (previousBalanceNum !== balance) {
-                        Logger.info(`Balance updated: ${balance.toFixed(2)}`);
+                // Get previous balance for comparison
+                const previousBalance = localStorage.getItem(CONFIG.STORAGE_KEY);
+                const previousBalanceNum = previousBalance ? parseFloat(previousBalance) : null;
 
-                        // Store in localStorage
-                        localStorage.setItem(CONFIG.STORAGE_KEY, balance.toString());
+                // Update storage if balance changed
+                if (previousBalanceNum !== balance) {
+                    Logger.info(`Balance updated: ${balance.toFixed(2)}`);
 
-                        // Also store timestamp of last update
-                        localStorage.setItem(`${CONFIG.STORAGE_KEY}_timestamp`, Date.now().toString());
+                    // Store in localStorage
+                    localStorage.setItem(CONFIG.STORAGE_KEY, balance.toString());
 
-                        // Update last confirmed balance
-                        STATE.lastConfirmedBalance = balance;
-                        STATE.lastUpdateTime = Date.now();
-                    }
+                    // Also store timestamp of last update
+                    localStorage.setItem(`${CONFIG.STORAGE_KEY}_timestamp`, Date.now().toString());
+
+                    // Update last confirmed balance
+                    STATE.lastConfirmedBalance = balance;
+                    STATE.lastUpdateTime = Date.now();
                 }
+            } else {
+                Logger.verbose(`Invalid balance detected: ${balance} from text: "${balanceText}"`);
             }
         } catch (error) {
             Logger.error(`Error detecting balance: ${error.message}`);
@@ -143,23 +147,25 @@
      * Set up a MutationObserver to detect DOM changes
      */
     function setupBalanceObserver() {
-        // Create a MutationObserver to watch for changes to the balance element
+        // Create a MutationObserver to watch for changes
         const observer = new MutationObserver((mutations) => {
-            // Check if any of the mutations affect our balance elements
+            // Check if any mutations might affect balance display
             const shouldCheckBalance = mutations.some(mutation => {
-                // Check if the mutation target matches our selector
-                if (mutation.target.matches && mutation.target.matches(CONFIG.SELECTORS.BACCARAT_BALANCE)) {
+                // Check for text changes in any element
+                if (mutation.type === 'characterData') {
                     return true;
                 }
 
-                // Check if any added nodes match our selector
+                // Check for new elements that might contain balance
                 if (mutation.addedNodes.length) {
                     for (const node of mutation.addedNodes) {
                         if (node.nodeType === Node.ELEMENT_NODE) {
-                            if (node.matches && node.matches(CONFIG.SELECTORS.BACCARAT_BALANCE)) {
+                            // Check if added node or its children contain "Balance" text
+                            if (node.textContent && node.textContent.includes('Balance')) {
                                 return true;
                             }
-                            if (node.querySelector && node.querySelector(CONFIG.SELECTORS.BACCARAT_BALANCE)) {
+                            // Check if added node contains span elements (balance values)
+                            if (node.tagName === 'SPAN' || node.querySelector && node.querySelector('span')) {
                                 return true;
                             }
                         }
@@ -169,9 +175,9 @@
                 return false;
             });
 
-            // If relevant changes detected, check balance immediately
+            // If relevant changes detected, check balance after a short delay
             if (shouldCheckBalance) {
-                detectBalance();
+                setTimeout(detectBalance, 100);
             }
         });
 
@@ -183,7 +189,7 @@
             characterDataOldValue: true
         });
 
-        Logger.info('Balance observer set up');
+        Logger.info('Balance observer set up with robust detection');
 
         // Also run periodic checks as a fallback
         setInterval(detectBalance, 2000);
@@ -197,8 +203,8 @@
      * Initialize the balance detector
      */
     function initialize() {
-        Logger.info('Balance Detector v1.4 initialized');
-        Logger.info('Using selector: ' + CONFIG.SELECTORS.BACCARAT_BALANCE);
+        Logger.info('Balance Detector v1.5 initialized');
+        Logger.info('Using robust DOM traversal to find "Balance" label');
 
         // Run initial detection
         setTimeout(detectBalance, 1000);

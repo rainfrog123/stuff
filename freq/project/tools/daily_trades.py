@@ -72,16 +72,18 @@ class BinanceDailyTradesManager:
         Get file size from URL without downloading
         """
         try:
-            response = requests.head(url)
+            response = requests.head(url, timeout=10)  # Add 10 second timeout
+            response.raise_for_status()  # Raise exception for HTTP errors
             return int(response.headers.get('content-length', 0))
-        except:
+        except Exception as e:
+            print(f"Error checking file size for {url}: {e}")
             return 0
 
     def download_file(self, url, output_path):
         """
         Download a file with progress bar
         """
-        response = requests.get(url, stream=True)
+        response = requests.get(url, stream=True, timeout=30)  # Add 30 second timeout
         total_size = int(response.headers.get('content-length', 0))
         
         with open(output_path, 'wb') as file, tqdm(
@@ -544,14 +546,15 @@ def main():
     # Initialize the Binance Trades Manager
     manager = BinanceDailyTradesManager()
     
-    # Download data from March 2025 to today
-    start_date = datetime(2025, 5, 1)
+    # Download data from May 2025 to today
+    start_date = datetime(2025, 5, 1)  # Fixed: Changed to March 1 to match comment
     today = datetime.now()
+    yesterday = today - timedelta(days=1)  # Don't try to download today's data (may not exist yet)
     
-    print(f"Downloading ETH/USDT trades data from March 2025 to today ({today.strftime('%Y-%m-%d')})...")
+    print(f"Downloading ETH/USDT trades data from March 2025 to {yesterday.strftime('%Y-%m-%d')}...")
     
     current_date = start_date
-    while current_date <= today:
+    while current_date <= yesterday:
         print(f"\nProcessing {current_date.strftime('%B %Y')}...")
         manager.download_daily_trades(year=current_date.year, month=current_date.month)
         

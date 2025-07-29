@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Baccarat Simple v2 - Refactored
+// @name         Baccarat Simple v2 - Fixed
 // @namespace    http://tampermonkey.net/
-// @version      4.0
-// @description  Updated for new DOM structure - Bet fixed $0.2 every 3-5 rounds
+// @version      4.3
+// @description  Crypto-secure random betting - Fast 0.2 chip (1/8-1/2 balance) every 1-3 rounds
 // @author       you
 // @match        *://client.pragmaticplaylive.net/desktop/baccarat/*
 // @grant        unsafeWindow
@@ -13,431 +13,307 @@
     'use strict';
 
     /**
-     * Configuration and utilities
+     * Configuration
      */
     const CONFIG = {
-        CLICK_JITTER: [25, 55],     // ms between events
-        ROUND_DELAY: 8000,          // ms after result before betting
-        MIN_BET: 0.2,               // Fixed bet amount ($0.2)
-        DEBUG: false,               // Enable debug logging
+        ROUND_DELAY: 10000,          // ms after result before betting (3 seconds)
+        MIN_BET_FRACTION: 1/8,       // Minimum bet: 1/8 of balance
+        MAX_BET_FRACTION: 1/2,      // Maximum bet: 1/2 of balance
+        DEBUG: true,                // Enable debug logging
         SELECTORS: {
-            // Game state selectors
-            roundNumber: '.ju_jv',                              // Round number display
-            counters: '.jN_jZ',                                 // Counter values
-            counterTypes: '.jN_jQ',                             // P/B/T indicators
-            
-            // Betting area selectors  
-            leftBetRoot: '#leftBetTextRoot',                    // Player betting area
-            rightBetRoot: '#rightBetTextRoot',                  // Banker betting area
-            centerBetRoot: '#centerTopBet',                     // Tie betting area
-            
-            // Chip selectors (need to be updated based on actual interface)
-            chipContainer: '[class*="chip"]',                   // Chip container
-            activeChip: '[aria-pressed="true"]',                // Currently selected chip
-            
-            // Clickable betting spots
-            playerBetSpot: '#leftBetTextRoot [tabindex="-1"]',  // Player click area
-            bankerBetSpot: '#rightBetTextRoot [tabindex="-1"]', // Banker click area
+            roundNumber: '.ju_jv',
+            counters: '.jN_jZ',
+            counterTypes: '.jN_jQ',
+            // Simplified betting selectors
+            playerArea: '#leftBetTextRoot',
+            bankerArea: '#rightBetTextRoot'
         }
     };
 
     /**
-     * Enhanced logging utility
+     * Crypto-based random utilities
      */
-    class Logger {
-        static log(message, type = 'info') {
-            const timestamp = new Date().toLocaleTimeString();
-            const emoji = type === 'error' ? '❌' : type === 'warn' ? '⚠️' : type === 'success' ? '✅' : 'ℹ️';
-            console.log(`[${timestamp}] [SmartBet] ${emoji} ${message}`);
+    class CryptoRandom {
+        // Generate secure random boolean
+        static randomBool() {
+            return crypto.getRandomValues(new Uint8Array(1))[0] & 1;
         }
 
-        static debug(message) {
-            if (CONFIG.DEBUG) {
-                this.log(`[DEBUG] ${message}`, 'info');
-            }
+        // Generate secure random float between 0 and 1
+        static randomFloat() {
+            const array = new Uint32Array(1);
+            crypto.getRandomValues(array);
+            return array[0] / (0xFFFFFFFF + 1);
         }
 
-        static error(message, error = null) {
-            this.log(message, 'error');
-            if (error) console.error(error);
+        // Generate secure random integer between min and max (inclusive)
+        static randomInt(min, max) {
+            return Math.floor(this.randomFloat() * (max - min + 1)) + min;
         }
 
-        static warn(message) {
-            this.log(message, 'warn');
-        }
-
-        static success(message) {
-            this.log(message, 'success');
+        // Choose Player or Banker randomly
+        static randomSide() {
+            return this.randomBool() ? 'Player' : 'Banker';
         }
     }
 
     /**
-     * DOM utilities for new interface
+     * Simple logger
+     */
+    class Logger {
+        static log(msg) {
+            console.log(`[SmartBet] ${new Date().toLocaleTimeString()} - ${msg}`);
+        }
+        static debug(msg) {
+            if (CONFIG.DEBUG) console.log(`[DEBUG] ${msg}`);
+        }
+    }
+
+    /**
+     * Simplified DOM utilities
      */
     class DOMUtils {
-        /**
-         * Get current round number
-         */
         static getRoundNumber() {
+            const el = document.querySelector(CONFIG.SELECTORS.roundNumber);
+            const match = el?.textContent?.match(/#(\d+)/);
+            return match ? parseInt(match[1]) : 0;
+        }
+
+        static readCounters() {
+            const counters = { P: 0, B: 0, T: 0 };
+            const values = document.querySelectorAll(CONFIG.SELECTORS.counters);
+            const types = document.querySelectorAll(CONFIG.SELECTORS.counterTypes);
+            
+            for (let i = 0; i < Math.min(values.length, types.length); i++) {
+                const type = types[i]?.textContent?.trim();
+                const value = parseInt(values[i]?.textContent?.trim() || '0');
+                if (type && !isNaN(value) && counters.hasOwnProperty(type)) {
+                    counters[type] = value;
+                }
+            }
+            return counters;
+        }
+
+        static getPlayerArea() {
+            return document.querySelector(CONFIG.SELECTORS.playerArea);
+        }
+
+        static getBankerArea() {
+            return document.querySelector(CONFIG.SELECTORS.bankerArea);
+        }
+
+        static areElementsReady() {
+            return !!(this.getPlayerArea() && this.getBankerArea());
+        }
+    }
+
+    /**
+     * Dynamic betting logic with balance-based amounts
+     */
+    class BettingLogic {
+        static simulateClick(element) {
             try {
-                const element = document.querySelector(CONFIG.SELECTORS.roundNumber);
-                const text = element?.textContent?.trim();
-                if (!text) return 0;
-                // Extract number from "#45" format
-                const match = text.match(/#(\d+)/);
-                return match ? parseInt(match[1], 10) : 0;
+                // Simple and effective PointerEvent sequence
+                const downEvent = new PointerEvent('pointerdown', {
+                    bubbles: true,
+                    cancelable: true,
+                    pointerType: 'mouse',
+                });
+
+                const upEvent = new PointerEvent('pointerup', {
+                    bubbles: true,
+                    cancelable: true,
+                    pointerType: 'mouse',
+                });
+
+                element.dispatchEvent(downEvent);
+                element.dispatchEvent(upEvent);
+
+                return true;
             } catch (error) {
-                Logger.debug(`Error getting round number: ${error.message}`);
+                Logger.log(`❌ Click simulation error: ${error.message}`);
+                return false;
+            }
+        }
+
+        static getCurrentBalance() {
+            try {
+                // Use robust method to find balance
+                const balanceLabel = [...document.querySelectorAll('div')]
+                    .find(el => el.textContent.trim() === 'Balance');
+                if (!balanceLabel) return 0;
+                
+                const balanceContainer = balanceLabel.parentElement;
+                if (!balanceContainer) return 0;
+                
+                const balanceValueDiv = balanceContainer.querySelector('div:not(:first-child) span');
+                if (!balanceValueDiv) return 0;
+                
+                const balanceText = balanceValueDiv.textContent.trim();
+                const balance = parseFloat(balanceText.replace(/[^0-9.]/g, ''));
+                
+                return !isNaN(balance) ? balance : 0;
+            } catch {
                 return 0;
             }
         }
 
-        /**
-         * Read counter values and types
-         */
-        static readCounters() {
-            const counters = { P: 0, B: 0, T: 0 };
+        static calculateBetAmount(balance) {
+            // Random bet between 1/8 and 1/2 of balance using crypto random
+            const minBet = balance * CONFIG.MIN_BET_FRACTION;
+            const maxBet = balance * CONFIG.MAX_BET_FRACTION;
+            const randomBet = minBet + CryptoRandom.randomFloat() * (maxBet - minBet);
             
+            // Round to nearest chip value (0.2)
+            const chips = Math.max(1, Math.floor(randomBet / 0.2));
+            const betAmount = chips * 0.2;
+            
+            return { betAmount, chips };
+        }
+
+        static async placeBet(side) {
             try {
-                const values = document.querySelectorAll(CONFIG.SELECTORS.counters);
-                const types = document.querySelectorAll(CONFIG.SELECTORS.counterTypes);
+                const balance = this.getCurrentBalance();
+                if (balance < 0.2) {
+                    Logger.log(`❌ Insufficient balance: $${balance.toFixed(2)}`);
+                    return false;
+                }
+
+                const { betAmount, chips } = this.calculateBetAmount(balance);
                 
-                Logger.debug(`Found ${values.length} counter values and ${types.length} counter types`);
+                if (chips <= 0) {
+                    Logger.log(`❌ No chips to bet (calculated ${chips} chips)`);
+                    return false;
+                }
+
+                Logger.log(`💰 Betting $${betAmount.toFixed(2)} (${chips} chips) on ${side} | Balance: $${balance.toFixed(2)}`);
                 
-                // Match values with types
-                for (let i = 0; i < Math.min(values.length, types.length); i++) {
-                    const type = types[i]?.textContent?.trim();
-                    const value = parseInt(values[i]?.textContent?.trim() || '0', 10);
+                const area = side === 'Player' ? DOMUtils.getPlayerArea() : DOMUtils.getBankerArea();
+                if (!area) {
+                    Logger.log(`❌ ${side} area not found`);
+                    return false;
+                }
+
+                // Click multiple times for the desired bet amount - FAST clicking
+                for (let i = 0; i < chips; i++) {
+                    const success = this.simulateClick(area);
+                    if (!success) {
+                        Logger.log(`❌ Failed to click ${i + 1}/${chips} on ${side}`);
+                        return false;
+                    }
                     
-                    Logger.debug(`Counter ${i}: type="${type}", value="${value}"`);
-                    
-                    if (type && !isNaN(value) && counters.hasOwnProperty(type)) {
-                        counters[type] = value;
+                    // Very small delay between clicks for speed
+                    if (i < chips - 1) {
+                        await new Promise(resolve => setTimeout(resolve, 5));
                     }
                 }
                 
-                Logger.debug(`Final counters: P=${counters.P}, B=${counters.B}, T=${counters.T}`);
-            } catch (error) {
-                Logger.error('Error reading counters:', error);
-            }
-            
-            return counters;
-        }
-
-        /**
-         * Find appropriate chip for betting
-         */
-        static findChip() {
-            try {
-                // Try to find currently selected chip
-                let chip = document.querySelector(CONFIG.SELECTORS.activeChip);
-                if (chip) {
-                    Logger.debug('Found active chip');
-                    return chip;
-                }
-
-                // Fallback: find any available chip
-                const chips = document.querySelectorAll(CONFIG.SELECTORS.chipContainer);
-                if (chips.length > 0) {
-                    Logger.debug(`Found ${chips.length} chips, using first one`);
-                    return chips[0];
-                }
-
-                Logger.warn('No chips found');
-                return null;
-            } catch (error) {
-                Logger.error('Error finding chip:', error);
-                return null;
-            }
-        }
-
-        /**
-         * Get player betting area
-         */
-        static getPlayerBetSpot() {
-            try {
-                const spot = document.querySelector(CONFIG.SELECTORS.playerBetSpot);
-                Logger.debug(`Player bet spot found: ${!!spot}`);
-                return spot;
-            } catch (error) {
-                Logger.error('Error finding player bet spot:', error);
-                return null;
-            }
-        }
-
-        /**
-         * Get banker betting area
-         */
-        static getBankerBetSpot() {
-            try {
-                const spot = document.querySelector(CONFIG.SELECTORS.bankerBetSpot);
-                Logger.debug(`Banker bet spot found: ${!!spot}`);
-                return spot;
-            } catch (error) {
-                Logger.error('Error finding banker bet spot:', error);
-                return null;
-            }
-        }
-
-        /**
-         * Check if essential elements are available
-         */
-        static areElementsReady() {
-            const playerSpot = this.getPlayerBetSpot();
-            const bankerSpot = this.getBankerBetSpot();
-            const chip = this.findChip();
-            
-            const ready = !!(playerSpot && bankerSpot && chip);
-            Logger.debug(`Elements ready: player=${!!playerSpot}, banker=${!!bankerSpot}, chip=${!!chip}`);
-            
-            return ready;
-        }
-    }
-
-    /**
-     * Enhanced betting logic
-     */
-    class BettingLogic {
-        /**
-         * Perform enhanced click simulation
-         */
-        static simulateClick(element) {
-            try {
-                const rect = element.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-
-                // Enhanced event simulation
-                const events = [
-                    { type: 'pointerdown', delay: 0 },
-                    { type: 'mousedown', delay: 10 },
-                    { type: 'pointerup', delay: CONFIG.CLICK_JITTER[0] },
-                    { type: 'mouseup', delay: CONFIG.CLICK_JITTER[0] + 10 },
-                    { type: 'click', delay: CONFIG.CLICK_JITTER[1] }
-                ];
-
-                events.forEach(({ type, delay }) => {
-                    setTimeout(() => {
-                        element.dispatchEvent(new PointerEvent(type, {
-                            bubbles: true,
-                            cancelable: true,
-                            pointerType: 'mouse',
-                            view: unsafeWindow,
-                            clientX: x,
-                            clientY: y
-                        }));
-                    }, delay);
-                });
-
-                return true;
-            } catch (error) {
-                Logger.error(`Error simulating click: ${error.message}`, error);
-                return false;
-            }
-        }
-
-        /**
-         * Place a bet on specified side
-         */
-        static async placeBet(side, amount) {
-            try {
-                Logger.log(`💰 Attempting to bet $${amount} on ${side}`);
-
-                // Get betting elements
-                const chip = DOMUtils.findChip();
-                const betSpot = side === 'Player' ? DOMUtils.getPlayerBetSpot() : DOMUtils.getBankerBetSpot();
-
-                if (!chip || !betSpot) {
-                    Logger.error(`Missing elements: chip=${!!chip}, betSpot=${!!betSpot}`);
-                    return false;
-                }
-
-                // Click chip first
-                Logger.debug('Clicking chip...');
-                if (!this.simulateClick(chip)) {
-                    Logger.error('Failed to click chip');
-                    return false;
-                }
-
-                // Wait a moment
-                await new Promise(resolve => setTimeout(resolve, CONFIG.CLICK_JITTER[1] + 50));
-
-                // Click betting spot
-                Logger.debug(`Clicking ${side} betting spot...`);
-                if (!this.simulateClick(betSpot)) {
-                    Logger.error(`Failed to click ${side} betting spot`);
-                    return false;
-                }
-
-                Logger.success(`✅ Bet placed on ${side} for $${amount}`);
+                Logger.log(`✅ ${side} bet placed: $${betAmount.toFixed(2)} (${chips} fast clicks)`);
                 return true;
                 
             } catch (error) {
-                Logger.error(`Error placing bet: ${error.message}`, error);
+                Logger.log(`❌ Bet error: ${error.message}`);
                 return false;
             }
         }
     }
 
     /**
-     * Game state tracking and management
+     * Game state manager
      */
-    class GameStateManager {
+    class GameState {
         constructor() {
             this.round = 0;
             this.roundsSinceLastBet = 0;
-            this.nextBetRound = this.getRandomBetInterval();
+            this.nextBetRound = this.getRandomInterval();
             this.waitingForResult = false;
             this.previousCounters = { P: 0, B: 0, T: 0 };
             this.isRunning = false;
         }
 
-        /**
-         * Get random interval between 3-5 rounds
-         */
-        getRandomBetInterval() {
-            return Math.floor(Math.random() * 3) + 3; // 3-5 rounds
+        getRandomInterval() {
+            return CryptoRandom.randomInt(1, 3); // 1-3 rounds using crypto random
         }
 
-        /**
-         * Detect if a new round has started based on counter changes
-         */
         detectNewRound() {
-            const currentCounters = DOMUtils.readCounters();
-            const roundNumber = DOMUtils.getRoundNumber();
-            
-            // Check if any counter increased (indicating a result)
-            const hasCounterIncrease = 
-                currentCounters.P > this.previousCounters.P ||
-                currentCounters.B > this.previousCounters.B ||
-                currentCounters.T > this.previousCounters.T;
+            const current = DOMUtils.readCounters();
+            const hasIncrease = 
+                current.P > this.previousCounters.P ||
+                current.B > this.previousCounters.B ||
+                current.T > this.previousCounters.T;
 
-            if (hasCounterIncrease) {
-                // Determine winner
-                const winner = this.determineWinner(currentCounters, this.previousCounters);
-                
-                Logger.log(`🎯 Round ${roundNumber} result: ${winner}`);
-                Logger.debug(`Counters changed: P:${this.previousCounters.P}→${currentCounters.P}, B:${this.previousCounters.B}→${currentCounters.B}, T:${this.previousCounters.T}→${currentCounters.T}`);
-                
-                this.onRoundComplete(winner);
+            if (hasIncrease) {
+                this.onRoundComplete();
             }
-
-            this.previousCounters = { ...currentCounters };
+            this.previousCounters = { ...current };
         }
 
-        /**
-         * Determine winner based on counter changes
-         */
-        determineWinner(current, previous) {
-            const deltaP = current.P - previous.P;
-            const deltaB = current.B - previous.B;
-            const deltaT = current.T - previous.T;
-
-            if (deltaP > deltaB && deltaP > deltaT) return 'Player';
-            if (deltaB > deltaP && deltaB > deltaT) return 'Banker';
-            if (deltaT > deltaP && deltaT > deltaB) return 'Tie';
-            return 'Unknown';
-        }
-
-        /**
-         * Handle round completion
-         */
-        onRoundComplete(winner) {
+        onRoundComplete() {
             this.waitingForResult = false;
             this.round++;
             this.roundsSinceLastBet++;
 
-            Logger.log(`�� Round ${this.round} completed. Rounds since last bet: ${this.roundsSinceLastBet}/${this.nextBetRound}`);
+            const roundsLeft = this.nextBetRound - this.roundsSinceLastBet;
+            Logger.log(`🎯 Round ${this.round} complete. Next bet in: ${roundsLeft} round(s)`);
 
-            // Check if it's time to bet
             if (this.roundsSinceLastBet >= this.nextBetRound) {
                 this.scheduleBet();
             }
         }
 
-        /**
-         * Schedule the next bet
-         */
         scheduleBet() {
-            if (this.waitingForResult) {
-                Logger.debug('Already waiting for result, skipping bet');
-                return;
-            }
+            if (this.waitingForResult) return;
 
-            Logger.log(`⏰ Scheduling bet in ${CONFIG.ROUND_DELAY}ms...`);
+            Logger.log(`⏰ Scheduling bet in ${CONFIG.ROUND_DELAY}ms`);
             
             setTimeout(async () => {
                 if (!this.waitingForResult && DOMUtils.areElementsReady()) {
-                    const side = Math.random() < 0.5 ? 'Player' : 'Banker';
-                    const success = await BettingLogic.placeBet(side, CONFIG.MIN_BET);
+                    const side = CryptoRandom.randomSide();
+                    const success = await BettingLogic.placeBet(side);
                     
                     if (success) {
                         this.waitingForResult = true;
                         this.roundsSinceLastBet = 0;
-                        this.nextBetRound = this.getRandomBetInterval();
-                        Logger.log(`⏳ Next bet scheduled in ${this.nextBetRound} round(s)`);
-                    } else {
-                        Logger.warn('Bet failed, will retry next round');
+                        this.nextBetRound = this.getRandomInterval();
                     }
-                } else {
-                    Logger.warn('Cannot bet: waiting for result or elements not ready');
                 }
             }, CONFIG.ROUND_DELAY);
         }
 
-        /**
-         * Start monitoring the game
-         */
         start() {
-            if (this.isRunning) {
-                Logger.warn('Game state manager already running');
-                return;
-            }
-
-            Logger.success('🟢 SmartBet v4.0 started - monitoring game state');
+            if (this.isRunning) return;
+            
+            Logger.log('🟢 Started');
             this.isRunning = true;
-
-            // Initialize counters
             this.previousCounters = DOMUtils.readCounters();
             
-            // Start monitoring loop
-            this.monitorInterval = setInterval(() => {
+            this.interval = setInterval(() => {
                 this.detectNewRound();
-            }, 1000); // Check every second
+            }, 1000);
         }
 
-        /**
-         * Stop monitoring
-         */
         stop() {
-            if (this.monitorInterval) {
-                clearInterval(this.monitorInterval);
-                this.monitorInterval = null;
-            }
+            if (this.interval) clearInterval(this.interval);
             this.isRunning = false;
-            Logger.log('🔴 SmartBet stopped');
+            Logger.log('🔴 Stopped');
         }
 
-        /**
-         * Get current status
-         */
         getStatus() {
-            const roundsLeft = this.nextBetRound - this.roundsSinceLastBet;
             return {
                 round: this.round,
-                roundsLeft: Math.max(0, roundsLeft),
-                waitingForResult: this.waitingForResult,
-                isRunning: this.isRunning
+                roundsLeft: Math.max(0, this.nextBetRound - this.roundsSinceLastBet),
+                waiting: this.waitingForResult,
+                running: this.isRunning
             };
         }
     }
 
     /**
-     * Enhanced HUD display
+     * Minimal HUD
      */
-    class HUDManager {
-        constructor(gameStateManager) {
-            this.gameState = gameStateManager;
+    class MiniHUD {
+        constructor(gameState) {
+            this.gameState = gameState;
             this.createHUD();
         }
 
@@ -448,153 +324,88 @@
                 bottom: '10px',
                 left: '10px',
                 background: 'rgba(0, 0, 0, 0.8)',
-                color: '#00ff00',
-                font: '12px "Courier New", monospace',
-                padding: '8px 12px',
-                borderRadius: '6px',
-                border: '1px solid #00ff00',
+                color: '#0f0',
+                font: '11px monospace',
+                padding: '4px 8px',
+                borderRadius: '4px',
                 zIndex: '99999',
-                minWidth: '250px',
-                boxShadow: '0 2px 10px rgba(0, 0, 0, 0.5)'
+                minWidth: '120px'
             });
 
             document.body.appendChild(this.hud);
-            this.startUpdating();
-        }
-
-        startUpdating() {
-            this.updateInterval = setInterval(() => {
-                this.updateDisplay();
-            }, 500);
-        }
-
-        updateDisplay() {
-            try {
-                const status = this.gameState.getStatus();
-                const balance = this.getBalance();
-                const roundNumber = DOMUtils.getRoundNumber();
-                const counters = DOMUtils.readCounters();
-                
-                const statusText = status.waitingForResult ? '⏳ Waiting' : '🟢 Ready';
-                const roundsText = status.roundsLeft === 0 ? 'BETTING NOW' : `${status.roundsLeft} round${status.roundsLeft !== 1 ? 's' : ''}`;
-                
-                this.hud.innerHTML = `
-                    <div><strong>🎰 SmartBet v4.0</strong></div>
-                    <div>Status: ${statusText}</div>
-                    <div>Round: #${roundNumber} (${status.round} tracked)</div>
-                    <div>Next bet: ${roundsText}</div>
-                    <div>Counters: P:${counters.P} B:${counters.B} T:${counters.T}</div>
-                    <div>Balance: $${balance.toFixed(2)}</div>
-                `;
-            } catch (error) {
-                Logger.debug(`HUD update error: ${error.message}`);
-            }
+            
+            setInterval(() => this.update(), 500);
         }
 
         getBalance() {
             try {
-                return parseFloat(localStorage.getItem('currentBalance')) || 0;
-            } catch {
-                return 0;
-            }
-        }
-
-        destroy() {
-            if (this.updateInterval) {
-                clearInterval(this.updateInterval);
-            }
-            if (this.hud && this.hud.parentNode) {
-                this.hud.parentNode.removeChild(this.hud);
-            }
-        }
-    }
-
-    /**
-     * Main application initialization
-     */
-    class SmartBetApp {
-        constructor() {
-            this.gameState = new GameStateManager();
-            this.hud = null;
-        }
-
-        async initialize() {
-            Logger.log('🚀 Initializing SmartBet v4.0...');
-
-            // Wait for DOM to be ready
-            await this.waitForDOM();
-            
-            // Start game monitoring
-            this.gameState.start();
-            
-            // Create HUD
-            this.hud = new HUDManager(this.gameState);
-            
-            // Expose global controls
-            this.exposeGlobalAPI();
-            
-            Logger.success('✅ SmartBet v4.0 initialized successfully');
-        }
-
-        async waitForDOM() {
-            const checkElements = () => {
-                const hasRoundNumber = !!document.querySelector(CONFIG.SELECTORS.roundNumber);
-                const hasCounters = document.querySelectorAll(CONFIG.SELECTORS.counters).length > 0;
-                const hasBetSpots = !!(document.querySelector(CONFIG.SELECTORS.leftBetRoot) && 
-                                     document.querySelector(CONFIG.SELECTORS.rightBetRoot));
+                // Use robust method to find balance
+                const balanceLabel = [...document.querySelectorAll('div')]
+                    .find(el => el.textContent.trim() === 'Balance');
+                if (!balanceLabel) return 'N/A';
                 
-                Logger.debug(`DOM check: round=${hasRoundNumber}, counters=${hasCounters}, betSpots=${hasBetSpots}`);
-                return hasRoundNumber && hasCounters && hasBetSpots;
-            };
-
-            if (checkElements()) {
-                Logger.debug('DOM ready immediately');
-                return;
+                const balanceContainer = balanceLabel.parentElement;
+                if (!balanceContainer) return 'N/A';
+                
+                const balanceValueDiv = balanceContainer.querySelector('div:not(:first-child) span');
+                if (!balanceValueDiv) return 'N/A';
+                
+                return balanceValueDiv.textContent.trim();
+            } catch {
+                return 'N/A';
             }
-
-            Logger.log('⏳ Waiting for DOM elements...');
-            
-            return new Promise((resolve) => {
-                const observer = new MutationObserver(() => {
-                    if (checkElements()) {
-                        observer.disconnect();
-                        Logger.success('✅ DOM elements ready');
-                        resolve();
-                    }
-                });
-
-                observer.observe(document.body, {
-                    childList: true,
-                    subtree: true
-                });
-
-                // Timeout after 30 seconds
-                setTimeout(() => {
-                    observer.disconnect();
-                    Logger.warn('⚠️ DOM wait timeout, proceeding anyway');
-                    resolve();
-                }, 30000);
-            });
         }
 
-        exposeGlobalAPI() {
-            window.smartBet = {
-                start: () => this.gameState.start(),
-                stop: () => this.gameState.stop(),
-                status: () => this.gameState.getStatus(),
-                debug: (enabled = true) => { CONFIG.DEBUG = enabled; },
-                testBet: (side = 'Player') => BettingLogic.placeBet(side, CONFIG.MIN_BET),
-                config: CONFIG
-            };
-
-            Logger.log('🔧 Global API exposed as window.smartBet');
+        update() {
+            const s = this.gameState.getStatus();
+            const round = DOMUtils.getRoundNumber();
+            const counters = DOMUtils.readCounters();
+            const balance = this.getBalance();
+            
+            const status = s.waiting ? '⏳' : s.running ? '🟢' : '🔴';
+            const nextBet = s.roundsLeft === 0 ? 'NOW' : s.roundsLeft;
+            
+            this.hud.innerHTML = `${status} #${round} | Next: ${nextBet} | ${balance} | P:${counters.P} B:${counters.B} T:${counters.T}`;
         }
     }
 
-    // Initialize the application
-    const app = new SmartBetApp();
-    app.initialize().catch(error => {
-        Logger.error('Failed to initialize SmartBet:', error);
-    });
+    // Initialize
+    const gameState = new GameState();
+    const hud = new MiniHUD(gameState);
+
+    // Wait for DOM then start
+    setTimeout(() => {
+        if (DOMUtils.areElementsReady()) {
+            gameState.start();
+            Logger.log('✅ SmartBet v4.3 ready - Crypto-secure random betting enabled');
+        } else {
+            Logger.log('⚠️ DOM not ready, retrying...');
+            setTimeout(() => gameState.start(), 3000);
+        }
+    }, 2000);
+
+    // Global API
+    window.smartBet = {
+        start: () => gameState.start(),
+        stop: () => gameState.stop(),
+        status: () => gameState.getStatus(),
+        testBet: (side = 'Player') => BettingLogic.placeBet(side),
+        getBalance: () => BettingLogic.getCurrentBalance(),
+        calcBet: () => {
+            const balance = BettingLogic.getCurrentBalance();
+            const result = BettingLogic.calculateBetAmount(balance);
+            console.log(`Balance: $${balance.toFixed(2)}, Bet: $${result.betAmount.toFixed(2)} (${result.chips} chips)`);
+            return result;
+        },
+        // Crypto random test functions
+        testRandom: () => {
+            console.log('Testing crypto random functions:');
+            console.log(`Random bool: ${CryptoRandom.randomBool()}`);
+            console.log(`Random float: ${CryptoRandom.randomFloat()}`);
+            console.log(`Random int (1-3): ${CryptoRandom.randomInt(1, 3)}`);
+            console.log(`Random side: ${CryptoRandom.randomSide()}`);
+        },
+        randomSide: () => CryptoRandom.randomSide()
+    };
 
 })();
