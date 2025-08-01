@@ -6,17 +6,17 @@ username="user-sp5uwd5fih"
 password="15yFvupp9fbN_zzP0D"
 proxy_server="gate.decodo.com:7000"
 session_duration="60"  # in minutes (1-1440)
-country="uk"           # two-letter country code
+country="se"           # two-letter country code
 # city="Hamburg"         # city name (use underscores for spaces)
 # state=""            # state code (for US - use us_state_name format)
 # continent=""        # continent code (eu, na, as, sa, af, oc)
 # asn=""              # ASN number
 
 # Session prefix (p = persistent, r = random)
-session_prefix="aax"
+session_prefix="apple22"
 
 # Define number of sessions to test
-num_sessions=30
+num_sessions=10
 
 # IPQS Configuration
 ipqs_api_key="740F92cS9nqqV41L0u7jfbSepB3dff08"
