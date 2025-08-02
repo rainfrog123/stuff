@@ -6,5 +6,6 @@ freqtrade trade --strategy SimpleTestStrategy --userdir /allah/stuff/freq/projec
 
 ## Backtesting Commands
 freqtrade backtesting --strategy TEMAReversal_MLStrategy --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config.json --timerange 20250710-20250711 --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000 --eps --fee 0
+# --timerange 1752105600-1752109200
 
 freqtrade backtesting --strategy TrendReversalLabelingStrategy --userdir /allah/stuff/freq/project_1/user_data --config /allah/stuff/freq/project_1/user_data/config.json --timerange 20170110- --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps --export=signals --fee 0

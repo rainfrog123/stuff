@@ -1,34 +1,25 @@
-/freq/project_1/user_data/backtest_results
-/freq/project_2/user_data/backtest_results
-/freq/userdir/models
-/freq/userdir/user_data/backtest_results
-events.out.tfevents.*
-*.ckpt
-/freq/project_1/ml/lightning_logs
-*.pyc
-/allah/stuff/web/alt_calculator
-/freq/project_2/labeled_data/lstm_data/
-/freq/project_2/labeled_data/logs/
-*.npy
-*.parquet
-*.csv
+# Freqtrade backtest results
+backtest-result*
+*result.json
+last_result.json
 
-# Database files
-*.db
-
-
-# Image files - visualization outputs
-*.png
-
-
-# JSON result/output files
-*_results_*.json
-*_params_*.json
-
-# Additional binary files
+# ML datasets
+ml_datasets/
 *.feather
-*.sqlite*
 
-# ML Training files
-*.yaml
-*/*/logs/*
+# Freqtrade user data
+user_data/backtest_results/
+user_data/logs/
+user_data/plot/
+user_data/ml_datasets/
+
+# Cache files
+*.cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store

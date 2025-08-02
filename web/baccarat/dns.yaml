@@ -1,0 +1,515 @@
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - tls://1.0.0.1
+    - tls://8.8.4.4
+  proxy-server-nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+
+proxies:
+  - name: aws_jp
+    server: 13.248.168.222
+    port: 19000
+    type: ssr
+    cipher: chacha20-ietf
+    password: bxsnucrgk6hfish
+    protocol: auth_aes128_sha1
+    obfs: plain
+    protocol-param: null
+    obfs-param: e8f8b194874.microsoft.com
+
+  - name: gcp_origin
+    server: 13.248.168.222
+    port: 19000
+    type: ssr
+    cipher: chacha20-ietf
+    password: bxsnucrgk6hfish
+    protocol: auth_aes128_sha1
+    obfs: plain
+    protocol-param: null
+    obfs-param: e8f8b194874.microsoft.com
+
+  - { name: '🇭🇰SS|Hong Kong 01|IPLC x3', type: ss, server: c.naiun.cac.cab, port: 30301, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: '🇭🇰V2|Hong Kong 01|IPLC x3', type: vmess, server: c.naiun.cac.cab, port: 30202, uuid: bb553795-6a8f-493c-960c-12a6f2f65eee, alterId: 0, cipher: auto, udp: true, network: ws, ws-opts: { path: /, headers: { Host: live.bilibili.com } }, ws-path: /, ws-headers: { Host: live.bilibili.com } }
+  - { name: '🇹🇼SS|Taiwan 01|IPLC x3', type: ss, server: c.naiun.cac.cab, port: 30302, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: '🇯🇵SS|Japan 01|IPLC x3', type: ss, server: c.naiun.cac.cab, port: 30304, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: '🇸🇬SS|Singapore 01|IPLC x3', type: ss, server: c.naiun.cac.cab, port: 30303, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: 🇸🇬TJ|Singapore C01|Netflix, type: trojan, server: 4bf2c66f2bad9c4168582a95a0a2b368.node.tro.cac.cab, port: 46203, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true, sni: sg.01.naiun.bilibili.com, skip-cert-verify: true }
+  - { name: 🇸🇬TJ|Singapore C02|Netflix, type: trojan, server: cc.rk1.cac.cab, port: 10116, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true, sni: sg.01.naiun.bilibili.com, skip-cert-verify: true }
+  - { name: 🇸🇬SS|Singapore A01|Netflix, type: ss, server: a.naiun.cac.cab, port: 30103, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: 🇸🇬SS|Singapore B01|Netflix, type: ss, server: b.naiun.cac.cab, port: 30103, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: '🇺🇸SS|United States 01|IPLC x3', type: ss, server: c.naiun.cac.cab, port: 30305, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: '🇹🇭SS|Thailand 01|IPLC x3', type: ss, server: c.naiun.cac.cab, port: 30306, cipher: chacha20-ietf-poly1305, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true }
+  - { name: 🇯🇵TJ|Japan C02|Netflix, type: trojan, server: cc.rk1.cac.cab, port: 10116, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true, sni: jp.01.naiun.bilibili.com, skip-cert-verify: true }
+  - { name: 🇳🇱TJ|Netherlands C01|IDC, type: trojan, server: 55055e1240b3e9b1e8b751432709cd93.node.tro.cac.cab, port: 42603, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true, sni: nl.01.naiun.bilibili.com, skip-cert-verify: true }
+  - { name: 🇬🇧TJ|英国C02|IDC, type: trojan, server: cc.rk1.cac.cab, port: 10116, password: bb553795-6a8f-493c-960c-12a6f2f65eee, udp: true, sni: gb.01.naiun.bilibili.com, skip-cert-verify: true }
+
+
+proxy-groups:
+  - name: 🏠 Official Website
+    type: select
+    proxies:
+      - gotocmy.com
+  
+  - name: 🚀 Node Selection
+    type: select
+    proxies:
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - 🇭🇰 Hong Kong Nodes
+      - 🇯🇵 Japan Nodes
+      - 🇺🇸 United States Nodes
+      - 🇮🇩 Indonesia Nodes
+      - 🇸🇬 Singapore Nodes
+      - 🇪🇺 Europe Nodes
+      - 🇹🇼 Taiwan Nodes
+      - 🍁 Other Regions
+      - DIRECT
+  
+  - name: 🔑 Manual Selection
+    type: select
+    proxies:
+      - DIRECT
+      - aws_jp
+      - gcp_origin
+      - 🇭🇰SS|Hong Kong 01|IPLC x3
+      - 🇭🇰V2|Hong Kong 01|IPLC x3
+      - 🇹🇼SS|Taiwan 01|IPLC x3
+      - 🇯🇵SS|Japan 01|IPLC x3
+      - 🇸🇬SS|Singapore 01|IPLC x3
+      - 🇸🇬TJ|Singapore C01|Netflix
+      - 🇸🇬TJ|Singapore C02|Netflix
+      - 🇸🇬SS|Singapore A01|Netflix
+      - 🇸🇬SS|Singapore B01|Netflix
+      - 🇺🇸SS|United States 01|IPLC x3
+      - 🇹🇭SS|Thailand 01|IPLC x3
+      - 🇯🇵TJ|Japan C02|Netflix
+      - 🇳🇱TJ|Netherlands C01|IDC
+      - 🇬🇧TJ|英国C02|IDC
+
+  - name: ☎️ Telegram
+    type: select
+    proxies:
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - 🇭🇰 Hong Kong Nodes
+      - 🇯🇵 Japan Nodes
+      - 🇺🇸 United States Nodes
+      - 🇮🇩 Indonesia Nodes
+      - 🇸🇬 Singapore Nodes
+      - 🇪🇺 Europe Nodes
+      - 🍁 Other Regions
+      - DIRECT
+  
+  - name: 📺 BiliBili
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+  
+  - name: 🎬 YouTube
+    type: select
+    proxies:
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - 🇭🇰 Hong Kong Nodes
+      - 🇯🇵 Japan Nodes
+      - 🇺🇸 United States Nodes
+      - 🇮🇩 Indonesia Nodes
+      - 🇸🇬 Singapore Nodes
+      - 🇪🇺 Europe Nodes
+      - 🍁 Other Regions
+      - DIRECT
+  
+  - name: 📷 TikTok
+    type: select
+    proxies:
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - 🇭🇰 Hong Kong Nodes
+      - 🇯🇵 Japan Nodes
+      - 🇺🇸 United States Nodes
+      - 🇮🇩 Indonesia Nodes
+      - 🇸🇬 Singapore Nodes
+      - 🇪🇺 Europe Nodes
+      - 🍁 Other Regions
+      - DIRECT
+  
+  - name: 🎥 Netflix
+    type: select
+    proxies:
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - 🇭🇰 Hong Kong Nodes
+      - 🇯🇵 Japan Nodes
+      - 🇺🇸 United States Nodes
+      - 🇮🇩 Indonesia Nodes
+      - 🇸🇬 Singapore Nodes
+      - 🇪🇺 Europe Nodes
+      - 🍁 Other Regions
+      - DIRECT
+  
+  - name: 📹 Disney+
+    type: select
+    proxies:
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - 🇭🇰 Hong Kong Nodes
+      - 🇯🇵 Japan Nodes
+      - 🇺🇸 United States Nodes
+      - 🇮🇩 Indonesia Nodes
+      - 🇸🇬 Singapore Nodes
+      - 🇪🇺 Europe Nodes
+      - 🍁 Other Regions
+      - DIRECT
+  
+  - name: 🎼 Emby
+    type: select
+    proxies:
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - 🇭🇰 Hong Kong Nodes
+      - 🇯🇵 Japan Nodes
+      - 🇺🇸 United States Nodes
+      - 🇮🇩 Indonesia Nodes
+      - 🇸🇬 Singapore Nodes
+      - 🇪🇺 Europe Nodes
+      - 🍁 Other Regions
+      - DIRECT
+  
+  - name: 🛡️ Privacy Protection
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+      - 🚀 Node Selection
+  
+  - name: 🎮 Gaming Platform
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+  
+  - name: ⏬ Download Platform
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+  
+  - name: 🌲 BT Torrent
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+  
+  - name: 🇨🇳 China Traffic
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+  
+  - name: 🚫 Ad Blocking
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+  
+  - name: 🚩 Social Media IP Location
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+  
+  - name: 🐟 Final
+    type: select
+    proxies:
+      - 🚀 Node Selection
+      - 🔑 Manual Selection
+      - ⚡️IPLC/IEPL
+      - 🎠Trojan
+      - DIRECT
+  
+  - name: 🛠️ Fallback
+    type: fallback
+    proxies:
+      - 🎠Trojan
+      - ⚡️IPLC/IEPL
+      - 🔑 Manual Selection
+    url: https://i.ytimg.com/generate_204
+    interval: 500
+  
+  - name: ⚡️IPLC/IEPL
+    type: select
+    proxies:
+      - DIRECT
+  
+  - name: 🎠Trojan
+    type: select
+    proxies:
+      - DIRECT
+  
+  - name: 🇭🇰 Hong Kong Nodes
+    type: select
+    proxies:
+      - 🇭🇰SS|Hong Kong 01|IPLC x3
+      - 🇭🇰V2|Hong Kong 01|IPLC x3
+      - DIRECT
+  
+  - name: 🇯🇵 Japan Nodes
+    type: select
+    proxies:
+      - 🇯🇵TJ|Japan C02|Netflix
+  
+  - name: 🇮🇩 Indonesia Nodes
+    type: select
+    proxies:
+      - DIRECT
+  
+  - name: 🇺🇸 United States Nodes
+    type: select
+    proxies:
+      - DIRECT
+      - 🇺🇸SS|United States 01|IPLC x3
+  
+  - name: ChatGPT Nodes
+    type: select
+    proxies:
+      # - 🇳🇱TJ|Netherlands C01|IDC
+      - 🇸🇬SS|Singapore 01|IPLC x3
+  
+  - name: 🇹🇼 Taiwan Nodes
+    type: select
+    proxies:
+      - 🇹🇼SS|Taiwan 01|IPLC x3
+      - aws_jp
+  
+  - name: 🇸🇬 Singapore Nodes
+    type: select
+    proxies:
+      - 🇸🇬SS|Singapore 01|IPLC x3
+      - 🇸🇬TJ|Singapore C01|Netflix
+      - 🇸🇬TJ|Singapore C02|Netflix
+      - 🇸🇬SS|Singapore A01|Netflix
+      - 🇸🇬SS|Singapore B01|Netflix
+      - DIRECT
+  
+  - name: 🇪🇺 Europe Nodes
+    type: select
+    proxies:
+      - DIRECT
+
+  - name: Stake Nodes
+    type: select
+    proxies:
+      - 🇹🇭SS|Thailand 01|IPLC x3
+  
+  - name: 🍁 Other Regions
+    type: select
+    proxies:
+      - DIRECT
+  
+  - name: gotocmy.com
+    type: select
+    proxies:
+      - DIRECT
+
+rule-providers:
+  IPfake:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/IPfake.yaml
+    path: ./Rules/IPfake.yaml
+    interval: 86400
+  
+  BiliBili:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/bilibili.yaml
+    path: ./Rules/bilibili.yaml
+    interval: 86400
+  
+  Disney:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Disney.yaml
+    path: ./Rules/Disney.yaml
+    interval: 86400
+  
+  Netflix:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Netflix.yaml
+    path: ./Rules/Netflix.yaml
+    interval: 86400
+  
+  TikTok:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/TikTok.yaml
+    path: ./Rules/TikTok.yaml
+    interval: 86400
+  
+  YouTube:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/YouTube.yaml
+    path: ./Rules/YouTube.yaml
+    interval: 86400
+  
+  Telegram:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Telegram.yaml
+    path: ./Rules/Telegram.yaml
+    interval: 86400
+  
+  Emby:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Emby.yaml
+    path: ./Rules/Emby.yaml
+    interval: 86400
+  
+  Game:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Game.yaml
+    path: ./Rules/Game.yaml
+    interval: 86400
+  
+  BanEasyPrivacy:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/BanEasyPrivacy.yaml
+    path: ./Rules/BanEasyPrivacy.yaml
+    interval: 86400
+  
+  Advertising:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Advertising.yaml
+    path: ./Rules/Advertising.yaml
+    interval: 86400
+  
+  Download:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Download.yaml
+    path: ./Rules/Download.yaml
+    interval: 86400
+  
+  PrivateTracker:
+    type: http
+    behavior: domain
+    url: https://gitee.com/jarred711/clap/raw/master/PrivateTracker.yaml
+    path: ./Rules/PrivateTracker.yaml
+    interval: 86400
+  
+  ChinaMax:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/ChinaMax.yaml
+    path: ./Rules/ChinaMax.yaml
+    interval: 86400
+  
+  Global:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Global.yaml
+    path: ./Rules/Global.yaml
+    interval: 86400
+  
+  Lan:
+    type: http
+    behavior: classical
+    url: https://gitee.com/jarred711/clap/raw/master/Lan.yaml
+    path: ./Rules/Lan.yaml
+    interval: 86400
+
+rules:
+  - DOMAIN-KEYWORD,bybit,🇯🇵 Japan Nodes
+  - DOMAIN-KEYWORD,paddypower,🇪🇺 Europe Nodes
+  - DOMAIN-KEYWORD,chatgpt,ChatGPT Nodes
+  - DOMAIN-KEYWORD,stripe,ChatGPT Nodes
+  - DOMAIN-KEYWORD,cursor,ChatGPT Nodes
+  - DOMAIN-KEYWORD,trading212,ChatGPT Nodes
+  # - DOMAIN-KEYWORD,chat,ChatGPT Nodes
+  - DOMAIN-KEYWORD,oai,ChatGPT Nodes
+  - DOMAIN-KEYWORD,openai,ChatGPT Nodes
+  - DOMAIN-KEYWORD,trading212,🇺🇸 United States Nodes
+  - DOMAIN-KEYWORD,stake,Stake Nodes
+  - DOMAIN-KEYWORD,evo-games,Stake Nodes
+  - DOMAIN-KEYWORD,pragmatic,Stake Nodes
+  - DOMAIN-KEYWORD,fdhmcqdyio,Stake Nodes
+  - DOMAIN-KEYWORD,intercom,Stake Nodes
+  - DOMAIN-KEYWORD,zhizzz,🇯🇵 Japan Nodes
+  - DOMAIN-KEYWORD,puyqhjvx,Stake Nodes
+  - DOMAIN-KEYWORD,dhayxeqnylmaparu,Stake Nodes
+  - DOMAIN,ouo.io,🚀 Node Selection
+  - DOMAIN-KEYWORD,bendibao,DIRECT
+  - DOMAIN-KEYWORD,ipqualityscore,DIRECT
+  - DOMAIN-KEYWORD,jd.com,DIRECT
+  - DOMAIN-KEYWORD,microsoft.com,🔑 Manual Selection
+  - DOMAIN-KEYWORD,cdn2020,🔑 Manual Selection
+  - DOMAIN-KEYWORD,siwazywcdn2,🔑 Manual Selection
+  - DOMAIN,u.bijiago.com,DIRECT
+  - DOMAIN-SUFFIX,gjfzpt.cn,REJECT
+  - SRC-IP-CIDR,219.143.187.136/32,REJECT
+  - RULE-SET,BiliBili,📺 BiliBili
+  - RULE-SET,YouTube,🎬 YouTube
+  - RULE-SET,Netflix,🎥 Netflix
+  - RULE-SET,Disney,📹 Disney+
+  - RULE-SET,TikTok,📷 TikTok
+  - RULE-SET,Emby,🎼 Emby
+  - RULE-SET,Telegram,☎️ Telegram
+  - RULE-SET,Game,🎮 Gaming Platform
+  - RULE-SET,BanEasyPrivacy,🛡️ Privacy Protection
+  - RULE-SET,Advertising,🚫 Ad Blocking
+  - RULE-SET,Download,⏬ Download Platform
+  - RULE-SET,PrivateTracker,🌲 BT Torrent
+  - RULE-SET,IPfake,🚩 Social Media IP Location
+  - RULE-SET,Lan,🇨🇳 China Traffic
+  - RULE-SET,ChinaMax,🇨🇳 China Traffic
+  - RULE-SET,Global,🚀 Node Selection
+  - GEOIP,CN,🇨🇳 China Traffic
+  - MATCH,🐟 Final 
+
