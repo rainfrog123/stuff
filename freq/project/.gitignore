@@ -6,3 +6,5 @@
 *.npy
 *.sqlite*
 
+# Ignore everything in ml_datasets except .py files
+
