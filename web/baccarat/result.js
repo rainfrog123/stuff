@@ -127,51 +127,6 @@
         }, 1000);
     }
 
-    // Anti-detection: Override focus/visibility events
-    function setupAntiDetection() {
-        const dummyFn = () => {};
-        
-        // Override common detection events
-        ['blur', 'focus', 'visibilitychange', 'beforeunload', 'unload'].forEach(eventType => {
-            // Remove existing listeners (if possible)
-            try {
-                const originalAddEventListener = window.addEventListener;
-                const originalRemoveEventListener = window.removeEventListener;
-                
-                // Override addEventListener for these events
-                window.addEventListener = function(type, listener, options) {
-                    if (['blur', 'focus', 'visibilitychange'].includes(type)) {
-                        return originalAddEventListener.call(this, type, dummyFn, options);
-                    }
-                    return originalAddEventListener.call(this, type, listener, options);
-                };
-                
-                // Add dummy listeners to capture events
-                window.addEventListener(eventType, dummyFn, true);
-                document.addEventListener(eventType, dummyFn, true);
-            } catch (e) {
-                // Silently fail if not possible
-            }
-        });
-        
-        // Override document.hidden and document.visibilityState
-        try {
-            Object.defineProperty(document, 'hidden', {
-                get: () => false,
-                configurable: true
-            });
-            Object.defineProperty(document, 'visibilityState', {
-                get: () => 'visible',
-                configurable: true
-            });
-        } catch (e) {
-            // Silently fail if not possible
-        }
-        
-        console.log("[Detector] Anti-detection measures active");
-    }
-
     console.log("[Detector] Initializing Baccarat stats monitor...");
-    setupAntiDetection();
     waitForStatsPanelAndStart();
 })();
