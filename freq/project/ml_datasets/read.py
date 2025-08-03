@@ -10,7 +10,6 @@ from pathlib import Path
 plt.style.use('default')
 sns.set_palette("husl")
 
-# %%
 # Load the dataset and summary
 dataset_path = "TEMAReversal_MLStrategy_ml_dataset.feather"
 summary_path = "TEMAReversal_MLStrategy_ml_dataset_summary.json"

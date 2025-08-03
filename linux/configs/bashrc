@@ -1,10 +1,15 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
-# --- Cursor Agent shell override ---
-if [[ -n "$CURSOR_TRACE_ID" ]]; then    # Cursor sets this env-var 环境变量
-  exec /bin/zsh -il                     # -i 交互式, -l 登录 shell
-fi
+# # --- Cursor Agent shell override ---
+# if [[ -n "$CURSOR_TRACE_ID" ]]; then    # Cursor sets this env-var 环境变量
+#   exec /bin/zsh -il                     # -i 交互式, -l 登录 shell
+# fi
 # --- end override ---
+# if running inside Cursor Agent, use a super‑simple prompt
+if [ -n "$CURSOR_TRACE_ID" ]; then
+  # minimal PS1 for Cursor Agent
+  PS1='\w \$ '
+fi
 
 # ===== GENERAL SETTINGS =====
 # Set default editor
@@ -33,15 +38,13 @@ PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[
 
 # ===== FREQTRADE ALIASES =====
 # Main directories
-alias fq='cd /allah/freqtrade'                   # Freqtrade root directory
-alias ftcore='cd /allah/freqtrade/freqtrade'     # Freqtrade core directory
-alias ft='cd /allah/stuff/freq'                  # Freq directory
-alias p1='cd /allah/stuff/freq/project_1'        # Project 1 directory
-alias p2='cd /allah/stuff/freq/project_2'        # Project 2 directory
+alias ft='cd /allah/freqtrade'                   # Freqtrade root directory
+alias ftc='cd /allah/freqtrade/freqtrade'     # Freqtrade core directory
+alias fq='cd /allah/stuff/freq'                  # Freq directory
 alias mi='cd /allah/stuff/freq/misc'
 # Data & strategies
-alias strat='cd /allah/stuff/freq/project_1/user_data/strategies'  # Strategies directory
-alias tv='cd /allah/stuff/freq/misc/tradingview_scripts'          # TradingView scripts
+alias strat='cd /allah/stuff/freq/project/user_data/strategies'  # Strategies directory
+alias tv='cd /allah/stuff/freq/misc/tradingview'          # TradingView scripts
 alias mo='cd /allah/stuff/freq/userdir/user_data/models'          # Models directory
 alias usdt='cd /allah/freqtrade/user_data/data/binance/futures'   # Futures data directory
 alias us='cd /allah/stuff/freq/userdir/user_data'                 # User directory
@@ -59,9 +62,9 @@ alias web='cd /allah/stuff/web'                  # Web projects
 alias ba='cd /allah/stuff/web/baccarat'          # Baccarat project 
 alias sm='cd /allah/stuff/web/smartproxy'        # SmartProxy project
 alias li='cd /allah/stuff/linux/history'         # Linux history directory
-alias dt='cd /allah/data/trades/eth_usdt_daily_trades'  # Trade data
+alias dt='cd /allah/stuff/freq/project/ml_datasets'  # Trade data
 alias pa='cd /allah/data/parquet'                # Parquet data directory
-alias db='cd /allah/stuff/freq/project_2/collector/tradingview'                # Parquet data directory
+alias pro='cd /allah/stuff/freq/project'                # Parquet data directory
 
 # ===== UTILITY ALIASES =====
 # Code editors and configs
