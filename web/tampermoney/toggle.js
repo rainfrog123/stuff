@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         ChatGPT 4o/o3 Model Toggle
+// @name         ChatGPT gpt-5/gpt-5-thinking Model Toggle
 // @namespace    http://tampermonkey.net/
 // @version      2.0.0
-// @description  Toggle between ChatGPT 4o and o3 models - Ctrl+X to switch
+// @description  Toggle between ChatGPT gpt-5 and gpt-5-thinking models - Ctrl+X to switch
 // @author       Assistant
 // @match        https://chatgpt.com/*
 // @match        https://chat.openai.com/*
@@ -19,15 +19,15 @@
     // Configuration
     const CONFIG = {
         models: {
-            gpt4o: 'gpt-4o',
-            o3: 'o3'
+            gpt5: 'gpt-5',
+            gpt5thinking: 'gpt-5-thinking'
         },
         toggleKey: 'x',
         storageKey: 'chatgpt_model_toggle_v2'
     };
 
     // State management
-    let currentModel = GM_getValue(CONFIG.storageKey, CONFIG.models.gpt4o);
+    let currentModel = GM_getValue(CONFIG.storageKey, CONFIG.models.gpt5);
 
     // Save state
     function saveState() {
@@ -38,7 +38,7 @@
 
     // Toggle between models
     function toggleModel() {
-        currentModel = currentModel === CONFIG.models.gpt4o ? CONFIG.models.o3 : CONFIG.models.gpt4o;
+        currentModel = currentModel === CONFIG.models.gpt5 ? CONFIG.models.gpt5thinking : CONFIG.models.gpt5;
         saveState();
         updateUIHeader();
     }
@@ -54,7 +54,7 @@
                 const targetSpan = modelSwitcherButton.querySelector('span.text-token-text-tertiary');
                 if (targetSpan) {
                     const spanText = targetSpan.textContent?.trim().toLowerCase();
-                    if (spanText === 'o3' || spanText === '4o' || spanText === 'gpt-4o' || spanText === 'o3-mini') {
+                    if (spanText === 'gpt-5' || spanText === 'gpt-5-thinking' || spanText === '5' || spanText === '5-thinking') {
                         modelElement = targetSpan;
                     }
                 }
@@ -69,7 +69,7 @@
                         const targetSpan = div.querySelector('span.text-token-text-tertiary');
                         if (targetSpan) {
                             const spanText = targetSpan.textContent?.trim().toLowerCase();
-                            if (spanText === 'o3' || spanText === '4o' || spanText === 'gpt-4o' || spanText === 'o3-mini') {
+                            if (spanText === 'gpt-5' || spanText === 'gpt-5-thinking' || spanText === '5' || spanText === '5-thinking') {
                                 modelElement = targetSpan;
                                 return;
                             }
@@ -83,7 +83,7 @@
                 const allSpans = document.querySelectorAll('span.text-token-text-tertiary');
                 allSpans.forEach(span => {
                     const text = span.textContent?.trim().toLowerCase();
-                    if (text === 'o3' || text === '4o' || text === 'gpt-4o' || text === 'o3-mini') {
+                    if (text === 'gpt-5' || text === 'gpt-5-thinking' || text === '5' || text === '5-thinking') {
                         modelElement = span;
                     }
                 });
@@ -91,7 +91,7 @@
 
             // Update the model name in the UI
             if (modelElement) {
-                const shortName = currentModel === CONFIG.models.gpt4o ? '4o' : 'o3';
+                const shortName = currentModel === CONFIG.models.gpt5 ? '5' : '5-thinking';
                 const currentText = modelElement.textContent.trim();
                 if (currentText !== shortName) {
                     modelElement.textContent = shortName;
@@ -121,7 +121,7 @@
             try {
                 // Check if this is a conversation API call
                 if (typeof resource === 'string' &&
-                    resource.includes('/backend-api/conversation') &&
+                    resource.includes('/backend-api/f/conversation') &&
                     config.method === 'POST' &&
                     config.body) {
 
@@ -162,8 +162,9 @@
                     const target = mutation.target;
                     if (target.textContent &&
                         (target.textContent.includes('ChatGPT') ||
-                         target.textContent.includes('o3') ||
-                         target.textContent.includes('4o'))) {
+                         target.textContent.includes('gpt-5') ||
+                         target.textContent.includes('5-thinking') ||
+                         target.textContent.includes('5'))) {
                         // React immediately to header changes
                         setTimeout(updateUIHeader, 10);
                         setTimeout(updateUIHeader, 100);

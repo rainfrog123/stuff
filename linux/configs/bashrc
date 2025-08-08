@@ -65,6 +65,7 @@ alias ftpy='/allah/freqtrade/.venv/bin/python3'
 # PROJECT DIRECTORIES
 # ============================================================================
 # General projects
+alias note='cursor /allah/stuff/freq/project/note'
 alias st='cd /allah/stuff/'                       # General stuff directory
 alias pro='cd /allah/stuff/freq/project'          # Project directory
 
