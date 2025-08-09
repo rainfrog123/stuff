@@ -22,62 +22,70 @@ class gamble(IStrategy):
 
     tema_length = 50
     atr_length = 14
-    atr_multiplier = 3.0
-    tp_risk_ratio = 2.0
+    # Note: atr_multiplier and tp_risk_ratio are now adaptive based on volatility regime
 
     def informative_pairs(self):
-        # Return empty list since we're calculating 1m ATR ourselves from 5s data
-        # No need for additional timeframe data fetching
+        # No additional timeframe data needed - using same-TF volatility metrics
         return []
 
-    def calculate_1m_atr_vectorized(self, dataframe: DataFrame) -> DataFrame:
+    def _vol_metrics(self, df: DataFrame) -> DataFrame:
         """
-        Vectorized calculation of 1-minute ATR from 5-second data
-        More efficient than using @informative('1m') decorator
+        Same-timeframe volatility metrics for adaptive risk management
         """
-        df_temp = dataframe.copy()
+        # 5s ATR (same timeframe)
+        df['atr'] = ta.ATR(df['high'], df['low'], df['close'], timeperiod=self.atr_length)
+        df['atr_ema'] = df['atr'].ewm(span=10, adjust=False).mean()  # smooth
+        df['atr_pct'] = (df['atr_ema'] / df['close']).clip(upper=0.05)  # cap outliers
+
+        # Rolling stats on atr_pct for regime detection
+        win = 240  # ~20 minutes on 5s bars
+        m = df['atr_pct'].rolling(win, min_periods=win//4)
+        mean, std = m.mean(), m.std(ddof=0)
+        df['atr_z'] = (df['atr_pct'] - mean) / (std.replace(0, np.nan))  # volatility expansion
         
-        # Ensure we have datetime index for resampling
-        if not isinstance(df_temp.index, pd.DatetimeIndex):
-            if 'date' in df_temp.columns:
-                df_temp.set_index('date', inplace=True)
-            else:
-                # Fallback: assume index is already datetime-like
-                df_temp.index = pd.to_datetime(df_temp.index)
-        
-        # Resample 5s data to 1m candles
-        df_1m = df_temp.resample('1min').agg({
-            'open': 'first',
-            'high': 'max',
-            'low': 'min', 
-            'close': 'last',
-            'volume': 'sum'
-        }).dropna()
-        
-        # Calculate ATR on 1-minute aggregated data
-        df_1m['atr_1m'] = ta.ATR(df_1m, timeperiod=self.atr_length)
-        
-        # Create minute-floor mapping for broadcasting back to 5s
-        df_1m.reset_index(inplace=True)
-        df_1m['minute_key'] = df_1m['date'].dt.floor('1min')
-        
-        # Add minute key to original dataframe
-        original_index = dataframe.index
-        if 'date' in dataframe.columns:
-            minute_key = pd.to_datetime(dataframe['date']).dt.floor('1min')
-        else:
-            minute_key = pd.to_datetime(dataframe.index).dt.floor('1T')
-        
-        # Map 1m ATR values back to 5s timeframe
-        atr_mapping = df_1m.set_index('minute_key')['atr_1m'].to_dict()
-        dataframe['atr_1m'] = minute_key.map(atr_mapping)
-        
-        # Forward fill any missing values
-        dataframe['atr_1m'] = dataframe['atr_1m'].ffill()
-        
-        return dataframe
+        # Percentile rank (fast approximation)
+        df['atr_pctile'] = df['atr_pct'].rolling(win, min_periods=win//4)\
+                             .apply(lambda x: (x.rank(pct=True).iloc[-1]) if len(x) > 0 else np.nan, raw=False)
+        return df
+
+    def _risk_block(self, df: DataFrame) -> DataFrame:
+        """
+        Adaptive R multiples based on volatility regime
+        """
+        # Map atr_pctile → dynamic multipliers
+        conds = [
+            df['atr_pctile'] < 0.3,          # low vol
+            df['atr_pctile'].between(0.3, 0.7, inclusive='both'),  # medium vol
+            df['atr_pctile'] > 0.7           # high vol
+        ]
+        atr_mults = [3.5, 3.0, 2.2]  # bigger R in low vol, smaller in high vol
+        tp_rrs = [2.2, 2.0, 1.5]     # adjust TP ratios accordingly
+
+        df['atr_mult_dyn'] = np.select(conds, atr_mults, default=3.0)
+        df['tp_rr_dyn'] = np.select(conds, tp_rrs, default=2.0)
+
+        df['risk'] = df['atr_ema'] * df['atr_mult_dyn']
+        df['entry_price'] = df['close']
+
+        # Adaptive TP/SL based on current volatility regime
+        df['tp_long'] = df['entry_price'] + df['tp_rr_dyn'] * df['risk']
+        df['sl_long'] = df['entry_price'] - df['risk']
+        df['tp_short'] = df['entry_price'] - df['tp_rr_dyn'] * df['risk']
+        df['sl_short'] = df['entry_price'] + df['risk']
+        return df
+
+    def _vol_confirm_mask(self, df: DataFrame):
+        """
+        Volatility confirmation filters for entry signals
+        """
+        # Sweet spot: avoid ultra-low and ultra-high noise
+        base = df['atr_pct'].between(0.002, 0.01) & (df['atr_z'] > 0.25)
+        long_ok = base & (df['trend'] == 'UP')
+        short_ok = base & (df['trend'] == 'DOWN')
+        return long_ok, short_ok
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        # TEMA trend detection (unchanged)
         ema1 = ta.EMA(dataframe['close'], timeperiod=self.tema_length)
         ema2 = ta.EMA(ema1, timeperiod=self.tema_length)
         ema3 = ta.EMA(ema2, timeperiod=self.tema_length)
@@ -94,56 +102,29 @@ class gamble(IStrategy):
         dataframe['trend_prev'] = dataframe['trend'].shift(1)
         dataframe['trend_flip'] = (dataframe['trend'] != dataframe['trend_prev']) & (dataframe['trend'] != 'FLAT')
         
-        # Calculate 1m ATR using vectorized aggregation (more efficient than @informative)
-        dataframe = self.calculate_1m_atr_vectorized(dataframe)
-        dataframe['atr'] = dataframe['atr_1m']
-        dataframe['entry_price'] = dataframe['close']
-        dataframe['risk'] = dataframe['atr'] * self.atr_multiplier
+        # New: same-TF adaptive volatility metrics
+        dataframe = self._vol_metrics(dataframe)
+        dataframe = self._risk_block(dataframe)
         
-        dataframe['tp_long'] = np.where(
-            dataframe['trend'] == 'UP',
-            dataframe['entry_price'] + (self.tp_risk_ratio * dataframe['risk']),
-            np.nan
-        )
-        dataframe['sl_long'] = np.where(
-            dataframe['trend'] == 'UP',
-            dataframe['entry_price'] - dataframe['risk'],
-            np.nan
-        )
-        dataframe['tp_short'] = np.where(
-            dataframe['trend'] == 'DOWN',
-            dataframe['entry_price'] - (self.tp_risk_ratio * dataframe['risk']),
-            np.nan
-        )
-        dataframe['sl_short'] = np.where(
-            dataframe['trend'] == 'DOWN',
-            dataframe['entry_price'] + dataframe['risk'],
-            np.nan
-        )
-        
+        # Trend reversal signals (for reference)
         dataframe['reversal_to_up'] = (dataframe['trend_flip']) & (dataframe['trend'] == 'UP')
         dataframe['reversal_to_down'] = (dataframe['trend_flip']) & (dataframe['trend'] == 'DOWN')
         
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe['random_entry'] = np.random.random(len(dataframe)) < 0.99
+        # Get volatility-confirmed entry conditions
+        long_ok, short_ok = self._vol_confirm_mask(dataframe)
         
+        # Enter long on TEMA reversal to up with volatility confirmation
         dataframe.loc[
-            (dataframe['reversal_to_up'] == True) &
-            (~dataframe['atr'].isna()) &
-            (dataframe['atr'] > 0) &
-            (~dataframe['tema'].isna()) &
-            (dataframe['random_entry'] == True),
+            long_ok & dataframe['trend_flip'] & (dataframe['trend'] == 'UP'),
             'enter_long'
         ] = 1
 
+        # Enter short on TEMA reversal to down with volatility confirmation
         dataframe.loc[
-            (dataframe['reversal_to_down'] == True) &
-            (~dataframe['atr'].isna()) &
-            (dataframe['atr'] > 0) &
-            (~dataframe['tema'].isna()) &
-            (dataframe['random_entry'] == True),
+            short_ok & dataframe['trend_flip'] & (dataframe['trend'] == 'DOWN'),
             'enter_short'
         ] = 1
         
@@ -162,23 +143,26 @@ class gamble(IStrategy):
                 return self.stoploss
             
             entry_price = trade.open_rate
-            latest_atr = dataframe['atr'].iloc[-1]
-            if pd.isna(latest_atr) or latest_atr <= 0:
+            
+            # Use latest adaptive volatility metrics
+            latest_atr_ema = dataframe['atr_ema'].iloc[-1]
+            latest_risk = dataframe['risk'].iloc[-1]
+            latest_tp_rr = dataframe['tp_rr_dyn'].iloc[-1]
+            
+            if pd.isna(latest_atr_ema) or pd.isna(latest_risk) or latest_atr_ema <= 0:
                 return self.stoploss
             
-            risk_amount = latest_atr * self.atr_multiplier
-            
             if trade.is_short:
-                sl_price = entry_price + risk_amount
-                tp_price = entry_price - (self.tp_risk_ratio * risk_amount)
+                sl_price = entry_price + latest_risk
+                tp_price = entry_price - (latest_tp_rr * latest_risk)
                 if current_rate <= tp_price:
-                    return 1
+                    return 1  # Take profit hit
                 sl_percentage = (sl_price - entry_price) / entry_price
             else:
-                sl_price = entry_price - risk_amount
-                tp_price = entry_price + (self.tp_risk_ratio * risk_amount)
+                sl_price = entry_price - latest_risk
+                tp_price = entry_price + (latest_tp_rr * latest_risk)
                 if current_rate >= tp_price:
-                    return 1
+                    return 1  # Take profit hit
                 sl_percentage = -(entry_price - sl_price) / entry_price
             
             return sl_percentage
