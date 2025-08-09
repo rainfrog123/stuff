@@ -5,7 +5,7 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-class DebugTrades(IStrategy):
+class Debug(IStrategy):
     """Strategy to debug trade data conversion to OHLCV"""
     
     timeframe = '5s'

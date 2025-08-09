@@ -1,12 +1,13 @@
 ## Data Download Commands
-freqtrade download-data --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config.json --timerange 20250501- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir /allah/freqtrade/user_data/data/binance
+freqtrade download-data --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config/main.json --timerange 20250501- --timeframes 1m 3m 5m 15m 30m 1h 4h --datadir /allah/freqtrade/user_data/data/binance
 
 ## Strategy Commands
-freqtrade trade --strategy SimpleTestStrategy --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config_test_5s.json 
+freqtrade trade --strategy Test5s --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config/test.json 
 
 ## Backtesting Commands
-freqtrade backtesting --strategy TEMAReversal_MLStrategy --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config.json --timerange 20250701- --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000 --eps --fee 0
+freqtrade backtesting --strategy TemaMl --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config/main.json --timerange 20250701- --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000 --eps --fee 0
 # --timerange 1752105600-1752109200
 
-freqtrade backtesting --strategy TrendReversalLabelingStrategy --userdir /allah/stuff/freq/project_1/user_data --config /allah/stuff/freq/project_1/user_data/config.json --timerange 20170110- --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps --export=signals --fee 0
+freqtrade backtesting --strategy TrendLabel --userdir /allah/stuff/freq/project_1/user_data --config /allah/stuff/freq/project_1/user_data/config.json --timerange 20170110- --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps --export=signals --fee 0
 
+freqtrade trade --strategy Test5s --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config/test.json 

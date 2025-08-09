@@ -23,7 +23,7 @@ from freqtrade.strategy import (
 import talib.abstract as ta
 
 # --- Custom Strategy Class ---
-class TemaAtr(IStrategy):
+class TemaFast(IStrategy):
     """
     Strategy for labeling trend reversals in trading data for machine learning tasks.
     """

@@ -9,7 +9,7 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-class MlClassifier(IStrategy):
+class MlBasic(IStrategy):
     """
     A strategy utilizing AI-based classification for dynamic long and short entry/exit decisions.
     """
