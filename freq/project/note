@@ -10,4 +10,4 @@ freqtrade backtesting --strategy TemaMl --userdir /allah/stuff/freq/project/user
 
 freqtrade backtesting --strategy TrendLabel --userdir /allah/stuff/freq/project_1/user_data --config /allah/stuff/freq/project_1/user_data/config.json --timerange 20170110- --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000000 --eps --export=signals --fee 0
 
-freqtrade trade --strategy Test5s --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config/test.json 
+freqtrade trade --strategy gamble --userdir /allah/stuff/freq/project/user_data --config /allah/stuff/freq/project/user_data/config/gamble.json 

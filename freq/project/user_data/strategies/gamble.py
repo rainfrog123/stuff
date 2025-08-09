@@ -1,5 +1,7 @@
 from freqtrade.strategy import IStrategy, informative
+from freqtrade.persistence import Trade
 from pandas import DataFrame
+import pandas as pd
 from datetime import datetime
 import talib.abstract as ta
 import numpy as np
@@ -7,7 +9,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class Gamble(IStrategy):
+class gamble(IStrategy):
     INTERFACE_VERSION = 3
     timeframe = '5s'
     can_short: bool = True
@@ -24,11 +26,55 @@ class Gamble(IStrategy):
     tp_risk_ratio = 2.0
 
     def informative_pairs(self):
+        # Return empty list since we're calculating 1m ATR ourselves from 5s data
+        # No need for additional timeframe data fetching
         return []
 
-    @informative('1m')
-    def populate_indicators_1m(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe['atr'] = ta.ATR(dataframe, timeperiod=self.atr_length)
+    def calculate_1m_atr_vectorized(self, dataframe: DataFrame) -> DataFrame:
+        """
+        Vectorized calculation of 1-minute ATR from 5-second data
+        More efficient than using @informative('1m') decorator
+        """
+        df_temp = dataframe.copy()
+        
+        # Ensure we have datetime index for resampling
+        if not isinstance(df_temp.index, pd.DatetimeIndex):
+            if 'date' in df_temp.columns:
+                df_temp.set_index('date', inplace=True)
+            else:
+                # Fallback: assume index is already datetime-like
+                df_temp.index = pd.to_datetime(df_temp.index)
+        
+        # Resample 5s data to 1m candles
+        df_1m = df_temp.resample('1min').agg({
+            'open': 'first',
+            'high': 'max',
+            'low': 'min', 
+            'close': 'last',
+            'volume': 'sum'
+        }).dropna()
+        
+        # Calculate ATR on 1-minute aggregated data
+        df_1m['atr_1m'] = ta.ATR(df_1m, timeperiod=self.atr_length)
+        
+        # Create minute-floor mapping for broadcasting back to 5s
+        df_1m.reset_index(inplace=True)
+        df_1m['minute_key'] = df_1m['date'].dt.floor('1min')
+        
+        # Add minute key to original dataframe
+        original_index = dataframe.index
+        if 'date' in dataframe.columns:
+            minute_key = pd.to_datetime(dataframe['date']).dt.floor('1min')
+        else:
+            minute_key = pd.to_datetime(dataframe.index).dt.floor('1T')
+        
+        # Map 1m ATR values back to 5s timeframe
+        atr_mapping = df_1m.set_index('minute_key')['atr_1m'].to_dict()
+        dataframe['atr_1m'] = minute_key.map(atr_mapping)
+        
+        # Forward fill any missing values
+        dataframe['atr_1m'] = dataframe['atr_1m'].ffill()
+        
         return dataframe
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -47,6 +93,9 @@ class Gamble(IStrategy):
         
         dataframe['trend_prev'] = dataframe['trend'].shift(1)
         dataframe['trend_flip'] = (dataframe['trend'] != dataframe['trend_prev']) & (dataframe['trend'] != 'FLAT')
+        
+        # Calculate 1m ATR using vectorized aggregation (more efficient than @informative)
+        dataframe = self.calculate_1m_atr_vectorized(dataframe)
         dataframe['atr'] = dataframe['atr_1m']
         dataframe['entry_price'] = dataframe['close']
         dataframe['risk'] = dataframe['atr'] * self.atr_multiplier
@@ -78,7 +127,7 @@ class Gamble(IStrategy):
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe['random_entry'] = np.random.random(len(dataframe)) < 0.1
+        dataframe['random_entry'] = np.random.random(len(dataframe)) < 0.99
         
         dataframe.loc[
             (dataframe['reversal_to_up'] == True) &
@@ -139,7 +188,7 @@ class Gamble(IStrategy):
     def leverage(self, pair: str, current_time: datetime, current_rate: float,
                  proposed_leverage: float, max_leverage: float, entry_tag: str | None, side: str,
                  **kwargs) -> float:
-        return 1
+        return max_leverage
 
     def confirm_trade_entry(self, pair: str, order_type: str, amount: float,
                            rate: float, time_in_force: str, current_time: datetime,

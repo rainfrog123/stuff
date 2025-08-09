@@ -1,7 +1,7 @@
 {
-    "max_open_trades": -1,
+    "max_open_trades": 1,
     "stake_currency": "USDT",
-    "stake_amount": 100,
+    "stake_amount": "unlimited",
     "export_ml_dataset": false,
     "tradable_balance_ratio": 0.99,
     "fiat_display_currency": "USD",
@@ -40,8 +40,8 @@
               "http": "",
               "https": ""
             }},
-        "key": "",
-        "secret": "",
+        "key": "ofQzX3gGAKS777NyYIovAy1XyqLzGC2UJPMh9jqIYEfieFRy3DCkZJl15VYA2zXo",
+        "secret": "QVJpTFgHIEv74LmCT5clX8o1zAFEEqJqKpg2ePklObM1Ybv9iKNe8jvM7MRjoz07",
         "ccxt_async_config": {},
         "pair_whitelist": [
             "ETH/USDT:USDT"
