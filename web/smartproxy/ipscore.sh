@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# ========================================
+# 📝 INSERT YOUR IP ADDRESS HERE:
+# ========================================
+# Examples:
+# IPv4: TARGET_IP="8.8.8.8"
+# IPv6: TARGET_IP="2a00:23c7:ffbd:9c00:2e99:75ff:fedb:7c2a"
+TARGET_IP="2a00:23c7:ffbd:9c00:2e99:75ff:fedb:7c2a"
+
 # IPQS Configuration
 IPQS_API_KEY="740F92cS9nqqV41L0u7jfbSepB3dff08"
 IPQS_BASE_URL="https://ipqualityscore.com/api/json/ip/${IPQS_API_KEY}"
@@ -18,18 +26,25 @@ fi
 
 # Function to display usage
 usage() {
-    echo "Usage: $0 <IP_ADDRESS>"
+    echo "Usage: $0 [IP_ADDRESS]"
     echo "Example: $0 8.8.8.8"
+    echo "Note: If no IP is provided, will use TARGET_IP from script"
     exit 1
 }
 
-# Check if IP address is provided
+# Use command line argument if provided, otherwise use TARGET_IP
 if [ $# -eq 0 ]; then
-    echo "❌ No IP address provided."
-    usage
+    if [ -z "$TARGET_IP" ]; then
+        echo "❌ TARGET_IP is empty and no command line argument provided."
+        echo "Please set TARGET_IP in the script or provide IP as argument."
+        usage
+    fi
+    IP_ADDRESS="$TARGET_IP"
+    echo "ℹ️  Using TARGET_IP from script: $IP_ADDRESS"
+else
+    IP_ADDRESS="$1"
+    echo "ℹ️  Using command line argument: $IP_ADDRESS"
 fi
-
-IP_ADDRESS="$1"
 
 # Validate IP address format (IPv4 and IPv6)
 validate_ip() {
