@@ -79,7 +79,7 @@ alias pa='cd /allah/data/parquet'                 # Parquet data directory
 alias web='cd /allah/stuff/web'                   # Web projects
 alias ba='cd /allah/stuff/web/baccarat'           # Baccarat project 
 alias sm='cd /allah/stuff/web/smartproxy'         # SmartProxy project
-
+alias co='cd /allah/stuff/freq/project/collector/tradingview_collector'
 # System
 alias li='cd /allah/stuff/linux/history'          # Linux history directory
 
