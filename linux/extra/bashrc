@@ -73,7 +73,7 @@ alias note='cursor /allah/blue/freq/project/note'
 alias bl='cd /allah/blue/'                       # General blue directory
 alias pro='cd /allah/blue/freq/project'          # Project directory
 alias st='cd /allah/blue/freq/project/user_data/strategies'
-alias conf='cd /allah/blue/freq/project/user_data/config'
+alias config='cd /allah/blue/freq/project/user_data/config'
 # Machine Learning
 alias ml='cd /allah/blue/ml'                     # Machine Learning directory
 alias ka='cd /allah/blue/ml/kaggle'              # Kaggle projects
