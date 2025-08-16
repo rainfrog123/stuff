@@ -16,7 +16,7 @@ class gamble(IStrategy):
     timeframe = '5s'
     can_short: bool = True
     process_only_new_candles = True
-    startup_candle_count: int = 60
+    startup_candle_count: int = 150
     minimal_roi = {"0": 1}
     stoploss = -0.001 * 125
     trailing_stop = False

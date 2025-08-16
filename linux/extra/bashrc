@@ -1,127 +1,52 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-
-# ============================================================================
-# CURSOR AGENT SETTINGS
-# ============================================================================
-# Cursor Agent shell override (commented out)
-# if [[ -n "$CURSOR_TRACE_ID" ]]; then    # Cursor sets this env-var 环境变量
-#   exec /bin/zsh -il                     # -i 交互式, -l 登录 shell
-# fi
 if [ -n "$CURSOR_AGENT" ]; then
   PS1='$ '
 else
-  # Shell appearance - Custom prompt with emojis 🚀
   PS1="\[\033[1;32m\]\u\[\033[0m\]@\[\033[1;34m\]\h\[\033[0m\] \[\e[1;34m\]\w\[\e[0m\] 🚀🚀🚀  $ "
 fi
-
-
-# ~/.bashrc
-
-
-# ============================================================================
-# GENERAL SHELL SETTINGS
-# ============================================================================
-# Default editor
 export EDITOR='cursor'
-
-# History settings
 HISTSIZE=10000
 HISTFILESIZE=20000
 HISTCONTROL=ignoreboth:erasedups
-
-
-
-# Optional ls settings (uncomment to enable)
-# export LS_OPTIONS='--color=auto'
-# eval "$(dircolors)"
-# alias ls='ls $LS_OPTIONS'
-# alias ll='ls $LS_OPTIONS -l'
-# alias l='ls $LS_OPTIONS -lA'
-
-# Optional safety aliases (uncomment to enable)
-# alias rm='rm -i'
-# alias cp='cp -i'
-# alias mv='mv -i'
-
-# ============================================================================
-# FREQTRADE ALIASES
-# ============================================================================
-# Main directories
-alias ft='cd /allah/freqtrade'                    # Freqtrade root directory
-alias li='cd /allah/blue/linux'                  # Linux directory
-alias ftc='cd /allah/freqtrade/freqtrade'         # Freqtrade core directory
-alias fq='cd /allah/blue/freq'                   # Freq directory
-alias mi='cd /allah/blue/freq/misc'              # Misc directory
-
-# Data & strategies
-alias strat='cd /allah/blue/freq/project/user_data/strategies'  # Strategies directory
-alias tv='cd /allah/blue/freq/misc/tradingview'                 # TradingView scripts
-alias mo='cd /allah/blue/freq/userdir/user_data/models'         # Models directory
-alias us='cd /allah/blue/freq/userdir/user_data'               # User directory
-alias usdt='cd /allah/freqtrade/user_data/data/binance/futures' # Futures data directory
-alias label='cd /allah/blue/freq/project_2/labeled_data'       # Labeled data
-
-# Run shortcuts
+alias ft='cd /allah/freqtrade'
+alias li='cd /allah/blue/linux'
+alias ftc='cd /allah/freqtrade/freqtrade'
+alias fq='cd /allah/blue/freq'
+alias mi='cd /allah/blue/freq/misc'
+alias user='cd /allah/blue/freq/project/user_data'
+alias strat='cd /allah/blue/freq/project/user_data/strategies'
+alias tv='cd /allah/blue/freq/misc/tradingview'
+alias usdt='cd /allah/freqtrade/user_data/data/binance/futures'
 alias ftrun='/allah/freqtrade/.venv/bin/python3 /allah/freqtrade/freqtrade/main.py'
 alias ftpy='/allah/freqtrade/.venv/bin/python3'
-
-# ============================================================================
-# PROJECT DIRECTORIES
-# ============================================================================
-# General projects
 alias note='cursor /allah/blue/freq/project/note'
-alias bl='cd /allah/blue/'                       # General blue directory
-alias pro='cd /allah/blue/freq/project'          # Project directory
+alias bl='cd /allah/blue/'
+alias tools='cd /allah/blue/freq/project/tools'
+alias pro='cd /allah/blue/freq/project'
 alias st='cd /allah/blue/freq/project/user_data/strategies'
 alias config='cd /allah/blue/freq/project/user_data/config'
-# Machine Learning
-alias ml='cd /allah/blue/ml'                     # Machine Learning directory
-alias ka='cd /allah/blue/ml/kaggle'              # Kaggle projects
-alias dt='cd /allah/blue/freq/project/ml_datasets'  # Trade data
-alias pa='cd /allah/data/parquet'                 # Parquet data directory
-
-# Web projects
-alias web='cd /allah/blue/web'                   # Web projects
-alias ba='cd /allah/blue/web/baccarat'           # Baccarat project 
-alias sm='cd /allah/blue/web/smartproxy'         # SmartProxy project
+alias dt='cd /allah/blue/freq/project/ml_datasets'
+alias web='cd /allah/blue/web'
+alias ba='cd /allah/blue/web/baccarat'
+alias sm='cd /allah/blue/web/smartproxy'
 alias co='cd /allah/blue/freq/project/collector/tradingview_collector'
-# System
-alias vps='cd /allah/blue/linux/vps'                # VPS configurations
-alias aws='cd /allah/blue/linux/vps/aws'            # AWS VPS files
-alias gcp='cd /allah/blue/linux/vps/gcp'            # GCP VPS files  
-alias linode='cd /allah/blue/linux/vps/linode'      # Linode VPS files
-alias extra='cd /allah/blue/linux/extra'            # Extra files (flattened structure)
-
-# ============================================================================
-# MACHINE LEARNING & TENSORBOARD
-# ============================================================================
-alias lg='cd /allah/data/parquet/lightning_logs'  # Lightning logs directory
-alias tb='tensorboard --logdir "$(find . -type d -name "tensorboard" | sort | tail -n 1)"'  # Start TensorBoard
-alias cdtb='cd "$(find . -type d -name "tensorboard" | sort | tail -n 1)"'                 # Navigate to TensorBoard logs
-
-# ============================================================================
-# UTILITY ALIASES
-# ============================================================================
-# Code editors and configs
-alias code='cursor'                               # Use cursor as code editor
-alias bashrc='cursor ~/.bashrc'                   # Open .bashrc in editor
-alias rc='cursor ~/.bashrc'                       # Shortcut to open .bashrc
-
-# Git shortcuts
+alias vps='cd /allah/blue/linux/vps'
+alias aws='cd /allah/blue/linux/vps/aws'
+alias gcp='cd /allah/blue/linux/vps/gcp'
+alias linode='cd /allah/blue/linux/vps/linode'
+alias extra='cd /allah/blue/linux/extra'
+alias tb='tensorboard --logdir "$(find . -type d -name "tensorboard" | sort | tail -n 1)"'
+alias cdtb='cd "$(find . -type d -name "tensorboard" | sort | tail -n 1)"'
+alias code='cursor'
+alias bashrc='cursor ~/.bashrc'
+alias rc='cursor ~/.bashrc'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit -m'
 alias gp='git push'
 alias gl='git pull'
-
-# System utilities
-alias cls='clear'                                 # Clear screen
-alias lsh='ls -la | head'                         # List first 10 entries
-alias diskspace='df -h'                           # Check disk space
-alias myip='curl -s http://ipinfo.io/ip'          # Get public IP
-
-# ============================================================================
-# ENVIRONMENT VARIABLES
-# ============================================================================
+alias cls='clear'
+alias lsh='ls -la | head'
+alias diskspace='df -h'
+alias myip='curl -s http://ipinfo.io/ip'
 export DISPLAY=:10
 export PATH="$HOME/development/flutter/bin:$PATH"
