@@ -20,32 +20,32 @@ class AppointmentMonitor:
             "Client-Version": "7.1.1",
             "Accept-Encoding": "gzip, deflate, br",
             "Accept-Language": "en-GB;q=1",
-            "token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzUyMDY3MTI2LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTQ2NTkxMjZ9.cqAJ3RaGREQ9dxrhBgP_rxiZQfZIpMMDDP756Vk-KPo***HXGYAPP",
-            "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzUyMDY3MTI2LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTQ2NTkxMjZ9.cqAJ3RaGREQ9dxrhBgP_rxiZQfZIpMMDDP756Vk-KPo***HXGYAPP",
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzU1NDQ2NDk0LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTgwMzg0OTR9.aCOfJR9zPZfigeMmjRbCUmypadibO-e2_yXwhOspSzc***HXGYAPP",
+            "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNzkwODA5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhIiwiaWF0IjoxNzU1NDQ2NDk0LCJzdWIiOiJ7XCJ1c2VySWRcIjpcIjI3OTA4MFwiLFwiYWNjb3VudElkXCI6XCIyOTMzNjBcIixcInVzZXJUeXBlXCI6MCxcImFwcENvZGVcIjpcIkhYR1lBUFBcIixcImNoYW5uZWxDb2RlXCI6XCJQQVRJRU5UX0lPU1wiLFwiZGV2aWNlbnVtYmVyXCI6XCI5NTBiOWY4NzhlNjcwZTg3Y2VjOWYwNzc5YmI5ODE0NTVhZDM3YmUyMjViZjVkODkzODA4MTM5YzYwMDgwODBhXCIsXCJkZXZpY2VUeXBlXCI6XCJBUFBcIixcImFjY291bnROb1wiOlwiMTM4ODI5ODUxODhcIixcIm5hbWVcIjpcIumZiOS6leW3nVwiLFwiZG9jdG9ySWRcIjpudWxsLFwib3JnYW5Db2RlXCI6bnVsbH0iLCJleHAiOjE3NTgwMzg0OTR9.aCOfJR9zPZfigeMmjRbCUmypadibO-e2_yXwhOspSzc***HXGYAPP",
             "Content-Type": "application/json",
             "User-Agent": "hua yi tong/7.1.1 (iPhone; iOS 15.7.1; Scale/3.00)",
             "Connection": "keep-alive",
-            "Cookie": "acw_tc=1a0c39d517520671325397305e006fd461912cc23204c81632e69d6d08fbc3"
+            "Cookie": "acw_tc=0a472f9217554465078907866e6c5fce8d73d0fa07e8972a700e4b3198e7df"
         }
         
         # Multiple doctors to monitor
         self.doctors = [
-            # {
-            #     "name": "戴晴晴 (耳鼻喉眩晕专科)",
-            #     "payload": {
-            #         "hospitalCode": "HID0101",
-            #         "deptCode": "1649",
-            #         "doctorId": "4028b881646e3d8701646e3d876301f6",
-            #         "channelCode": "PATIENT_IOS",
-            #         "appCode": "HXGYAPP",
-            #         "hospitalAreaCode": "F0017",
-            #         "tabAreaCode": "",
-            #         "cardId": "806596678557749240",
-            #         "encrypt": "MR+DrCZkmnCtWy7tdyTqkA==",
-            #         "deptCategoryCode": "6100-EBHK",
-            #         "appointmentType": "1"
-            #     }
-            # },
+            {
+                "name": "戴晴晴 (耳鼻喉眩晕专科)",
+                "payload": {
+                    "hospitalCode": "HID0101",
+                    "deptCode": "561",
+                    "doctorId": "4028b881646e3d8701646e3d876301f6",
+                    "channelCode": "PATIENT_IOS",
+                    "appCode": "HXGYAPP",
+                    "hospitalAreaCode": "HID0101",
+                    "tabAreaCode": "",
+                    "cardId": "873738037312622592",
+                    "encrypt": "kcui18a+qQQpNX87VYHbzQ==",
+                    "deptCategoryCode": "6100-EBHK",
+                    "appointmentType": "1"
+                }
+            },
             # {
             #     "name": "王茹 (美容烧伤整形-四级专家)",
             #     "payload": {
@@ -62,22 +62,22 @@ class AppointmentMonitor:
             #         "appointmentType": "1"
             #     }
             # },
-            {
-                "name": "李正勇 (美容烧伤整形-一级专家)",
-                "payload": {
-                    "hospitalCode": "HID0101",
-                    "deptCode": "",
-                    "doctorId": "4028b082715335fa017153530154008d",
-                    "channelCode": "PATIENT_IOS",
-                    "appCode": "HXGYAPP",
-                    "hospitalAreaCode": "",
-                    "tabAreaCode": "",
-                    "cardId": "",
-                    "encrypt": "FU+k39GWflNAKvkCDVD+oQ==",
-                    "deptCategoryCode": "",
-                    "appointmentType": "1"
-                }
-            }
+            # {
+            #     "name": "李正勇 (美容烧伤整形-一级专家)",
+            #     "payload": {
+            #         "hospitalCode": "HID0101",
+            #         "deptCode": "",
+            #         "doctorId": "4028b082715335fa017153530154008d",
+            #         "channelCode": "PATIENT_IOS",
+            #         "appCode": "HXGYAPP",
+            #         "hospitalAreaCode": "",
+            #         "tabAreaCode": "",
+            #         "cardId": "",
+            #         "encrypt": "FU+k39GWflNAKvkCDVD+oQ==",
+            #         "deptCategoryCode": "",
+            #         "appointmentType": "1"
+            #     }
+            # }
             # {
             #     "name": "伍俊良 (美容烧伤整形-四级专家)",
             #     "payload": {
@@ -116,14 +116,12 @@ class AppointmentMonitor:
         
         # Track previous state of remaining numbers for each doctor
         self.previous_remaining = {}
-        self.log_file = "success.log"
-        self.reg_log_file = "reg.log"
         
         # 中国标准时间 CST (UTC+8) 
         self.cst_tz = timezone(timedelta(hours=8))
         
         # Server酱通知配置
-        self.serverchan_url = "https://sctapi.ftqq.com/SCT282278TOxQRSjkfr6zTL0r7gQTi4wyZ.send"
+        self.serverchan_url = "https://sctapi.ftqq.com/SCT282278T91zPNpvuek2817He3xtGpSLJ.send"
         self.last_notification_time = 0  # Track last notification timestamp
         self.notification_cooldown = 300  # 5 minutes in seconds
         
@@ -317,57 +315,6 @@ class AppointmentMonitor:
         
         return changes
     
-    def log_regular_check(self, entries: List[Dict[str, Any]], timestamp: str, iteration: int):
-        """Log regular checks to reg.log"""
-        with open(self.reg_log_file, "a", encoding="utf-8") as f:
-            total_available = sum(e["availableCount"] for e in entries)
-            total_active_status = sum(1 for e in entries if e["status"] == 1)
-            is_peak = self.is_peak_hour()
-            peak_marker = " [PEAK]" if is_peak else ""
-            f.write(f"[{timestamp}] Check #{iteration}{peak_marker} - Total available: {total_available}, active status: {total_active_status}\n")
-            
-            # Log details of each slot grouped by doctor
-            current_doctor = ""
-            for entry in entries:
-                doctor_name = entry.get("doctor_name", "Unknown")
-                if doctor_name != current_doctor:
-                    f.write(f"  --- {doctor_name} ---\n")
-                    current_doctor = doctor_name
-                f.write(f"  {entry['scheduleDate']} {entry['timePeriod']} ({entry['dayDesc']}) - "
-                       f"Available: {entry['availableCount']}, Status: {entry['status']} - "
-                       f"{entry['deptName']} - {entry['hospitalAreaName']}\n")
-
-    def log_success(self, changes: List[Dict[str, Any]], full_response: Dict[str, Any]):
-        """Log successful detections to success.log"""
-        timestamp = datetime.now(self.cst_tz).strftime("%Y-%m-%d %H:%M:%S CST")
-        
-        with open(self.log_file, "a", encoding="utf-8") as f:
-            f.write(f"\n{'='*80}\n")
-            f.write(f"APPOINTMENT AVAILABLE DETECTED - {timestamp}\n")
-            f.write(f"{'='*80}\n")
-            
-            # Group changes by doctor
-            changes_by_doctor = {}
-            for change in changes:
-                doctor_name = change.get("doctor_name", "Unknown")
-                if doctor_name not in changes_by_doctor:
-                    changes_by_doctor[doctor_name] = []
-                changes_by_doctor[doctor_name].append(change)
-            
-            for doctor_name, doctor_changes in changes_by_doctor.items():
-                f.write(f"\n--- {doctor_name} ---\n")
-                for change in doctor_changes:
-                    f.write(f"\nSlot Available:\n")
-                    f.write(f"  Schedule ID: {change['id']}\n")
-                    f.write(f"  Date: {change['scheduleDate']} {change['timePeriod']} ({change['dayDesc']})\n")
-                    f.write(f"  Department: {change['deptName']}\n")
-                    f.write(f"  Location: {change['admLocation']}\n")
-                    f.write(f"  Hospital Area: {change['hospitalAreaName']}\n")
-                    f.write(f"  Changes: {change['changes_summary']}\n")
-                    f.write(f"  Schedule Range: {change['scheduleRange']}\n")
-            
-            f.write(f"\n{'='*80}\n")
-    
     def notify_user(self, changes: List[Dict[str, Any]]):
         """Notify user about available appointments"""
         print(f"\n🎉 APPOINTMENT SLOTS AVAILABLE! 🎉")
@@ -394,7 +341,6 @@ class AppointmentMonitor:
                 print(f"      🔄 Changes: {change['changes_summary']}")
                 slot_counter += 1
         
-        print(f"\n📋 Details logged to: {self.log_file}")
         print("="*60)
         
         # Send Server酱 WeChat notification
@@ -450,7 +396,9 @@ class AppointmentMonitor:
                 
                 for change in doctor_changes:
                     # Determine fee based on doctor
-                    if "李正勇" in doctor_name:
+                    if "戴晴晴" in doctor_name:
+                        fee_info = "挂号费17元 + 服务费2元"
+                    elif "李正勇" in doctor_name:
                         fee_info = "挂号费90元 + 服务费2元"
                     elif "王茹" in doctor_name or "伍俊良" in doctor_name:
                         fee_info = "挂号费20元 + 服务费2元"
@@ -472,8 +420,7 @@ class AppointmentMonitor:
             desp_lines.extend([
                 "",
                 "---",
-                f"💡 **提醒**: 请尽快登录华西医院App进行预约！",
-                f"🔗 **监控日志**: {self.log_file}"
+                f"💡 **提醒**: 请尽快登录华西医院App进行预约！"
             ])
             
             desp = "\n".join(desp_lines)
@@ -509,8 +456,6 @@ class AppointmentMonitor:
     def run_monitor(self):
         """Main monitoring loop"""
         print(f"🔍 Starting appointment monitor...")
-        print(f"📋 Success logging to: {self.log_file}")
-        print(f"📝 Regular logging to: {self.reg_log_file}")
         print(f"⏰ Normal: 15-25s intervals | Peak: 5s intervals (7:59-8:04 AM/PM 中国时间)")
         print(f"🎯 Monitoring {len(self.doctors)} doctors:")
         for i, doctor in enumerate(self.doctors, 1):
@@ -518,15 +463,8 @@ class AppointmentMonitor:
         print(f"🛡️ Anti-detection: Dynamic timestamps, randomized intervals, rotating User-Agents")
         print(f"📱 WeChat notifications: Enabled via Server酱")
         print(f"🔍 Monitoring: availableCount (0→positive), status (2→any), time periods (上午/下午)")
-        print(f"🏥 李正勇: Only monitoring 华西坝院区 (HID0101)")
+        print(f"🏥 戴晴晴: Monitoring ENT Vertigo Specialist")
         print("="*60)
-        
-        # Initialize log files
-        start_time_cst = datetime.now(self.cst_tz).strftime('%Y-%m-%d %H:%M:%S CST')
-        with open(self.log_file, "a", encoding="utf-8") as f:
-            f.write(f"\n\nMonitor started at: {start_time_cst}\n")
-        with open(self.reg_log_file, "a", encoding="utf-8") as f:
-            f.write(f"\n\nMonitor started at: {start_time_cst}\n")
         
         iteration = 0
         while True:
@@ -579,14 +517,9 @@ class AppointmentMonitor:
                     # Small delay between doctors
                     time.sleep(random.uniform(1, 3))
                 
-                # Log and notify if any changes found
-                if all_entries:
-                    # Log regular check for all doctors
-                    self.log_regular_check(all_entries, timestamp, iteration)
-                    
+                # Notify if any changes found                   
                 if all_changes:
-                    # Log and notify about all changes
-                    self.log_success(all_changes, {"combined_changes": True})
+                    # Notify about all changes
                     self.notify_user(all_changes)
                 else:
                     # Show overall summary
@@ -607,26 +540,10 @@ class AppointmentMonitor:
             except KeyboardInterrupt:
                 stop_time_cst = datetime.now(self.cst_tz).strftime('%Y-%m-%d %H:%M:%S CST')
                 print(f"\n\n⏹️  Monitor stopped by user at {stop_time_cst}")
-                with open(self.log_file, "a", encoding="utf-8") as f:
-                    f.write(f"Monitor stopped at: {stop_time_cst}\n")
-                with open(self.reg_log_file, "a", encoding="utf-8") as f:
-                    f.write(f"Monitor stopped at: {stop_time_cst}\n")
-                
-                # Clear log files after session ends
-                print("🧹 Clearing log files...")
-                with open(self.log_file, "w", encoding="utf-8") as f:
-                    f.write("")  # Clear success.log
-                with open(self.reg_log_file, "w", encoding="utf-8") as f:
-                    f.write("")  # Clear reg.log
-                print("✅ Log files cleared successfully!")
                 break
             except Exception as e:
                 error_time = datetime.now(self.cst_tz).strftime('%Y-%m-%d %H:%M:%S CST')
                 print(f"[{error_time}] Error: {e}")
-                with open(self.log_file, "a", encoding="utf-8") as f:
-                    f.write(f"Error at {error_time}: {e}\n")
-                with open(self.reg_log_file, "a", encoding="utf-8") as f:
-                    f.write(f"Error at {error_time}: {e}\n")
                 # Random wait on error too
                 error_wait = random.uniform(30, 60)
                 print(f"[{error_time}] Waiting {error_wait:.1f} seconds before retry...")

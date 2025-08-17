@@ -5,3 +5,5 @@ freqtrade download-data --userdir /allah/blue/freq/project/user_data --config /a
 freqtrade backtesting --strategy gamble --userdir /allah/blue/freq/project/user_data --config /allah/blue/freq/project/user_data/config/gamble.json --timerange 20250801- --datadir /allah/freqtrade/user_data/data/binance --cache none --starting-balance 10000 --eps --fee 0
 
 freqtrade trade --strategy gamble --userdir /allah/blue/freq/project/user_data --config /allah/blue/freq/project/user_data/config/gamble.json  
+
+freqtrade webserver --userdir /allah/blue/freq/project/user_data --config /allah/blue/freq/project/user_data/config/gamble.json
