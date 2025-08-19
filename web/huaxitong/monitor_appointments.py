@@ -34,15 +34,15 @@ class AppointmentMonitor:
                 "name": "戴晴晴 (耳鼻喉眩晕专科)",
                 "payload": {
                     "hospitalCode": "HID0101",
-                    "deptCode": "561",
+                    "deptCode": "",
                     "doctorId": "4028b881646e3d8701646e3d876301f6",
                     "channelCode": "PATIENT_IOS",
                     "appCode": "HXGYAPP",
-                    "hospitalAreaCode": "HID0101",
+                    "hospitalAreaCode": "",
                     "tabAreaCode": "",
-                    "cardId": "873738037312622592",
-                    "encrypt": "kcui18a+qQQpNX87VYHbzQ==",
-                    "deptCategoryCode": "6100-EBHK",
+                    "cardId": "",
+                    "encrypt": "0pBD0zoaW/BZcze33xLcSg==",
+                    "deptCategoryCode": "",
                     "appointmentType": "1"
                 }
             },
