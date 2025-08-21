@@ -14,10 +14,11 @@
 
     const CONFIG = {
         TILE_SELECTOR: '.TileComponent_tileMobile__2wg6p',
+        DISABLED_SELECTOR: '[class*="TileBetBoard_disabled__"]',
         CHECK_INTERVAL: 1000, // Check every second
         DEBUG: false,
-        BET_DELAY: 5000, // 3s delay before betting
-        TOP_COUNT: 5, // Top N tables to bet on
+        BET_DELAY: 1000, // 1s delay before betting
+        TOP_COUNT: 10, // Top N tables to bet on
         BALANCE_KEY: 'currentBalance', // Same key as balance detector
         MIN_BET_FRACTION: 1/8, // 1/8 of balance
         MAX_BET_FRACTION: 1/2, // 1/2 of balance
@@ -65,7 +66,9 @@
                     lastResults: [],
                     tableId: '',
                     rawText: text,
-                    timestamp: Date.now()
+                    timestamp: Date.now(),
+                    // Betting state data
+                    bettingState: 'unknown'
                 };
 
                 // Parse each line
@@ -117,6 +120,10 @@
                     }
                 }
 
+                // Check betting state using disabled element
+                const disabled = this.element.querySelector(CONFIG.DISABLED_SELECTOR);
+                newData.bettingState = disabled ? 'closed' : 'open';
+
                 return newData;
             } catch (error) {
                 console.error(`[TableMonitor] Error parsing table ${this.id}:`, error);
@@ -162,6 +169,11 @@
             if (this.previousData.lastResults && JSON.stringify(this.data.lastResults) !== JSON.stringify(this.previousData.lastResults)) {
                 changes.push(`Results ${this.previousData.lastResults.join('')} → ${this.data.lastResults.join('')}`);
             }
+            
+            // Betting state change
+            if (this.previousData.bettingState && this.data.bettingState !== this.previousData.bettingState) {
+                changes.push(`Betting ${this.previousData.bettingState} → ${this.data.bettingState}`);
+            }
 
             if (changes.length > 0 && CONFIG.DEBUG) {
                 console.log(`[TableMonitor] ${this.data.name || `Table ${this.id}`}:`);
@@ -178,7 +190,9 @@
                 counters: this.data.counters,
                 bettingLimits: `${this.data.minBet} - ${this.data.maxBet}`,
                 tableId: this.data.tableId,
-                lastUpdate: new Date(this.data.timestamp).toLocaleTimeString()
+                lastUpdate: new Date(this.data.timestamp).toLocaleTimeString(),
+                // Betting state
+                bettingState: this.data.bettingState
             };
         }
     }
@@ -282,6 +296,7 @@
             status.forEach(table => {
                 console.log(`📋 ${table.name}`);
                 console.log(`   Round: #${table.round} | Result: ${table.result} | P:${table.counters.P} B:${table.counters.B} T:${table.counters.T}`);
+                console.log(`   Betting: ${table.bettingState}`);
                 console.log(`   Betting Limits: ${table.bettingLimits} | ${table.tableId} | Updated: ${table.lastUpdate}`);
             });
         }
@@ -294,8 +309,6 @@
             this.currentIndex = 0;
             this.isRunning = false;
             this.currentTable = null;
-            this.lastRound = 0;
-            this.waitingForFinish = false;
             this.betSide = '';
             this.lastBetAmount = 0;
         }
@@ -324,7 +337,7 @@
             this.isRunning = true;
             this.refreshBetList();
             this.processNext();
-            console.log('[Betting] Started sequential betting');
+            console.log('[Betting] Started betting state-based betting');
         }
 
         stop() {
@@ -368,20 +381,22 @@
                 return;
             }
 
-            this.lastRound = this.currentTable.data.roundNumber;
-            this.waitForRoundEnd();
+            // Check betting state instead of waiting for round changes
+            this.checkBettingState();
         }
 
-        waitForRoundEnd() {
+        checkBettingState() {
             if (!this.isRunning || !this.currentTable) return;
 
-            const currentRound = this.currentTable.data.roundNumber;
+            const bettingState = this.currentTable.data.bettingState;
             
-            if (currentRound !== this.lastRound) {
-                this.lastRound = currentRound;
-                setTimeout(() => this.placeBet(), CONFIG.BET_DELAY);
+            if (bettingState === 'open') {
+                // Table is open for betting, place bet immediately
+                this.placeBet();
             } else {
-                setTimeout(() => this.waitForRoundEnd(), 500);
+                // Table is closed, skip to next one
+                if (CONFIG.DEBUG) console.log(`[Betting] Table ${this.currentTable.id} closed (${bettingState}), skipping...`);
+                this.moveToNext();
             }
         }
 
@@ -403,30 +418,16 @@
                 await this.betBanker(this.currentTable.id, clicks);
 
             if (success) {
-                this.waitingForFinish = true;
                 const table = this.currentTable.data;
                 const balance = this.getBalance();
                 console.log(`[Betting] ${table.name || this.currentTable.id}`);
                 console.log(`  Round #${table.roundNumber} | P:${table.counters.P} B:${table.counters.B} T:${table.counters.T} | Current: ${table.currentResult}`);
                 console.log(`  Bet ${this.betSide} $${amount.toFixed(2)} (${clicks} clicks) | Balance: $${balance.toFixed(2)}`);
                 console.log(`  ${table.bettingLimits || `${table.minBet} - ${table.maxBet}`} | ${table.tableId}`);
-                this.waitForBetFinish();
-            } else {
-                this.moveToNext();
+                console.log(`  Betting State: ${table.bettingState}`);
             }
-        }
-
-        waitForBetFinish() {
-            if (!this.isRunning || !this.currentTable) return;
-
-            const currentRound = this.currentTable.data.roundNumber;
-            
-            if (currentRound !== this.lastRound) {
-                this.waitingForFinish = false;
-                this.moveToNext();
-            } else {
-                setTimeout(() => this.waitForBetFinish(), 500);
-            }
+            // Wait after bet before moving to next table
+            setTimeout(() => this.moveToNext(), CONFIG.BET_DELAY);
         }
 
         moveToNext() {
@@ -467,8 +468,7 @@
                 listLength: this.betList.length,
                 currentIndex: this.currentIndex,
                 currentTable: this.currentTable?.id || null,
-                lastRound: this.lastRound,
-                waitingForFinish: this.waitingForFinish,
+                currentTableBettingState: this.currentTable?.data.bettingState || null,
                 betSide: this.betSide,
                 lastBetAmount: this.lastBetAmount,
                 balance: this.getBalance()
@@ -533,7 +533,23 @@
         },
         startBetting: () => betting.start(),
         stopBetting: () => betting.stop(),
-        bettingStatus: () => betting.getStatus()
+        bettingStatus: () => betting.getStatus(),
+        // Betting state functions
+        getBettingStates: () => {
+            const states = [];
+            for (const [id, table] of monitor.tables) {
+                states.push({
+                    id,
+                    name: table.data.name,
+                    bettingState: table.data.bettingState
+                });
+            }
+            return states;
+        },
+        getTableBettingState: (id) => {
+            const table = monitor.tables.get(id);
+            return table ? table.data.bettingState : null;
+        }
     };
 
     if (CONFIG.DEBUG) {
@@ -541,6 +557,7 @@
         console.log('Monitor: start(), stop(), status(), getTables(), getEle(id), rank(), list(), count(), toggleLogging()');
         console.log('Betting: betPlayer(id, clicks), betBanker(id, clicks), startBetting(), stopBetting(), bettingStatus()');
         console.log('Balance: getBalance(), calcBet()');
+        console.log('States: getBettingStates(), getTableBettingState(id)');
     }
 
 })();
@@ -556,3 +573,5 @@
 // window.tableMonitor.getTables();
 // window.tableMonitor.getBalance();
 // window.tableMonitor.calcBet();
+// window.tableMonitor.getBettingStates();
+// window.tableMonitor.getTableBettingState('table_0');
