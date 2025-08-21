@@ -25,15 +25,17 @@
         CLICK_VALUE: 0.2 // Each click = 0.2
     };
 
-    class Random {
+    class CryptoRandom {
         static randomBool() {
-            return Math.random() < 0.5;
+            return crypto.getRandomValues(new Uint8Array(1))[0] & 1;
         }
         static randomFloat() {
-            return Math.random();
+            const array = new Uint32Array(1);
+            crypto.getRandomValues(array);
+            return array[0] / (0xFFFFFFFF + 1);
         }
         static randomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
+            return Math.floor(this.randomFloat() * (max - min + 1)) + min;
         }
         static randomSide() {
             return this.randomBool() ? 'Player' : 'Banker';
@@ -322,7 +324,7 @@
 
             const minBet = balance * CONFIG.MIN_BET_FRACTION;
             const maxBet = balance * CONFIG.MAX_BET_FRACTION;
-            const randomBet = minBet + Random.randomFloat() * (maxBet - minBet);
+            const randomBet = minBet + CryptoRandom.randomFloat() * (maxBet - minBet);
             
             const clicks = Math.max(1, Math.floor(randomBet / CONFIG.CLICK_VALUE));
             const amount = clicks * CONFIG.CLICK_VALUE;
@@ -408,7 +410,7 @@
                 return;
             }
 
-            this.betSide = Random.randomSide();
+            this.betSide = CryptoRandom.randomSide();
             this.lastBetAmount = amount;
             
             const success = this.betSide === 'Player' ? 
