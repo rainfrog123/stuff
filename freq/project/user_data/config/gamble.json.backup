@@ -37,7 +37,7 @@
             "bids_to_ask_delta": 1
         }
     },
-    "exit_pricing": {
+    "exit_pricing":{
         "price_side": "other",
         "use_order_book": true,
         "order_book_top": 1
@@ -47,10 +47,9 @@
         "ccxt_config": {
             "aiohttp_proxy": "",
             "proxies": {
-                "http": "",
-                "https": ""
-            }
-        },
+              "http": "",
+              "https": ""
+            }},
         "key": "ofQzX3gGAKS777NyYIovAy1XyqLzGC2UJPMh9jqIYEfieFRy3DCkZJl15VYA2zXo",
         "secret": "QVJpTFgHIEv74LmCT5clX8o1zAFEEqJqKpg2ePklObM1Ybv9iKNe8jvM7MRjoz07",
         "ccxt_async_config": {},
@@ -91,6 +90,6 @@
     },
     "experimental": {
         "block_bad_exchanges": false
-    },
-    "candle_type_def": "futures"
+    }
 }
+
