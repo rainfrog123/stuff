@@ -20,6 +20,7 @@ alias ftrun='/allah/freqtrade/.venv/bin/python3 /allah/freqtrade/freqtrade/main.
 alias ftpy='/allah/freqtrade/.venv/bin/python3'
 alias note='cursor /allah/blue/freq/project/note'
 alias bl='cd /allah/blue/'
+alias ml='cd /allah/blue/freq/project/ml_datasets'
 alias tools='cd /allah/blue/freq/project/tools'
 alias pro='cd /allah/blue/freq/project'
 alias st='cd /allah/blue/freq/project/user_data/strategies'

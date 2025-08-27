@@ -175,7 +175,7 @@ class AppointmentMonitor:
         if self.is_peak_hour():
             return 5.0  # 5 seconds during peak hours
         else:
-            return random.uniform(15, 25)  # 15-25 seconds normally
+            return random.uniform(10, 20)  # 10-20 seconds normally
     
     def send_request(self, doctor_payload: Dict[str, Any], doctor_name: str) -> Dict[str, Any]:
         """Send the API request and return the response for specific doctor"""
@@ -456,7 +456,7 @@ class AppointmentMonitor:
     def run_monitor(self):
         """Main monitoring loop"""
         print(f"🔍 Starting appointment monitor...")
-        print(f"⏰ Normal: 15-25s intervals | Peak: 5s intervals (7:59-8:04 AM/PM 中国时间)")
+        print(f"⏰ Normal: 10-20s intervals | Peak: 5s intervals (7:59-8:04 AM/PM 中国时间)")
         print(f"🎯 Monitoring {len(self.doctors)} doctors:")
         for i, doctor in enumerate(self.doctors, 1):
             print(f"   {i}. {doctor['name']}")

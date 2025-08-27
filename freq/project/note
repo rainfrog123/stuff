@@ -6,7 +6,7 @@ freqtrade backtesting --strategy gamble --userdir /allah/blue/freq/project/user_
 
 freqtrade trade --strategy gamble --userdir /allah/blue/freq/project/user_data --config /allah/blue/freq/project/user_data/config/gamble.json  
 
-freqtrade webserver --userdir /allah/blue/freq/project/user_data --config /allah/blue/freq/project/user_data/config/gamble.json
+freqtrade webserver --userdir /allah/blue/freq/project/user_data --config /allah/blue/freq/project/user_data/config/gamble.json --datadir /allah/freqtrade/user_data/data/binance
 
 import pandas as pd
 pd.set_option("display.max_columns", None)

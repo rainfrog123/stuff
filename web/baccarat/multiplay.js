@@ -18,7 +18,7 @@
         CHECK_INTERVAL: 1000, // Check every second
         DEBUG: false,
         BET_DELAY: 1000, // 1s delay before betting
-        TOP_COUNT: 10, // Top N tables to bet on
+        TOP_COUNT: 20, // Top N tables to bet on
         BALANCE_KEY: 'currentBalance', // Same key as balance detector
         MIN_BET_FRACTION: 1/8, // 1/8 of balance
         MAX_BET_FRACTION: 1/2, // 1/2 of balance
